@@ -22,7 +22,7 @@ vim.cmd [[
 -- Use a protected call so we don't error out on first use
 local status_ok, packer = pcall(require, 'packer')
 if not status_ok then
-  return
+    return
 end
 
 -- Install plugins
@@ -66,6 +66,7 @@ return packer.startup(function(use)
     use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
     -- Playground
     use("nvim-treesitter/playground")
+
     -- Language Server Protocol
     use({
         "VonHeikemen/lsp-zero.nvim",
@@ -85,12 +86,16 @@ return packer.startup(function(use)
             { "L3MON4D3/LuaSnip" },
             -- Snippet Collection (Optional)
             { "rafamadriz/friendly-snippets" },
+            -- LSP Colors
+            { "folke/lsp-colors.nvim" },
         }
     })
     -- context inspection
-    use({"SmiteshP/nvim-navic", requires = { "neovim/nvim-lspconfig" } })
+    use({ "SmiteshP/nvim-navic", requires = { "neovim/nvim-lspconfig" } })
     -- fidget for displaying LSP progress
     use("j-hui/fidget.nvim")
+    -- pretty list for showing diagnostics
+    use("folke/trouble.nvim")
 
     -- Fugitive (Git interface)
     use("tpope/vim-fugitive")

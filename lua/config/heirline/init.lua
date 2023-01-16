@@ -49,11 +49,11 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 
 
 -- trivial
-local DelimiterChar = { "", "" }
+local DelimiterChars = { "", "" }
 local Align = { provider = "%=", hl = { bg = "bright_bg" } }
 local Space = { provider = " " }
-local LeftDelimiter = { provider = DelimiterChar[1] }
-local RightDelimiter = { provider = DelimiterChar[2] }
+local LeftDelimiter = { provider = DelimiterChars[1] }
+local RightDelimiter = { provider = DelimiterChars[2] }
 
 
 -- vi-mode

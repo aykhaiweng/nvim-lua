@@ -4,14 +4,13 @@ vim.g.python3_host_prog = os.getenv("HOME") .. "/.pyenv/versions/neovim3/bin/pyt
 -- Stop my GUI terminal from rendering it's cursor over mine
 vim.opt.guicursor = ""
 
+-- mouse
+vim.opt.mouse = "a"
+
 -- set line numbers
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
--- tabline
--- vim.opt.showtabline = 2
--- status
--- vim.opt.laststatus = 3
 -- Focus on the split window when opened
 vim.opt.splitright = true
 vim.opt.splitbelow = true

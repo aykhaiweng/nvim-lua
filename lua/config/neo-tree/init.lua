@@ -1,6 +1,9 @@
 local neotree = require("neo-tree")
 local windowpicker = require("window-picker")
 
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 -- setup window picker first
 windowpicker.setup({
     autoselect_one = true,
