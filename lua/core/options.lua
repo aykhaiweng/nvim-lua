@@ -17,7 +17,7 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 
 -- show whitespaces, tabs and spaces
-vim.opt.listchars = "tab:--,trail:·,nbsp:~,extends:>,precedes:<,eol:¬"
+vim.opt.listchars = "tab:--,trail:·,nbsp:~,extends:>,precedes:<"
 vim.opt.list = true
 
 -- indents - use 4 spaces as default

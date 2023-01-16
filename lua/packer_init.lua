@@ -1,18 +1,15 @@
--- Automatically install packer
-local fn = vim.fn
-local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
-
-if fn.empty(fn.glob(install_path)) > 0 then
-  packer_bootstrap = fn.system({
-    'git',
-    'clone',
-    '--depth',
-    '1',
-    'https://github.com/wbthomason/packer.nvim',
-    install_path
-  })
-  vim.o.runtimepath = vim.fn.stdpath('data') .. '/site/pack/*/start/*,' .. vim.o.runtimepath
+-- Bootstrapping the installation of packer.nvim
+local ensure_packer = function()
+    local fn = vim.fn
+    local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+    if fn.empty(fn.glob(install_path)) > 0 then
+        fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
+        vim.cmd [[packadd packer.nvim]]
+        return true
+    end
+    return false
 end
+local packer_bootstrap = ensure_packer()
 
 -- Autocommand that reloads neovim whenever you save the packer_init.lua file
 vim.cmd [[
@@ -108,16 +105,16 @@ return packer.startup(function(use)
     -- zenmode
     use("folke/zen-mode.nvim")
 
-    -- Tmux and vim navigation
-    use("christoomey/vim-tmux-navigator")
-
     -- Impatient (improved loading for nvim by caching chunks
-    -- use("lewis6991/impatient.nvim")
+    use("lewis6991/impatient.nvim")
 
     -- persistence (Automatic session loading)
     use({ "folke/persistence.nvim",
         event = "BufReadPre", -- this will only start session saving when an actual file was opened
         module = "persistence",
+        config = function()
+            require("persistence").setup()
+        end,
     })
 
     -- Highlighting color codes in NVIM
