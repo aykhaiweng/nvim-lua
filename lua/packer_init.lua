@@ -118,6 +118,9 @@ return packer.startup(function(use)
     -- Highlighting color codes in NVIM
     use("norcalli/nvim-colorizer.lua")
 
+    -- Tmux navigator
+    use("alexghergh/nvim-tmux-navigation")
+
 
     -- Automatically set up your configuration after cloning
     -- packer.nvim.

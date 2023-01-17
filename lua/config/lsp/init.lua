@@ -45,6 +45,7 @@ lsp.setup_nvim_cmp({
 
 lsp.set_preferences({
     suggest_lsp_servers = false,
+    set_lsp_keymaps = { omit = { '<C-k>' } },
     sign_icons = {
         error = vim.fn.sign_getdefined("DiagnosticSignError")[1].text,
         warn = vim.fn.sign_getdefined("DiagnosticSignWarn")[1].text,
@@ -55,19 +56,19 @@ lsp.set_preferences({
 
 -- keymaps for LSP
 lsp.on_attach(function(client, bufnr)
-    local opts = { buffer = bufnr, remap = false }
+    local opts = { buffer = bufnr, remap = true }
 
     -- Attach Navic
     -- TODO: Find a way to fix this
     require("lspconfig").pylsp.setup({
-        on_attach = function(client, bufnr)
-            -- Use a protected call so we don't error out on first use
-            local status_ok, navic = pcall(require, 'nvim-navic')
-            if not status_ok then
-              return
-            end
-            require("nvim-navic").attach(client, bufnr)
-        end
+       on_attach = function(client, bufnr)
+           -- Use a protected call so we don't error out on first use
+           local status_ok, navic = pcall(require, 'nvim-navic')
+           if not status_ok then
+             return
+           end
+           require("nvim-navic").attach(client, bufnr)
+       end
     })
 
     vim.keymap.set("n", "gD", function() vim.lsp.buf.declaration() end, opts)

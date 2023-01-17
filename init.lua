@@ -11,6 +11,7 @@ require("core/options")
 require("core/keymaps")
 require("config/catppuccin") -- colorscheme
 require("core/colors")
+require("config/nvim-tmux-navigation") -- nvim to tmux navigation
 -- Plugin Configurations
 require("config/lsp") -- language server
 require("config/fidget") -- LSP status

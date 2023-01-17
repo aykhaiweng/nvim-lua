@@ -30,6 +30,7 @@ require("catppuccin").setup({
     },
     color_overrides = {},
     custom_highlights = {},
+    highlight_overrides = {},
     integrations = {
         cmp = true,
         gitsigns = true,
@@ -42,5 +43,3 @@ require("catppuccin").setup({
 
 -- setup must be called before loading
 vim.cmd.colorscheme "catppuccin"
-
-vim.api.nvim_set_hl(0, "Cursor", { bg="#555555" })

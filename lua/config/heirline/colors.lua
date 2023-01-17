@@ -1,7 +1,9 @@
 local utils = require("heirline.utils")
 
--- colors
-local function setup_colors()
+M = {}
+
+-- funciton to return a table of colors
+function M.get_colors()
     return {
         bright_bg = utils.get_highlight("Folded").bg,
         bright_fg = utils.get_highlight("Folded").fg,
@@ -22,23 +24,25 @@ local function setup_colors()
         git_change = utils.get_highlight("DiffChanged").fg,
     }
 end
-require('heirline').load_colors(setup_colors())
 
+-- cache the colors
+M.colors = M.get_colors()
+
+-- setup the colors for heirline
+function M.setup_colors(colors)
+    colors = M.colors or M.get_colors()
+    require('heirline').load_colors(colors)
+end
+
+-- setup augroup for heirline to
+-- change colors on colorscheme change
 vim.api.nvim_create_augroup("Heirline", { clear = true })
 vim.api.nvim_create_autocmd("ColorScheme", {
     callback = function()
-        local colors = setup_colors()
+        local colors = M.colors
         utils.on_colorscheme(colors)
     end,
     group = "Heirline",
 })
 
-require("heirline").load_colors(setup_colors())
-vim.api.nvim_create_augroup("Heirline", { clear = true })
-vim.api.nvim_create_autocmd("ColorScheme", {
-    callback = function()
-        local colors = setup_colors()
-        utils.on_colorscheme(colors)
-    end,
-    group = "Heirline",
-})
+return M
