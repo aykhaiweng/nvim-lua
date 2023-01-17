@@ -29,7 +29,7 @@ vim.opt.expandtab = true
 vim.opt.smartindent = true
 
 -- stops vim from wrapping lines
-vim.opt.wrap = false
+vim.opt.wrap = true
 
 -- swaps and undo
 vim.opt.swapfile = false
@@ -54,3 +54,8 @@ vim.opt.isfname:append("@-@")
 
 -- updatetime
 vim.opt.updatetime = 50
+
+-- cursor
+vim.cmd([[ let &t_SI = "\e[6 q" ]])
+vim.cmd([[ let &t_EI = "\e[2 q" ]])
+vim.cmd([[ set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50\,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor\,sm:block-blinkwait175-blinkoff150-blinkon175" ]])

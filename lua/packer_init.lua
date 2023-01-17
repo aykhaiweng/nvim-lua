@@ -96,6 +96,8 @@ return packer.startup(function(use)
     use("j-hui/fidget.nvim")
     -- pretty list for showing diagnostics
     use("folke/trouble.nvim")
+    -- snippets
+    use("L3MON4D3/LuaSnip")
 
     -- Fugitive (Git interface)
     use("tpope/vim-fugitive")
@@ -112,15 +114,6 @@ return packer.startup(function(use)
 
     -- Impatient (improved loading for nvim by caching chunks
     use("lewis6991/impatient.nvim")
-
-    -- persistence (Automatic session loading)
-    use({ "folke/persistence.nvim",
-        event = "BufReadPre", -- this will only start session saving when an actual file was opened
-        module = "persistence",
-        config = function()
-            require("persistence").setup()
-        end,
-    })
 
     -- Highlighting color codes in NVIM
     use("norcalli/nvim-colorizer.lua")
