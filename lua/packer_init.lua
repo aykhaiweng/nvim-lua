@@ -12,12 +12,12 @@ end
 local packer_bootstrap = ensure_packer()
 
 -- Autocommand that reloads neovim whenever you save the packer_init.lua file
-vim.cmd [[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost packer_init.lua source <afile>
-  augroup end
-]]
+vim.cmd([[
+    augroup packer_user_config
+        autocmd!
+        autocmd BufWritePost packer_init.lua source <afile>
+    augroup end
+]])
 
 -- Use a protected call so we don't error out on first use
 local status_ok, packer = pcall(require, 'packer')

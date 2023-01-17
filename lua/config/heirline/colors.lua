@@ -5,8 +5,23 @@ M = {}
 -- funciton to return a table of colors
 function M.get_colors()
     return {
+        -- defaults
+        statusline = utils.get_highlight("StatusLineNC").bg,
+        statusline_fg = utils.get_highlight("StatusLineNC").fg,
+        statusline_nc = utils.get_highlight("StatusLine").bg,
+        statusline_nc_fg = utils.get_highlight("StatusLine").fg,
+        tabline = utils.get_highlight("Tabline").bg,
+        tabline_fg = utils.get_highlight("Tabline").fg,
+        tablinesel = utils.get_highlight("TablineSel").bg,
+        tablinesel_fg = utils.get_highlight("TablineSel").fg,
+        normal = utils.get_highlight("Normal").bg,
+        -- backgrounds
+        bg0 = utils.get_highlight("CursorLine").bg,
+        bg1 = utils.get_highlight("SignColumn").fg,
+        bg2 = "#585B70", -- this is catpuccin mocha surface2
         bright_bg = utils.get_highlight("Folded").bg,
         bright_fg = utils.get_highlight("Folded").fg,
+        -- colors
         red = utils.get_highlight("DiagnosticError").fg,
         dark_red = utils.get_highlight("DiffDelete").bg,
         green = utils.get_highlight("String").fg,

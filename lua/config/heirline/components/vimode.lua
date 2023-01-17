@@ -1,8 +1,11 @@
-local consts = require("config.heirline.consts")
+local M = {}
+
+
+local consts = require("config/heirline/consts")
 
 
 -- vi-mode
-local ViMode = {
+M.ViMode = {
     -- init
     init = function(self)
         self.mode = vim.fn.mode(1) -- :h mode()
@@ -35,4 +38,4 @@ local ViMode = {
 }
 
 
-return ViMode
+return M

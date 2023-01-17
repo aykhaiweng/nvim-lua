@@ -58,7 +58,7 @@ return {
     vimodes = vimodes,
     vimode_colors = vimode_colors,
     -- heirline components
-    Align = { provider = "%=", hl = { bg = "bright_bg" } },
+    Align = { provider = "%=" },
     Space = { provider = " " },
     LeftDelimiter = { provider = delimiter_chars[1] },
     RightDelimiter = { provider = delimiter_chars[2] }

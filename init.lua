@@ -26,3 +26,14 @@ require("config/lazygit") -- Popup for lazygit in nvim
 require("config/gitsigns") -- gitsigns in the sign column
 require("config/heirline") -- God's gift to this green earth
 require("config/luasnip") -- Snippets
+
+
+vim.cmd([[
+    augroup ReloadConfig
+        autocmd!
+        autocmd BufWritePost *.lua lua require('plenary.reload').reload_module('core', true)
+        autocmd BufWritePost *.lua lua require('plenary.reload').reload_module('config', true)
+        autocmd BufWritePost *.lua lua require('plenary.reload').reload_module('snippets', true)
+        autocmd BufWritePost *.lua source $MYVIMRC
+    augroup END
+]])

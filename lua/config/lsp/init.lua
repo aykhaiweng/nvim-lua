@@ -54,22 +54,11 @@ lsp.set_preferences({
     }
 })
 
+
 -- keymaps for LSP
 lsp.on_attach(function(client, bufnr)
     local opts = { buffer = bufnr, remap = true }
 
-    -- Attach Navic
-    -- TODO: Find a way to fix this
-    require("lspconfig").pylsp.setup({
-       on_attach = function(client, bufnr)
-           -- Use a protected call so we don't error out on first use
-           local status_ok, navic = pcall(require, 'nvim-navic')
-           if not status_ok then
-             return
-           end
-           require("nvim-navic").attach(client, bufnr)
-       end
-    })
 
     vim.keymap.set("n", "gD", function() vim.lsp.buf.declaration() end, opts)
     vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
@@ -89,6 +78,14 @@ end)
 -- Setting up configuration for pylsp
 -- Changing the configuration to use flake8
 lsp.configure('pylsp', {
+    on_attach = function(client, bufnr)
+        -- Use a protected call so we don't error out on first use
+        local status_ok, navic = pcall(require, 'nvim-navic')
+        if not status_ok then
+            return
+        end
+        require("nvim-navic").attach(client, bufnr)
+    end,
     settings = {
         pylsp = {
             configurationSources = { 'flake8' },
