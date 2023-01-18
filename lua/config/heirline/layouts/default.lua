@@ -13,6 +13,7 @@ local diag = require("config/heirline/components/diagnostics")
 local git = require("config/heirline/components/git")
 local term = require("config/heirline/components/terminal")
 local win = require("config/heirline/components/win")
+local tabs = require("config/heirline/components/tabs")
 
 
 --[[
@@ -124,9 +125,18 @@ vim.api.nvim_create_autocmd("User", {
         end
     end,
 })
-
 M.WinBars = {
     utils.surround(c.delimiter_chars, "bg0", { win.FileNameBlock, c.Space, win.CloseButton })
+}
+
+
+--[[
+
+  SECTION: Tablines
+
+--]]
+M.Tabline = {
+    tabs.TabLineOffset, tabs.TabPagesBlock, c.Align, tabs.TabPageClose
 }
 
 
@@ -136,6 +146,7 @@ function M.setup_vim()
     vim.cmd "set noshowcmd"
     vim.o.showtabline = 1
     vim.o.laststatus = 3
+    vim.cmd([[au FileType * if index(['wipe', 'delete'], &bufhidden) >= 0 | set nobuflisted | endif]])
 end
 
 return M
