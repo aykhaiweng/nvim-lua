@@ -77,7 +77,7 @@ local TerminalStatusline = {
 M.StatusLine = {
     hl = function()
         if conditions.is_active() then
-            return "StatusLine"
+            return "SignColumn"
         else
             return "StatusLineNC"
         end

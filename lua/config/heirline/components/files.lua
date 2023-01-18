@@ -47,6 +47,15 @@ M.FileName = {
     end,
     hl = { fg = utils.get_highlight("Directory").fg },
 }
+M.FileNameShortened = {
+    provider = function(self)
+        local filename = vim.fn.fnamemodify(self.filename, ":.")
+        if filename == "" then return "[No Name]" end
+        filename = vim.fn.pathshorten(filename)
+        return filename
+    end,
+    hl = { fg = utils.get_highlight("Directory").fg },
+}
 M.FileFlags = {
     {
         condition = function()
@@ -117,9 +126,19 @@ M.FileLastModified = {
 
 -- Defining Blocks
 M.FileNameBlock = utils.insert(M.Base,
+    M.FileIcon,
     utils.insert(
         M.FileNameModifier,
         M.FileName
+    ),
+    M.FileFlags,
+    { provider = '%<' }
+)
+M.FileNameShortenedBlock = utils.insert(M.Base,
+    M.FileIcon,
+    utils.insert(
+        M.FileNameModifier,
+        M.FileNameShortened
     ),
     M.FileFlags,
     { provider = '%<' }

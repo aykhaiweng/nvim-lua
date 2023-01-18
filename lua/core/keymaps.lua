@@ -1,8 +1,12 @@
 -- Changing the leader symbol
 vim.g.mapleader = " "
 
+-- Bind C-c to <Esc>
+vim.keymap.set("i", "<C-c>", "<Esc>")
+vim.keymap.set("v", "<C-c>", "<Esc>")
+
 -- netrw
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+-- vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
 -- tabs
 vim.keymap.set('n', '<leader>tj',  vim.cmd.tabfirst)

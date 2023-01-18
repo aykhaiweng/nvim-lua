@@ -12,6 +12,7 @@ require("core/keymaps")
 require("config/catppuccin") -- colorscheme
 require("core/colors")
 require("config/nvim-tmux-navigation") -- nvim to tmux navigation
+require("config/toggleterm") -- Terminal
 -- Plugin Configurations
 require("config/lsp") -- language server
 require("config/fidget") -- LSP status
@@ -22,7 +23,6 @@ require("config/telescope") -- fuzzy finder
 require("config/neo-tree") -- filebrowser
 require("config/fugitive") -- git plugin for nvim
 require("config/zen-mode") -- changes a buffer to fullscreen
-require("config/lazygit") -- Popup for lazygit in nvim
 require("config/gitsigns") -- gitsigns in the sign column
 require("config/heirline") -- God's gift to this green earth
 require("config/luasnip") -- Snippets

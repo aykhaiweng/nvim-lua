@@ -17,7 +17,7 @@ function M.get_colors()
         normal = utils.get_highlight("Normal").bg,
         -- backgrounds
         bg0 = utils.get_highlight("CursorLine").bg,
-        bg1 = utils.get_highlight("SignColumn").fg,
+        bg1 = utils.get_highlight("SignColumn").fg, -- Same as the background
         bg2 = "#585B70", -- this is catpuccin mocha surface2
         bright_bg = utils.get_highlight("Folded").bg,
         bright_fg = utils.get_highlight("Folded").fg,

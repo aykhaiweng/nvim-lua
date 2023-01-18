@@ -2,6 +2,7 @@ local M = {}
 
 
 local conditions = require("heirline.conditions")
+local utils = require("heirline.utils")
 
 local c = require("config/heirline/consts")
 local files = require("config/heirline/components/files")
@@ -47,7 +48,7 @@ M.FileNameBlock = {
             return not conditions.is_active()
         end,
         {
-            hl = { fg = "bg2", force = true }, files.FileNameBlock
+            hl = { fg = "bg2", force = true }, files.FileNameShortenedBlock
         },
     },
     { -- A special winbar for terminals
@@ -61,7 +62,7 @@ M.FileNameBlock = {
         }
     },
     -- A winbar for regular files
-    files.FileNameBlock,
+    files.FileNameShortenedBlock,
 }
 
 

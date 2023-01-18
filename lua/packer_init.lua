@@ -101,13 +101,14 @@ return packer.startup(function(use)
 
     -- Fugitive (Git interface)
     use("tpope/vim-fugitive")
-    -- lazygit
-    use("kdheepak/lazygit.nvim")
     -- gitsigns
     use("lewis6991/gitsigns.nvim")
 
     -- vimspector
     use("puremourning/vimspector")
+
+    -- terminal
+    use({ "akinsho/toggleterm.nvim", tag = '*' })
 
     -- zenmode
     use("folke/zen-mode.nvim")
@@ -120,6 +121,9 @@ return packer.startup(function(use)
 
     -- Tmux navigator
     use("alexghergh/nvim-tmux-navigation")
+
+    -- Illuminate
+    use("RRethy/vim-illuminate")
 
 
     -- Automatically set up your configuration after cloning
