@@ -5,7 +5,6 @@ local conditions = require("heirline.conditions")
 local utils = require("heirline.utils")
 
 local c = require("config/heirline/consts")
-local colors = require("config/heirline/colors").colors
 local vimode = require("config/heirline/components/vimode")
 local files = require("config/heirline/components/files")
 local rulers = require("config/heirline/components/rulers")
@@ -21,21 +20,29 @@ local win = require("config/heirline/components/win")
  SECTION: Status Lines
 
 --]]
+local ViModeBlock = utils.surround({ c.empty, c.delimiters[2] }, function(self) return self:mode_color() end,
+    { c.Space, { hl = { fg = "bg0" }, vimode.ViMode }, c.Space })
+local FileNameBlock = utils.surround({ c.empty, c.delimiters[2] }, "bg1", { files.FileNameBlock })
+local GitBlock = utils.surround({ c.empty, c.delimiters[2] }, "bg0",
+    { condition = function() return conditions.is_git_repo() end, { git.GitName, c.Space, git.GitChanges } })
+
+local RulerBlock = utils.surround({ c.delimiters[1], c.empty }, "bg0", { rulers.Ruler })
+local FileTypeBlock = utils.surround({ c.delimiters[1], c.empty }, "bg1", { c.Space, files.FileTypeBlock, c.Space })
+
 local DefaultStatusline = {
     -- left side
-    vimode.ViMode, c.Space,
-    files.FileNameBlock, c.Space,
-    lsp.Navic, c.Space,
+    { hl = { bg = "bg1" }, ViModeBlock },
+    { hl = { bg = "bg0" }, FileNameBlock },
+    GitBlock,
     diag.Diagnostics, c.Space,
-    git.GitName, c.Space, git.GitChanges, c.Space,
+    lsp.Navic, c.Space,
     c.Align,
     -- centered
     c.Align,
     -- right side
     lsp.LSPActive, c.Space,
-    rulers.Ruler, c.Space,
-    rulers.ScrollBar, c.Space,
-    files.FileTypeBlock
+    RulerBlock,
+    { hl = { bg = "bg0" }, FileTypeBlock }
 }
 local InactiveStatusline = {
     -- Status line for inactive windows
@@ -62,7 +69,7 @@ local TerminalStatusline = {
     -- Quickly add a condition to the ViMode to only show it when buffer is active!
     {
         condition = conditions.is_active,
-        vimode.ViMode,
+        { hl = { bg = "bg1" }, ViModeBlock },
         c.Space
     }, files.FileType, c.Space, term.TerminalName, c.Align,
 }
@@ -76,12 +83,13 @@ M.StatusLine = {
     end,
 
     static = {
-        mode_color_map = colors
+        mode_color_map = c.vimode_colors,
+        mode_color = function(self)
+            local mode = conditions.is_active() and vim.fn.mode() or "n"
+            local color = self.mode_color_map[mode]
+            return color
+        end,
     },
-    mode_color = function(self)
-        local mode = conditions.is_active() and vim.fn.mode() or "n"
-        return self.mode_colors_map[mode]
-    end,
 
     -- the first statusline with no condition, or which condition returns true is used.
     -- think of it as a switch case with breaks to stop fallthrough.

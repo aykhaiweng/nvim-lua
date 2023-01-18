@@ -117,7 +117,6 @@ M.FileLastModified = {
 
 -- Defining Blocks
 M.FileNameBlock = utils.insert(M.Base,
-    M.FileIcon,
     utils.insert(
         M.FileNameModifier,
         M.FileName
@@ -126,9 +125,9 @@ M.FileNameBlock = utils.insert(M.Base,
     { provider = '%<' }
 )
 M.FileTypeBlock = {
-    M.FileType,
     M.FileEncoding,
-    M.FileFormat
+    M.FileFormat,
+    { M.FileIcon, M.FileType }
 }
 
 

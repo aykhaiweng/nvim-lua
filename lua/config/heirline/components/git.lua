@@ -21,6 +21,14 @@ M.Base = {
     end,
 }
 M.GitName = {
+    condition = function(self)
+        if (self.status_dict.head)
+        then
+            return true
+        else
+            return false
+        end
+    end,
     provider = function(self)
         return " " .. self.status_dict.head
     end,
@@ -29,37 +37,43 @@ M.GitName = {
 M.GitChanges = {
     {
         condition = function(self)
-            return self.has_changes
+            local count = self.status_dict.added or 0
+            return count > 0
         end,
-        provider = "("
-    },
-    {
         provider = function(self)
             local count = self.status_dict.added or 0
-            return count > 0 and ("+" .. count)
+            return count > 0 and ("+" .. count .. " ")
         end,
-        hl = { fg = "git_add" },
+        hl = { fg = "green" },
     },
     {
+        condition = function(self)
+            local count = self.status_dict.removed or 0
+            return count > 0
+        end,
         provider = function(self)
             local count = self.status_dict.removed or 0
             return count > 0 and ("-" .. count)
         end,
-        hl = { fg = "git_del" },
-    },
-    {
-        provider = function(self)
-            local count = self.status_dict.changed or 0
-            return count > 0 and ("~" .. count)
-        end,
-        hl = { fg = "git_change" },
+        hl = { fg = "red" },
     },
     {
         condition = function(self)
-            return self.has_changes
+            local count = self.status_dict.changed or 0
+            return count > 0
         end,
-        provider = ")",
+        provider = function(self)
+            local count = self.status_dict.changed or 0
+            return count > 0 and (" ~" .. count)
+        end,
+        hl = { fg = "blue" },
     },
+}
+M.Fugitive = {
+    provider = function()
+        local branch = vim.fn.FugitiveStatusline()
+        return branch
+    end
 }
 
 M.GitName = utils.insert(M.Base, M.GitName)

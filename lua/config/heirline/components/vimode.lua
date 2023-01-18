@@ -26,11 +26,6 @@ M.ViMode = {
     provider = function(self)
         return "%2(" .. self.mode_names[self.mode] .. "%)"
     end,
-    -- higlights
-    hl = function(self)
-        local mode = self.mode:sub(1, 1) -- get only the first mode character
-        return { fg = self.mode_colors[mode], bold = true, }
-    end,
     -- update on mode change
     update = {
         "ModeChanged",
