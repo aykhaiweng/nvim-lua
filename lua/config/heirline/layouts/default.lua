@@ -34,7 +34,7 @@ local DefaultStatusline = {
     -- left side
     { hl = { bg = "bg1" }, ViModeBlock },
     { hl = { bg = "bg0" }, FileNameBlock },
-    GitBlock,
+    GitBlock, c.Space,
     diag.Diagnostics, c.Space,
     lsp.Navic, c.Space,
     c.Align,

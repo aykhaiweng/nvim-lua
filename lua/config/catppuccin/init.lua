@@ -29,8 +29,14 @@ require("catppuccin").setup({
         operators = {},
     },
     color_overrides = {},
-    custom_highlights = {},
-    highlight_overrides = {},
+    custom_higlights = {},
+    highlight_overrides = {
+        all = function()
+            return {
+                Cursor = { bg = "gray" }
+            }
+        end
+    },
     integrations = {
         cmp = true,
         gitsigns = true,
@@ -41,5 +47,13 @@ require("catppuccin").setup({
     },
 })
 
+
 -- setup must be called before loading
 vim.cmd.colorscheme "catppuccin"
+
+
+-- changing the cursor
+vim.cmd([[ set guicursor=n-v-c:block-Cursor ]])
+vim.cmd([[ set guicursor+=i-ci-ve:ver25 ]])
+vim.cmd([[ set guicursor+=r-cr:block-Cursor ]])
+vim.cmd([[ set guicursor+=a:blinkwait75-blinkoff400-blinkon200 ]])
