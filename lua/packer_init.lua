@@ -123,7 +123,7 @@ return packer.startup(function(use)
     use("alexghergh/nvim-tmux-navigation")
 
     -- Illuminate
-    use("RRethy/vim-illuminate")
+    -- use("RRethy/vim-illuminate")
 
 
     -- Automatically set up your configuration after cloning
