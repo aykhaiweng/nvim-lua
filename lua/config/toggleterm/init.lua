@@ -23,7 +23,7 @@ local lazygit = Terminal:new({
     vim.cmd("startinsert!")
   end,
 })
-local function _lazygit_toggle()
+function _lazygit_toggle()
   lazygit:toggle()
 end
 
@@ -46,7 +46,7 @@ local lazydocker = Terminal:new({
     vim.cmd("startinsert!")
   end,
 })
-local function _lazydocker_toggle()
+function _lazydocker_toggle()
   lazydocker:toggle()
 end
 
