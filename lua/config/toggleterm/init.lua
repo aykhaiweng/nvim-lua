@@ -7,6 +7,7 @@ require("toggleterm").setup()
 -- LazyGit
 local lazygit = Terminal:new({
   cmd = "lazygit",
+  count = 99,
   dir = "git_dir",
   direction = "float",
   float_opts = {
@@ -30,6 +31,7 @@ end
 -- LazyGit
 local lazydocker = Terminal:new({
   cmd = "lazydocker",
+  count = 98,
   dir = "git_dir",
   direction = "float",
   float_opts = {
@@ -56,3 +58,10 @@ vim.keymap.set("n", "<F5>", vim.cmd.ToggleTerm)
 vim.keymap.set("t", "<F5>", vim.cmd.ToggleTerm)
 vim.keymap.set("n", "<leader>gg", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
 vim.keymap.set("n", "<leader>ld", "<cmd>lua _lazydocker_toggle()<CR>", {noremap = true, silent = true})
+
+local nvim_tmux_nav = require('nvim-tmux-navigation')
+vim.keymap.set('t', '<C-q>', [[<C-\><C-n>]])
+vim.keymap.set('t', "<C-h>", nvim_tmux_nav.NvimTmuxNavigateLeft)
+vim.keymap.set('t', "<C-j>", nvim_tmux_nav.NvimTmuxNavigateDown)
+vim.keymap.set('t', "<C-k>", nvim_tmux_nav.NvimTmuxNavigateUp)
+vim.keymap.set('t', "<C-l>", nvim_tmux_nav.NvimTmuxNavigateRight)
