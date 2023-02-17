@@ -47,7 +47,9 @@ require("telescope").setup({
             }
         },
         layout_config = {
-            cursor = { width = 1, height = 0.7 },
+            preview_width = 0.6,
+            preview_cutoff = 120,
+            height = 0.8
         }
     },
     pickers = {
