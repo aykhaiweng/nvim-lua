@@ -18,7 +18,7 @@ M.CloseButton = {
     -- re register the component callback only on layout/buffer changes.
     update = {'WinNew', 'WinClosed', 'BufEnter'},
     {
-        provider = "",
+        provider = " ",
         on_click = {
             minwid = function()
                 return vim.api.nvim_get_current_win()
@@ -56,7 +56,6 @@ M.FileNameBlock = {
             return conditions.buffer_matches({ buftype = { "terminal" } })
         end,
         {
-            files.FileType,
             c.Space,
             term.TerminalName,
         }

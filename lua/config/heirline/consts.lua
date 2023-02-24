@@ -1,4 +1,6 @@
-local delimiter_chars = { "", "" }
+-- local delimiter_chars = { "", "" }
+local delimiter_chars = { "", "" }
+local sub_delimiter_chars = { "", "" }
 local empty = "█"
 
 local vimodes = { -- change the strings if you like it verbose!
@@ -56,6 +58,7 @@ local vimode_colors = {
 
 return {
     delimiter_chars = delimiter_chars,
+    sub_delimiter_chars = sub_delimiter_chars,
     delimiters = delimiter_chars,
     vimodes = vimodes,
     vimode_colors = vimode_colors,
@@ -63,7 +66,7 @@ return {
     -- heirline components
     Align = { provider = "%=" },
     Space = { provider = " " },
-    Empty = { provider = "█" },
+    Empty = { provider = empty },
     LeftDelimiter = { provider = delimiter_chars[1] },
     RightDelimiter = { provider = delimiter_chars[2] }
 }

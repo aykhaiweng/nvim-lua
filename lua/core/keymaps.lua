@@ -9,14 +9,14 @@ vim.keymap.set("v", "<C-c>", "<Esc>")
 -- vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
 -- tabs
-vim.keymap.set('n', '<leader>tj',  vim.cmd.tabfirst)
-vim.keymap.set('n', '<leader>tl',  vim.cmd.tabnext)
-vim.keymap.set('n', '<leader>th',  vim.cmd.tabprev)
-vim.keymap.set('n', '<leader>tk',  vim.cmd.tablast)
-vim.keymap.set('n', '<leader>tt',  vim.cmd.tabedit)
-vim.keymap.set('n', '<leader>tn',  vim.cmd.tabnew)
-vim.keymap.set('n', '<leader>tm',  vim.cmd([[:tabm]]))
-vim.keymap.set('n', '<leader>tx',  vim.cmd.tabclose)
+vim.keymap.set('n', '<leader>tj', vim.cmd.tabfirst)
+vim.keymap.set('n', '<leader>tl', vim.cmd.tabnext)
+vim.keymap.set('n', '<leader>th', vim.cmd.tabprev)
+vim.keymap.set('n', '<leader>tk', vim.cmd.tablast)
+vim.keymap.set('n', '<leader>tt', vim.cmd.tabedit)
+vim.keymap.set('n', '<leader>tn', vim.cmd.tabnew)
+vim.keymap.set('n', '<leader>tm', vim.cmd([[:tabm]]))
+vim.keymap.set('n', '<leader>tx', vim.cmd.tabclose)
 
 -- visual line move -- It will automatically indent with =
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
@@ -44,7 +44,7 @@ vim.keymap.set('n', 'Q', "<nop>")
 -- tmux-sessionizer
 vim.keymap.set('n', '<leader>po', "<cmd>silent !tmux neww tms<CR>")
 -- some LSP thing
-vim.keymap.set('n', '<leader>f', function()
+vim.keymap.set('n', '<leader>ff', function()
     vim.lsp.buf.format()
 end)
 
@@ -52,4 +52,4 @@ end)
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 -- set breakpoints
-vim.keymap.set('n', '<leader>bp', vim.cmd.Break)
+-- vim.keymap.set('n', '<leader>bp', vim.cmd.Break)

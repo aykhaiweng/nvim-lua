@@ -23,11 +23,11 @@ local tabs = require("config/heirline/components/tabs")
 --]]
 local ViModeBlock = utils.surround({ c.empty, c.delimiters[2] }, function(self) return self:mode_color() end,
     { c.Space, { hl = { fg = "bg0" }, vimode.ViMode }, c.Space })
-local FileNameBlock = utils.surround({ c.empty, c.delimiters[2] }, "bg1", { files.FileNameBlock })
+local FileNameBlock = utils.surround({ c.empty, c.delimiters[2] }, "bg1", { files.FileNameBlock, c.Space })
 local GitBlock = utils.surround({ c.empty, c.delimiters[2] }, "bg0",
-    { condition = function() return conditions.is_git_repo() end, { git.GitName, c.Space, git.GitChanges } })
+    { condition = function() return conditions.is_git_repo() end, { git.GitName, c.Space, git.GitChanges, c.Space } })
 
-local RulerBlock = utils.surround({ c.delimiters[1], c.empty }, "bg0", { rulers.Ruler })
+local RulerBlock = utils.surround({ c.delimiters[1], c.empty }, "bg0", { c.Space, rulers.Ruler })
 local FileTypeBlock = utils.surround({ c.delimiters[1], c.empty }, "bg1", { c.Space, files.FileTypeBlock, c.Space })
 
 local DefaultStatusline = {
@@ -42,7 +42,7 @@ local DefaultStatusline = {
     c.Align,
     -- right side
     lsp.LSPActive, c.Space,
-    RulerBlock,
+    { hl = { fg = "fg" }, RulerBlock },
     { hl = { bg = "bg0" }, FileTypeBlock }
 }
 local InactiveStatusline = {
@@ -126,7 +126,7 @@ vim.api.nvim_create_autocmd("User", {
     end,
 })
 M.WinBars = {
-    utils.surround(c.delimiter_chars, "bg0", { win.FileNameBlock, c.Space, win.CloseButton })
+    utils.surround({ c.empty, c.delimiters[2] }, "bg0", { win.FileNameBlock, c.Space, win.CloseButton })
 }
 
 
@@ -143,7 +143,7 @@ M.Tabline = {
 function M.setup_vim()
     -- vim options
     vim.cmd "set noshowmode"
-    vim.cmd "set noshowcmd"
+    vim.cmd "set showcmd"
     vim.o.showtabline = 1
     vim.o.laststatus = 3
     vim.cmd([[au FileType * if index(['wipe', 'delete'], &bufhidden) >= 0 | set nobuflisted | endif]])
