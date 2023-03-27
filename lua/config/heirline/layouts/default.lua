@@ -28,7 +28,7 @@ local GitBlock = utils.surround({ c.empty, c.delimiters[2] }, "bg0",
     { condition = function() return conditions.is_git_repo() end, { git.GitName, c.Space, git.GitChanges, c.Space } })
 
 local RulerBlock = utils.surround({ c.delimiters[1], c.empty }, "bg0", { c.Space, rulers.Ruler })
-local FileTypeBlock = utils.surround({ c.delimiters[1], c.empty }, "bg1", { c.Space, files.FileTypeBlock, c.Space })
+local FileTypeBlock = utils.surround({ c.delimiters[1], c.empty }, "bg1", { c.Space, files.FileTypeBlock })
 
 local DefaultStatusline = {
     -- left side
@@ -136,7 +136,7 @@ M.WinBars = {
 
 --]]
 M.Tabline = {
-    tabs.TabLineOffset, tabs.TabPagesBlock, c.Align, tabs.TabPageClose
+    tabs.TabLineOffset, c.Align, tabs.TabPagesBlock, tabs.TabPageClose
 }
 
 

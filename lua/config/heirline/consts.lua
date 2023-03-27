@@ -1,5 +1,6 @@
 -- local delimiter_chars = { "", "" }
-local delimiter_chars = { "", "" }
+-- local delimiter_chars = { "", "" }
+local delimiter_chars = { "█", "█" }
 local sub_delimiter_chars = { "", "" }
 local empty = "█"
 
