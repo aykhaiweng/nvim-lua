@@ -220,7 +220,7 @@ neotree.setup({
         }
     },
     source_selector = {
-        winbar = true,
+        winbar = false,
         statusline = false
     },
     buffers = {
