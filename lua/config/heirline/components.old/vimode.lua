@@ -1,8 +1,12 @@
 local M = {}
 
-local c = require("config/heirline/consts")
 
+local consts = require("config/heirline/consts")
+
+
+-- vi-mode
 M.ViMode = {
+    -- init
     init = function(self)
         self.mode = vim.fn.mode(1) -- :h mode()
         if not self.once then
@@ -15,8 +19,8 @@ M.ViMode = {
     end,
     -- static variables
     static = {
-        mode_names = c.vimodes,
-        mode_colors = c.vimode_colors
+        mode_names = consts.vimodes,
+        mode_colors = consts.vimode_colors
     },
     -- providers
     provider = function(self)
@@ -29,4 +33,4 @@ M.ViMode = {
 }
 
 
-return M.ViMode
+return M

@@ -53,7 +53,7 @@ require("telescope").setup({
     },
     pickers = {
         fd = {
-            find_command = { "fd", "--type", "f", "--strip-cwd-prefix", "-uu", "--hidden"},
+            -- find_command = { "fd", "--type", "f", "--strip-cwd-prefix", "-uu", "--hidden"},
             hidden = true,
             smartcase = true,
             file_ignore_patterns = default_file_ignore_patterns,

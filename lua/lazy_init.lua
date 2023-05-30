@@ -41,6 +41,14 @@ require("lazy").setup({
             require "config/toggleterm"
         end,
     },
+    -- Persisted
+    {
+        "olimorris/persisted.nvim",
+        config = function()
+            require("config/persisted")
+        end,
+        enabled = false
+    },
 
     ---------------------------------------------------------------
     -- Colors / Looks
@@ -71,8 +79,30 @@ require("lazy").setup({
     {
         "rebelot/heirline.nvim",
         config = function()
+            require "core/colors"
             require "config/heirline"
         end,
+        enabled = false
+    },
+    -- Lualine
+    {
+        "nvim-lualine/lualine.nvim",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+        config = function()
+            require("config/lualine")
+        end,
+    },
+    {
+        "utilyre/barbecue.nvim",
+        name = "barbecue",
+        version = "*",
+        dependencies = {
+            "SmiteshP/nvim-navic",
+            "nvim-tree/nvim-web-devicons", -- optional dependency
+        },
+        opts = {
+            -- configurations go here
+        },
     },
 
     ---------------------------------------------------------------
@@ -151,7 +181,7 @@ require("lazy").setup({
             -- LSP Support
             { 'neovim/nvim-lspconfig' }, -- Required
             {
-                                     -- Optional
+                -- Optional
                 'williamboman/mason.nvim',
                 build = function()
                     pcall(vim.cmd, 'MasonUpdate')
@@ -160,9 +190,9 @@ require("lazy").setup({
             { 'williamboman/mason-lspconfig.nvim' }, -- Optional
 
             -- Autocompletion
-            { 'hrsh7th/nvim-cmp' }, -- Required
+            { 'hrsh7th/nvim-cmp' },     -- Required
             { 'hrsh7th/cmp-nvim-lsp' }, -- Required
-            { 'L3MON4D3/LuaSnip' }, -- Required
+            { 'L3MON4D3/LuaSnip' },     -- Required
         },
         config = function()
             require "config/lsp"
@@ -171,6 +201,9 @@ require("lazy").setup({
     -- context inspection
     {
         "SmiteshP/nvim-navic",
-        dependencies = { "neovim/nvim-lspconfig" }
+        dependencies = { "neovim/nvim-lspconfig" },
+        config = function()
+            require "config/navic"
+        end,
     },
 })

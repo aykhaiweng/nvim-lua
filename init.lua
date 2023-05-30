@@ -19,10 +19,7 @@ require("core/colors")
 -- vim.cmd([[
 --     augroup ReloadConfig
 --         autocmd!
---         autocmd BufWritePost *.lua lua require('plenary.reload').reload_module('lazy_init', true)
---         autocmd BufWritePost *.lua lua require('plenary.reload').reload_module('core', true)
---         autocmd BufWritePost *.lua lua require('plenary.reload').reload_module('config', true)
---         autocmd BufWritePost *.lua lua require('plenary.reload').reload_module('snippets', true)
 --         autocmd BufWritePost *.lua source $MYVIMRC
+--         autocmd BufWritePost *.lua lua require("lazy.core.loader").reload(require("lazy.core.config").plugins["heirline.nvim"])
 --     augroup END
 -- ]])

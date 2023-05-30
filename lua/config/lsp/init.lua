@@ -13,17 +13,6 @@ lsp.ensure_installed({
     'bashls',
 })
 
--- Fix Undefined global 'vim'
-lsp.configure('lua_ls', {
-    settings = {
-        Lua = {
-            diagnostics = {
-                globals = { 'vim' }
-            }
-        }
-    }
-})
-
 -- CMP settings and mappings for when the autocomplete thing is open
 local cmp = require('cmp')
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
@@ -46,19 +35,12 @@ lsp.setup_nvim_cmp({
 lsp.set_preferences({
     suggest_lsp_servers = false,
     set_lsp_keymaps = { omit = { '<C-k>' } },
-    sign_icons = {
-        error = vim.fn.sign_getdefined("DiagnosticSignError")[1].text,
-        warn = vim.fn.sign_getdefined("DiagnosticSignWarn")[1].text,
-        hint = vim.fn.sign_getdefined("DiagnosticSignHint")[1].text,
-        info = vim.fn.sign_getdefined("DiagnosticSignInfo")[1].text
-    }
 })
 
 
 -- keymaps for LSP
 lsp.on_attach(function(client, bufnr)
     local opts = { buffer = bufnr, remap = true }
-
 
     vim.keymap.set("n", "gD", function() vim.lsp.buf.declaration() end, opts)
     vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
@@ -73,6 +55,18 @@ lsp.on_attach(function(client, bufnr)
     vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
     vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
 end)
+
+
+-- Fix Undefined global 'vim'
+lsp.configure('lua_ls', {
+    settings = {
+        Lua = {
+            diagnostics = {
+                globals = { 'vim' }
+            }
+        }
+    }
+})
 
 
 -- Setting up configuration for pylsp
