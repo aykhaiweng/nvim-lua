@@ -3,7 +3,6 @@ local actions = require("telescope.actions")
 local themes = require("telescope.themes")
 
 -- extensions
-require("telescope").load_extension("media")
 require("telescope").load_extension("ui-select")
 require("telescope").load_extension("vimspector")
 
@@ -69,11 +68,6 @@ require("telescope").setup({
         }
     },
     extensions = {
-        media = {
-            backend = "viu", -- "none"|"ueberzug"|"viu"|"chafa"|"jp2a"|"catimg"
-            move = true, -- experimental GIF preview
-            cache_path = "/tmp/tele.media.cache",
-        },
         ["ui-select"] = {
             themes.get_dropdown({})
         }

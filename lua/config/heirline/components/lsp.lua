@@ -25,7 +25,9 @@ M.LSPActive = {
     hl        = { fg = "green", bold = true },
 }
 M.Navic = {
-    condition = require("nvim-navic").is_available,
+    condition = function()
+        return false
+    end,-- require("nvim-navic").is_available,
     static = {
         -- create a type highlight map
         type_hl = {

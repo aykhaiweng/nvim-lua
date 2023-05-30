@@ -1,7 +1,9 @@
 local Terminal  = require('toggleterm.terminal').Terminal
 
 -- Setup toggleterm
-require("toggleterm").setup()
+require("toggleterm").setup({
+    open_mapping = [[<c-\>]],
+})
 
 
 -- LazyGit
@@ -54,8 +56,6 @@ end
 
 
 -- maps
-vim.keymap.set("n", "<F5>", vim.cmd.ToggleTerm)
-vim.keymap.set("t", "<F5>", vim.cmd.ToggleTerm)
 vim.keymap.set("n", "<leader>gg", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
 vim.keymap.set("n", "<leader>ld", "<cmd>lua _lazydocker_toggle()<CR>", {noremap = true, silent = true})
 
