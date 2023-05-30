@@ -51,8 +51,6 @@ return packer.startup(function(use)
 
     -- Telescope (fuzzyfinder) -- requires rg and fd
     use({ "nvim-telescope/telescope.nvim", requires = { "nvim-lua/plenary.nvim" } })
-    -- extension: telescope-media
-    use({ "dharmx/telescope-media.nvim", requires = { "nvim-lua/plenary.nvim" } })
     -- extension: telescope-ui-select
     use({ "nvim-telescope/telescope-ui-select.nvim", requires = { "nvim-lua/plenary.nvim" } })
     -- extension: vimspector

@@ -7,7 +7,7 @@ lsp.preset("recommended")
 -- is always installed
 lsp.ensure_installed({
     'tsserver',
-    'sumneko_lua',
+    'lua_ls',
     'dockerls',
     'dotls',
     'bashls',
@@ -107,6 +107,7 @@ lsp.configure('pylsp', {
         }
     }
 })
+
 
 -- Call the setup function
 lsp.setup()

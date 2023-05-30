@@ -36,7 +36,7 @@ local DefaultStatusline = {
     { hl = { bg = "bg0" }, FileNameBlock },
     GitBlock, c.Space,
     diag.Diagnostics, c.Space,
-    lsp.Navic, c.Space,
+    -- lsp.Navic, c.Space,
     c.Align,
     -- centered
     c.Align,
