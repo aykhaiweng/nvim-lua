@@ -12,6 +12,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+
 -- Registering the plugins
 require("lazy").setup({
     ---------------------------------------------------------------
@@ -188,7 +189,6 @@ require("lazy").setup({
                 end,
             },
             { 'williamboman/mason-lspconfig.nvim' }, -- Optional
-
             -- Autocompletion
             { 'hrsh7th/nvim-cmp' },     -- Required
             { 'hrsh7th/cmp-nvim-lsp' }, -- Required
