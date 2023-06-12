@@ -6,7 +6,7 @@ require('lualine').setup {
     section_separators = { left = '', right = ''},
     disabled_filetypes = {
       statusline = {'neo-tree'},
-      winbar = {},
+      winbar = {'neo-tree'},
     },
     ignore_focus = {},
     always_divide_middle = true,
@@ -38,3 +38,10 @@ require('lualine').setup {
   inactive_winbar = {},
   extensions = {}
 }
+
+
+-- vim options
+vim.cmd "set noshowmode"
+vim.cmd "set showcmd"
+vim.o.showtabline = 1
+vim.o.laststatus = 3
