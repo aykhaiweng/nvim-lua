@@ -20,7 +20,7 @@ require("telescope").setup({
         -- rg
         vimgrep_arguments = {
             "rg",
-            "--color=never",
+            -- "--color=never",
             "--no-heading",
             "--hidden",
             "--with-filename",
@@ -53,7 +53,7 @@ require("telescope").setup({
     },
     pickers = {
         fd = {
-            find_command = { "rg", "--type", "f", "--strip-cwd-prefix", "-uu", "--hidden"},
+            find_command = { "fd", "--type", "f", "--strip-cwd-prefix", "-uu", "--hidden"},
             hidden = true,
             smartcase = true,
             file_ignore_patterns = default_file_ignore_patterns,
@@ -77,9 +77,6 @@ require("telescope").setup({
 -- remaps
 vim.keymap.set("n", "<leader>pf", builtin.fd, {})
 vim.keymap.set("n", "<C-p>", builtin.git_files, {})
-vim.keymap.set("n", "<leader>ps", function()
-    builtin.grep_string({ search = vim.fn.input("Grep > ") })
-end)
 vim.keymap.set("n", "<C-f>", builtin.live_grep, {})
 -- vim.keymap.set("n", "<C-f>", function()
 --     builtin.grep_string({ search = vim.fn.input("Grep > ") })
