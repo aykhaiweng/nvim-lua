@@ -45,6 +45,7 @@ require("lazy").setup({
     -- Persisted
     {
         "olimorris/persisted.nvim",
+        enabled = false,
         config = function()
             require("config/persisted")
         end,
@@ -177,6 +178,7 @@ require("lazy").setup({
     {
         "VonHeikemen/lsp-zero.nvim",
         branch = 'v2.x',
+        lazy = false,
         dependencies = {
             -- LSP Support
             { 'neovim/nvim-lspconfig' }, -- Required
