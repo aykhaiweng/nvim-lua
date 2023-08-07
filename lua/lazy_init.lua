@@ -207,4 +207,15 @@ require("lazy").setup({
             require "config/navic"
         end,
     },
+
+    ---------------------------------------------------------------
+    -- Python
+    ---------------------------------------------------------------
+    {
+        "hattya/python-indent.vim",
+        config = function()
+            require "config/python-indent"
+        end,
+    },
+    -- context inspection
 })
