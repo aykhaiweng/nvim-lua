@@ -77,14 +77,14 @@ require("lazy").setup({
         end,
     },
     -- Heirline
-    {
-        "rebelot/heirline.nvim",
-        config = function()
-            require "core/colors"
-            require "config/heirline"
-        end,
-        enabled = false
-    },
+    -- {
+    --     "rebelot/heirline.nvim",
+    --     config = function()
+    --         require "core/colors"
+    --         require "config/heirline"
+    --     end,
+    --     enabled = false
+    -- },
     -- Lualine
     {
         "nvim-lualine/lualine.nvim",
@@ -112,7 +112,7 @@ require("lazy").setup({
     -- Telescope
     {
         "nvim-telescope/telescope.nvim",
-        tag = "0.1.1",
+        tag = "0.1.3",
         dependencies = { "nvim-lua/plenary.nvim" },
         config = function()
             require "config/telescope"
