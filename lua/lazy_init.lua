@@ -165,6 +165,7 @@ require("lazy").setup({
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
         event = "VeryLazy",
+        lazy = false,
         config = function()
             require "config/treesitter"
         end,
@@ -193,11 +194,17 @@ require("lazy").setup({
             -- Autocompletion
             { 'hrsh7th/nvim-cmp' },                  -- Required
             { 'hrsh7th/cmp-nvim-lsp' },              -- Required
-            { 'L3MON4D3/LuaSnip' },                  -- Required
         },
         config = function()
             require "config/lsp"
         end,
+    },
+    {
+        "L3MON4D3/LuaSnip",
+        -- follow latest release.
+        version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+        -- install jsregexp (optional!).
+        build = "make install_jsregexp"
     },
     -- context inspection
     {
