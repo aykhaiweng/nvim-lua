@@ -56,8 +56,8 @@ end
 
 
 -- maps
-vim.keymap.set("n", "<leader>gg", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
-vim.keymap.set("n", "<leader>ld", "<cmd>lua _lazydocker_toggle()<CR>", {noremap = true, silent = true})
+vim.keymap.set("n", "<leader>tlg", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
+vim.keymap.set("n", "<leader>tld", "<cmd>lua _lazydocker_toggle()<CR>", {noremap = true, silent = true})
 
 local nvim_tmux_nav = require('nvim-tmux-navigation')
 vim.keymap.set('t', '<C-q>', [[<C-\><C-n>]])
