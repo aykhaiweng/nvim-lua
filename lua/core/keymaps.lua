@@ -52,7 +52,7 @@ end)
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 -- set breakpoints
--- vim.keymap.set('n', '<leader>bp', vim.cmd.Break)
+vim.keymap.set('n', '<leader>bp', vim.cmd.Break)
 
 -- Folding
 vim.keymap.set("n", "<leader><space>", "za")
