@@ -18,4 +18,4 @@ vim.cmd([[smap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-nex
 
 
 -- load
-require("luasnip.loaders.from_lua").load({ paths = "$HOME/.config/nvim/snippets/" })
+require("luasnip.loaders.from_snipmate").lazy_load()

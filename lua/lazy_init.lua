@@ -4,7 +4,7 @@ if not vim.loop.fs_stat(lazypath) then
     vim.fn.system({
         "git",
         "clone",
-        "--filter=blob:none",
+        "--filter=blob:none",lazy
         "https://github.com/folke/lazy.nvim.git",
         "--branch=stable", -- latest stable release
         lazypath,
@@ -204,7 +204,10 @@ require("lazy").setup({
         -- follow latest release.
         version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
         -- install jsregexp (optional!).
-        build = "make install_jsregexp"
+        build = "make install_jsregexp",
+        config = function()
+            require "config/luasnip"
+        end,
     },
     -- context inspection
     {
