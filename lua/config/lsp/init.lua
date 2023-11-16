@@ -6,7 +6,6 @@ lsp.preset("recommended")
 -- A bunch of servers that we would like to ensure
 -- is always installed
 lsp.ensure_installed({
-    'tsserver',
     'lua_ls',
     'dockerls',
     'dotls',
