@@ -11,18 +11,10 @@ return {
         config = function()
             local builtin = require("telescope.builtin")
             local actions = require("telescope.actions")
-            local themes = require("telescope.themes")
 
             -- extensions
             require("telescope").load_extension("ui-select")
             require("telescope").load_extension("fzf")
-
-            -- variables
-            local default_file_ignore_patterns = {
-                ".git/*",
-                "node_modules/*",
-                "__pycache__/*"
-            }
 
             -- setup
             require("telescope").setup({
@@ -64,9 +56,5 @@ return {
     {
         "nvim-telescope/telescope-ui-select.nvim",
         dependencies = { "nvim-lua/plenary.nvim" },
-    },
-    -- {
-    --     "nvim-telescope/telescope-vimspector.nvim",
-    --     dependencies = { "puremourning/vimspector" },
-    -- }
+    }
 }
