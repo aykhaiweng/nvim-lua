@@ -15,13 +15,16 @@ return {
 		lazy = false,
 		config = true,
 	},
-
 	-- Autocompletion
 	{
 		"hrsh7th/nvim-cmp",
 		event = "InsertEnter",
 		dependencies = {
-			{ "L3MON4D3/LuaSnip" },
+			-- snippets
+			"L3MON4D3/LuaSnip", -- snippets engine
+			"saadparwaiz1/cmp_luasnip", -- for autocompletion
+			"rafamadriz/friendly-snippets", -- useful snippets
+			"onsails/lspkind.nvim", -- vs-code like pictograms
 		},
 		config = function()
 			-- Here is where you configure the autocompletion settings.
@@ -33,8 +36,21 @@ return {
 			local cmp_action = lsp_zero.cmp_action()
 			local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
+			local luasnip = require("luasnip")
+			local lspkind = require("lspkind")
+
+			-- loads vscode style snippets from installed plugins (e.g. friendly-snippets)
+			require("luasnip.loaders.from_vscode").lazy_load()
+
 			cmp.setup({
-				formatting = lsp_zero.cmp_format(),
+				completion = {
+					completeopt = "menu,menuone,preview,noselect",
+				},
+				snippet = { -- configure how nvim-cmp interacts with snippet engine
+					expand = function(args)
+						luasnip.lsp_expand(args.body)
+					end,
+				},
 				mapping = cmp.mapping.preset.insert({
 					["<C-Space>"] = cmp.mapping.complete(),
 					["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
@@ -45,10 +61,23 @@ return {
 					["<C-f>"] = cmp_action.luasnip_jump_forward(),
 					["<C-b>"] = cmp_action.luasnip_jump_backward(),
 				}),
+				-- sources for autocompletion
+				sources = cmp.config.sources({
+					{ name = "nvim_lsp" },
+					{ name = "luasnip" }, -- snippets
+					{ name = "buffer" }, -- text within current buffer
+					{ name = "path" }, -- file system paths
+				}),
+				-- configure lspkind for vs-code like pictograms in completion menu
+				formatting = {
+					format = lspkind.cmp_format({
+						maxwidth = 50,
+						ellipsis_char = "...",
+					}),
+				},
 			})
 		end,
 	},
-
 	-- LSP
 	{
 		"neovim/nvim-lspconfig",
@@ -62,7 +91,6 @@ return {
 			-- This is where all the LSP shenanigans will live
 			local lsp_zero = require("lsp-zero")
 			lsp_zero.extend_lspconfig()
-
 			lsp_zero.on_attach(function(client, bufnr)
 				-- see :help lsp-zero-keybindings
 				-- to learn the available actions
