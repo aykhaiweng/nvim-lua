@@ -5,7 +5,7 @@ require('lualine').setup {
     component_separators = { left = '', right = ''},
     section_separators = { left = '', right = ''},
     disabled_filetypes = {
-      statusline = {'neo-tree'},
+      statusline = {'neo-tree', 'Outline'},
       winbar = {'neo-tree'},
     },
     ignore_focus = {},

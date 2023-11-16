@@ -224,6 +224,12 @@ require("lazy").setup({
             require "config/trouble"
         end,
     },
+    {
+        "simrat39/symbols-outline.nvim",
+        config = function()
+            require "config/symbols-outline"
+        end,
+    },
 
     ---------------------------------------------------------------
     -- Python

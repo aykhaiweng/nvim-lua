@@ -104,7 +104,7 @@ neotree.setup({
     },
     window = {
         position = "left",
-        width = 37,
+        width = 45,
         mapping_options = {
             noremap = true,
             nowait = true,
@@ -126,8 +126,8 @@ neotree.setup({
             -- ["l"] = "focus_preview",
             -- ["S"] = "open_split",
             -- ["s"] = "open_vsplit",
-            ["s"] = "split_with_window_picker",
-            ["v"] = "vsplit_with_window_picker",
+            ["s"] = "open_split",
+            ["v"] = "open_vsplit",
             ["t"] = "open_tabnew",
             -- ["<cr>"] = "open_drop",
             -- ["t"] = "open_tab_drop",
