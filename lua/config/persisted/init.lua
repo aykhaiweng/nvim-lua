@@ -4,10 +4,6 @@ require("persisted").setup({
   use_git_branch = true, -- create session files based on the branch of the git enabled repository
   autosave = true, -- automatically save session files when exiting Neovim
   should_autosave = function()
-    -- do not autosave if the alpha dashboard is the current filetype
-    if vim.bo.filetype == "neo-tree" then
-      return false
-    end
     return true
   end, -- function to determine if a session should be autosaved
   autoload = true, -- automatically load the session for the cwd on Neovim startup

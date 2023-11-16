@@ -1,19 +1,17 @@
 local lsp = require("lsp-zero")
+local cmp = require("cmp")
+local mason = require('mason').setup({})
+local mason_lspconfig = require('mason-lspconfig').setup({
+  ensure_installed = {},
+  handlers = {
+    lsp.default_setup,
+  },
+})
 
 -- Setup the recommended preset
 lsp.preset("recommended")
 
--- A bunch of servers that we would like to ensure
--- is always installed
-lsp.ensure_installed({
-    'lua_ls',
-    'dockerls',
-    'dotls',
-    'bashls',
-})
-
 -- CMP settings and mappings for when the autocomplete thing is open
-local cmp = require('cmp')
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
 local cmp_mappings = lsp.defaults.cmp_mappings({
     ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
@@ -26,7 +24,7 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
 cmp_mappings['<Tab>'] = nil
 cmp_mappings['<S-Tab>'] = nil
 cmp_mappings['<CR>'] = nil
-lsp.setup_nvim_cmp({
+cmp.setup({
     mapping = cmp_mappings
 })
 
@@ -39,7 +37,6 @@ lsp.set_preferences({
 -- keymaps for LSP
 lsp.on_attach(function(client, bufnr)
     local opts = { buffer = bufnr, remap = true }
-
     vim.keymap.set("n", "gD", function() vim.lsp.buf.declaration() end, opts)
     vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
     vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
@@ -56,7 +53,7 @@ end)
 
 
 -- Fix Undefined global 'vim'
-lsp.configure('lua_ls', {
+require('lspconfig').lua_ls.setup({
     settings = {
         Lua = {
             diagnostics = {
@@ -65,40 +62,8 @@ lsp.configure('lua_ls', {
         }
     }
 })
-
-
--- Setting up configuration for pylsp
--- Changing the configuration to use flake8
--- lsp.configure('pylsp', {
---     on_attach = function(client, bufnr)
---         -- Use a protected call so we don't error out on first use
---         local status_ok, navic = pcall(require, 'nvim-navic')
---         if not status_ok then
---             return
---         end
---         require("nvim-navic").attach(client, bufnr)
---     end,
---     settings = {
---         pylsp = {
---             configurationSources = { 'flake8' },
---             plugins = {
---                 pycodestyle = {
---                     enabled = false,
---                 },
---                 pyflakes = {
---                     enabled = false,
---                 },
---                 mccabe = {
---                     enabled = false,
---                 },
---                 flake8 = {
---                     enabled = true,
---                     ignore = { 'W391' },
---                 }
---             }
---         }
---     }
--- })
+require('lspconfig').jedi_language_server.setup({})
+require('lspconfig').flake8.setup({})
 
 
 -- Call the setup function
