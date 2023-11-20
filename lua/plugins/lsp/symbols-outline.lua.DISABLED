@@ -1,0 +1,11 @@
+return {
+	'simrat39/symbols-outline.nvim',
+	lazy = true,
+	event = { "BufReadPre", "BufNewFile" }, -- to disable, comment this out
+	config = function()
+        require("symbols-outline").setup({
+            width = 18
+        })
+        vim.keymap.set("n", "<leader>=", [[:SymbolsOutline<CR>]])
+    end,
+}
