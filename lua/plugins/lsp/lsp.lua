@@ -108,6 +108,20 @@ return {
 					end,
 				},
 			})
+
+			require("lspconfig").pylsp.setup({
+				settings = {
+					-- configure plugins in pylsp
+					pylsp = {
+						plugins = {
+							pycodestyle = { enabled = false },
+							pyflakes = { enabled = false },
+							pylint = { enabled = false },
+							flake8 = { enabled = false },
+						},
+					},
+				},
+			})
 		end,
 	},
 }
