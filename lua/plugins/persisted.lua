@@ -17,7 +17,6 @@ return {
 				},
 			})
 
-			local neotree = require("neo-tree")
 			vim.api.nvim_create_autocmd({ "ExitPre" }, {
 				callback = function()
 					vim.cmd([[Neotree close]])
