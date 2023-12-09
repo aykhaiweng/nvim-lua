@@ -59,9 +59,9 @@ vim.opt.updatetime = 50
 -- vim.opt.clipboard = "unnamed"
 
 -- cursor
--- vim.cmd([[ let &t_SI = "\e[6 q" ]])
--- vim.cmd([[ let &t_EI = "\e[2 q" ]])
--- vim.cmd([[ set guicursor=n-v-c:block-Cursor ]])
--- vim.cmd([[ set guicursor+=i-ci-ve:ver25 ]])
--- vim.cmd([[ set guicursor+=r-cr:block-Cursor ]])
--- vim.cmd([[ set guicursor+=a:blinkwait700-blinkoff400-blinkon250 ]])
+vim.cmd([[ let &t_SI = "\e[6 q" ]])
+vim.cmd([[ let &t_EI = "\e[2 q" ]])
+vim.cmd([[ set guicursor=n-v-c:block-Cursor ]])
+vim.cmd([[ set guicursor+=i-ci-ve:ver25 ]])
+vim.cmd([[ set guicursor+=r-cr:block-Cursor ]])
+vim.cmd([[ set guicursor+=a:blinkwait700-blinkoff400-blinkon250 ]])
