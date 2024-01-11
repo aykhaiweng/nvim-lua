@@ -25,6 +25,9 @@ return {
 
 			-- loads vscode style snippets from installed plugins (e.g. friendly-snippets)
 			require("luasnip.loaders.from_vscode").lazy_load()
+            -- load custom snippets
+			require("luasnip.loaders.from_vscode").lazy_load({paths = {"~/.config/nvim/snippets"}})
+			require("luasnip.loaders.from_vscode").load({paths = {"./snippets"}})
 
 			cmp.setup({
 				completion = {
@@ -55,7 +58,7 @@ return {
 				-- configure lspkind for vs-code like pictograms in completion menu
 				formatting = {
 					format = lspkind.cmp_format({
-						maxwidth = 50,
+						maxwidth = 80,
 						ellipsis_char = "...",
 					}),
 				},
