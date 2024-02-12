@@ -1,9 +1,15 @@
 {
-    "wayk": {
-        "prefix": "wayk",
+    "newsnippet": {
+        "prefix": "newsnippet",
         "body": [
-            "Copyright (c) ${CURRENT_YEAR} ${0:Author}. All Rights Reserved."
+            "\"${1:SnippetTrigger}\": {",
+            "    \"prefix\": \"${1:SnippetTrigger}\",",
+            "    \"body\": [",
+            "        \"${3:SnippetBody}\"",
+            "    ],",
+            "    \"description\": \"${2:SnippetDescription}\"",
+            "},"
         ],
-        "description": "Snippet to put copyright"
+        "description": "Creating a new snippet"
     }
 }

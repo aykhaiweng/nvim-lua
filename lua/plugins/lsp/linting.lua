@@ -17,7 +17,23 @@ return {
 
 		local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
 
+        -- setting an autocmd for linting
 		vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+			group = lint_augroup,
+			callback = function()
+				lint.try_lint()
+			end,
+		})
+
+        -- setting up aggressive linting for these filetypes
+		vim.api.nvim_create_autocmd({ "TextChanged" }, {
+            pattern = {
+                "python",
+                "html",
+                "js",
+                "json",
+                "lua"
+            },
 			group = lint_augroup,
 			callback = function()
 				lint.try_lint()

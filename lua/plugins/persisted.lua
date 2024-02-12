@@ -7,7 +7,7 @@ return {
 				silent = false, -- silent nvim message when sourcing session file
 				use_git_branch = true, -- create session files based on the branch of the git enabled repository
 				autosave = true, -- automatically save session files when exiting Neovim
-				autoload = true, -- automatically load the session for the cwd on Neovim startup
+				autoload = false, -- automatically load the session for the cwd on Neovim startup
 				on_autoload_no_session = nil, -- function to run when `autoload = true` but there is no session to load
 				follow_cwd = true, -- change session file name to match current working directory if it changes
 				allowed_dirs = nil, -- table of dirs that the plugin will auto-save and auto-load from
@@ -15,12 +15,6 @@ return {
 				telescope = { -- options for the telescope extension
 					reset_prompt_after_deletion = true, -- whether to reset prompt after session deleted
 				},
-			})
-
-			vim.api.nvim_create_autocmd({ "ExitPre" }, {
-				callback = function()
-					vim.cmd([[Neotree close]])
-				end,
 			})
 		end,
 	},

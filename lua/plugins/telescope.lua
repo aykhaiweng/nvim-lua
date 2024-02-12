@@ -54,7 +54,7 @@ return {
 			-- remaps
 			vim.keymap.set("n", "<leader>pf", builtin.find_files, {})
 			vim.keymap.set("n", "<leader>pr", builtin.oldfiles, {})
-			vim.keymap.set("n", "<C-p>", builtin.git_files, {})
+			vim.keymap.set("n", "<C-p>", builtin.find_files, {})
             -- vim.keymap.set("n", "<C-f>", builtin.live_grep, {})
             vim.keymap.set("n", "<C-f>", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>")
 

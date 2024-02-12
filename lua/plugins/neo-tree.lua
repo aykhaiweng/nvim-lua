@@ -230,7 +230,7 @@ return {
                     }
                 },
                 source_selector = {
-                    winbar = false,
+                    winbar = true,
                     statusline = false
                 },
                 buffers = {

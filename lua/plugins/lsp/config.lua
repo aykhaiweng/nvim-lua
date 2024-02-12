@@ -29,9 +29,6 @@ return {
 				},
 			})
 
-            require("lspconfig").jedi_lanauge_server.setup({
-            })
-
             -- PyLSP Configuration
             require("lspconfig").pylsp.setup({
 				settings = {

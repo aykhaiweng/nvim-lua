@@ -12,8 +12,11 @@ vim.keymap.set("n", "<leader>th", vim.cmd.tabprev)
 vim.keymap.set("n", "<leader>tk", vim.cmd.tablast)
 vim.keymap.set("n", "<leader>tt", vim.cmd.tabedit)
 vim.keymap.set("n", "<leader>tn", vim.cmd.tabnew)
-vim.keymap.set("n", "<leader>tm", vim.cmd([[:tabm]]))
+vim.keymap.set("n", "<leader>tm", ":tabm ")
 vim.keymap.set("n", "<leader>tx", vim.cmd.tabclose)
+
+-- toggle hightlights
+vim.keymap.set("n", "<leader>F", [[:set hls!<CR>]])
 
 -- visual line move -- It will automatically indent with =
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")

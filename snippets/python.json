@@ -1,4 +1,22 @@
 {
+    "titleblock": {
+        "prefix": "titleblock",
+        "body": [
+            "############################################################",
+            "# $0",
+            "############################################################"
+        ],
+        "description": "Commented title block"
+    },
+    "minititleblock": {
+        "prefix": "minititleblock",
+        "body": [
+            "###############################",
+            "# $0",
+            "###############################"
+        ],
+        "description": "Commented title block"
+    },
     "modelsimport": {
         "prefix": "modelsimport",
         "body": [
@@ -17,18 +35,18 @@
         "prefix": "querysetmanager",
         "body": [
             "class ${0:ModelName}QuerySet(models.QuerySet):",
-            "   \"\"\"",
-            "   Base QuerySet for the ${0:ModelName} objects.",
-            "   \"\"\"",
+            "    \"\"\"",
+            "    Base QuerySet for the ${0:ModelName} objects.",
+            "    \"\"\"",
             "",
             "",
             "class Base${0:ModelName}Manager(models.Manager):",
-            "   \"\"\"",
-            "   Base Manager for the ${0:ModelName} objects.",
-            "   \"\"\"",
+            "    \"\"\"",
+            "    Base Manager for the ${0:ModelName} objects.",
+            "    \"\"\"",
             "",
             "",
-            "${0:ModelName}Manager = Base${0:ModelName}Manager.form_queryset(${0:ModelName}QuerySet)"
+            "${0:ModelName}Manager = Base${0:ModelName}Manager.from_queryset(${0:ModelName}QuerySet)"
         ],
         "description": "Snippet to put copyright"
     }
