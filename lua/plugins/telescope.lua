@@ -41,11 +41,11 @@ return {
 						height = 0.8,
 					},
 				},
-                pickers = {
-                    find_files = {
-                        hidden = true
-                    }
-                },
+				pickers = {
+					find_files = {
+						hidden = true,
+					},
+				},
 				extensions = {
 					fzf = {
 						fuzzy = true, -- false will only do exact matching
@@ -60,8 +60,8 @@ return {
 			vim.keymap.set("n", "<leader>pf", builtin.find_files, {})
 			vim.keymap.set("n", "<leader>pr", builtin.oldfiles, {})
 			vim.keymap.set("n", "<C-p>", builtin.find_files, {})
-            -- vim.keymap.set("n", "<C-f>", builtin.live_grep, {})
-            vim.keymap.set("n", "<C-f>", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>")
+			-- vim.keymap.set("n", "<C-f>", builtin.live_grep, {})
+			vim.keymap.set("n", "<C-f>", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>")
 
 			-- remaps for lsp
 			vim.keymap.set("n", "<leader>plr", builtin.lsp_references, {})
