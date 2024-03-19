@@ -41,6 +41,11 @@ return {
 						height = 0.8,
 					},
 				},
+                pickers = {
+                    find_files = {
+                        hidden = true
+                    }
+                },
 				extensions = {
 					fzf = {
 						fuzzy = true, -- false will only do exact matching

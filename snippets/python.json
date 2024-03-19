@@ -1,4 +1,13 @@
 {
+    "bigtitleblock": {
+        "prefix": "bigtitleblock",
+        "body": [
+            "##################################################################",
+            "# $0",
+            "##################################################################"
+        ],
+        "description": "Commented big title block"
+    },
     "titleblock": {
         "prefix": "titleblock",
         "body": [
@@ -15,7 +24,7 @@
             "# $0",
             "###############################"
         ],
-        "description": "Commented title block"
+        "description": "Commented mini title block"
     },
     "modelsimport": {
         "prefix": "modelsimport",

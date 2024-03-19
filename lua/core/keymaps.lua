@@ -50,6 +50,7 @@ vim.keymap.set("n", "<leader>po", "<cmd>silent !tmux neww tms<CR>")
 
 -- Imba substitute command
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set("v", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 -- set breakpoints
 vim.keymap.set("n", "<leader>bp", vim.cmd.Break)

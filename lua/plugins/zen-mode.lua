@@ -48,7 +48,7 @@ return {
         })
 
         -- mappings
-        vim.keymap.set('n', '<leader>zm', vim.cmd.ZenMode)
+        vim.keymap.set('n', '<leader>zen', vim.cmd.ZenMode)
         end,
     },
 }
