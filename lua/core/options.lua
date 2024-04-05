@@ -10,13 +10,14 @@ vim.opt.mouse = "a"
 -- set line numbers
 vim.opt.nu = true
 vim.opt.relativenumber = true
+vim.opt.numberwidth = 1
 
 -- Focus on the split window when opened
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
 -- show whitespaces, tabs and spaces
-vim.opt.listchars = "tab:--,trail:·,nbsp:~,extends:>,precedes:<"
+-- vim.opt.listchars = "tab:--,trail:·,nbsp:~,extends:>,precedes:<"
 vim.opt.list = true
 
 -- indents - use 4 spaces as default

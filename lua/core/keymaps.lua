@@ -43,10 +43,6 @@ vim.keymap.set("v", "<leader>d", '"_d')
 vim.keymap.set("n", "Q", "<nop>")
 -- tmux-sessionizer
 vim.keymap.set("n", "<leader>po", "<cmd>silent !tmux neww tms<CR>")
--- some LSP thing
--- vim.keymap.set("n", "<leader>ff", function()
---  	vim.lsp.buf.format()
--- end)
 
 -- Imba substitute command
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
