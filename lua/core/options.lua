@@ -12,13 +12,17 @@ vim.opt.nu = true
 vim.opt.relativenumber = true
 vim.opt.numberwidth = 1
 
+-- text truncation
+vim.opt.display = "lastline"
+
 -- Focus on the split window when opened
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
 -- show whitespaces, tabs and spaces
--- vim.opt.listchars = "tab:--,trail:·,nbsp:~,extends:>,precedes:<"
-vim.opt.list = true
+vim.opt.listchars = "tab:--,trail:·,nbsp:~,extends:>,precedes:<"
+vim.opt.list = false
+-- vim.opt.fillchars = { eob = "" }  -- Removing the tilde from the 
 
 -- indents - use 4 spaces as default
 vim.opt.tabstop = 4
