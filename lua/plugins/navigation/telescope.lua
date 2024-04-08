@@ -59,17 +59,17 @@ return {
 
 			-- remaps
 			vim.keymap.set("n", "<leader>pf", builtin.find_files, {})
-			vim.keymap.set("n", "<leader>pr", builtin.oldfiles, {})
+			vim.keymap.set("n", "<leader>po", builtin.oldfiles, {})
 			vim.keymap.set("n", "<C-p>", builtin.find_files, {})
 			-- vim.keymap.set("n", "<C-f>", builtin.live_grep, {})
 			vim.keymap.set("n", "<C-f>", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>")
 
 			-- remaps for lsp
-			vim.keymap.set("n", "<leader>plr", builtin.lsp_references, {})
-			vim.keymap.set("n", "<leader>pls", builtin.lsp_workspace_symbols, {})
+			vim.keymap.set("n", "<leader>pr", builtin.lsp_references, {})
+			vim.keymap.set("n", "<leader>ps", builtin.lsp_workspace_symbols, {})
 
 			-- remaps for diagnostics
-			vim.keymap.set("n", "<leader>pld", builtin.diagnostics, {})
+			vim.keymap.set("n", "<leader>pd", builtin.diagnostics, {})
 
 			-- remaps for treesitter
 			vim.keymap.set("n", "<leader>ts", builtin.treesitter, {})
