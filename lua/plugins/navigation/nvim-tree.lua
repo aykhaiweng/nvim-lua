@@ -1,9 +1,13 @@
 return {
 	"nvim-tree/nvim-tree.lua",
 	version = "*",
-	lazy = false,
+	cmd = { "NvimTreeToggle", "NvimTreeFindFile" },
 	dependencies = {
 		"nvim-tree/nvim-web-devicons",
+	},
+	keys = {
+		{ "<C-b>", ":NvimTreeToggle<CR>", "n", { desc = "Open file explorer" } },
+        { "<leader>-", ":NvimTreeFindFile<CR>", "n", { desc = "Focus current file in explorer" } },
 	},
 	config = function()
 		-- disable netrw at the very start of your init.lua
@@ -20,19 +24,16 @@ return {
 				signcolumn = "no",
 			},
 			renderer = {
-                indent_width = 4,
-                indent_markers = {
-                    enable = true
-                },
-                highlight_diagnostics = "name",
-                highlight_git = "name",
-            },
-            filters = {
-                enable = false,
-            }
+				indent_width = 4,
+				indent_markers = {
+					enable = true,
+				},
+				highlight_diagnostics = "name",
+				highlight_git = "name",
+			},
+			filters = {
+				enable = false,
+			},
 		})
-
-		vim.keymap.set("n", "<C-b>", ":NvimTreeToggle<CR>", { desc = "Open file explorer" })
-		vim.keymap.set("n", "<leader>-", ":NvimTreeFindFile<CR>", { desc = "Focus current file in explorer" })
 	end,
 }

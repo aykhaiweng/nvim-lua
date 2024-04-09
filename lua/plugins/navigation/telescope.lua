@@ -6,6 +6,7 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons",
+            "nvim-telescope/telescope-ui-select.nvim",
 			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 			{
 				"nvim-telescope/telescope-live-grep-args.nvim",
@@ -14,8 +15,33 @@ return {
 				version = "^1.0.0",
 			},
 		},
-		config = function()
+        cmd = { "Telescope" },
+		keys = function()
 			local builtin = require("telescope.builtin")
+			return {
+				-- remaps
+				{ "<leader>pf", builtin.find_files, "n", { desc = "Find files" } },
+				{ "<leader>po", builtin.oldfiles, "n", { desc = "Open recent" } },
+				{ "<C-p>", builtin.find_files, "n", { desc = "Find files" } },
+				{
+					"<C-f>",
+					":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
+					"n",
+					{ desc = "Live grep" },
+				},
+
+				-- remaps for lsp
+				{ "<leader>pr", builtin.lsp_references, "n", { desc = "LSP References" } },
+				{ "<leader>ps", builtin.lsp_workspace_symbols, "n", { desc = "Worksymbols" } },
+
+				-- remaps for diagnostics
+				{ "<leader>pd", builtin.diagnostics, "n", { desc = "Diagnostics" } },
+
+				-- remaps for treesitter
+				{ "<leader>ts", builtin.treesitter, "n", { desc = "Treesitter" } },
+			}
+		end,
+		config = function()
 			local actions = require("telescope.actions")
 
 			-- extensions
@@ -44,7 +70,7 @@ return {
 				pickers = {
 					find_files = {
 						hidden = true,
-                        no_ignore = true
+						no_ignore = true,
 					},
 				},
 				extensions = {
@@ -56,26 +82,6 @@ return {
 					},
 				},
 			})
-
-			-- remaps
-			vim.keymap.set("n", "<leader>pf", builtin.find_files, {desc = "Find files"})
-			vim.keymap.set("n", "<leader>po", builtin.oldfiles, {desc = "Open recent"})
-			vim.keymap.set("n", "<C-p>", builtin.find_files, {desc = "Find files"})
-			vim.keymap.set("n", "<C-f>", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", {desc = "Live grep"})
-
-			-- remaps for lsp
-			vim.keymap.set("n", "<leader>pr", builtin.lsp_references, {desc = "LSP References"})
-			vim.keymap.set("n", "<leader>ps", builtin.lsp_workspace_symbols, {desc = "Worksymbols"})
-
-			-- remaps for diagnostics
-			vim.keymap.set("n", "<leader>pd", builtin.diagnostics, {desc = "Diagnostics"})
-
-			-- remaps for treesitter
-			vim.keymap.set("n", "<leader>ts", builtin.treesitter, {desc = "Treesitter"})
 		end,
-	},
-	{
-		"nvim-telescope/telescope-ui-select.nvim",
-		dependencies = { "nvim-lua/plenary.nvim" },
 	},
 }

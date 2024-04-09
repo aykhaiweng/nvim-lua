@@ -2,7 +2,7 @@ return {
 	{
 		"hedyhli/outline.nvim",
         lazy = true,
-        event = { "BufEnter" },
+        event = { "BufReadPre", "BufNewFile" },
 		config = function()
 			-- Example mapping to toggle outline
 			vim.keymap.set("n", "<leader>=", "<cmd>Outline<CR>", { desc = "Toggle Outline" })

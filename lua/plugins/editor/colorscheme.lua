@@ -15,9 +15,9 @@ return {
                 show_end_of_buffer = false, -- show the '~' characters after the end of buffers
                 term_colors = false,
                 dim_inactive = {
-                    enabled = false,
+                    enabled = true,
                     shade = "dark",
-                    percentage = 0.50,
+                    percentage = 0.70,
                 },
                 no_italic = false, -- Force no italic
                 no_bold = false, -- Force no bold
@@ -41,6 +41,7 @@ return {
                     mocha = function(c)
                         return {
                             Cursor = { bg = c.foreground, fg = c.mantle },
+                            LspSignatureActiveParameter = { bg = c.peach, fg = c.mantle }
                             -- Borders
                             -- WinSeparator = { bg = c.mantle, fg = c.mantle },
                             -- -- Sign Column
@@ -67,9 +68,9 @@ return {
                     notify = true,
                     barbecue = {
                         dim_dirname = true, -- directory name is dimmed by default
-                        bold_basename = true,
-                        dim_context = false,
-                        alt_background = false,
+                        bold_basename = false,
+                        dim_context = true,
+                        alt_background = true,
                     }
                 },
             })

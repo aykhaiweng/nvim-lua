@@ -2,7 +2,7 @@ return {
 	{
 		"folke/trouble.nvim",
 		branch = "dev",
-		event = "VeryLazy",
+        event = { "BufReadPre", "BufNewFile" },
 		config = function()
 			require("trouble").setup({})
 

@@ -1,12 +1,15 @@
 return {
 	{
 		"nvim-lualine/lualine.nvim",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
+		dependencies = {
+            "nvim-tree/nvim-web-devicons",
+            "nvim-lua/lsp-status.nvim"
+        },
 		lazy = false,
 		config = function()
-            local disabled_filetypes = {
-                "NvimTree", "Outline", "undotree"
-            }
+            -- local disabled_filetypes = {
+            --     "NvimTree", "Outline", "undotree"
+            -- }
 			require("lualine").setup({
 				options = {
 					icons_enabled = true,
@@ -18,7 +21,7 @@ return {
 					-- },  -- Commented because using full length bar
 					ignore_focus = {},
 					always_divide_middle = true,
-					globalstatus = true,
+					globalstatus = false,
 					refresh = {
 						statusline = 1000,
 						tabline = 1000,
@@ -28,7 +31,7 @@ return {
 				sections = {
 					lualine_a = { "mode" },
 					lualine_b = { "branch", "diff", "diagnostics" },
-					lualine_c = { "filename" },
+					lualine_c = { "filename", "require'lsp-status'.status()" },
 					lualine_x = { "encoding", "fileformat", "filetype" },
 					lualine_y = { "progress" },
 					lualine_z = { "location" },
@@ -37,7 +40,7 @@ return {
 					lualine_a = {},
 					lualine_b = {},
 					lualine_c = { "filename" },
-					lualine_x = { "location" },
+					lualine_x = {},
 					lualine_y = {},
 					lualine_z = {},
 				},
@@ -50,7 +53,7 @@ return {
 			-- vim options
 			vim.cmd("set noshowmode")
 			vim.cmd("set showcmd")
-			vim.o.laststatus = 3
+			vim.o.laststatus = 1  -- 3 to span across
 		end,
 	},
 }

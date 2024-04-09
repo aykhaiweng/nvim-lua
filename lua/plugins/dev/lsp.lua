@@ -5,6 +5,10 @@ return {
 		event = "InsertEnter",
 		dependencies = {
 			"hrsh7th/cmp-nvim-lsp",
+			-- "hrsh7th/cmp-nvim-lsp-signature-help",
+			"hrsh7th/cmp-path",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-cmdline",
 		},
 		config = function()
 			-- Keybindings for LSP
@@ -22,9 +26,7 @@ return {
 					vim.keymap.set("n", "go", "<cmd>lua vim.lsp.buf.type_definition()<cr>", opts)
 					vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", opts)
 					vim.keymap.set("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
-					-- vim.keymap.set("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
-					-- vim.keymap.set({ "n", "x" }, "<F3>", "<cmd>lua vim.lsp.buf.format({async = true})<cr>", opts)
-					-- vim.keymap.set("n", "<F4>", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
+					-- vim.keymap.set("i", "<C-s>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
 				end,
 			})
 		end,
@@ -35,6 +37,7 @@ return {
 		lazy = false,
 		dependencies = { "williamboman/mason-lspconfig.nvim" },
 	},
+	-- Snippets
 	{
 		"L3MON4D3/LuaSnip", -- snippets engine
 		event = "InsertEnter",
@@ -43,6 +46,7 @@ return {
 			"rafamadriz/friendly-snippets", -- useful snippet
 		},
 	},
+	-- Fluff
 	{
 		"onsails/lspkind.nvim", -- vs-code like pictograms
 		event = "InsertEnter",
@@ -92,10 +96,43 @@ return {
 					completeopt = "menu,menuone,preview,noinsert",
 				},
 				sources = {
-					{ name = "nvim_lsp", priority = 9 }, -- Show LSP response
-					{ name = "luasnip" }, -- Snippets
-					{ name = "buffer" }, -- Buffer completions
-					{ name = "path" }, -- Show paths in completion
+					-- LSP
+					{
+						name = "nvim_lsp",
+						priority = 9,
+						option = { use_show_condition = true },
+						entry_filter = function(entry, ctx)
+							local context = require("cmp.config.context")
+							local show = not context.in_treesitter_capture("string", "comment")
+							return show
+						end,
+					},
+					-- Snippets
+					{
+						name = "luasnip",
+						option = { use_show_condition = true },
+						entry_filter = function(entry, ctx)
+							local context = require("cmp.config.context")
+							local show = not context.in_treesitter_capture("string", "comment", "arguments")
+							return show
+						end,
+					},
+					-- Buffer
+					{
+						name = "buffer",
+					},
+					-- Path
+					{
+						name = "path",
+						option = { use_show_condition = true },
+						trigger_characters = { "*" },
+						entry_filter = function(entry, ctx)
+							local context = require("cmp.config.context")
+							local show = context.in_treesitter_capture("string")
+								or context.in_treesitter_capture("comment")
+							return show
+						end,
+					}, -- Show paths in completion
 				},
 				mapping = cmp.mapping.preset.insert({
 					-- Enter key confirms completion item
@@ -128,8 +165,6 @@ return {
 					["<Tab>"] = cmp.mapping(function(fallback)
 						if cmp.visible() then
 							cmp.select_next_item()
-						-- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
-						-- that way you will only jump inside the snippet region
 						elseif require("luasnip").expand_or_jumpable() then
 							require("luasnip").expand_or_jump()
 						elseif has_words_before() then
@@ -169,6 +204,27 @@ return {
 				},
 			})
 
+			-- Command Line and Searching shit
+			cmp.setup.cmdline("/", {
+				mapping = cmp.mapping.preset.cmdline(),
+				sources = {
+					{ name = "buffer" },
+				},
+			})
+			cmp.setup.cmdline(":", {
+				mapping = cmp.mapping.preset.cmdline(),
+				sources = cmp.config.sources({
+					{ name = "path" },
+				}, {
+					{
+						name = "cmdline",
+						option = {
+							ignore_cmds = { "Man", "!" },
+						},
+					},
+				}),
+			})
+
 			-- LS setup
 			-- lua_ls
 			require("lspconfig").lua_ls.setup({
@@ -206,6 +262,69 @@ return {
 			})
 
 			vim.opt.pumheight = 20 -- Maximum 10 items in the list
+		end,
+	},
+	-- Signature Help
+	{
+		"ray-x/lsp_signature.nvim",
+		cmd = { "LspInfo", "LspInstall", "LspStart" },
+		event = { "BufReadPre", "BufNewFile" },
+		opts = {
+			floating_window_above_cur_line = true,
+			always_trigger = true,
+			toggle_key = "<C-s>",
+			hint_enable = false,
+            check_completion_visible = false,
+            handler_opts = {
+                border = "single"
+            }
+		},
+		config = function(_, opts)
+			require("lsp_signature").setup(opts)
+		end,
+	},
+	{
+		"lewis6991/hover.nvim",
+        event = { "BufReadPre", "BufNewFile" },
+		dependencies = {
+			"ldelossa/gh.nvim",
+		},
+		config = function()
+			require("hover").setup({
+				init = function()
+					-- Require providers
+					require("hover.providers.lsp")
+					require("hover.providers.gh")
+					require("hover.providers.gh_user")
+					-- require('hover.providers.jira')
+					-- require('hover.providers.man')
+					-- require('hover.providers.dictionary')
+				end,
+				preview_opts = {
+					border = "single",
+				},
+				-- Whether the contents of a currently open hover window should be moved
+				-- to a :h preview-window when pressing the hover keymap.
+				preview_window = true,
+				title = true,
+				mouse_providers = {
+					"LSP",
+				},
+			})
+
+			-- Setup keymaps
+			vim.keymap.set("n", "K", require("hover").hover, { desc = "hover.nvim" })
+			vim.keymap.set("n", "gK", require("hover").hover_select, { desc = "hover.nvim (select)" })
+			vim.keymap.set("n", "<S-Tab>", function()
+				require("hover").hover_switch("previous")
+			end, { desc = "hover.nvim (previous source)" })
+			vim.keymap.set("n", "<Tab>", function()
+				require("hover").hover_switch("next")
+			end, { desc = "hover.nvim (next source)" })
+
+			-- Mouse support
+			-- vim.keymap.set("n", "<MouseMove>", require("hover").hover_mouse, { desc = "hover.nvim (mouse)" })
+			-- vim.o.mousemoveevent = true
 		end,
 	},
 }

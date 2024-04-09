@@ -2,19 +2,32 @@ return {
     {
         "echasnovski/mini.starter",
         version = "*",
+        lazy = false,
         config = function()
             local starter = require("mini.starter")
 
             local my_items = {
+                -- Telescope
                 {
                     name = "Find files",
                     action = [[lua require("telescope.builtin").find_files()]],
                     section = "Telescope"
                 },
                 {
-                    name = "Harpoon",
-                    action = [[function() require("harpoon.ui"):toggle_quick_menu(harpoon:list()) end]],
+                    name = "Find recent files",
+                    action = [[lua require("telescope.builtin").oldfiles()]],
                     section = "Telescope"
+                },
+                -- Lazy
+                {
+                    name = "Lazy",
+                    action = [[:Lazy]],
+                    section = "Plugin Manager"
+                },
+                {
+                    name = "Update",
+                    action = [[:Lazy update]],
+                    section = "Plugin Manager"
                 },
             }
             starter.setup({
@@ -45,7 +58,7 @@ return {
                 -- Footer to be displayed after items. Converted to single string via
                 -- `tostring` (use `\n` to display several lines). If function, it is
                 -- evaluated first. If `nil` (default), default usage help will be shown.
-                footer = "lmao",
+                footer = nil,
 
                 -- Array  of functions to be applied consecutively to initial content.
                 -- Each function should take and return content for 'Starter' buffer (see
