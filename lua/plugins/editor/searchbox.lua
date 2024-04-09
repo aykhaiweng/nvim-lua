@@ -2,6 +2,7 @@ return {
     'VonHeikemen/searchbox.nvim',
     event = "VeryLazy",
     version = "*",
+    event = { "BufReadPre", "BufNewFile" }, -- to disable, comment this out
     dependencies = {
         {'MunifTanjim/nui.nvim'}
     },

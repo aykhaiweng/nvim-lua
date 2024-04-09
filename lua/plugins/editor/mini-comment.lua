@@ -2,6 +2,7 @@ return {
     {
         "echasnovski/mini.comment",
         version = "*",
+		event = { "BufReadPre", "BufNewFile" }, -- to disable, comment this out
         config = function()
             require("mini.comment").setup({
               -- Options which control module behavior

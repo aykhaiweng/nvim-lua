@@ -4,6 +4,9 @@ vim.g.python3_host_prog = os.getenv("HOME") .. "/.pyenv/versions/neovim3/bin/pyt
 -- Stop my GUI terminal from rendering it's cursor over mine
 vim.opt.guicursor = ""
 
+-- Stop buffers from hiding
+vim.cmd([[ set nohidden ]])
+
 -- mouse
 vim.opt.mouse = "a"
 

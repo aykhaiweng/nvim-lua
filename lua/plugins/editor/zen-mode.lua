@@ -1,7 +1,8 @@
 return {
     {
         "folke/zen-mode.nvim",
-        cnnfig = function()
+        lazy = false,
+        config = function()
             -- Setup ZenMode
             require('zen-mode').setup({
                 window = {
@@ -11,7 +12,7 @@ return {
                     -- * a percentage of the width / height of the editor when <= 1
                     -- * a function that returns the width or the height
                     width = 140, -- width of the Zen window
-                    height = 0.98, -- height of the Zen window
+                    height = 1.00, -- height of the Zen window
                     -- by default, no options are changed for the Zen window
                     -- uncomment any of the options below, or add other vim.wo options you want to apply
                     options = {
@@ -43,7 +44,7 @@ return {
             })
 
             -- mappings
-            vim.keymap.set('n', '<leader>zm', vim.cmd.ZenMode)
+            vim.keymap.set('n', '<leader>fz', vim.cmd.ZenMode, {desc = "ZenMode"})
         end,
     },
 }

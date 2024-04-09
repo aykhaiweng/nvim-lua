@@ -2,6 +2,7 @@ return {
     {
         "echasnovski/mini.sessions",
         version = "*",
+        lazy = false,
         config = function()
             require("mini.sessions").setup({
                 -- Whether to read latest session if Neovim opened without file arguments

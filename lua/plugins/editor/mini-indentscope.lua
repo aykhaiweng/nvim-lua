@@ -2,6 +2,7 @@ return {
     {
         "echasnovski/mini.indentscope",
         version = "*",
+		event = { "BufReadPre", "BufNewFile" }, -- to disable, comment this out
         config = function()
             require("mini.indentscope").setup({
               -- Draw options
@@ -47,6 +48,15 @@ return {
               -- Which character to use for drawing scope indicator
               symbol = '╎',
             })
+
+            -- HACK: Added disabling scope in NvimTree
+            vim.api.nvim_create_autocmd({ "FileType" },
+                {
+                    pattern = "NvimTree",
+                    callback = function() vim.b.miniindentscope_disable = true end
+                }
+            )
+
 
         end
     }

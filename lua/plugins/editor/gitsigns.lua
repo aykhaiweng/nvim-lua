@@ -1,6 +1,8 @@
 return {
     {
         "lewis6991/gitsigns.nvim",
+        version = "*",
+		event = { "BufReadPre", "BufNewFile" }, -- to disable, comment this out
         config = function()
             vim.api.nvim_set_hl(0, "GitSignsCurrentLineBlame", { link = "Comment" })
 
