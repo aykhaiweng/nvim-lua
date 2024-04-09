@@ -57,6 +57,6 @@
             "",
             "${0:ModelName}Manager = Base${0:ModelName}Manager.from_queryset(${0:ModelName}QuerySet)"
         ],
-        "description": "Snippet to put copyright"
+        "description": "Snippet to create QuerySet and ModelManagers"
     }
 }
