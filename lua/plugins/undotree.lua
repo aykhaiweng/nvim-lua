@@ -5,7 +5,6 @@ return {
 		keys = {
 			{ "<leader>u", vim.cmd.UndotreeToggle, "n", { desc = "Toggle Undotree" } },
 		},
-		config = function()
-		end,
+		config = function() end,
 	},
 }

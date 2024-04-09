@@ -14,7 +14,7 @@ return {
 					"vim",
 					"comment",
 					"html",
-                    "css",
+					"css",
 					"json",
 					"markdown",
 					"markdown_inline",

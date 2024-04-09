@@ -25,7 +25,7 @@ vim.opt.splitbelow = true
 -- show whitespaces, tabs and spaces
 vim.opt.listchars = "tab:--,trail:·,nbsp:~,extends:>,precedes:<"
 vim.opt.list = false
--- vim.opt.fillchars = { eob = "" }  -- Removing the tilde from the 
+-- vim.opt.fillchars = { eob = "" }  -- Removing the tilde from the
 
 -- indents - use 4 spaces as default
 vim.opt.tabstop = 4

@@ -274,10 +274,10 @@ return {
 			always_trigger = true,
 			toggle_key = "<C-s>",
 			hint_enable = false,
-            check_completion_visible = false,
-            handler_opts = {
-                border = "single"
-            }
+			check_completion_visible = false,
+			handler_opts = {
+				border = "single",
+			},
 		},
 		config = function(_, opts)
 			require("lsp_signature").setup(opts)
@@ -285,7 +285,7 @@ return {
 	},
 	{
 		"lewis6991/hover.nvim",
-        event = { "BufReadPre", "BufNewFile" },
+		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
 			"ldelossa/gh.nvim",
 		},
