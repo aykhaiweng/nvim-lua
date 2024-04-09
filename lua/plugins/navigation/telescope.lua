@@ -58,21 +58,20 @@ return {
 			})
 
 			-- remaps
-			vim.keymap.set("n", "<leader>pf", builtin.find_files, {})
-			vim.keymap.set("n", "<leader>po", builtin.oldfiles, {})
-			vim.keymap.set("n", "<C-p>", builtin.find_files, {})
-			-- vim.keymap.set("n", "<C-f>", builtin.live_grep, {})
-			vim.keymap.set("n", "<C-f>", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>")
+			vim.keymap.set("n", "<leader>pf", builtin.find_files, {desc = "Find files"})
+			vim.keymap.set("n", "<leader>po", builtin.oldfiles, {desc = "Open recent"})
+			vim.keymap.set("n", "<C-p>", builtin.find_files, {desc = "Find files"})
+			vim.keymap.set("n", "<C-f>", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", {desc = "Live grep"})
 
 			-- remaps for lsp
-			vim.keymap.set("n", "<leader>pr", builtin.lsp_references, {})
-			vim.keymap.set("n", "<leader>ps", builtin.lsp_workspace_symbols, {})
+			vim.keymap.set("n", "<leader>pr", builtin.lsp_references, {desc = "LSP References"})
+			vim.keymap.set("n", "<leader>ps", builtin.lsp_workspace_symbols, {desc = "Worksymbols"})
 
 			-- remaps for diagnostics
-			vim.keymap.set("n", "<leader>pd", builtin.diagnostics, {})
+			vim.keymap.set("n", "<leader>pd", builtin.diagnostics, {desc = "Diagnostics"})
 
 			-- remaps for treesitter
-			vim.keymap.set("n", "<leader>ts", builtin.treesitter, {})
+			vim.keymap.set("n", "<leader>ts", builtin.treesitter, {desc = "Treesitter"})
 		end,
 	},
 	{

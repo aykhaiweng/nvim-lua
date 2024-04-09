@@ -3,7 +3,21 @@ return {
         "echasnovski/mini.starter",
         version = "*",
         config = function()
-            require("mini.starter").setup({
+            local starter = require("mini.starter")
+
+            local my_items = {
+                {
+                    name = "Find files",
+                    action = [[lua require("telescope.builtin").find_files()]],
+                    section = "Telescope"
+                },
+                {
+                    name = "Harpoon",
+                    action = [[function() require("harpoon.ui"):toggle_quick_menu(harpoon:list()) end]],
+                    section = "Telescope"
+                },
+            }
+            starter.setup({
                 -- Whether to open starter buffer on VimEnter. Not opened if Neovim was
                 -- started with intent to show something else.
                 autoopen = true,
@@ -16,7 +30,12 @@ return {
                 -- - Function: should return one of these three categories.
                 -- - Array: elements of these three types (i.e. item, array, function).
                 -- If `nil` (default), default items will be used (see |mini.starter|).
-                items = nil,
+                items = {
+                    starter.sections.sessions(5, true),
+                    starter.sections.builtin_actions(),
+                    starter.sections.recent_files(10, true),
+                    my_items,
+                },
 
                 -- Header to be displayed before items. Converted to single string via
                 -- `tostring` (use `\n` to display several lines). If function, it is
@@ -26,7 +45,7 @@ return {
                 -- Footer to be displayed after items. Converted to single string via
                 -- `tostring` (use `\n` to display several lines). If function, it is
                 -- evaluated first. If `nil` (default), default usage help will be shown.
-                footer = nil,
+                footer = "lmao",
 
                 -- Array  of functions to be applied consecutively to initial content.
                 -- Each function should take and return content for 'Starter' buffer (see

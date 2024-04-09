@@ -58,14 +58,14 @@ return {
             local minifiles_toggle = function()
               if not MiniFiles.close() then MiniFiles.open() end
             end
-            vim.keymap.set("n", "<C-b>", minifiles_toggle)
+            vim.keymap.set("n", "<C-b>", minifiles_toggle, {desc = "File explorer"})
 
             -- show current file
             local minifiles_show_current_file = function()
               MiniFiles.open(vim.api.nvim_buf_get_name(0))
               MiniFiles.reveal_cwd()
             end
-            vim.keymap.set("n", "<leader>=", minifiles_show_current_file)
+            vim.keymap.set("n", "<leader>-", minifiles_show_current_file, {desc = "Reveal current file"})
 
             -- imba split keybinds
             local map_split = function(buf_id, lhs, direction)
