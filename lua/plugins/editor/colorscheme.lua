@@ -17,7 +17,7 @@ return {
                 dim_inactive = {
                     enabled = false,
                     shade = "dark",
-                    percentage = 0.17,
+                    percentage = 0.50,
                 },
                 no_italic = false, -- Force no italic
                 no_bold = false, -- Force no bold
@@ -38,10 +38,15 @@ return {
                 color_overrides = {},
                 custom_higlights = {},
                 highlight_overrides = {
-                    all = function(colors)
+                    mocha = function(c)
                         return {
-                            Cursor = { bg = "gray", fg = "black" },
-                            MiniIndentscopeSymbol = { fg = "gray" }
+                            Cursor = { bg = c.foreground, fg = c.dim },
+                            WinSeparator = { bg = c.dim },
+                            SignColumn = { bg = c.dim },
+                            SignColumnSB = { bg = c.dim },
+                            LineNr = { bg = c.dim },
+                            TroubleNormal = { bg = c.dim },
+                            MiniIndentscopeSymbol = { fg = "gray" },
                         }
                     end
                 },
@@ -52,14 +57,44 @@ return {
                     telescope = true,
                     treesitter = true,
                     notify = true,
+                    barbecue = {
+                        dim_dirname = true, -- directory name is dimmed by default
+                        bold_basename = true,
+                        dim_context = false,
+                        alt_background = false,
+                    }
                 },
             })
 
             -- setup must be called before loading
             vim.cmd.colorscheme "catppuccin"
 
-            flavour = require("catppuccin").flavour
-            C = require("catppuccin.palettes").get_palette(flavour)
+            -- Darken the Normal color
+            -- flavour = require("catppuccin").flavour
+            -- C = require("catppuccin.palettes").get_palette(flavour)
+            -- U = require("catppuccin.utils.colors")
+            -- local darken_percentage = 0.20
+            -- C.dim = U.vary_color(
+            --     { latte = U.darken(C.base, darken_percentage, C.mantle) },
+            --     U.darken(C.base, darken_percentage, C.mantle)
+            -- )
+
+            -- local DimmedBackground = vim.api.nvim_create_augroup(
+            --     "DimmedBackground", { clear = true }
+            -- )
+            -- vim.api.nvim_create_autocmd({"BufEnter"},
+            --     {
+            --         pattern = "*",
+            --         callback = function(ev)
+            --             local buftype = vim.bo.buftype
+            --             print(buftype)
+            --             if buftype == "help" or buftype == "nowrite" then
+            --                 -- vim.api.nvim_set_hl(0, "Normal", { bg=C.dim }) 
+            --             end
+            --         end,
+            --         group = DimmedBackground
+            --     }
+            -- )
 
             -- changing the cursor
             vim.cmd([[ set guicursor=n-v-c:block-Cursor ]])
