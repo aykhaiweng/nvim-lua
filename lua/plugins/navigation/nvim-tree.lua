@@ -27,6 +27,9 @@ return {
                 highlight_diagnostics = "name",
                 highlight_git = "name",
             },
+            filters = {
+                enable = false,
+            }
 		})
 
 		vim.keymap.set("n", "<C-b>", ":NvimTreeToggle<CR>", { desc = "Open file explorer" })

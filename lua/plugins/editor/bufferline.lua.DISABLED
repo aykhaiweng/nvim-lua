@@ -29,4 +29,8 @@ return {
             },
 		},
 	},
+    config = function()
+        -- Always show tabline
+        vim.o.showtabline = 1
+    end
 }

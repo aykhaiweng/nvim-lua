@@ -29,7 +29,7 @@ return {
 			})
 		end,
 	},
-    -- Mason
+	-- Mason
 	{
 		"williamboman/mason.nvim",
 		lazy = false,
@@ -37,16 +37,20 @@ return {
 	},
 	{
 		"L3MON4D3/LuaSnip", -- snippets engine
+		event = "InsertEnter",
 		dependencies = {
 			"saadparwaiz1/cmp_luasnip", -- for autocompletion
 			"rafamadriz/friendly-snippets", -- useful snippet
 		},
 	},
-    {
-			"onsails/lspkind.nvim", -- vs-code like pictograms
-    },
+	{
+		"onsails/lspkind.nvim", -- vs-code like pictograms
+		event = "InsertEnter",
+	},
 	{
 		"neovim/nvim-lspconfig",
+		cmd = { "LspInfo", "LspInstall", "LspStart" },
+		event = { "BufReadPre", "BufNewFile" },
 		config = function()
 			-- Config defaults
 			local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -100,25 +104,25 @@ return {
 					-- Ctrl + space triggers completion menu
 					["<C-Space>"] = cmp.mapping.complete(),
 
-                    -- Doc scrolling
+					-- Doc scrolling
 					["<C-u>"] = cmp.mapping.scroll_docs(-4),
 					["<C-d>"] = cmp.mapping.scroll_docs(4),
 
-                    -- luasnip stuff
+					-- luasnip stuff
 					-- ["<C-f>"] = require("luasnip").jump(1),
 					-- ["<C-b>"] = require("luasnip").jump(-1),
-                    ["<C-f>"] = cmp.mapping(function(fallback)
+					["<C-f>"] = cmp.mapping(function(fallback)
 						if cmp.visible() then
 							require("luasnip").jump(1)
-                        else
-                            fallback()
+						else
+							fallback()
 						end
 					end, { "i", "s" }),
-                    ["<C-b>"] = cmp.mapping(function(fallback)
+					["<C-b>"] = cmp.mapping(function(fallback)
 						if cmp.visible() then
 							require("luasnip").jump(-1)
-                        else
-                            fallback()
+						else
+							fallback()
 						end
 					end, { "i", "s" }),
 					["<Tab>"] = cmp.mapping(function(fallback)
@@ -149,16 +153,24 @@ return {
 						require("luasnip").lsp_expand(args.body)
 					end,
 				},
-                comparators = {
-                    cmp.config.compare.kind,
-                    cmp.config.compare.offset,
-                    cmp.config.compare.exact,
-                    cmp.config.compare.score,
-                    cmp.config.compare.recently_used,
-                },
+				comparators = {
+					cmp.config.compare.kind,
+					cmp.config.compare.offset,
+					cmp.config.compare.exact,
+					cmp.config.compare.score,
+					cmp.config.compare.recently_used,
+				},
+				-- configure lspkind for vs-code like pictograms in completion menu
+				formatting = {
+					format = require("lspkind").cmp_format({
+						maxwidth = 80,
+						ellipsis_char = "...",
+					}),
+				},
 			})
 
 			-- LS setup
+			-- lua_ls
 			require("lspconfig").lua_ls.setup({
 				capabilities = lsp_capabilities,
 				settings = {
@@ -177,8 +189,23 @@ return {
 					},
 				},
 			})
+			-- pylsp
+			require("lspconfig").pylsp.setup({
+				settings = {
+					-- configure plugins in pylsp
+					pylsp = {
+						plugins = {
+							pycodestyle = { enabled = false },
+							pyflakes = { enabled = false },
+							pylint = { enabled = false },
+							flake8 = { enabled = false },
+							mccabe = { enabled = false },
+						},
+					},
+				},
+			})
 
-            vim.opt.pumheight = 20 -- Maximum 10 items in the list
+			vim.opt.pumheight = 20 -- Maximum 10 items in the list
 		end,
 	},
 }

@@ -40,13 +40,21 @@ return {
                 highlight_overrides = {
                     mocha = function(c)
                         return {
-                            Cursor = { bg = c.foreground, fg = c.dim },
-                            WinSeparator = { bg = c.dim },
-                            SignColumn = { bg = c.dim },
-                            SignColumnSB = { bg = c.dim },
-                            LineNr = { bg = c.dim },
-                            TroubleNormal = { bg = c.dim },
-                            MiniIndentscopeSymbol = { fg = "gray" },
+                            Cursor = { bg = c.foreground, fg = c.mantle },
+                            -- Borders
+                            -- WinSeparator = { bg = c.mantle, fg = c.mantle },
+                            -- -- Sign Column
+                            -- SignColumn = { bg = c.mantle },
+                            -- SignColumnSB = { bg = c.mantle },
+                            -- LineNr = { bg = c.mantle },
+                            -- -- Barbecue
+                            -- barbecue_normal = { bg = c.mantle },
+                            -- -- Trouble
+                            -- TroubleNormal = { bg = c.mantle },
+                            -- -- Indent Scope
+                            -- MiniIndentscopeSymbol = { fg = c.flamingo },
+                            -- -- Outline
+                            -- OutlineNormal = { bg = c.mantle }
                         }
                     end
                 },
