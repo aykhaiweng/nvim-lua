@@ -13,7 +13,7 @@ return {
 						harpoon:list():add()
 					end,
 					"n",
-					{ desc = "Add to Harpoon" },
+					desc = "Add to Harpoon",
 				},
 				{
 					"<C-e>",
@@ -21,7 +21,7 @@ return {
 						harpoon.ui:toggle_quick_menu(harpoon:list())
 					end,
 					"n",
-					{ desc = "Open Harpoon" },
+					desc = "Open Harpoon",
 				},
 			}
 		end,

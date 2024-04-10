@@ -20,25 +20,25 @@ return {
 			local builtin = require("telescope.builtin")
 			return {
 				-- remaps
-				{ "<leader>pf", builtin.find_files, "n", { desc = "Find files" } },
-				{ "<leader>po", builtin.oldfiles, "n", { desc = "Open recent" } },
-				{ "<C-p>", builtin.find_files, "n", { desc = "Find files" } },
+				{ "<leader>pf", builtin.find_files, "n", desc = "Find files" },
+				{ "<leader>po", builtin.oldfiles, "n", desc = "Open recent" },
+				{ "<C-p>", builtin.find_files, "n", desc = "Find files" },
 				{
 					"<C-f>",
 					":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
 					"n",
-					{ desc = "Live grep" },
+					desc = "Live grep",
 				},
 
 				-- remaps for lsp
-				{ "<leader>pr", builtin.lsp_references, "n", { desc = "LSP References" } },
-				{ "<leader>ps", builtin.lsp_workspace_symbols, "n", { desc = "Worksymbols" } },
+				{ "<leader>pr", builtin.lsp_references, "n", desc = "LSP References" },
+				-- { "<leader>ps", builtin.lsp_workspace_symbols, "n", desc = "Worksymbols" },
 
 				-- remaps for diagnostics
-				{ "<leader>pd", builtin.diagnostics, "n", { desc = "Diagnostics" } },
+				{ "<leader>pd", builtin.diagnostics, "n", desc = "Diagnostics" },
 
 				-- remaps for treesitter
-				{ "<leader>ts", builtin.treesitter, "n", { desc = "Treesitter" } },
+				{ "<leader>ts", builtin.treesitter, "n", desc = "Treesitter" },
 			}
 		end,
 		config = function()

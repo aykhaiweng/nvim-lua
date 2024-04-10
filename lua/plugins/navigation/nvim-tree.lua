@@ -6,8 +6,8 @@ return {
 		"nvim-tree/nvim-web-devicons",
 	},
 	keys = {
-		{ "<C-b>", ":NvimTreeToggle<CR>", "n", { desc = "Open file explorer" } },
-        { "<leader>-", ":NvimTreeFindFile<CR>", "n", { desc = "Focus current file in explorer" } },
+		{ "<C-b>", ":NvimTreeToggle<CR>", "n", desc = "Open file explorer" },
+        { "<leader>-", ":NvimTreeFindFile<CR>", "n", desc = "Focus current file in explorer" },
 	},
 	config = function()
 		-- disable netrw at the very start of your init.lua
