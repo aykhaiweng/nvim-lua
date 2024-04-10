@@ -3,7 +3,7 @@ return {
 		"folke/zen-mode.nvim",
 		event = { "BufReadPre", "BufNewFile" },
 		keys = {
-			{ "<leader>fz", vim.cmd.ZenMode, "n", desc = "ZenMode" },
+			{ "<leader>z", vim.cmd.ZenMode, "n", desc = "ZenMode" },
 		},
 		config = function()
 			-- Setup ZenMode

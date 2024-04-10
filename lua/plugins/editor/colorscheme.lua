@@ -65,7 +65,32 @@ return {
 					nvimtree = true,
 					telescope = true,
 					treesitter = true,
-					notify = true,
+					lsp_trouble = true,
+					symbols_outline = true,
+					illuminate = true,
+					indent_blankline = {
+						enabled = true,
+						scope_color = "", -- catppuccin color (eg. `lavender`) Default: text
+						colored_indent_levels = true,
+					},
+					native_lsp = {
+						enabled = true,
+						virtual_text = {
+							errors = { "italic" },
+							hints = { "italic" },
+							warnings = { "italic" },
+							information = { "italic" },
+						},
+						underlines = {
+							errors = { "underline" },
+							hints = { "underline" },
+							warnings = { "underline" },
+							information = { "underline" },
+						},
+						inlay_hints = {
+							background = true,
+						},
+					},
 					barbecue = {
 						dim_dirname = true, -- directory name is dimmed by default
 						bold_basename = false,

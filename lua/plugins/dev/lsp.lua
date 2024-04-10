@@ -253,11 +253,13 @@ return {
 			-- Diagnostics
 			vim.diagnostic.config({
 				virtual_text = true,
+                underline = true,
 				float = {
 					header = false,
 					border = "rounded",
 					focusable = true,
 				},
+                severity_sort = true
 			})
 
 			-- Automatically open the diagnostics window

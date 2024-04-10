@@ -73,6 +73,11 @@ return {
 				-- Whether to disable showing non-error feedback
 				silent = false,
 			})
+
+            vim.api.nvim_create_autocmd(
+                { "FileType" },
+                { pattern = "starter", command = "set nocursorline" }
+            )
 		end,
 	},
 }
