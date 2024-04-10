@@ -23,13 +23,26 @@ return {
 				-- Hook functions for actions. Default `nil` means 'do nothing'.
 				hooks = {
 					-- Before successful action
-					pre = { read = nil, write = nil, delete = nil },
+					pre = {
+					    read = nil,
+					    write = function()
+                        end,
+					    delete = nil
+					},
 					-- After successful action
-					post = { read = nil, write = nil, delete = nil },
+					post = {
+					    read = nil,
+					    write = nil,
+					    delete = nil
+					},
 				},
 
 				-- Whether to print session path after action
-				verbose = { read = false, write = true, delete = true },
+				verbose = {
+				    read = true,
+				    write = true,
+				    delete = true
+				},
 			})
 
 			vim.opt.sessionoptions = "buffers,curdir,folds,help,tabpages"
