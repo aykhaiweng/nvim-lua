@@ -26,6 +26,11 @@ return {
 					pre = {
 					    read = nil,
 					    write = function()
+                            local b = require("utils.buffers")
+                            -- Close all fugitive buffers
+                            b.close_buffers_by_filetype("fugitive")
+                            -- Close all gitcommit buffers
+                            b.close_buffers_by_filetype("gitcommit")
                         end,
 					    delete = nil
 					},
