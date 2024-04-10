@@ -64,6 +64,18 @@ vim.keymap.set(
 	[[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
 	{ desc = "Substitute word under cursor" }
 )
+vim.keymap.set(
+	"v",
+	"<leader>s",
+	[[:s/<C-r><C-w>/<C-r><C-w>/gI<Left><Left><Left>]],
+	{ desc = "Make substitution under selection" }
+)
+vim.keymap.set(
+	"v",
+	"<leader>S",
+	[[:s/]],
+	{ desc = "Make substitution under selection" }
+)
 
 -- set breakpoints
 vim.keymap.set("n", "<leader>bp", vim.cmd.Break, { desc = "Create breakpoint under cursor" })
