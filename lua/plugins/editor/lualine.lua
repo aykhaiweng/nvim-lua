@@ -13,6 +13,9 @@ return {
 				"undotree",
 				"trouble",
 				"term",
+                "gitcommit",
+                "fugitive",
+                "fugitiveblame"
 			}
 			require("lualine").setup({
 				options = {
