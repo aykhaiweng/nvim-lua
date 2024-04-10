@@ -135,7 +135,7 @@ return {
 						option = { use_show_condition = true },
 						entry_filter = function(entry, ctx)
 							local context = require("cmp.config.context")
-							local show = not context.in_treesitter_capture("string", "comment")
+							local show = not context.in_treesitter_capture("comment")
 							return show
 						end,
 					},
@@ -330,6 +330,14 @@ return {
 			-- 		},
 			-- 	},
 			-- })
+            -- basedpyright
+            require("lspconfig").basedpyright.setup({
+				settings = {
+					basedpyright = {
+                        typeCheckingMode = "standard"
+                    }
+				},
+			})
 
 			vim.opt.pumheight = 20 -- Maximum 10 items in the list
 		end,
