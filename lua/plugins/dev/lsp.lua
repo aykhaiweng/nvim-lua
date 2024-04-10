@@ -9,6 +9,7 @@ return {
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-cmdline",
+			"hrsh7th/cmp-nvim-lua",
 		},
 		config = function()
 			-- Keybindings for LSP
@@ -20,6 +21,7 @@ return {
 					-- these will be buffer-local keybindings
 					-- because they only work if you have an active language server
 					vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
+					vim.keymap.set("n", "gl", [[:lua vim.diagnostic.open_float(0, { scope = "line" })<cr>]], opts)
 					vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
 					vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
 					vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", opts)
@@ -50,6 +52,22 @@ return {
 	{
 		"onsails/lspkind.nvim", -- vs-code like pictograms
 		event = "InsertEnter",
+	},
+	-- Git
+	{
+		"petertriho/cmp-git",
+		ft = "gitcommit",
+		config = function()
+			local cmp = require("cmp")
+			cmp.setup.filetype("gitcommit", {
+				sources = cmp.config.sources({
+					{ name = "git" },
+				}, {
+					{ name = "buffer" },
+				}),
+			})
+            require("cmp_git").setup()
+		end,
 	},
 	{
 		"neovim/nvim-lspconfig",
@@ -95,6 +113,20 @@ return {
 				completion = {
 					completeopt = "menu,menuone,preview,noinsert",
 				},
+				border = {
+					completion = true,
+					documentation = true,
+				},
+				window = {
+					completion = {
+						border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+						winhighlight = "Normal:CmpPmenu,FloatBorder:CmpBorder,CursorLine:PmenuSel,Search:None",
+					},
+					documentation = {
+						border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+						winhighlight = "Normal:CmpPmenu,FloatBorder:CmpBorder,CursorLine:PmenuSel,Search:None",
+					},
+				},
 				sources = {
 					-- LSP
 					{
@@ -133,6 +165,7 @@ return {
 							return show
 						end,
 					}, -- Show paths in completion
+					{ name = "nvim-lua" },
 				},
 				mapping = cmp.mapping.preset.insert({
 					-- Enter key confirms completion item
@@ -198,11 +231,48 @@ return {
 				-- configure lspkind for vs-code like pictograms in completion menu
 				formatting = {
 					format = require("lspkind").cmp_format({
-						maxwidth = 80,
+						-- mode = "symbol",
+						maxwidth = 50,
 						ellipsis_char = "...",
+						show_labelDetails = true,
+						before = function(entry, item)
+							local menu_icon = {
+								nvim_lsp = "[LSP]",
+								luasnip = "[Luasnip]",
+								buffer = "[Buf]",
+								path = "[Path]",
+							}
+
+							item.menu = menu_icon[entry.source.name]
+							return item
+						end,
 					}),
 				},
 			})
+
+			-- Diagnostics
+			vim.diagnostic.config({
+				virtual_text = true,
+				float = {
+					header = false,
+					border = "rounded",
+					focusable = true,
+				},
+			})
+
+			-- Automatically open the diagnostics window
+			OpenDiagFloat = function()
+				for _, winid in pairs(vim.api.nvim_tabpage_list_wins(0)) do
+					if vim.api.nvim_win_get_config(winid).zindex then
+						return
+					end
+				end
+				vim.diagnostic.open_float({ focusable = false })
+			end
+			vim.api.nvim_create_autocmd(
+				{ "CursorHold" },
+				{ pattern = "*", command = [[autocmd CursorHold <buffer> lua OpenDiagFloat()]] }
+			)
 
 			-- Command Line and Searching shit
 			cmp.setup.cmdline("/", {
@@ -246,20 +316,20 @@ return {
 				},
 			})
 			-- pylsp
-			require("lspconfig").pylsp.setup({
-				settings = {
-					-- configure plugins in pylsp
-					pylsp = {
-						plugins = {
-							pycodestyle = { enabled = false },
-							pyflakes = { enabled = false },
-							pylint = { enabled = false },
-							flake8 = { enabled = false },
-							mccabe = { enabled = false },
-						},
-					},
-				},
-			})
+			-- require("lspconfig").pylsp.setup({
+			-- 	settings = {
+			-- 		-- configure plugins in pylsp
+			-- 		pylsp = {
+			-- 			plugins = {
+			-- 				pycodestyle = { enabled = false },
+			-- 				pyflakes = { enabled = false },
+			-- 				pylint = { enabled = false },
+			-- 				flake8 = { enabled = false },
+			-- 				mccabe = { enabled = false },
+			-- 			},
+			-- 		},
+			-- 	},
+			-- })
 
 			vim.opt.pumheight = 20 -- Maximum 10 items in the list
 		end,
