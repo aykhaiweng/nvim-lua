@@ -42,15 +42,14 @@ vim.keymap.set("n", "J", "mzJ`z", { desc = "Move the bottom line to current line
 -- This will paste but not override the register. In cases
 -- like pasting over existing text, it does not take
 -- existing text into the register
-vim.keymap.set("x", "<leader>p", '"_dP', { desc = "Paste without overriding default register" })
+vim.keymap.set("x", "P", '"_dP', { desc = "Paste without overriding default register" })
 -- This will yank into the system clipboard, useful when
 -- separating the vim and system clipboards
-vim.keymap.set("n", "<leader>y", '"+y', { desc = "Yank to system clipboard" })
-vim.keymap.set("v", "<leader>y", '"+y', { desc = "Yank to system clipboard" })
-vim.keymap.set("n", "<leader>Y", '"+Y', { desc = "Yank to system clipboard" })
+vim.keymap.set("v", "Y", '"+y', { desc = "Yank to system clipboard" })
+vim.keymap.set("n", "Y", '"+Y', { desc = "Yank to system clipboard" })
 -- Same as above but for cutting
-vim.keymap.set("n", "<leader>d", '"_d', { desc = "Delete to empty register" })
-vim.keymap.set("v", "<leader>d", '"_d', { desc = "Delete to empty register" })
+vim.keymap.set("n", "D", '"_d', { desc = "Delete to empty register" })
+vim.keymap.set("v", "D", '"_d', { desc = "Delete to empty register" })
 
 -- Unbinding capital Q
 vim.keymap.set("n", "Q", "<nop>", { desc = "DISABLED" })
@@ -60,19 +59,19 @@ vim.keymap.set("n", "Q", "<nop>", { desc = "DISABLED" })
 -- Imba substitute command
 vim.keymap.set(
 	"n",
-	"<leader>s",
+	"<leader>es",
 	[[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
 	{ desc = "Substitute word under cursor" }
 )
 vim.keymap.set(
 	"v",
-	"<leader>s",
+	"<leader>es",
 	[[:s/<C-r><C-w>/<C-r><C-w>/gI<Left><Left><Left>]],
 	{ desc = "Make substitution under selection" }
 )
 vim.keymap.set(
 	"v",
-	"<leader>S",
+	"<leader>eS",
 	[[:s/]],
 	{ desc = "Make substitution under selection" }
 )

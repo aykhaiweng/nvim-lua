@@ -43,7 +43,7 @@ return {
 							Cursor = { bg = c.foreground, fg = c.mantle },
 							LspSignatureActiveParameter = { bg = c.peach, fg = c.mantle },
 							-- Borders
-							-- WinSeparator = { bg = c.mantle, fg = c.mantle },
+							WinSeparator = { bg = c.mantle, fg = c.mantle },
 							-- -- Sign Column
 							-- SignColumn = { bg = c.mantle },
 							-- SignColumnSB = { bg = c.mantle },
@@ -68,6 +68,10 @@ return {
 					lsp_trouble = true,
 					symbols_outline = true,
 					illuminate = true,
+					dropbar = {
+						enabled = true,
+						color_mode = true, -- enable color for kind's texts, not just kind's icons
+					},
 					indent_blankline = {
 						enabled = true,
 						scope_color = "", -- catppuccin color (eg. `lavender`) Default: text

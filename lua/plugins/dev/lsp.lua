@@ -279,12 +279,18 @@ return {
 			-- Command Line and Searching shit
 			cmp.setup.cmdline("/", {
 				mapping = cmp.mapping.preset.cmdline(),
+				completion = {
+					completeopt = "menu,menuone,preview,noselect",
+				},
 				sources = {
 					{ name = "buffer" },
 				},
 			})
 			cmp.setup.cmdline(":", {
 				mapping = cmp.mapping.preset.cmdline(),
+				completion = {
+					completeopt = "menu,menuone,preview,noselect",
+				},
 				sources = cmp.config.sources({
 					{ name = "path" },
 				}, {
@@ -336,7 +342,9 @@ return {
             require("lspconfig").basedpyright.setup({
 				settings = {
 					basedpyright = {
-                        typeCheckingMode = "standard"
+                        typeCheckingMode = "standard",
+                        reportMissingImports = "error",
+                        disableOrganizeImports = true
                     }
 				},
 			})

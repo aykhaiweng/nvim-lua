@@ -52,19 +52,30 @@ return {
 			-- setup
 			require("telescope").setup({
 				defaults = {
+                    file_ignore_patterns = {
+                        ".git",
+                        "/node_modules",
+                        "__pycache__"
+                    },
+                    color_devicons = true,
 					prompt_prefix = "   ",
 					path_display = { "truncate" },
 					mappings = {
 						i = {
 							["<ESC>"] = actions.close,
 							["<C-c>"] = actions.close,
-							["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+                            ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
 						},
 					},
+                    sorting_strategy = "ascending",
+                    layout_strategy = "vertical",
 					layout_config = {
-						preview_width = 0.6,
-						preview_cutoff = 120,
-						height = 0.8,
+                        prompt_position = "top",
+                        width = {
+                            0.5,
+                            min = 80,
+                            max = 90
+                        }
 					},
 				},
 				pickers = {

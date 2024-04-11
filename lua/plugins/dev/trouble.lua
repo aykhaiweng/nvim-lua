@@ -3,17 +3,13 @@ return {
 		"folke/trouble.nvim",
 		branch = "dev",
 		event = { "BufReadPre", "BufNewFile" },
+        keys = {
+            {"<leader>ll", [[:Trouble loclist toggle<CR>]], "n", desc = "Open Location List" },
+            {"<leader>ld", [[:Trouble diagnostics toggle filter.buf=0<CR>]], "n", desc = "Open Diagnostics (This buffer)" },
+            {"<leader>lD", [[:Trouble diagnostics toggle<CR>]], "n", desc = "Open Diagnostics" },
+        },
 		config = function()
-			require("trouble").setup({})
-
-			vim.keymap.set("n", "<leader>ll", [[:Trouble loclist toggle<CR>]], { desc = "Open Location List" })
-			vim.keymap.set(
-				"n",
-				"<leader>ld",
-				[[:Trouble diagnostics toggle filter.buf=0<CR>]],
-				{ desc = "Open Diagnostics (This buffer)" }
-			)
-			vim.keymap.set("n", "<leader>lD", [[:Trouble diagnostics toggle<CR>]], { desc = "Open Diagnostics" })
+			require("trouble").setup()
 		end,
 	},
 }
