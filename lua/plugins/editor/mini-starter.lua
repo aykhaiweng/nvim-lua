@@ -53,12 +53,12 @@ return {
 				-- Header to be displayed before items. Converted to single string via
 				-- `tostring` (use `\n` to display several lines). If function, it is
 				-- evaluated first. If `nil` (default), polite greeting will be used.
-				header = nil,
+				header = os.date(),
 
 				-- Footer to be displayed after items. Converted to single string via
 				-- `tostring` (use `\n` to display several lines). If function, it is
 				-- evaluated first. If `nil` (default), default usage help will be shown.
-				footer = nil,
+				footer = "XXXXXXXXX",
 
 				-- Array  of functions to be applied consecutively to initial content.
 				-- Each function should take and return content for 'Starter' buffer (see
@@ -68,16 +68,13 @@ return {
 				-- Characters to update query. Each character will have special buffer
 				-- mapping overriding your global ones. Be careful to not add `:` as it
 				-- allows you to go into command mode.
-				query_updaters = "abcdefghijklmnopqrstuvwxyz0123456789_-.",
+				query_updaters = "abcdefghijklmnopqrstuvwxyz0123456789_-.ABCDEFGHIJKLMNOPQRSTUVWXYZ",
 
 				-- Whether to disable showing non-error feedback
 				silent = false,
 			})
 
-            vim.api.nvim_create_autocmd(
-                { "FileType" },
-                { pattern = "starter", command = "set nocursorline" }
-            )
+			vim.api.nvim_create_autocmd({ "FileType" }, { pattern = "starter", command = "set nocursorline" })
 		end,
 	},
 }

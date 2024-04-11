@@ -2,6 +2,11 @@ return {
 	{
 		"folke/edgy.nvim",
 		event = { "BufReadPre", "BufNewFile" },
+		init = function()
+			local disabled_filetypes = {
+				"starter",
+			}
+		end,
 		keys = {
 			{
 				"<leader>we",
@@ -9,6 +14,13 @@ return {
 					require("edgy").toggle()
 				end,
 				desc = "Edgy Toggle",
+			},
+			{
+				"<leader>wo",
+				function()
+					require("edgy").open()
+				end,
+				desc = "Edgy Open",
 			},
             -- stylua: ignore
             { "<leader>wE", function() require("edgy").select() end, desc = "Edgy Select Window" },
@@ -64,24 +76,24 @@ return {
 						ft = "fugitive",
 						pinned = true,
 						open = function()
-                            vim.cmd("Git")
+							vim.cmd("Git")
 						end,
 						size = { height = 0.5 },
 					},
 				},
 				bottom = {
 					"help",
-                    "gitcommit"
+					"gitcommit",
 				},
 				keys = {
-                    -- next window
-                    ["<C-j>"] = function(win)
-                        win:next({ visible = true, focus = true })
-                    end,
-                    -- previous window
-                    ["<C-k>"] = function(win)
-                        win:prev({ visible = true, focus = true })
-                    end,
+					-- next window
+					["<C-j>"] = function(win)
+						win:next({ visible = true, focus = true })
+					end,
+					-- previous window
+					["<C-k>"] = function(win)
+						win:prev({ visible = true, focus = true })
+					end,
 					-- increase width
 					["<c-Right>"] = function(win)
 						win:resize("width", 2)
