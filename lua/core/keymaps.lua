@@ -50,6 +50,9 @@ vim.keymap.set("n", "Y", '"+Y', { desc = "Yank to system clipboard" })
 -- Same as above but for cutting
 vim.keymap.set("n", "D", '"_d', { desc = "Delete to empty register" })
 vim.keymap.set("v", "D", '"_d', { desc = "Delete to empty register" })
+-- Same as above but for cutting
+vim.keymap.set("n", "X", '"_x', { desc = "Cut to empty register" })
+vim.keymap.set("v", "X", '"_x', { desc = "Cut to empty register" })
 
 -- Unbinding capital Q
 vim.keymap.set("n", "Q", "<nop>", { desc = "DISABLED" })

@@ -2,10 +2,6 @@ return {
 	{
 		"folke/edgy.nvim",
 		event = "VeryLazy",
-		init = function()
-			vim.opt.laststatus = 3
-            vim.opt.splitkeep = "screen"
-		end,
 		opts = {
 			bottom = {
 				-- toggleterm / lazyterm at the bottom with a height of 40% of the screen
@@ -49,6 +45,9 @@ return {
 		},
 		config = function(opts)
 			require("edgy").setup(opts)
+
+			vim.opt.laststatus = 3
+            vim.opt.splitkeep = "screen"
 		end,
 	},
 }

@@ -255,8 +255,9 @@ return {
 				virtual_text = true,
                 underline = true,
 				float = {
-					header = false,
+					header = "Diagnostics",
 					border = "rounded",
+                    source = true,
 					focusable = true,
 				},
                 severity_sort = true

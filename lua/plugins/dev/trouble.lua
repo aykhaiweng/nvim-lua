@@ -1,15 +1,17 @@
 return {
 	{
 		"folke/trouble.nvim",
-		branch = "dev",
 		event = { "BufReadPre", "BufNewFile" },
         keys = {
-            {"<leader>ll", [[:Trouble loclist toggle<CR>]], "n", desc = "Open Location List" },
-            {"<leader>ld", [[:Trouble diagnostics toggle filter.buf=0<CR>]], "n", desc = "Open Diagnostics (This buffer)" },
-            {"<leader>lD", [[:Trouble diagnostics toggle<CR>]], "n", desc = "Open Diagnostics" },
+            {"<leader>ll", function() require("trouble").toggle() end, "n", desc = "Open Location List" },
+            {"<leader>ld", function() require("trouble").toggle("document_diagnostics") end, "n", desc = "Open Diagnostics" },
+            {"<leader>lD", function() require("trouble").toggle("workspace_diagnostics") end, "n", desc = "Open Workspace Diagnostics" },
         },
 		config = function()
-			require("trouble").setup()
+			require("trouble").setup({
+                mode = "workspace_diagnostics",
+                auto_preview = false,
+            })
 		end,
 	},
 }
