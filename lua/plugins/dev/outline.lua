@@ -14,9 +14,9 @@ return {
 				icon_source = "lspkind",
 			},
 		},
-		config = function(opts)
+		config = function(_, opts)
 			-- Example mapping to toggle outline
-			vim.keymap.set("n", "<leader>=", "<cmd>Outline<CR>", { desc = "Toggle Outline" })
+			vim.keymap.set("n", "<leader>=", "<cmd>OutlineOpen<CR><cmd>OutlineFocus<CR>", { desc = "Open Outline" })
 			require("outline").setup(opts)
 		end,
 	},

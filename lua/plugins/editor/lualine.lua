@@ -1,6 +1,8 @@
 return {
     {
         'linrongbin16/lsp-progress.nvim',
+        cmd = { "LspInfo", "LspInstall", "LspStart" },
+        event = { "BufReadPre", "BufNewFile" },
         init = function()
             -- listen lsp-progress event and refresh lualine
             vim.api.nvim_create_augroup("lualine_augroup", { clear = true })

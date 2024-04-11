@@ -1,6 +1,7 @@
 return {
 	{
 		"tpope/vim-fugitive",
+        cmd = {"Git"},
 		keys = function()
 			return {
 				{ "<leader>gg", [[:<C-U>Git<CR>]], "n", desc = "Fugitive" },

@@ -50,7 +50,7 @@ return {
 				},
 			})
 
-			vim.opt.sessionoptions = "buffers,curdir,folds,help,tabpages"
+			vim.opt.sessionoptions = "buffers,curdir,folds,help,tabpages,winsize"
 		end,
 	},
 }

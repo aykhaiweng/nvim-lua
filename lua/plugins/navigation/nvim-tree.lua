@@ -9,7 +9,7 @@ return {
         { "<C-b>",     ":NvimTreeToggle<CR>",   "n", desc = "Open file explorer" },
         { "<leader>-", ":NvimTreeFindFile<CR>", "n", desc = "Focus current file in explorer" },
     },
-    config = function(opts)
+    config = function(_, opts)
         -- disable netrw at the very start of your init.lua
         vim.g.loaded_netrw = 1
         vim.g.loaded_netrwPlugin = 1
