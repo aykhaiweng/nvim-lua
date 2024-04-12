@@ -3,6 +3,7 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		branch = "0.1.x",
+        lazy = true,
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons",
@@ -63,18 +64,20 @@ return {
 					mappings = {
 						i = {
 							["<ESC>"] = actions.close,
-							["<C-c>"] = actions.close,
+                            ["<C-c>"] = actions.close,
                             ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
 						},
 					},
-                    sorting_strategy = "ascending",
+                    -- sorting_strategy = "ascending",
+                    selection_strategy = "closest",
                     layout_strategy = "vertical",
 					layout_config = {
-                        prompt_position = "top",
-                        width = {
-                            0.5,
-                            min = 80,
-                            max = 90
+                        vertical = {
+                            -- prompt_position = "top",
+                            width = {
+                                0.6,
+                                max = 120
+                            }
                         }
 					},
 				},

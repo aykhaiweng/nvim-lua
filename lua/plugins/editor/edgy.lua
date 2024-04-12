@@ -2,11 +2,6 @@ return {
 	{
 		"folke/edgy.nvim",
 		event = { "BufReadPre", "BufNewFile" },
-		init = function()
-			local disabled_filetypes = {
-				"starter",
-			}
-		end,
 		keys = {
 			{
 				"<leader>we",
@@ -38,19 +33,10 @@ return {
 						size = 45,
 					},
 					bottom = {
-						size = 25,
+						size = 20,
 					},
 				},
 				left = {
-					{
-						title = "Diagnostics",
-						ft = "Trouble",
-						pinned = true,
-						open = function()
-							vim.cmd("Trouble")
-						end,
-						size = { height = 0.3 },
-					},
 					{
 						title = "Files",
 						ft = "NvimTree",
@@ -58,7 +44,7 @@ return {
 						open = function()
 							vim.cmd("NvimTreeFindFile")
 						end,
-						size = { height = 0.3 },
+						size = { height = 0.6 },
 					},
 					{
 						title = "Outline",
@@ -67,14 +53,14 @@ return {
 						open = function()
 							vim.cmd("OutlineOpen")
 						end,
-						size = { height = 0.5 },
+						size = { height = 0.4 },
 					},
 				},
 				right = {
 					{
 						title = "Fugitive",
 						ft = "fugitive",
-						pinned = true,
+						pinned = false,
 						open = function()
 							vim.cmd("Git")
 						end,
@@ -84,6 +70,15 @@ return {
 				bottom = {
 					"help",
 					"gitcommit",
+					{
+						title = "Diagnostics",
+						ft = "Trouble",
+						pinned = false,
+						-- open = function()
+						-- 	vim.cmd("Trouble")
+						-- end,
+						size = { height = 0.2 },
+					},
 				},
 				keys = {
 					-- next window

@@ -5,19 +5,21 @@ return {
 		event = { "BufReadPre", "BufNewFile" },
 		cmd = { "Outline", "OutlineFocus" },
 		opts = {
-			auto_update_events = {
-				"CursorHold",
-			},
 			outline_window = {
 				winhl = "NormalFloat:",
 			},
+            outline_items = {
+                auto_update_events = {
+                    "CursorMove",
+                },
+            },
 			preview_window = {
 				winhl = "NormalFloat:",
 			},
 			icon_source = "lspkind",
 		},
 		keys = {
-			{ "<leader>=", "<cmd>OutlineOpen<CR><cmd>OutlineFocus<CR>", "n", desc = "Open Outline" },
+			{ "<leader>=", "<cmd>Outline<CR>", "n", desc = "Open Outline" },
 		},
 		config = function(_, opts)
 			-- Example mapping to toggle outline
