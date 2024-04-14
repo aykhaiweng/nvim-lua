@@ -6,6 +6,7 @@ vim.opt.guicursor = ""
 
 -- Stop buffers from hiding
 vim.cmd([[ set nohidden ]])
+vim.cmd([[ set autoread ]])
 
 -- mouse
 vim.opt.mouse = "a"
@@ -34,7 +35,7 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 
 -- smart indents
--- vim.opt.smartindent = true
+vim.opt.smartindent = true
 
 -- stops vim from wrapping lines
 vim.opt.wrap = true
@@ -61,7 +62,7 @@ vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 
 -- updatetime
-vim.opt.updatetime = 50
+vim.opt.updatetime = 1000
 
 -- clipboard
 -- vim.opt.clipboard = "unnamed"

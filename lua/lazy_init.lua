@@ -19,6 +19,8 @@ require("lazy").setup({
 	{ import = "plugins.dev" },
 	{ import = "plugins.git" },
 	{ import = "plugins.editor" },
+	{ import = "plugins.terminal" },
+	{ import = "plugins.profiling" },
 }, {
 	checker = {
 		enabled = true,

@@ -6,8 +6,41 @@ return {
 		"nvim-tree/nvim-web-devicons",
 	},
 	keys = {
-		{ "<C-b>", ":NvimTreeToggle<CR>", "n", desc = "Open file explorer" },
-		{ "<leader>-", ":NvimTreeFindFile<CR>", "n", desc = "Focus current file in explorer" },
+		{ "<C-b>", "<CMD>NvimTreeToggle<CR>", "n", desc = "Open file explorer" },
+		{ "<leader>-", "<CMD>NvimTreeFindFile<CR>", "n", desc = "Focus current file in explorer" },
+	},
+	opts = {
+		diagnostics = {
+			enable = true,
+			show_on_dirs = true,
+			show_on_open_dirs = false,
+		},
+		view = {
+			centralize_selection = true,
+			width = {
+				min = 30,
+				max = 45,
+				padding = 2,
+			},
+			signcolumn = "auto",
+		},
+		renderer = {
+			indent_width = 4,
+			indent_markers = {
+				enable = true,
+			},
+			highlight_diagnostics = "name",
+			highlight_git = "name",
+			icons = {
+				git_placement = "after",
+				modified_placement = "after",
+				diagnostics_placement = "signcolumn",
+				bookmarks_placement = "signcolumn",
+			},
+		},
+		filters = {
+			enable = false,
+		},
 	},
 	config = function(_, opts)
 		-- disable netrw at the very start of your init.lua
@@ -16,6 +49,11 @@ return {
 
 		-- custom on_attach
 		local my_on_attach = function(bufnr)
+
+			local function opts(desc)
+				return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+			end
+
 			local api = require("nvim-tree.api")
 			-- BEGIN_DEFAULT_ON_ATTACH
 			vim.keymap.set("n", "<C-]>", api.tree.change_root_to_node, opts("CD"))
@@ -55,7 +93,7 @@ return {
 			vim.keymap.set("n", "H", api.tree.toggle_hidden_filter, opts("Toggle Filter: Dotfiles"))
 			vim.keymap.set("n", "I", api.tree.toggle_gitignore_filter, opts("Toggle Filter: Git Ignore"))
 			vim.keymap.set("n", "J", api.node.navigate.sibling.last, opts("Last Sibling"))
-			vim.keymap.set("n", "K", api.node.navigate.sibling.first, opts("First Sibling"))
+			-- vim.keymap.set("n", "K", api.node.navigate.sibling.first, opts("First Sibling"))
 			vim.keymap.set("n", "L", api.node.open.toggle_group_empty, opts("Toggle Group Empty"))
 			vim.keymap.set("n", "M", api.tree.toggle_no_bookmark_filter, opts("Toggle Filter: No Bookmark"))
 			vim.keymap.set("n", "m", api.marks.toggle, opts("Toggle Bookmark"))
@@ -79,6 +117,8 @@ return {
 			-- END_DEFAULT_ON_ATTACH
 		end
 
+        opts.on_attach = my_on_attach
+
 		local symbols = {
 			-- Change type
 			added = "", -- or "✚", but this is redundant info if you use git_status_colors on the name
@@ -93,38 +133,6 @@ return {
 			conflict = "",
 		}
 
-		require("nvim-tree").setup({
-			diagnostics = {
-				enable = true,
-				show_on_dirs = true,
-				show_on_open_dirs = false,
-			},
-			view = {
-				centralize_selection = true,
-				width = {
-					min = 30,
-					max = 45,
-					padding = 2,
-				},
-				signcolumn = "auto",
-			},
-			renderer = {
-				indent_width = 4,
-				indent_markers = {
-					enable = true,
-				},
-				highlight_diagnostics = "name",
-				highlight_git = "name",
-				icons = {
-					git_placement = "after",
-					modified_placement = "after",
-					diagnostics_placement = "signcolumn",
-					bookmarks_placement = "signcolumn",
-				},
-			},
-			filters = {
-				enable = false,
-			},
-		})
+		require("nvim-tree").setup(opts)
 	end,
 }

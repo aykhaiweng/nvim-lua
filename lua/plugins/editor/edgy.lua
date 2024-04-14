@@ -38,6 +38,12 @@ return {
 				},
 				left = {
 					{
+						title = "Diagnostics",
+						ft = "Trouble",
+						pinned = false,
+						size = { height = 0.2 },
+					},
+					{
 						title = "Files",
 						ft = "NvimTree",
 						pinned = true,
@@ -66,18 +72,24 @@ return {
 						end,
 						size = { height = 0.5 },
 					},
+                    "tsplayground"
 				},
 				bottom = {
 					"help",
 					"gitcommit",
+					"toggleterm",
+					"terminal",
 					{
-						title = "Diagnostics",
-						ft = "Trouble",
-						pinned = false,
-						-- open = function()
-						-- 	vim.cmd("Trouble")
-						-- end,
-						size = { height = 0.2 },
+						ft = "help",
+						size = { height = 20 },
+						-- only show help buffers
+						filter = function(buf)
+							return vim.bo[buf].buftype == "help"
+						end,
+					},
+					{
+						ft = "qf",
+						title = "QuickFix",
 					},
 				},
 				keys = {
@@ -99,12 +111,12 @@ return {
 					end,
 					-- increase height
 					["<c-Up>"] = function(win)
-						win:resize("height", 2)
-					end,
+                        win:resize("height", 2)
+                    end,
 					-- decrease height
 					["<c-Down>"] = function(win)
-						win:resize("height", -2)
-					end,
+                        win:resize("height", -2)
+                    end,
 				},
 			}
 			return opts
@@ -112,7 +124,7 @@ return {
 		config = function(_, opts)
 			require("edgy").setup(opts)
 
-			vim.opt.laststatus = 3
+			vim.opt.laststatus = 2
 			vim.opt.splitkeep = "screen"
 		end,
 	},

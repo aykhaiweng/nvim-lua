@@ -16,10 +16,10 @@ vim.keymap.set("n", "<leader>tm", ":tabm ", { desc = "Move tab to index" })
 vim.keymap.set("n", "<leader>tx", vim.cmd.tabclose, { desc = "Close tab" })
 
 -- resize windows
-vim.keymap.set("n", "<M-h>", [[<C-w><]], { desc = "Decrease width" })
-vim.keymap.set("n", "<M-j>", [[<C-w>-]], { desc = "Increase height" })
-vim.keymap.set("n", "<M-k>", [[<C-w>+]], { desc = "Decrease height" })
-vim.keymap.set("n", "<M-l>", [[<C-w>>]], { desc = "Increase width" })
+vim.keymap.set("n", "<M-h>", "<C-w><", { desc = "Decrease width" })
+vim.keymap.set("n", "<M-j>", "<C-w>-", { desc = "Increase height" })
+vim.keymap.set("n", "<M-k>", "<C-w>+", { desc = "Decrease height" })
+vim.keymap.set("n", "<M-l>", "<C-w>>", { desc = "Increase width" })
 
 -- move cursor in edit mode
 vim.keymap.set("i", "<M-h>", "<left>", { desc = "Cursor left" })
@@ -85,3 +85,6 @@ vim.keymap.set("n", "<leader>bp", vim.cmd.Break, { desc = "Create breakpoint und
 -- Folding
 vim.keymap.set("n", "<leader><space>", "za", { desc = "Toggle fold under cursor" })
 -- vim.keymap.set("n", "<CR>", "za", {desc = "Toggle fold under cursor"})
+
+-- Terminal
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit out of Terminal Insert" })

@@ -2,24 +2,34 @@ return {
 	{
 		"hedyhli/outline.nvim",
 		lazy = true,
-		event = { "BufReadPre", "BufNewFile" },
-		cmd = { "Outline", "OutlineFocus" },
+		cmd = { "Outline", "OutlineOpen", "OutlineFocus" },
 		opts = {
 			outline_window = {
 				winhl = "NormalFloat:",
 			},
-            outline_items = {
-                auto_update_events = {
-                    "CursorMove",
-                },
+            -- outline_items = {
+            --     auto_update_events = {
+            --         "CursorHold",
+            --     },
+            -- },
+            symbol_folding = {
+                autofold_depth = 3,
+                auto_unfold = {
+                    hovered = true
+                }
             },
 			preview_window = {
 				winhl = "NormalFloat:",
 			},
 			icon_source = "lspkind",
+            keymaps = {
+                down_and_jump = "<M-j>",  -- Unbind CTRL-J
+                up_and_jump = "<M-k>" -- Unbind CTRL-K
+            }
 		},
 		keys = {
-			{ "<leader>=", "<cmd>Outline<CR>", "n", desc = "Open Outline" },
+			{ "<leader>=", "<cmd>OutlineOpen<CR><cmd>OutlineFocus<CR>", "n", desc = "Open Outline" },
+			{ "<leader>+", "<cmd>OutlineClose<CR>", "n", desc = "Close Outline" },
 		},
 		config = function(_, opts)
 			-- Example mapping to toggle outline

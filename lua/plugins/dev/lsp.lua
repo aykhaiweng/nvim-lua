@@ -28,7 +28,7 @@ return {
 					vim.keymap.set("n", "go", "<cmd>lua vim.lsp.buf.type_definition()<cr>", opts)
 					vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", opts)
 					vim.keymap.set("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
-					-- vim.keymap.set("i", "<C-s>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
+					vim.keymap.set("i", "<C-s>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
 				end,
 			})
 		end,
@@ -73,6 +73,11 @@ return {
 		"neovim/nvim-lspconfig",
 		cmd = { "LspInfo", "LspInstall", "LspStart" },
 		event = { "BufReadPre", "BufNewFile" },
+        opts = {
+            inlay_hints = {
+                enabled = true
+            }
+        },
 		config = function()
 			-- Config defaults
 			local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -128,7 +133,9 @@ return {
 						option = { use_show_condition = true },
 						entry_filter = function(entry, ctx)
 							local context = require("cmp.config.context")
-							local show = not context.in_treesitter_capture("comment")
+							local show = not context.in_treesitter_capture(
+                                "comment"
+                            )
 							return show
 						end,
 					},
@@ -138,23 +145,42 @@ return {
 						option = { use_show_condition = true },
 						entry_filter = function(entry, ctx)
 							local context = require("cmp.config.context")
-							local show = not context.in_treesitter_capture("string", "comment", "arguments")
+							local show = not context.in_treesitter_capture(
+                                "string",
+                                "comment",
+                                "arguments",
+                                "import_statement",
+                                "import_from_statement"
+                            )
 							return show
 						end,
 					},
 					-- Buffer
 					{
 						name = "buffer",
+						option = { use_show_condition = true },
+						entry_filter = function(entry, ctx)
+							local context = require("cmp.config.context")
+							local show = context.in_treesitter_capture(
+                                "import_statement",
+                                "import_from_statement"
+                            )
+							return show
+						end,
 					},
 					-- Path
 					{
 						name = "path",
 						option = { use_show_condition = true },
-						trigger_characters = { "*" },
+						trigger_characters = { "/" },
 						entry_filter = function(entry, ctx)
 							local context = require("cmp.config.context")
-							local show = context.in_treesitter_capture("string")
-								or context.in_treesitter_capture("comment")
+							local show = context.in_treesitter_capture(
+                                "string",
+                                "comment",
+                                "import_statement",
+                                "import_from_statement"
+                            )
 							return show
 						end,
 					}, -- Show paths in completion
@@ -194,7 +220,12 @@ return {
 							unpack = unpack or table.unpack
 							local line, col = unpack(vim.api.nvim_win_get_cursor(0))
 							return col ~= 0
-								and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s")
+								and vim.api.nvim_buf_get_lines(
+                                    0,
+                                    line - 1,
+                                    line,
+                                    true
+                                )[1]:sub(col, col):match("%s")
 									== nil
 						end
 						if cmp.visible() then
@@ -254,7 +285,8 @@ return {
 			-- Diagnostics
 			vim.diagnostic.config({
 				virtual_text = true,
-				underline = true,
+				underline = false,
+                update_in_insert = false,
 				float = {
 					header = "Diagnostics",
 					border = "rounded",
@@ -263,20 +295,6 @@ return {
 				},
 				severity_sort = true,
 			})
-
-			-- Automatically open the diagnostics window
-			OpenDiagFloat = function()
-				for _, winid in pairs(vim.api.nvim_tabpage_list_wins(0)) do
-					if vim.api.nvim_win_get_config(winid).zindex then
-						return
-					end
-				end
-				vim.diagnostic.open_float({ focusable = false })
-			end
-			vim.api.nvim_create_autocmd(
-				{ "CursorHold" },
-				{ pattern = "*", command = [[autocmd CursorHold <buffer> lua OpenDiagFloat()]] }
-			)
 
 			-- Command Line and Searching shit
 			cmp.setup.cmdline("/", {
@@ -317,6 +335,12 @@ return {
 						diagnostics = {
 							globals = { "vim" },
 						},
+                        completion = {
+                            autoRequire = true
+                        },
+                        hint = {
+                            enable = true
+                        },
 						workspace = {
 							library = {
 								vim.env.VIMRUNTIME,
@@ -352,82 +376,6 @@ return {
 			})
 
 			vim.opt.pumheight = 0 -- Maximum 10 items in the list
-		end,
-	},
-	-- Signature Help
-	{
-		"ray-x/lsp_signature.nvim",
-		cmd = { "LspInfo", "LspInstall", "LspStart" },
-		event = { "BufReadPre", "BufNewFile" },
-		opts = {
-			floating_window_above_cur_line = false,
-			floating_window_off_y = -2,
-			always_trigger = true,
-			toggle_key = "<C-s>",
-			hint_enable = false,
-			check_completion_visible = false,
-			handler_opts = {
-				border = "single",
-			},
-		},
-		config = function(_, opts)
-			require("lsp_signature").setup(opts)
-		end,
-	},
-	{
-		"lewis6991/hover.nvim",
-		dependencies = {
-			"ldelossa/gh.nvim",
-		},
-		keys = function()
-			return {
-				{ "K", require("hover").hover, "n", desc = "hover.nvim" },
-				{
-					"gK",
-					require("hover").hover_select,
-					"n",
-					desc = "hover.nvim (select)",
-				},
-				{
-					"<S-Tab>",
-					function()
-						require("hover").hover_switch("previous")
-					end,
-					"n",
-					desc = "hover.nvim (previous source)",
-				},
-				{
-					"<Tab>",
-					function()
-						require("hover").hover_switch("next")
-					end,
-					"n",
-					desc = "hover.nvim (next source)",
-				},
-			}
-		end,
-		config = function()
-			require("hover").setup({
-				init = function()
-					-- Require providers
-					require("hover.providers.lsp")
-					require("hover.providers.gh")
-					require("hover.providers.gh_user")
-					-- require('hover.providers.jira')
-					-- require('hover.providers.man')
-					-- require('hover.providers.dictionary')
-				end,
-				preview_opts = {
-					border = "single",
-				},
-				-- Whether the contents of a currently open hover window should be moved
-				-- to a :h preview-window when pressing the hover keymap.
-				preview_window = true,
-				title = true,
-				mouse_providers = {
-					"LSP",
-				},
-			})
 		end,
 	},
 }

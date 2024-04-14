@@ -1,62 +1,67 @@
 {
-    "bigtitleblock": {
-        "prefix": "bigtitleblock",
-        "body": [
-            "##################################################################",
-            "# $0",
-            "##################################################################"
-        ],
-        "description": "Commented big title block"
-    },
-    "titleblock": {
-        "prefix": "titleblock",
-        "body": [
-            "############################################################",
-            "# $0",
-            "############################################################"
-        ],
-        "description": "Commented title block"
-    },
-    "minititleblock": {
-        "prefix": "minititleblock",
-        "body": [
-            "###############################",
-            "# $0",
-            "###############################"
-        ],
-        "description": "Commented mini title block"
-    },
-    "modelsimport": {
-        "prefix": "modelsimport",
-        "body": [
-            "from django.db import models"
-        ],
-        "description": "Sets up the models.py import"
-    },
-    "managersimport": {
-        "prefix": "managersimport",
-        "body": [
-            "from django.db import models"
-        ],
-        "description": "Sets up the managers.py import"
-    },
-    "querysetmanager": {
-        "prefix": "querysetmanager",
-        "body": [
-            "class ${0:ModelName}QuerySet(models.QuerySet):",
-            "    \"\"\"",
-            "    Base QuerySet for the ${0:ModelName} objects.",
-            "    \"\"\"",
-            "",
-            "",
-            "class Base${0:ModelName}Manager(models.Manager):",
-            "    \"\"\"",
-            "    Base Manager for the ${0:ModelName} objects.",
-            "    \"\"\"",
-            "",
-            "",
-            "${0:ModelName}Manager = Base${0:ModelName}Manager.from_queryset(${0:ModelName}QuerySet)"
-        ],
-        "description": "Snippet to create QuerySet and ModelManagers"
-    }
+  "bigtitleblock": {
+    "prefix": "bigtitleblock",
+    "body": [
+      "##################################################################",
+      "# $0",
+      "##################################################################"
+    ],
+    "description": "Commented big title block"
+  },
+  "titleblock": {
+    "prefix": "titleblock",
+    "body": [
+      "############################################################",
+      "# $0",
+      "############################################################"
+    ],
+    "description": "Commented title block"
+  },
+  "minititleblock": {
+    "prefix": "minititleblock",
+    "body": [
+      "###############################",
+      "# $0",
+      "###############################"
+    ],
+    "description": "Commented mini title block"
+  },
+  "docstring": {
+    "prefix": "docstring",
+    "body": [
+      "\"\"\"",
+      "${0}",
+      "\"\"\""
+    ],
+    "description": "Python docstring"
+  },
+  "modelsimport": {
+    "prefix": "modelsimport",
+    "body": ["from django.db import models"],
+    "description": "Sets up the models.py import"
+  },
+  "managersimport": {
+    "prefix": "managersimport",
+    "body": ["from django.db import models"],
+    "description": "Sets up the managers.py import"
+  },
+  "querysetmanager": {
+    "prefix": "querysetmanager",
+    "body": [
+      "class ${0:ModelName}QuerySet(models.QuerySet):",
+      "    \"\"\"",
+      "    Base QuerySet for the ${0:ModelName} objects.",
+      "    \"\"\"",
+      "",
+      "",
+      "class Base${0:ModelName}Manager(models.Manager):",
+      "    \"\"\"",
+      "    Base Manager for the ${0:ModelName} objects.",
+      "    \"\"\"",
+      "",
+      "",
+      "${0:ModelName}Manager = Base${0:ModelName}Manager.from_queryset(${0:ModelName}QuerySet)"
+    ],
+    "description": "Snippet to create QuerySet and ModelManagers"
+  }
 }

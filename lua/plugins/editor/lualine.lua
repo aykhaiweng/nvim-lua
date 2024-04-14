@@ -1,21 +1,21 @@
 return {
-    {
-        'linrongbin16/lsp-progress.nvim',
-        cmd = { "LspInfo", "LspInstall", "LspStart" },
-        event = { "BufReadPre", "BufNewFile" },
-        init = function()
-            -- listen lsp-progress event and refresh lualine
-            vim.api.nvim_create_augroup("lualine_augroup", { clear = true })
-            vim.api.nvim_create_autocmd("User", {
-                group = "lualine_augroup",
-                pattern = "LspProgressStatusUpdated",
-                callback = require("lualine").refresh,
-            })
-        end,
-        config = function()
-            require('lsp-progress').setup()
-        end
-    },
+    -- {
+    --     'linrongbin16/lsp-progress.nvim',
+    --     cmd = { "LspInfo", "LspInstall", "LspStart" },
+    --     event = { "BufReadPre", "BufNewFile" },
+    --     init = function()
+    --         -- listen lsp-progress event and refresh lualine
+    --         vim.api.nvim_create_augroup("lualine_augroup", { clear = true })
+    --         vim.api.nvim_create_autocmd("User", {
+    --             group = "lualine_augroup",
+    --             pattern = "LspProgressStatusUpdated",
+    --             callback = require("lualine").refresh,
+    --         })
+    --     end,
+    --     config = function()
+    --         require('lsp-progress').setup()
+    --     end
+    -- },
     {
         "nvim-lualine/lualine.nvim",
         dependencies = {
@@ -24,14 +24,16 @@ return {
         lazy = false,
         config = function()
             local disabled_filetypes = {
+                "help",
+                "term",
+                "gitcommit",
                 "NvimTree",
                 "Outline",
                 "undotree",
-                "trouble",
-                "term",
-                "gitcommit",
+                "Trouble",
                 "fugitive",
-                "fugitiveblame"
+                "fugitiveblame",
+                "tsplayground"
             }
             require("lualine").setup({
                 options = {
@@ -55,12 +57,7 @@ return {
                     lualine_a = { "mode" },
                     lualine_b = { "branch", "diff", "diagnostics" },
                     lualine_c = { "filename" },
-                    lualine_x = {
-                        -- LSP Progress
-                        function()
-                            return require('lsp-progress').progress()
-                        end,
-                    },
+                    lualine_x = {},
                     lualine_y = { "encoding", "fileformat", "filetype" },
                     lualine_z = { "location", "progress" },
                 },

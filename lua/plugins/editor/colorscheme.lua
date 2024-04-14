@@ -44,6 +44,7 @@ return {
 							LspSignatureActiveParameter = { bg = c.peach, fg = c.mantle },
 							-- Borders
 							WinSeparator = { bg = c.mantle, fg = c.mantle },
+                            LspInlayHint = { bg = c.crust, style = {"italic"} }
 							-- -- Sign Column
 							-- SignColumn = { bg = c.mantle },
 							-- SignColumnSB = { bg = c.mantle },

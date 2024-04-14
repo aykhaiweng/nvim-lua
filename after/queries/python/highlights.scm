@@ -13,3 +13,7 @@
 ;
 ; ; Attribute docstring
 ; ((expression_statement (assignment)) . (expression_statement (string) @comment))
+
+[
+  "from" 
+] @keyword.import
