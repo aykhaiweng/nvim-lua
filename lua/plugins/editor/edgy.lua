@@ -40,8 +40,11 @@ return {
 					{
 						title = "Diagnostics",
 						ft = "Trouble",
-						pinned = false,
-						size = { height = 0.2 },
+						pinned = true,
+						open = function()
+							vim.cmd("Trouble")
+						end,
+						size = { height = 0.3 },
 					},
 					{
 						title = "Files",
@@ -50,7 +53,7 @@ return {
 						open = function()
 							vim.cmd("NvimTreeFindFile")
 						end,
-						size = { height = 0.6 },
+						size = { height = 0.5 },
 					},
 					{
 						title = "Outline",
@@ -59,7 +62,7 @@ return {
 						open = function()
 							vim.cmd("OutlineOpen")
 						end,
-						size = { height = 0.4 },
+						size = { height = 0.6 },
 					},
 				},
 				right = {
@@ -72,13 +75,20 @@ return {
 						end,
 						size = { height = 0.5 },
 					},
+					{
+						title = "Undotree",
+						ft = "undotree",
+						pinned = false,
+						size = { height = 0.5 },
+					},
+                    "diff",
                     "tsplayground"
 				},
 				bottom = {
 					"help",
 					"gitcommit",
-					"toggleterm",
-					"terminal",
+					-- "toggleterm",
+					-- "terminal",
 					{
 						ft = "help",
 						size = { height = 20 },
@@ -93,14 +103,6 @@ return {
 					},
 				},
 				keys = {
-					-- next window
-					["<C-j>"] = function(win)
-						win:next({ visible = true, focus = true })
-					end,
-					-- previous window
-					["<C-k>"] = function(win)
-						win:prev({ visible = true, focus = true })
-					end,
 					-- increase width
 					["<c-Right>"] = function(win)
 						win:resize("width", 2)
@@ -115,6 +117,22 @@ return {
                     end,
 					-- decrease height
 					["<c-Down>"] = function(win)
+                        win:resize("height", -2)
+                    end,
+					-- increase width
+					["<M-L>"] = function(win)
+						win:resize("width", 2)
+					end,
+					-- decrease width
+					["<M-H>"] = function(win)
+						win:resize("width", -2)
+					end,
+					-- increase height
+					["<M-K>"] = function(win)
+                        win:resize("height", 2)
+                    end,
+					-- decrease height
+					["<M-J>"] = function(win)
                         win:resize("height", -2)
                     end,
 				},

@@ -41,10 +41,12 @@ return {
 					mocha = function(c)
 						return {
 							Cursor = { bg = c.foreground, fg = c.mantle },
-							LspSignatureActiveParameter = { bg = c.peach, fg = c.mantle },
+							LspSignatureActiveParameter = { bg = c.surface0, fg = c.yellow },
+							LspInlayHint = { bg = c.crust, style = { "italic" } },
 							-- Borders
 							WinSeparator = { bg = c.mantle, fg = c.mantle },
-                            LspInlayHint = { bg = c.crust, style = {"italic"} }
+                            -- Outline
+							OutlineCurrent = { bg = c.surface0, fg = c.yellow, style = { "italic" } },
 							-- -- Sign Column
 							-- SignColumn = { bg = c.mantle },
 							-- SignColumnSB = { bg = c.mantle },

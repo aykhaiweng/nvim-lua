@@ -26,6 +26,7 @@ return {
             local disabled_filetypes = {
                 "help",
                 "term",
+                "diff",
                 "gitcommit",
                 "NvimTree",
                 "Outline",
@@ -33,7 +34,8 @@ return {
                 "Trouble",
                 "fugitive",
                 "fugitiveblame",
-                "tsplayground"
+                "tsplayground",
+                "toggleterm"
             }
             require("lualine").setup({
                 options = {

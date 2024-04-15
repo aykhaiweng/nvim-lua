@@ -4,23 +4,17 @@ return {
 		lazy = true,
 		cmd = { "Outline", "OutlineOpen", "OutlineFocus" },
 		opts = {
-			outline_window = {
-				winhl = "NormalFloat:",
-			},
             -- outline_items = {
             --     auto_update_events = {
             --         "CursorHold",
             --     },
             -- },
             symbol_folding = {
-                autofold_depth = 3,
+                autofold_depth = 1,
                 auto_unfold = {
                     hovered = true
                 }
             },
-			preview_window = {
-				winhl = "NormalFloat:",
-			},
 			icon_source = "lspkind",
             keymaps = {
                 down_and_jump = "<M-j>",  -- Unbind CTRL-J
