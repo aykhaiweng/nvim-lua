@@ -81,6 +81,7 @@ return {
 		config = function()
 			-- Config defaults
 			local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
+            lsp_capabilities.semanticTokensProvider = false
 			local default_setup = function(server)
 				require("lspconfig")[server].setup({
 					capabilities = lsp_capabilities,

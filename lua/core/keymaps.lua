@@ -43,6 +43,7 @@ vim.keymap.set("n", "J", "mzJ`z", { desc = "Move the bottom line to current line
 -- like pasting over existing text, it does not take
 -- existing text into the register
 vim.keymap.set("x", "P", '"_dP', { desc = "Paste without overriding default register" })
+vim.keymap.set("v", "P", '"_dP', { desc = "Visual paste without overriding the register" })
 -- This will yank into the system clipboard, useful when
 -- separating the vim and system clipboards
 vim.keymap.set("v", "Y", '"+y', { desc = "Yank to system clipboard" })

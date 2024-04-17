@@ -5,7 +5,7 @@ return {
 		version = "*",
         cmd = { "TSJToggle" },
         keys = {
-            { "<leader>ej", "<cmd>TSJToggle<CR>", "Toggle Splitjoin" },
+            { "<leader>ej", "<cmd>TSJToggle<CR>", desc="Toggle Splitjoin" },
         },
         opts = {
         },

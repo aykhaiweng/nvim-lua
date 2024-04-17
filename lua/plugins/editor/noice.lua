@@ -2,7 +2,7 @@ return {
 	{
 		"folke/noice.nvim",
 		event = "VeryLazy",
-        enabled = false,
+        enabled = true,
 		opts = {
 			-- add any options here
 			presets = {
@@ -12,6 +12,11 @@ return {
 				inc_rename = false, -- enables an input dialog for inc-rename.nvim
 				lsp_doc_border = true, -- add a border to hover docs and signature help
 			},
+            lsp = {
+                signature = {
+                    enabled = false
+                }
+            }
 		},
 		dependencies = {
 			-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries

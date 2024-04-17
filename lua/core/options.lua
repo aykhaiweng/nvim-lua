@@ -57,7 +57,10 @@ vim.opt.smartcase = true
 vim.opt.termguicolors = true
 
 -- scrolloff
-vim.opt.scrolloff = 8
+vim.opt.scrolloff = 10
+vim.opt.sidescrolloff = 10
+
+-- sign column
 vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 

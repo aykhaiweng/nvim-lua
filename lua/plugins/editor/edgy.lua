@@ -87,7 +87,7 @@ return {
 				bottom = {
 					"help",
 					"gitcommit",
-					-- "toggleterm",
+					"toggleterm",
 					-- "terminal",
 					{
 						ft = "help",
