@@ -40,10 +40,7 @@ return {
 					{
 						title = "Diagnostics",
 						ft = "Trouble",
-						pinned = true,
-						open = function()
-							vim.cmd("Trouble")
-						end,
+						pinned = false,
 						size = { height = 0.3 },
 					},
 					{
@@ -142,7 +139,7 @@ return {
 		config = function(_, opts)
 			require("edgy").setup(opts)
 
-			vim.opt.laststatus = 2
+			vim.opt.laststatus = 3
 			vim.opt.splitkeep = "screen"
 		end,
 	},

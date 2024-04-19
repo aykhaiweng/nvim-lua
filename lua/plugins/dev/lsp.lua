@@ -1,3 +1,13 @@
+local custom_capture = function(capture_func, ...)
+    local args = {...}  -- Capture the variable arguments into a table
+    for _, arg in ipairs(args) do
+        if capture_func(arg) then
+            return true
+        end
+    end
+    return false
+end
+
 return {
 	-- Completion menu
 	{
@@ -134,8 +144,10 @@ return {
 						option = { use_show_condition = true },
 						entry_filter = function(entry, ctx)
 							local context = require("cmp.config.context")
-							local show = not context.in_treesitter_capture(
-                                "comment"
+							local show = not custom_capture(
+                                context.in_treesitter_capture,
+                                "comment",
+                                "string"
                             )
 							return show
 						end,
@@ -146,7 +158,8 @@ return {
 						option = { use_show_condition = true },
 						entry_filter = function(entry, ctx)
 							local context = require("cmp.config.context")
-							local show = not context.in_treesitter_capture(
+							local show = not custom_capture(
+                                context.in_treesitter_capture,
                                 "string",
                                 "comment",
                                 "arguments",
@@ -162,9 +175,10 @@ return {
 						option = { use_show_condition = true },
 						entry_filter = function(entry, ctx)
 							local context = require("cmp.config.context")
-							local show = context.in_treesitter_capture(
-                                "import_statement",
-                                "import_from_statement"
+							local show = custom_capture(
+                                context.in_treesitter_capture,
+                                "string",
+                                "comment"
                             )
 							return show
 						end,
@@ -176,11 +190,10 @@ return {
 						trigger_characters = { "/" },
 						entry_filter = function(entry, ctx)
 							local context = require("cmp.config.context")
-							local show = context.in_treesitter_capture(
+							local show = custom_capture(
+                                context.in_treesitter_capture,
                                 "string",
-                                "comment",
-                                "import_statement",
-                                "import_from_statement"
+                                "comments"
                             )
 							return show
 						end,

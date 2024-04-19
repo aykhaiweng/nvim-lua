@@ -65,7 +65,7 @@ vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 
 -- updatetime
-vim.opt.updatetime = 1000
+vim.opt.updatetime = 250
 
 -- clipboard
 -- vim.opt.clipboard = "unnamed"

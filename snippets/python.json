@@ -28,22 +28,13 @@
   },
   "docstring": {
     "prefix": "docstring",
-    "body": [
-      "\"\"\"",
-      "${0}",
-      "\"\"\""
-    ],
+    "body": ["\"\"\"", "${0}", "\"\"\""],
     "description": "Python docstring"
   },
-  "modelsimport": {
-    "prefix": "modelsimport",
-    "body": ["from django.db import models"],
-    "description": "Sets up the models.py import"
-  },
-  "managersimport": {
-    "prefix": "managersimport",
-    "body": ["from django.db import models"],
-    "description": "Sets up the managers.py import"
+  "jsonprint": {
+    "prefix": "jsonprint",
+    "body": ["print(__import__('json').dumps(${0}, indent=4, default=str))"],
+    "description": "Python docstring"
   },
   "querysetmanager": {
     "prefix": "querysetmanager",

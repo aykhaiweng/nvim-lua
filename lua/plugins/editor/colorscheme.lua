@@ -52,7 +52,7 @@ return {
 							-- SignColumnSB = { bg = c.mantle },
 							-- LineNr = { bg = c.mantle },
 							-- -- Barbecue
-							-- barbecue_normal = { bg = c.mantle },
+							barbecue_normal = { bg = c.mantle },
 							-- -- Trouble
 							-- TroubleNormal = { bg = c.mantle },
 							-- -- Indent Scope
@@ -100,7 +100,7 @@ return {
 					},
 					barbecue = {
 						dim_dirname = true, -- directory name is dimmed by default
-						bold_basename = false,
+						bold_basename = true,
 						dim_context = true,
 						alt_background = true,
 					},
