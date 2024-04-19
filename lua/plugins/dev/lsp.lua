@@ -79,6 +79,7 @@ return {
 			require("cmp_git").setup()
 		end,
 	},
+    -- LSP Configurator
 	{
 		"neovim/nvim-lspconfig",
 		cmd = { "LspInfo", "LspInstall", "LspStart" },
