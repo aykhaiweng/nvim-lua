@@ -1,11 +1,11 @@
 local custom_capture = function(capture_func, ...)
-    local args = {...}  -- Capture the variable arguments into a table
-    for _, arg in ipairs(args) do
-        if capture_func(arg) then
-            return true
-        end
-    end
-    return false
+	local args = { ... } -- Capture the variable arguments into a table
+	for _, arg in ipairs(args) do
+		if capture_func(arg) then
+			return true
+		end
+	end
+	return false
 end
 
 return {
@@ -31,7 +31,7 @@ return {
 					-- these will be buffer-local keybindings
 					-- because they only work if you have an active language server
 					vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
-					vim.keymap.set("n", "gl", [[:lua vim.diagnostic.open_float(0, { scope = "line" })<cr>]], opts)
+					vim.keymap.set("n", "gl", '<cmd>lua vim.diagnostic.open_float(0, { scope = "line" })<cr>', opts)
 					vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
 					vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
 					vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", opts)
@@ -39,6 +39,35 @@ return {
 					vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", opts)
 					vim.keymap.set("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
 					vim.keymap.set("i", "<C-s>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
+
+					-- Function to check if a floating dialog exists and if not
+					-- then check for diagnostics under the cursor
+					function OpenDiagnosticIfNoFloat()
+						for _, winid in pairs(vim.api.nvim_tabpage_list_wins(0)) do
+							if vim.api.nvim_win_get_config(winid).zindex then
+								return
+							end
+						end
+						-- THIS IS FOR BUILTIN LSP
+						vim.diagnostic.open_float(0, {
+							scope = "cursor",
+							focusable = false,
+							close_events = {
+								"CursorMoved",
+								"CursorMovedI",
+								"BufHidden",
+								"InsertCharPre",
+								"WinLeave",
+							},
+						})
+					end
+					-- Show diagnostics under the cursor when holding position
+					vim.api.nvim_create_augroup("lsp_diagnostics_hold", { clear = true })
+					vim.api.nvim_create_autocmd({ "CursorHold" }, {
+						pattern = "*",
+						command = "lua OpenDiagnosticIfNoFloat()",
+						group = "lsp_diagnostics_hold",
+					})
 				end,
 			})
 		end,
@@ -79,20 +108,20 @@ return {
 			require("cmp_git").setup()
 		end,
 	},
-    -- LSP Configurator
+	-- LSP Configurator
 	{
 		"neovim/nvim-lspconfig",
 		cmd = { "LspInfo", "LspInstall", "LspStart" },
 		event = { "BufReadPre", "BufNewFile" },
-        opts = {
-            inlay_hints = {
-                enabled = true
-            }
-        },
+		opts = {
+			inlay_hints = {
+				enabled = true,
+			},
+		},
 		config = function()
 			-- Config defaults
 			local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
-            lsp_capabilities.semanticTokensProvider = false
+			lsp_capabilities.semanticTokensProvider = false
 			local default_setup = function(server)
 				require("lspconfig")[server].setup({
 					capabilities = lsp_capabilities,
@@ -145,11 +174,7 @@ return {
 						option = { use_show_condition = true },
 						entry_filter = function(entry, ctx)
 							local context = require("cmp.config.context")
-							local show = not custom_capture(
-                                context.in_treesitter_capture,
-                                "comment",
-                                "string"
-                            )
+							local show = not custom_capture(context.in_treesitter_capture, "comment", "string")
 							return show
 						end,
 					},
@@ -160,13 +185,13 @@ return {
 						entry_filter = function(entry, ctx)
 							local context = require("cmp.config.context")
 							local show = not custom_capture(
-                                context.in_treesitter_capture,
-                                "string",
-                                "comment",
-                                "arguments",
-                                "import_statement",
-                                "import_from_statement"
-                            )
+								context.in_treesitter_capture,
+								"string",
+								"comment",
+								"arguments",
+								"import_statement",
+								"import_from_statement"
+							)
 							return show
 						end,
 					},
@@ -176,11 +201,7 @@ return {
 						option = { use_show_condition = true },
 						entry_filter = function(entry, ctx)
 							local context = require("cmp.config.context")
-							local show = custom_capture(
-                                context.in_treesitter_capture,
-                                "string",
-                                "comment"
-                            )
+							local show = custom_capture(context.in_treesitter_capture, "string", "comment")
 							return show
 						end,
 					},
@@ -191,11 +212,7 @@ return {
 						trigger_characters = { "/" },
 						entry_filter = function(entry, ctx)
 							local context = require("cmp.config.context")
-							local show = custom_capture(
-                                context.in_treesitter_capture,
-                                "string",
-                                "comments"
-                            )
+							local show = custom_capture(context.in_treesitter_capture, "string", "comments")
 							return show
 						end,
 					}, -- Show paths in completion
@@ -235,12 +252,7 @@ return {
 							unpack = unpack or table.unpack
 							local line, col = unpack(vim.api.nvim_win_get_cursor(0))
 							return col ~= 0
-								and vim.api.nvim_buf_get_lines(
-                                    0,
-                                    line - 1,
-                                    line,
-                                    true
-                                )[1]:sub(col, col):match("%s")
+								and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s")
 									== nil
 						end
 						if cmp.visible() then
@@ -300,8 +312,8 @@ return {
 			-- Diagnostics
 			vim.diagnostic.config({
 				virtual_text = true,
-				underline = false,
-                update_in_insert = false,
+				underline = true,
+				update_in_insert = false,
 				float = {
 					header = "Diagnostics",
 					border = "rounded",
@@ -350,12 +362,12 @@ return {
 						diagnostics = {
 							globals = { "vim" },
 						},
-                        completion = {
-                            autoRequire = true
-                        },
-                        hint = {
-                            enable = true
-                        },
+						completion = {
+							autoRequire = true,
+						},
+						hint = {
+							enable = true,
+						},
 						workspace = {
 							library = {
 								vim.env.VIMRUNTIME,
