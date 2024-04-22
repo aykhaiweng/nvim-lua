@@ -55,7 +55,7 @@ return {
 					{
 						title = "Outline",
 						ft = "Outline",
-						pinned = true,
+						pinned = false,
 						open = function()
 							vim.cmd("OutlineOpen")
 						end,
