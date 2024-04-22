@@ -63,19 +63,25 @@ vim.keymap.set("n", "Q", "<nop>", { desc = "DISABLED" })
 -- Imba substitute command
 vim.keymap.set(
 	"n",
-	"<leader>es",
+	"<leader>er",
 	[[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
 	{ desc = "Substitute word under cursor" }
 )
 vim.keymap.set(
 	"v",
-	"<leader>es",
+	"<leader>er",
 	[[:s/<C-r><C-w>/<C-r><C-w>/gI<Left><Left><Left>]],
-	{ desc = "Make substitution under selection" }
+	{ desc = "Substitute word under cursor, limited to selection" }
 )
+-- vim.keymap.set(
+-- 	"v",
+-- 	"<leader>eS",
+-- 	[[:<C-u>]],
+-- 	{ desc = "Make substitution under selection" }
+-- )
 vim.keymap.set(
 	"v",
-	"<leader>eS",
+	"<leader>es",
 	[[:s/]],
 	{ desc = "Make substitution under selection" }
 )

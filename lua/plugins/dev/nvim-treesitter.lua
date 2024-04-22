@@ -57,4 +57,12 @@ return {
         "stsewd/sphinx.nvim",
         event = { "BufReadPre", "BufNewFile" }
     },
+    -- Fixing % motions
+    {
+        "yorickpeterse/nvim-tree-pairs",
+        event = { "BufReadPre", "BufNewFile" },
+        config = function(_, opts)
+            require('tree-pairs').setup(opts)
+        end
+    }
 }

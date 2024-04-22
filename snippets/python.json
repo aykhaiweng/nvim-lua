@@ -36,6 +36,11 @@
     "body": ["print(__import__('json').dumps(${0}, indent=4, default=str))"],
     "description": "Python docstring"
   },
+  "printa": {
+    "prefix": "printa",
+    "body": ["print(f\"${0} = {${0}}\")"],
+    "description": "Python docstring"
+  },
   "querysetmanager": {
     "prefix": "querysetmanager",
     "body": [

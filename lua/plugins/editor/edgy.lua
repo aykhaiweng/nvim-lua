@@ -82,22 +82,6 @@ return {
                     "tsplayground"
 				},
 				bottom = {
-					"help",
-					"gitcommit",
-					"toggleterm",
-					-- "terminal",
-					{
-						ft = "help",
-						size = { height = 20 },
-						-- only show help buffers
-						filter = function(buf)
-							return vim.bo[buf].buftype == "help"
-						end,
-					},
-					{
-						ft = "qf",
-						title = "QuickFix",
-					},
 				},
 				keys = {
 					-- increase width
@@ -140,7 +124,7 @@ return {
 			require("edgy").setup(opts)
 
 			vim.opt.laststatus = 3
-			vim.opt.splitkeep = "screen"
+			-- vim.opt.splitkeep = "screen"
 		end,
 	},
 }
