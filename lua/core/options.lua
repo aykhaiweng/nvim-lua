@@ -47,7 +47,7 @@ vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir/"
 vim.opt.undofile = true
 
 -- search hightlighting
-vim.opt.hlsearch = false
+vim.opt.hlsearch = true
 vim.opt.incsearch = true
 -- search behaviour
 vim.opt.ignorecase = true
@@ -57,11 +57,14 @@ vim.opt.smartcase = true
 vim.opt.termguicolors = true
 
 -- scrolloff
-vim.opt.scrolloff = 10
-vim.opt.sidescrolloff = 10
+vim.opt.scrolloff = 20
+vim.opt.sidescrolloff = 20
 
 -- sign column
 vim.opt.signcolumn = "yes"
+
+-- I can't remember what this is for but it's in all my configs
+-- so here it is.
 vim.opt.isfname:append("@-@")
 
 -- updatetime

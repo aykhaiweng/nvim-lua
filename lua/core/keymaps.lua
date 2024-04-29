@@ -73,12 +73,6 @@ vim.keymap.set(
 	[[:s/<C-r><C-w>/<C-r><C-w>/gI<Left><Left><Left>]],
 	{ desc = "Substitute word under cursor, limited to selection" }
 )
--- vim.keymap.set(
--- 	"v",
--- 	"<leader>eS",
--- 	[[:<C-u>]],
--- 	{ desc = "Make substitution under selection" }
--- )
 vim.keymap.set(
 	"v",
 	"<leader>es",

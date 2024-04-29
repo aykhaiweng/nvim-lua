@@ -47,18 +47,31 @@ return {
 							WinSeparator = { bg = c.mantle, fg = c.mantle },
                             -- Outline
 							OutlineCurrent = { bg = c.surface0, fg = c.yellow, style = { "italic" } },
-							-- -- Sign Column
-							-- SignColumn = { bg = c.mantle },
-							-- SignColumnSB = { bg = c.mantle },
-							-- LineNr = { bg = c.mantle },
-							-- -- Barbecue
+                            TreesitterContext = { bg = c.mantle, style = {} },
+                            TreesitterContextLineNumber = { bg = c.mantle, style = {} },
+                            TreesitterContextBottom = { bg = c.mantle, style = {} },
+                            TreesitterContextLineNumberBottom = { bg = c.mantle, style = {} },
+                            -- GitSigns
+							GitSignsAdd = { bg = c.mantle },
+							GitSignsChange = { bg = c.mantle },
+							GitSignsDelete = { bg = c.mantle },
+							-- Sign Column
+							SignColumn = { bg = c.mantle },
+							SignColumnSB = { bg = c.mantle },
+							LineNr = { bg = c.mantle },
+                            CursorLineNr = { fg = c.foreground },
+							-- Barbecue
 							barbecue_normal = { bg = c.mantle },
-							-- -- Trouble
-							-- TroubleNormal = { bg = c.mantle },
-							-- -- Indent Scope
-							-- MiniIndentscopeSymbol = { fg = c.flamingo },
-							-- -- Outline
-							-- OutlineNormal = { bg = c.mantle }
+                            -- Telescope
+                            TelescopeNormal = { bg = c.mantle },  -- Generally the backgrounds
+                            TelescopeBorder = { bg = c.mantle, fg = c.mantle },  -- All the borders
+                            TelescopePromptTitle = { bg = c.pink, fg = c.mantle },
+                            TelescopePromptNormal = { bg = c.base },
+                            TelescopePromptPrefix = { bg = c.base },
+                            TelescopePromptBorder = { bg = c.base, fg = c.base },
+                            TelescopeResultsTitle = { bg = c.green, fg = c.mantle },
+                            TelescopePreviewTitle = { bg = c.blue, fg = c.mantle },
+                            TelescopePreviewNormal = { bg = c.background },
 						}
 					end,
 				},

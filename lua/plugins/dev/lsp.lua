@@ -210,11 +210,6 @@ return {
 						name = "path",
 						option = { use_show_condition = true },
 						trigger_characters = { "/" },
-						entry_filter = function(entry, ctx)
-							local context = require("cmp.config.context")
-							local show = custom_capture(context.in_treesitter_capture, "string", "comments")
-							return show
-						end,
 					}, -- Show paths in completion
 					{ name = "nvim-lua" },
 				},

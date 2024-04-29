@@ -68,17 +68,25 @@ return {
                             ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
 						},
 					},
-                    -- sorting_strategy = "ascending",
+                    sorting_strategy = "ascending",
                     selection_strategy = "closest",
-                    layout_strategy = "vertical",
+                    -- layout_strategy = "vertical",
 					layout_config = {
                         vertical = {
-                            -- prompt_position = "top",
+                            prompt_position = "top",
                             width = {
                                 0.6,
                                 max = 120
                             }
-                        }
+                        },
+                        horizontal = {
+                            prompt_position = "top",
+                            width = {
+                                0.8,
+                                max = 160,
+                            },
+                        },
+                        preview_cutoff = 10
 					},
 				},
 				pickers = {
