@@ -311,7 +311,7 @@ return {
 				update_in_insert = false,
 				float = {
 					header = "Diagnostics",
-					border = "rounded",
+					border = "none",  -- bordered
 					source = true,
 					focusable = true,
 				},

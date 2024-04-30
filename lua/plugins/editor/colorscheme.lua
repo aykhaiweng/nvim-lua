@@ -61,7 +61,7 @@ return {
 							LineNr = { bg = c.mantle },
                             CursorLineNr = { fg = c.foreground },
 							-- Barbecue
-							barbecue_normal = { bg = c.mantle },
+							barbecue_normal = { bg = c.crust },
                             -- Telescope
                             TelescopeNormal = { bg = c.mantle },  -- Generally the backgrounds
                             TelescopeBorder = { bg = c.mantle, fg = c.mantle },  -- All the borders

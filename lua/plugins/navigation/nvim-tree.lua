@@ -27,7 +27,7 @@ return {
 		renderer = {
 			indent_width = 4,
 			indent_markers = {
-				enable = true,
+				enable = false,
 			},
 			highlight_diagnostics = "name",
 			highlight_git = "name",
