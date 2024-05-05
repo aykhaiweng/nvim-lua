@@ -9,6 +9,11 @@ return {
             --         "CursorHold",
             --     },
             -- },
+            outline_window = {
+                width = 45,
+                relative_width = false,
+                winhl = "Normal:NvimTreeNormal"
+            },
             symbol_folding = {
                 autofold_depth = 1,
                 auto_unfold = {

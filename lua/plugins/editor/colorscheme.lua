@@ -40,11 +40,15 @@ return {
 				highlight_overrides = {
 					mocha = function(c)
 						return {
+                            --- NATIVE
 							Cursor = { bg = c.foreground, fg = c.mantle },
-							LspSignatureActiveParameter = { bg = c.surface0, fg = c.yellow },
-							LspInlayHint = { bg = c.crust, style = { "italic" } },
+							NormalFloat = { bg = c.mantle },
 							-- Borders
 							WinSeparator = { bg = c.mantle, fg = c.mantle },
+                            -- LSP Stuff
+							LspSignatureActiveParameter = { bg = c.surface0, fg = c.yellow },
+							LspInlayHint = { bg = c.crust, style = { "italic" } },
+                            --- PLUGINS
                             -- Outline
 							OutlineCurrent = { bg = c.surface0, fg = c.yellow, style = { "italic" } },
                             TreesitterContext = { bg = c.mantle, style = {} },
@@ -60,6 +64,8 @@ return {
 							SignColumnSB = { bg = c.mantle },
 							LineNr = { bg = c.mantle },
                             CursorLineNr = { fg = c.foreground },
+                            -- NvimTree
+                            -- NvimTreeNormal = { bg = c.crust },
 							-- Barbecue
 							barbecue_normal = { bg = c.crust },
                             -- Telescope

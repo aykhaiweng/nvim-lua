@@ -18,8 +18,8 @@ return {
 		view = {
 			centralize_selection = true,
 			width = {
-				min = 30,
-				max = 45,
+				min = 45,
+                max = 60,
 				padding = 2,
 			},
 			signcolumn = "auto",
