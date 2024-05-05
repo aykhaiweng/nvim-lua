@@ -2,6 +2,7 @@ return {
 	{
 		"folke/edgy.nvim",
 		event = { "BufReadPre", "BufNewFile" },
+        enabled = false,
 		keys = {
 			{
 				"<leader>we",
