@@ -119,23 +119,23 @@ return {
 			},
 		},
 		config = function()
-			-- Config defaults
+			--- Config defaults
 			local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
-			lsp_capabilities.semanticTokensProvider = false
+			lsp_capabilities.semanticTokensProvider = true
 			local default_setup = function(server)
 				require("lspconfig")[server].setup({
 					capabilities = lsp_capabilities,
 				})
 			end
 
-			-- Snippets
+			--- Snippets
 			-- loads vscode style snippets from installed plugins (e.g. friendly-snippets)
 			require("luasnip.loaders.from_vscode").lazy_load()
 			-- load custom snippets
 			require("luasnip.loaders.from_vscode").lazy_load({ paths = { "~/.config/nvim/snippets" } })
 			require("luasnip.loaders.from_vscode").load({ paths = { "./snippets" } })
 
-			-- Mason setup
+			--- Mason setup
 			require("mason").setup({})
 			require("mason-lspconfig").setup({
 				ensure_installed = {
@@ -146,7 +146,7 @@ return {
 				},
 			})
 
-			-- CMP setup
+			--- CMP setup
 			local cmp = require("cmp")
 			cmp.setup({
 				completion = {
@@ -304,21 +304,21 @@ return {
 				},
 			})
 
-			-- Diagnostics
+			--- Diagnostics
 			vim.diagnostic.config({
 				virtual_text = true,
 				underline = true,
 				update_in_insert = false,
 				float = {
 					header = "Diagnostics",
-					border = "none",  -- bordered
+					border = "none", -- bordered
 					source = true,
 					focusable = true,
 				},
 				severity_sort = true,
 			})
 
-			-- Command Line and Searching shit
+			--- Command Line and Searching shit
 			cmp.setup.cmdline("/", {
 				mapping = cmp.mapping.preset.cmdline(),
 				completion = {
@@ -345,7 +345,16 @@ return {
 				}),
 			})
 
-			-- LS setup
+			--- Navic
+            -- require("lspconfig").lua_ls.setup({
+            --     on_attach = function(client, bufnr)
+            --         if client.service_capabilities.documentSymbolProvider then
+            --             require("nvim-navic").attach(client, bufnr)
+            --         end
+            --     end,
+            -- })
+
+			--- LS setup
 			-- lua_ls
 			require("lspconfig").lua_ls.setup({
 				capabilities = lsp_capabilities,
@@ -371,21 +380,6 @@ return {
 					},
 				},
 			})
-			-- pylsp
-			-- require("lspconfig").pylsp.setup({
-			-- 	settings = {
-			-- 		-- configure plugins in pylsp
-			-- 		pylsp = {
-			-- 			plugins = {
-			-- 				pycodestyle = { enabled = false },
-			-- 				pyflakes = { enabled = false },
-			-- 				pylint = { enabled = false },
-			-- 				flake8 = { enabled = false },
-			-- 				mccabe = { enabled = false },
-			-- 			},
-			-- 		},
-			-- 	},
-			-- })
 			-- basedpyright
 			require("lspconfig").basedpyright.setup({
 				settings = {

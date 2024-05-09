@@ -47,9 +47,10 @@ return {
 			vim.opt.foldlevel = 99
 		end,
 	},
-	-- Playground
+	-- Treesitter Context
 	{
 		"nvim-treesitter/nvim-treesitter-context",
+		enabled = false,
 		event = { "BufReadPre", "BufNewFile" },
 	},
 	-- Playground

@@ -2,7 +2,6 @@ return {
 	{
 		"folke/edgy.nvim",
 		event = { "BufReadPre", "BufNewFile" },
-        enabled = false,
 		keys = {
 			{
 				"<leader>we",
@@ -39,10 +38,10 @@ return {
 				},
 				left = {
 					{
-						title = "Diagnostics",
-						ft = "Trouble",
+						title = "Undotree",
+						ft = "undotree",
 						pinned = false,
-						size = { height = 0.3 },
+						size = { height = 0.5 },
 					},
 					{
 						title = "Files",
@@ -64,23 +63,6 @@ return {
 					},
 				},
 				right = {
-					{
-						title = "Fugitive",
-						ft = "fugitive",
-						pinned = false,
-						open = function()
-							vim.cmd("Git")
-						end,
-						size = { height = 0.5 },
-					},
-					{
-						title = "Undotree",
-						ft = "undotree",
-						pinned = false,
-						size = { height = 0.5 },
-					},
-                    "diff",
-                    "tsplayground"
 				},
 				bottom = {
 				},

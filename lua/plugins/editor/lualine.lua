@@ -1,25 +1,20 @@
 return {
-	-- {
-	--     'linrongbin16/lsp-progress.nvim',
-	--     cmd = { "LspInfo", "LspInstall", "LspStart" },
-	--     event = { "BufReadPre", "BufNewFile" },
-	--     init = function()
-	--         -- listen lsp-progress event and refresh lualine
-	--         vim.api.nvim_create_augroup("lualine_augroup", { clear = true })
-	--         vim.api.nvim_create_autocmd("User", {
-	--             group = "lualine_augroup",
-	--             pattern = "LspProgressStatusUpdated",
-	--             callback = require("lualine").refresh,
-	--         })
-	--     end,
-	--     config = function()
-	--         require('lsp-progress').setup()
-	--     end
-	-- },
 	{
 		"nvim-lualine/lualine.nvim",
 		dependencies = {
 			"nvim-tree/nvim-web-devicons",
+			{
+				"SmiteshP/nvim-navic",
+				opts = {
+					lazy_update_context = false,
+					lsp = {
+						auto_attach = true,
+					},
+				},
+				config = function(_, opts)
+					require("nvim-navic").setup(opts)
+				end,
+			},
 		},
 		lazy = false,
 		opts = function()
@@ -37,35 +32,6 @@ return {
 				"tsplayground",
 				"toggleterm",
 			}
-
-			local colors = {
-				blue = "#80a0ff",
-				cyan = "#79dac8",
-				black = "#080808",
-				white = "#c6c6c6",
-				red = "#ff5189",
-				violet = "#d183e8",
-				grey = "#303030",
-			}
-
-			local bubbles_theme = {
-				normal = {
-					a = { fg = colors.black, bg = colors.violet },
-					b = { fg = colors.white, bg = colors.grey },
-					c = { fg = colors.white },
-				},
-
-				insert = { a = { fg = colors.black, bg = colors.blue } },
-				visual = { a = { fg = colors.black, bg = colors.cyan } },
-				replace = { a = { fg = colors.black, bg = colors.red } },
-
-				inactive = {
-					a = { fg = colors.white, bg = colors.black },
-					b = { fg = colors.white, bg = colors.black },
-					c = { fg = colors.white },
-				},
-			}
-
 			return {
 				options = {
 					icons_enabled = true,
@@ -85,14 +51,24 @@ return {
 				},
 				sections = {
 					lualine_a = {
-                        { "mode", separator = { left = "" }, right_padding = 2 },
-                    },
+						{ "mode", separator = { left = "" }, right_padding = 2 },
+					},
 					lualine_b = { "branch", "diff", "diagnostics" },
-					lualine_c = { "filename" },
+					lualine_c = {
+						"filename",
+						{
+							function()
+								return require("nvim-navic").get_location()
+							end,
+							cond = function()
+								return package.loaded["nvim-navic"] and require("nvim-navic").is_available()
+							end,
+						},
+					},
 					lualine_x = {},
 					lualine_y = { { "encoding", "fileformat" }, "filetype" },
 					lualine_z = {
-                        "location",
+						"location",
 						{ "progress", separator = { right = "" }, left_padding = 2 },
 					},
 				},
@@ -104,10 +80,62 @@ return {
 					lualine_y = {},
 					lualine_z = {},
 				},
-				tabline = {},
-				winbar = {},
-				inactive_winbar = {},
-				extensions = {},
+				tabline = {
+					lualine_b = {
+						{
+							"tabs",
+							tab_max_length = 40, -- Maximum width of each tab. The content will be shorten dynamically (example: apple/orange -> a/orange)
+							max_length = vim.o.columns / 3, -- Maximum width of tabs component.
+							-- Note:
+							-- It can also be a function that returns
+							-- the value of `max_length` dynamically.
+							mode = 0, -- 0: Shows tab_nr
+							-- 1: Shows tab_name
+							-- 2: Shows tab_nr + tab_name
+
+							path = 1, -- 0: just shows the filename
+							-- 1: shows the relative path and shorten $HOME to ~
+							-- 2: shows the full path
+							-- 3: shows the full path and shorten $HOME to ~
+
+							-- Automatically updates active tab color to match color of other components (will be overidden if buffers_color is set)
+							use_mode_colors = false,
+							show_modified_status = true, -- Shows a symbol next to the tab name if the file has been modified.
+							symbols = {
+								modified = "[+]", -- Text to show when the file is modified.
+							},
+						},
+					},
+					lualine_y = { "buffers" },
+				},
+				winbar = {
+					lualine_b = {
+						{
+							"filename",
+							file_status = true,
+							newfile_status = true,
+							path = 1,
+						},
+					},
+					lualine_c = {
+						{ "diagnostics" },
+					},
+					extensions = {},
+				},
+				inactive_winbar = {
+					lualine_a = {
+						{
+							"filename",
+							file_status = true,
+							newfile_status = true,
+							path = 1,
+						},
+					},
+					lualine_b = {
+						{ "diagnostics" },
+					},
+					extensions = {},
+				},
 			}
 		end,
 		config = function(_, opts)
@@ -116,7 +144,8 @@ return {
 			-- vim options
 			vim.cmd("set noshowmode")
 			vim.cmd("set showcmd")
-			vim.o.laststatus = 1 -- 3 to span across
+			vim.opt.laststatus = 1 -- 3 to span across
+			vim.opt.showtabline = 2
 		end,
 	},
 }

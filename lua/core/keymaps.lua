@@ -46,14 +46,15 @@ vim.keymap.set("x", "P", '"_dP', { desc = "Paste without overriding default regi
 vim.keymap.set("v", "P", '"_dP', { desc = "Visual paste without overriding the register" })
 -- This will yank into the system clipboard, useful when
 -- separating the vim and system clipboards
-vim.keymap.set("v", "Y", '"+y', { desc = "Yank to system clipboard" })
-vim.keymap.set("n", "Y", '"+Y', { desc = "Yank to system clipboard" })
+vim.keymap.set("v", "<leader>y", '"+y', { desc = "Yank to system clipboard" })
+vim.keymap.set("n", "<leader>y", '"+Y', { desc = "Yank to system clipboard" })
+
 -- Same as above but for cutting
-vim.keymap.set("n", "D", '"_d', { desc = "Delete to empty register" })
-vim.keymap.set("v", "D", '"_d', { desc = "Delete to empty register" })
+vim.keymap.set("n", "<leader>d", '"_d', { desc = "Delete to empty register" })
+vim.keymap.set("v", "<leader>d", '"_d', { desc = "Delete to empty register" })
 -- Same as above but for cutting
-vim.keymap.set("n", "X", '"_x', { desc = "Cut to empty register" })
-vim.keymap.set("v", "X", '"_x', { desc = "Cut to empty register" })
+vim.keymap.set("n", "<leader>x", '"_x', { desc = "Cut to empty register" })
+vim.keymap.set("v", "<leader>x", '"_x', { desc = "Cut to empty register" })
 
 -- Unbinding capital Q
 vim.keymap.set("n", "Q", "<nop>", { desc = "DISABLED" })

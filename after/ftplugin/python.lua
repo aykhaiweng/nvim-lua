@@ -30,3 +30,5 @@ end
 vim.api.nvim_create_user_command("PythonModulePath", get_python_module_path, {})
 
 vim.keymap.set("n", "<leader>ym", "<cmd>PythonModulePath<CR>", { desc = "Yank the current python module path to system clipboard" })
+
+vim.opt.colorcolumn="99"

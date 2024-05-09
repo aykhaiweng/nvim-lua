@@ -19,7 +19,7 @@ return {
 			centralize_selection = true,
 			width = {
 				min = 45,
-                max = 60,
+                max = 45,
 				padding = 2,
 			},
 			signcolumn = "auto",
