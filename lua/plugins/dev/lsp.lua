@@ -135,7 +135,7 @@ return {
 			require("luasnip.loaders.from_vscode").lazy_load({ paths = { "~/.config/nvim/snippets" } })
 			require("luasnip.loaders.from_vscode").load({ paths = { "./snippets" } })
 
-			--- Mason setup
+			--- Mason setup --- MUST BE BEFORE CMP AND NVIM-LSPCONFIG
 			require("mason").setup({})
 			require("mason-lspconfig").setup({
 				ensure_installed = {

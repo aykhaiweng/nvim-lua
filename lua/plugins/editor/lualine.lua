@@ -106,7 +106,7 @@ return {
 							},
 						},
 					},
-					lualine_y = { "buffers" },
+					-- lualine_y = { "buffers" },
 				},
 				winbar = {
 					lualine_b = {
@@ -115,6 +115,7 @@ return {
 							file_status = true,
 							newfile_status = true,
 							path = 1,
+                            shorting_target = 60,
 						},
 					},
 					lualine_c = {

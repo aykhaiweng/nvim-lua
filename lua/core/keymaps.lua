@@ -4,6 +4,8 @@
 -- Bind C-c to <Esc>
 vim.keymap.set("i", "<C-c>", "<Esc>")
 vim.keymap.set("v", "<C-c>", "<Esc>")
+-- Unbinding capital Q
+vim.keymap.set("n", "Q", "<nop>", { desc = "DISABLED" })
 
 -- tabs
 vim.keymap.set("n", "<leader>tj", vim.cmd.tabfirst, { desc = "Go to first tab" })
@@ -28,7 +30,7 @@ vim.keymap.set("i", "<M-k>", "<up>", { desc = "Cursor up" })
 vim.keymap.set("i", "<M-l>", "<right>", { desc = "Cursor right" })
 
 -- toggle hightlights
-vim.keymap.set("n", "<leader>F", [[:set hls!<CR>]], { desc = "Toggle highlights" })
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 -- visual line move -- It will automatically indent with =
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move selection up" })
@@ -56,21 +58,19 @@ vim.keymap.set("v", "<leader>d", '"_d', { desc = "Delete to empty register" })
 vim.keymap.set("n", "<leader>x", '"_x', { desc = "Cut to empty register" })
 vim.keymap.set("v", "<leader>x", '"_x', { desc = "Cut to empty register" })
 
--- Unbinding capital Q
-vim.keymap.set("n", "Q", "<nop>", { desc = "DISABLED" })
 -- tmux-sessionizer
 -- vim.keymap.set("n", "<leader>po", "<cmd>silent !tmux neww tms<CR>")
 
 -- Imba substitute command
 vim.keymap.set(
 	"n",
-	"<leader>er",
+	"<leader>ew",
 	[[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
 	{ desc = "Substitute word under cursor" }
 )
 vim.keymap.set(
 	"v",
-	"<leader>er",
+	"<leader>ew",
 	[[:s/<C-r><C-w>/<C-r><C-w>/gI<Left><Left><Left>]],
 	{ desc = "Substitute word under cursor, limited to selection" }
 )
