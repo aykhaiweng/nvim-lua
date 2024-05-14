@@ -51,7 +51,11 @@ return {
 				},
 				sections = {
 					lualine_a = {
-						{ "mode", separator = { left = "" }, right_padding = 2 },
+						{
+                            "mode",
+                            separator = { left = "", right = "" },
+                            right_padding = 2,
+                        },
 					},
 					lualine_b = {
                         {
@@ -80,7 +84,11 @@ return {
 					lualine_y = { { "encoding", "fileformat" }, "filetype" },
 					lualine_z = {
 						"location",
-						{ "progress", separator = { right = "" }, left_padding = 2 },
+						{
+                            "progress",
+                            separator = { right = "" },
+                            left_padding = 2,
+                        },
 					},
 				},
 				inactive_sections = {
@@ -119,21 +127,21 @@ return {
 					},
 					-- lualine_y = { "buffers" },
 				},
-				winbar = {
-					lualine_b = {
-						{
-							"filename",
-							file_status = true,
-							newfile_status = true,
-							path = 1,
-                            shorting_target = 60,
-						},
-					},
-					lualine_c = {
-						{ "diagnostics" },
-					},
-					extensions = {},
-				},
+				-- winbar = {
+				-- 	lualine_b = {
+				-- 		{
+				-- 			"filename",
+				-- 			file_status = true,
+				-- 			newfile_status = true,
+				-- 			path = 1,
+				--                         shorting_target = 60,
+				-- 		},
+				-- 	},
+				-- 	lualine_c = {
+				-- 		{ "diagnostics" },
+				-- 	},
+				-- 	extensions = {},
+				-- },
 				inactive_winbar = {
 					lualine_a = {
 						{
