@@ -7,27 +7,43 @@ return {
 			local starter = require("mini.starter")
 
 			local my_items = {
-				-- Telescope
+                -- Remote
 				{
-					name = "Find files",
-					action = [[lua require("telescope.builtin").find_files()]],
-					section = "Telescope",
+					section = "Remote",
+					name = "Start remote session",
+					action = [[:RemoteStart]],
 				},
 				{
+					section = "Remote",
+					name = "Show remote logs",
+					action = [[:RemoteLog]],
+				},
+				{
+					section = "Remote",
+					name = "Show remote info",
+					action = [[:RemoteInfo]],
+				},
+				-- Telescope
+				{
+					section = "Telescope",
+					name = "Find files",
+					action = [[lua require("telescope.builtin").find_files()]],
+				},
+				{
+					section = "Telescope",
 					name = "Find recent files",
 					action = [[lua require("telescope.builtin").oldfiles()]],
-					section = "Telescope",
 				},
 				-- Lazy
 				{
+					section = "Plugin Manager",
 					name = "Lazy",
 					action = [[:Lazy]],
-					section = "Plugin Manager",
 				},
 				{
+					section = "Plugin Manager",
 					name = "Update",
 					action = [[:Lazy update]],
-					section = "Plugin Manager",
 				},
 			}
 			starter.setup({

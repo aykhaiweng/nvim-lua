@@ -53,7 +53,18 @@ return {
 					lualine_a = {
 						{ "mode", separator = { left = "" }, right_padding = 2 },
 					},
-					lualine_b = { "branch", "diff", "diagnostics" },
+					lualine_b = {
+                        {
+                            function()
+                            return vim.g.remote_neovim_host and ("Remote: %s"):format(vim.uv.os_gethostname()) or ""
+                                end,
+                            padding = { right = 1, left = 1 },
+                            separator = { left = "", right = "" },
+                        },
+                        "branch",
+                        "diff",
+                        "diagnostics",
+                    },
 					lualine_c = {
 						"filename",
 						{
