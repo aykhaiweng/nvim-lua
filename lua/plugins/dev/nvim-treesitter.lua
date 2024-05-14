@@ -50,7 +50,6 @@ return {
 	-- Treesitter Context
 	{
 		"nvim-treesitter/nvim-treesitter-context",
-		enabled = false,
 		event = { "BufReadPre", "BufNewFile" },
 	},
 	-- Playground
