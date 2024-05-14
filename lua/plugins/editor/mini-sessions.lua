@@ -12,7 +12,7 @@ return {
 				autowrite = true,
 
 				-- Directory where global sessions are stored (use `''` to disable)
-				directory = "",
+                directory = vim.fn.stdpath("data") .. "/sessions",
 
 				-- File for local session (use `''` to disable)
 				file = "Session.vim",
