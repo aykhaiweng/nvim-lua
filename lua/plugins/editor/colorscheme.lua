@@ -59,6 +59,12 @@ return {
 							GitSignsAdd = { bg = c.mantle },
 							GitSignsChange = { bg = c.mantle },
 							GitSignsDelete = { bg = c.mantle },
+                            -- DiagnosticSign
+							DiagnosticSignOK = { bg = c.mantle },
+							DiagnosticSignHint = { bg = c.mantle },
+							DiagnosticSignInfo = { bg = c.mantle },
+							DiagnosticSignWarn = { bg = c.mantle },
+							DiagnosticSignError = { bg = c.mantle },
 							-- Sign Column
 							SignColumn = { bg = c.mantle },
 							SignColumnSB = { bg = c.mantle },
