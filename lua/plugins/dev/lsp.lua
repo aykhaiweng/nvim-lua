@@ -345,15 +345,6 @@ return {
 				}),
 			})
 
-			--- Navic
-            -- require("lspconfig").lua_ls.setup({
-            --     on_attach = function(client, bufnr)
-            --         if client.service_capabilities.documentSymbolProvider then
-            --             require("nvim-navic").attach(client, bufnr)
-            --         end
-            --     end,
-            -- })
-
 			--- LS setup
 			-- lua_ls
 			require("lspconfig").lua_ls.setup({
