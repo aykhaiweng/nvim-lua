@@ -30,6 +30,7 @@
   "noice.nvim": { "branch": "main", "commit": "09102ca2e9a3e9302119fdaf7a059a034e4a626d" },
   "nui.nvim": { "branch": "main", "commit": "a3597dc88b53489d3fddbddbbd13787355253bb0" },
   "nvim-cmp": { "branch": "main", "commit": "24122371810089d390847d8ba66325c1f1aa64c0" },
+  "nvim-dap-python": { "branch": "master", "commit": "3dffa58541d1f52c121fe58ced046268c838d802" },
   "nvim-lint": { "branch": "master", "commit": "f3bcc28ffccb768212247294acccc106e029fc3c" },
   "nvim-lspconfig": { "branch": "master", "commit": "94513a5b246cf32a8f87ca714af50911df63351c" },
   "nvim-navic": { "branch": "master", "commit": "8649f694d3e76ee10c19255dece6411c29206a54" },
@@ -39,6 +40,7 @@
   "outline.nvim": { "branch": "main", "commit": "dbd836893fb99cfc33119d7c4abbdb700210f54b" },
   "playground": { "branch": "master", "commit": "ba48c6a62a280eefb7c85725b0915e021a1a0749" },
   "plenary.nvim": { "branch": "master", "commit": "08e301982b9a057110ede7a735dd1b5285eb341f" },
+  "remote-nvim.nvim": { "branch": "main", "commit": "3c69fb3ec7c7eb18d6a85d9caafc2b416bab19e9" },
   "sphinx.nvim": { "branch": "master", "commit": "d4eceb35975d379c6b380111627c5d4531f77d08" },
   "telescope-fzf-native.nvim": { "branch": "main", "commit": "9ef21b2e6bb6ebeaf349a0781745549bbb870d27" },
   "telescope-live-grep-args.nvim": { "branch": "master", "commit": "20656efd7a0dbb4483290649c9671af14b0cfb0d" },
@@ -49,6 +51,7 @@
   "treesj": { "branch": "main", "commit": "e1e82ab4237619d342c7102c9f13d4b9833bfd39" },
   "trouble.nvim": { "branch": "main", "commit": "b9cf677f20bb2faa2dacfa870b084e568dca9572" },
   "undotree": { "branch": "master", "commit": "56c684a805fe948936cda0d1b19505b84ad7e065" },
+  "venv-selector.nvim": { "branch": "main", "commit": "9b1bfe5aea225853e14358f504c656d4af007035" },
   "vim-fugitive": { "branch": "master", "commit": "ce882460cf3db12e99f8bf579cbf99e331f6dd4f" },
   "which-key.nvim": { "branch": "main", "commit": "4433e5ec9a507e5097571ed55c02ea9658fb268a" },
   "zen-mode.nvim": { "branch": "main", "commit": "78557d972b4bfbb7488e17b5703d25164ae64e6a" }
