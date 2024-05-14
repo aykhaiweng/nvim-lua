@@ -45,6 +45,13 @@ return {
 					name = "Update",
 					action = [[:Lazy update]],
 				},
+				-- Sessions
+				{
+					section = "Sessions",
+					name = "Show sessions",
+					action = [[lua require("telescope.builtin").find_files()]],
+				}
+
 			}
 			starter.setup({
 				-- Whether to open starter buffer on VimEnter. Not opened if Neovim was
@@ -60,7 +67,7 @@ return {
 				-- - Array: elements of these three types (i.e. item, array, function).
 				-- If `nil` (default), default items will be used (see |mini.starter|).
 				items = {
-					starter.sections.sessions(5, true),
+					starter.sections.sessions(10, true),
 					starter.sections.builtin_actions(),
 					starter.sections.recent_files(10, true),
 					my_items,
