@@ -43,6 +43,7 @@ return {
                             --- NATIVE
 							Cursor = { bg = c.foreground, fg = c.mantle },
 							NormalFloat = { bg = c.mantle },
+                            NormalNC = { bg = c.mantle },
 							-- Borders
 							WinSeparator = { bg = c.mantle, fg = c.mantle },
                             -- LSP Stuff
@@ -71,7 +72,7 @@ return {
 							LineNr = { bg = c.mantle },
                             CursorLineNr = { fg = c.foreground },
                             -- NvimTree
-                            -- NvimTreeNormal = { bg = c.crust },
+                            NvimTreeNormal = { bg = c.crust },
 							-- Barbecue
 							barbecue_normal = { bg = c.crust },
                             -- Telescope

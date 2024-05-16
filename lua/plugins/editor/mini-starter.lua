@@ -7,7 +7,7 @@ return {
 			local starter = require("mini.starter")
 
 			local my_items = {
-                -- Remote
+				-- Remote
 				{
 					section = "Remote",
 					name = "Start remote session",
@@ -45,14 +45,14 @@ return {
 					name = "Update",
 					action = [[:Lazy update]],
 				},
-				-- Sessions
-				{
-					section = "Sessions",
-					name = "Show sessions",
-					action = [[lua require("telescope.builtin").find_files()]],
-				}
-
 			}
+
+			local items = {
+				starter.sections.sessions(5, true),
+				starter.sections.recent_files(10, true),
+				my_items,
+			}
+
 			starter.setup({
 				-- Whether to open starter buffer on VimEnter. Not opened if Neovim was
 				-- started with intent to show something else.
@@ -66,17 +66,12 @@ return {
 				-- - Function: should return one of these three categories.
 				-- - Array: elements of these three types (i.e. item, array, function).
 				-- If `nil` (default), default items will be used (see |mini.starter|).
-				items = {
-					starter.sections.sessions(10, true),
-					starter.sections.builtin_actions(),
-					starter.sections.recent_files(10, true),
-					my_items,
-				},
+				items = items,
 
 				-- Header to be displayed before items. Converted to single string via
 				-- `tostring` (use `\n` to display several lines). If function, it is
 				-- evaluated first. If `nil` (default), polite greeting will be used.
-				header = os.date(),
+				header = vim.fn.getcwd(),
 
 				-- Footer to be displayed after items. Converted to single string via
 				-- `tostring` (use `\n` to display several lines). If function, it is
