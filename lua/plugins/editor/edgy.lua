@@ -52,20 +52,19 @@ return {
 						end,
 						size = { height = 0.5 },
 					},
+				},
+				right = {
 					{
 						title = "Outline",
 						ft = "Outline",
-						pinned = false,
+						pinned = true,
 						open = function()
 							vim.cmd("OutlineOpen")
 						end,
 						size = { height = 0.6 },
 					},
 				},
-				right = {
-				},
-				bottom = {
-				},
+				bottom = {},
 				keys = {
 					-- increase width
 					["<c-Right>"] = function(win)
@@ -77,12 +76,12 @@ return {
 					end,
 					-- increase height
 					["<c-Up>"] = function(win)
-                        win:resize("height", 2)
-                    end,
+						win:resize("height", 2)
+					end,
 					-- decrease height
 					["<c-Down>"] = function(win)
-                        win:resize("height", -2)
-                    end,
+						win:resize("height", -2)
+					end,
 					-- increase width
 					["<M-L>"] = function(win)
 						win:resize("width", 2)
@@ -93,12 +92,12 @@ return {
 					end,
 					-- increase height
 					["<M-K>"] = function(win)
-                        win:resize("height", 2)
-                    end,
+						win:resize("height", 2)
+					end,
 					-- decrease height
 					["<M-J>"] = function(win)
-                        win:resize("height", -2)
-                    end,
+						win:resize("height", -2)
+					end,
 				},
 			}
 			return opts
