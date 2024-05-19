@@ -127,21 +127,21 @@ return {
 					},
 					-- lualine_y = { "buffers" },
 				},
-				-- winbar = {
-				-- 	lualine_b = {
-				-- 		{
-				-- 			"filename",
-				-- 			file_status = true,
-				-- 			newfile_status = true,
-				-- 			path = 1,
-				--                         shorting_target = 60,
-				-- 		},
-				-- 	},
-				-- 	lualine_c = {
-				-- 		{ "diagnostics" },
-				-- 	},
-				-- 	extensions = {},
-				-- },
+				winbar = {
+					lualine_a = {
+						{
+							"filename",
+							file_status = true,
+							newfile_status = true,
+							path = 1,
+				                        shorting_target = 60,
+						},
+					},
+					lualine_b = {
+						{ "diagnostics" },
+					},
+					extensions = {},
+				},
 				inactive_winbar = {
 					lualine_a = {
 						{

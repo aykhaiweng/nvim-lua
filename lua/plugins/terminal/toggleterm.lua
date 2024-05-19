@@ -9,37 +9,62 @@ return {
 		},
 		keys = function()
 			local Terminal = require("toggleterm.terminal").Terminal
-			local _cwd = vim.fn.getcwd()
-			local _cmd = string.format('tmuxattach _floaters %s zsh "source-file $HOME/.tmux-popup.conf"', _cwd)
-			local _projectTerminal = Terminal:new({
-				cmd = _cmd,
-				hidden = true,
-                size = 20,
+			local cwd = vim.fn.getcwd()
+
+			-- Project Terminal
+			local _project_terminal = Terminal:new({
+				cmd = string.format('tmuxattach _floaters %s zsh "source-file $HOME/.tmux-popup.conf"', cwd),
+				hidden = false,
+				size = 20,
 			})
 			function ProjectTerminal_toggle()
-				_projectTerminal:toggle()
+				_project_terminal:toggle()
 			end
 
-			return {
+			local keymaps = {
 				{
 					"<F5>",
 					"<cmd>lua ProjectTerminal_toggle()<cr>",
 					mode = { "n", "i", "t" },
 					desc = "Toggle Project Terminal",
 				},
-				-- {
-				-- 	"<F6>",
-				-- 	"<Cmd>exe v:count1 . 'ToggleTerm'<CR>",
-				-- 	mode = { "n", "i", "t" },
-				-- 	desc = "Toggle Project Terminal",
-				-- },
-				-- {
-				-- 	"<F7>",
-				-- 	"<Cmd>exe v:count1 2 'ToggleTerm'<CR>",
-				-- 	mode = { "n", "i", "t" },
-				-- 	desc = "Toggle Project Terminal",
-				-- },
 			}
+
+			if vim.g.neovide then
+				-- Lazygit
+				-- "tmuxattach _lazydocker \"${popup_id}\" lazydocker \"source-file $HOME/.tmux-popup.conf\" "; \
+
+				local _lazygit_terminal = Terminal:new({
+					cmd = string.format('tmuxattach _lazygit %s lazygit "source-file $HOME/.tmux-popup.conf"', cwd),
+					hidden = false,
+					size = 20,
+				})
+				function LazygitTerminal_toggle()
+					_lazygit_terminal:toggle()
+				end
+				-- Lazydocker
+				local _lazydocker_terminal = Terminal:new({
+					cmd = string.format('tmuxattach _lazydocker %s lazydocker "source-file $HOME/.tmux-popup.conf"', cwd),
+					hidden = false,
+					size = 20,
+				})
+				function LazydockerTerminal_toggle()
+					_lazydocker_terminal:toggle()
+				end
+				keymaps.insert({
+					"<F2>",
+					"<cmd>lua LazygitTerminal_toggle()<cr>",
+					mode = { "n", "i", "t" },
+					desc = "Toggle Lazygit",
+				}, {
+					"<F3>",
+					"<cmd>lua LazydockerTerminal_toggle()<cr>",
+					mode = { "n", "i", "t" },
+					desc = "Toggle Lazydocker",
+				})
+			end
+
+			return keymaps
 		end,
 		config = function(_, opts)
 			require("toggleterm").setup(opts)

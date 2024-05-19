@@ -39,6 +39,7 @@ return {
 				custom_higlights = {},
 				highlight_overrides = {
 					mocha = function(c)
+                        local sign_column_background = c.crust
 						return {
                             --- NATIVE
 							Cursor = { bg = c.foreground, fg = c.mantle },
@@ -49,28 +50,30 @@ return {
                             -- LSP Stuff
 							LspSignatureActiveParameter = { bg = c.surface0, fg = c.yellow },
 							LspInlayHint = { bg = c.crust, style = { "italic" } },
+                            -- LineNr
+                            SignColumn = { bg = sign_column_background },
+                            SignColumnSB = { bg = sign_column_background },
+                            CursorLineNr = { fg = c.foreground },
+                            LineNr = { bg = c.mantle },
                             --- PLUGINS
+                            -- Edgy stuff
+                            EdgyNormal = { bg = c.crust },
                             -- Outline
 							OutlineCurrent = { bg = c.surface0, fg = c.yellow, style = { "italic" } },
-                            TreesitterContext = { bg = c.mantle, style = {} },
-                            TreesitterContextLineNumber = { bg = c.mantle, style = {} },
-                            TreesitterContextBottom = { bg = c.mantle, style = {} },
-                            TreesitterContextLineNumberBottom = { bg = c.mantle, style = {} },
+                            TreesitterContext = { bg = c.crust, style = {} },
+                            TreesitterContextLineNumber = { bg = c.crust, style = {} },
+                            TreesitterContextBottom = { bg = c.crust, style = {} },
+                            TreesitterContextLineNumberBottom = { bg = c.crust, style = {} },
                             -- GitSigns
-							GitSignsAdd = { bg = c.mantle },
-							GitSignsChange = { bg = c.mantle },
-							GitSignsDelete = { bg = c.mantle },
+							GitSignsAdd = { bg = sign_column_background },
+							GitSignsChange = { bg = sign_column_background },
+							GitSignsDelete = { bg = sign_column_background },
                             -- DiagnosticSign
-							DiagnosticSignOK = { bg = c.mantle },
-							DiagnosticSignHint = { bg = c.mantle },
-							DiagnosticSignInfo = { bg = c.mantle },
-							DiagnosticSignWarn = { bg = c.mantle },
-							DiagnosticSignError = { bg = c.mantle },
-							-- Sign Column
-							SignColumn = { bg = c.mantle },
-							SignColumnSB = { bg = c.mantle },
-							LineNr = { bg = c.mantle },
-                            CursorLineNr = { fg = c.foreground },
+							DiagnosticSignOK = { bg = sign_column_background },
+							DiagnosticSignHint = { bg = sign_column_background },
+							DiagnosticSignInfo = { bg = sign_column_background },
+							DiagnosticSignWarn = { bg = sign_column_background },
+							DiagnosticSignError = { bg = sign_column_background },
                             -- NvimTree
                             NvimTreeNormal = { bg = c.crust },
 							-- Barbecue

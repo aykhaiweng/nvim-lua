@@ -17,11 +17,7 @@ return {
 		},
 		view = {
 			centralize_selection = true,
-			width = {
-				min = 45,
-                max = 45,
-				padding = 2,
-			},
+			width = 40,
 			signcolumn = "auto",
 		},
 		renderer = {

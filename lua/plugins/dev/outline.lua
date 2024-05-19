@@ -10,7 +10,7 @@ return {
             --     },
             -- },
             outline_window = {
-                width = 45,
+                width = 40,
                 relative_width = false,
                 winhl = "Normal:NvimTreeNormal"
             },

@@ -27,10 +27,10 @@ return {
 				},
 				options = {
 					left = {
-						size = 45,
+						size = 40,
 					},
 					right = {
-						size = 45,
+						size = 40,
 					},
 					bottom = {
 						size = 20,
