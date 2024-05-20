@@ -31,6 +31,8 @@ return {
 				"fugitiveblame",
 				"tsplayground",
 				"toggleterm",
+				"quickfixlist",
+				"loclist",
 			}
 			return {
 				options = {
@@ -52,23 +54,23 @@ return {
 				sections = {
 					lualine_a = {
 						{
-                            "mode",
-                            separator = { left = "", right = "" },
-                            right_padding = 2,
-                        },
+							"mode",
+							separator = { right = "" },
+							right_padding = 2,
+						},
 					},
 					lualine_b = {
-                        {
-                            function()
-                            return vim.g.remote_neovim_host and ("Remote: %s"):format(vim.uv.os_gethostname()) or ""
-                                end,
-                            padding = { right = 1, left = 1 },
-                            separator = { left = "", right = "" },
-                        },
-                        "branch",
-                        "diff",
-                        "diagnostics",
-                    },
+						{
+							function()
+								return vim.g.remote_neovim_host and ("Remote: %s"):format(vim.uv.os_gethostname()) or ""
+							end,
+							padding = { right = 1, left = 1 },
+							separator = { left = "", right = "" },
+						},
+						"branch",
+						"diff",
+						"diagnostics",
+					},
 					lualine_c = {
 						"filename",
 						{
@@ -85,10 +87,9 @@ return {
 					lualine_z = {
 						"location",
 						{
-                            "progress",
-                            separator = { right = "" },
-                            left_padding = 2,
-                        },
+							"progress",
+							left_padding = 2,
+						},
 					},
 				},
 				inactive_sections = {
@@ -134,7 +135,8 @@ return {
 							file_status = true,
 							newfile_status = true,
 							path = 1,
-				                        shorting_target = 60,
+							shorting_target = 60,
+							separator = { left = "", right = "" },
 						},
 					},
 					lualine_b = {
