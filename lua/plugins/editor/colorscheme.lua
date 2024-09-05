@@ -43,8 +43,8 @@ return {
 						return {
                             --- NATIVE
 							Cursor = { bg = c.foreground, fg = c.mantle },
-							NormalFloat = { bg = c.mantle },
-                            NormalNC = { bg = c.mantle },
+							-- NormalFloat = { bg = c.mantle },
+                            -- NormalNC = { bg = c.mantle },
 							-- Borders
 							WinSeparator = { bg = c.mantle, fg = c.mantle },
                             -- LSP Stuff

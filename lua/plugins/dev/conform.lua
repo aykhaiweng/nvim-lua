@@ -7,7 +7,7 @@ return {
 			{
 				"<leader>ff",
 				function()
-					conform.format({ lsp_fallback = true, async = true, timeout_ms = 2000 })
+					conform.format({timeout_ms = 3000})
 				end,
 				desc = "Conform in file or range (visual)",
 			},
@@ -27,14 +27,9 @@ return {
 			markdown = { "prettier" },
 			graphql = { "prettier" },
 			lua = { "stylua" },
-			python = function(bufnr)
-				if require("conform").get_formatter_info("ruff_format", bufnr).available then
-					return { "ruff_format" }
-				else
-					return { "isort", "black" }
-				end
-			end,
+			python = { "isort", "black" },
 		},
+		timeout_ms = 3000,
 	},
 	config = function(_, opts)
 		local conform = require("conform")

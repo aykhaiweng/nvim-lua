@@ -4,28 +4,27 @@ return {
 		event = { "BufReadPre", "BufNewFile" },
 		keys = {
 			{
-				"<leader>ll",
-				function()
-					require("trouble").toggle()
-				end,
+				"<leader>lD",
+				"<cmd>Trouble diagnostics toggle<cr>",
 				"n",
-				desc = "Open Location List",
+				desc = "Diagnostics (Trouble)",
 			},
 			{
 				"<leader>ld",
-				function()
-					require("trouble").toggle("document_diagnostics")
-				end,
-				"n",
-				desc = "Open Diagnostics",
+				"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+				desc = "Buffer Diagnostics (Trouble)",
 			},
 			{
-				"<leader>lD",
-				function()
-					require("trouble").toggle("workspace_diagnostics")
-				end,
+				"<leader>ll",
+				"<cmd>Trouble loclist toggle<cr>",
 				"n",
-				desc = "Open Workspace Diagnostics",
+				desc = "Location List (Trouble)",
+			},
+			{
+				"<leader>lq",
+				"<cmd>Trouble qflist toggle<cr>",
+				"n",
+				desc = "Quickfix List (Trouble)",
 			},
 		},
 		cmd = { "Trouble" },
