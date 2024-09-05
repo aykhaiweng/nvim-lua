@@ -1,3 +1,4 @@
+--- Filebrowser
 return {
 	"nvim-tree/nvim-tree.lua",
 	version = "*",

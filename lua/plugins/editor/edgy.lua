@@ -52,8 +52,6 @@ return {
 						end,
 						size = { height = 0.5 },
 					},
-				},
-				right = {
 					{
 						title = "Outline",
 						ft = "Outline",
@@ -61,9 +59,10 @@ return {
 						open = function()
 							vim.cmd("OutlineOpen")
 						end,
-						size = { height = 0.6 },
+						size = { height = 0.5 },
 					},
 				},
+				right = {},
 				bottom = {},
 				keys = {
 					-- increase width

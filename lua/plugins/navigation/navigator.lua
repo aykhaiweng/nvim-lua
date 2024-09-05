@@ -1,3 +1,4 @@
+--- Navigation for TMUX
 return {
 	{
 		"numToStr/Navigator.nvim",

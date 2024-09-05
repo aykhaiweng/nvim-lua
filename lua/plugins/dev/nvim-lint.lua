@@ -1,3 +1,4 @@
+--- Linting
 return {
 	"mfussenegger/nvim-lint",
 	lazy = true,
@@ -50,7 +51,7 @@ return {
 			javascriptreact = { "eslint_d" },
 			typescriptreact = { "eslint_d" },
 			svelte = { "eslint_d" },
-			python = { "flake8" },
+			python = { "ruff" },
 			json = { "jsonlint" },
 		}
 	end,
