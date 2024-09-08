@@ -8,7 +8,7 @@ return {
 			{
 				"<leader>ff",
 				function()
-					conform.format({timeout_ms = 3000})
+					conform.format({ timeout_ms = 3000 })
 				end,
 				desc = "Conform in file or range (visual)",
 			},
@@ -23,13 +23,17 @@ return {
 			svelte = { "prettierd" },
 			css = { "prettierd" },
 			html = { "prettierd" },
-            htmldjango = { "djlint" },
+			htmldjango = { "djlint" },
 			json = { "prettierd" },
 			yaml = { "prettierd" },
 			markdown = { "prettierd" },
 			graphql = { "prettierd" },
 			lua = { "stylua" },
-			python = { "ruff" },
+			python = {
+				"ruff_fix",
+				"ruff_format",
+				"ruff_organize_imports",
+			},
 		},
 		timeout_ms = 3000,
 	},
