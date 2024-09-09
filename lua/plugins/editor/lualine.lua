@@ -34,10 +34,16 @@ return {
 				"quickfixlist",
 				"loclist",
 			}
+			--          local section_separators = { left = '', right = '' }
+			-- local alt_section_separators = { left = "", right = "" }
+            local alt_section_separators = { left = '', right = '' }
+			local section_separators = { left = "", right = "" }
+            -- local section_separators = { left = '', right = '' }
 			return {
 				options = {
 					icons_enabled = true,
-					section_separators = { left = "", right = "" },
+					section_separators = { left = section_separators.right, right = section_separators.left },
+                    component_separators = "",
 					disabled_filetypes = {
 						statusline = disabled_filetypes,
 						winbar = disabled_filetypes,
@@ -55,7 +61,7 @@ return {
 					lualine_a = {
 						{
 							"mode",
-							separator = { right = "" },
+							separator = { right = section_separators.right },
 							right_padding = 2,
 						},
 					},
@@ -65,7 +71,7 @@ return {
 								return vim.g.remote_neovim_host and ("Remote: %s"):format(vim.uv.os_gethostname()) or ""
 							end,
 							padding = { right = 1, left = 1 },
-							separator = { left = "", right = "" },
+							separator = { left = section_separators.left, right = section_separators.right },
 						},
 						"branch",
 						"diff",
@@ -100,34 +106,7 @@ return {
 					lualine_y = {},
 					lualine_z = {},
 				},
-				tabline = {
-					lualine_b = {
-						{
-							"tabs",
-							tab_max_length = 40, -- Maximum width of each tab. The content will be shorten dynamically (example: apple/orange -> a/orange)
-							max_length = vim.o.columns / 3, -- Maximum width of tabs component.
-							-- Note:
-							-- It can also be a function that returns
-							-- the value of `max_length` dynamically.
-							mode = 0, -- 0: Shows tab_nr
-							-- 1: Shows tab_name
-							-- 2: Shows tab_nr + tab_name
-
-							path = 1, -- 0: just shows the filename
-							-- 1: shows the relative path and shorten $HOME to ~
-							-- 2: shows the full path
-							-- 3: shows the full path and shorten $HOME to ~
-
-							-- Automatically updates active tab color to match color of other components (will be overidden if buffers_color is set)
-							use_mode_colors = false,
-							show_modified_status = true, -- Shows a symbol next to the tab name if the file has been modified.
-							symbols = {
-								modified = "[+]", -- Text to show when the file is modified.
-							},
-						},
-					},
-					-- lualine_y = { "buffers" },
-				},
+				tabline = {},
 				winbar = {
 					lualine_a = {
 						{
@@ -136,7 +115,7 @@ return {
 							newfile_status = true,
 							path = 1,
 							shorting_target = 60,
-							separator = { left = "", right = "" },
+							separator = { right = alt_section_separators.right },
 						},
 					},
 					lualine_b = {

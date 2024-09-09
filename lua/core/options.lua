@@ -5,7 +5,7 @@ vim.g.python3_host_prog = os.getenv("HOME") .. "/.pyenv/versions/neovim3/bin/pyt
 vim.opt.guicursor = ""
 
 -- Stop buffers from hiding
-vim.cmd([[ set nohidden ]])
+vim.cmd([[ set hidden ]])
 vim.cmd([[ set autoread ]])
 
 -- mouse
