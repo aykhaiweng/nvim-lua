@@ -36,14 +36,16 @@ return {
 			}
 			--          local section_separators = { left = '', right = '' }
 			-- local alt_section_separators = { left = "", right = "" }
-            local alt_section_separators = { left = '', right = '' }
-			local section_separators = { left = "", right = "" }
-            -- local section_separators = { left = '', right = '' }
+			local section_separators = { left = "", right = "" }
+			local alt_section_separators = { left = "", right = "" }
+			local sub_section_separators = { left = "", right = "" }
+			-- local sub_section_separators = { left = "", right = "" }
+			-- local section_separators = { left = '', right = '' }
 			return {
 				options = {
 					icons_enabled = true,
 					section_separators = { left = section_separators.right, right = section_separators.left },
-                    component_separators = "",
+					component_separators = { left = sub_section_separators.right, right = sub_section_separators.left },
 					disabled_filetypes = {
 						statusline = disabled_filetypes,
 						winbar = disabled_filetypes,
@@ -92,10 +94,7 @@ return {
 					lualine_y = { { "encoding", "fileformat" }, "filetype" },
 					lualine_z = {
 						"location",
-						{
-							"progress",
-							left_padding = 2,
-						},
+						"progress",
 					},
 				},
 				inactive_sections = {
@@ -106,7 +105,17 @@ return {
 					lualine_y = {},
 					lualine_z = {},
 				},
-				tabline = {},
+				tabline = {
+					lualine_a = {
+						{
+							"tabs",
+                            mode = 0,
+                            path = 1,
+							separator = { right = alt_section_separators.right },
+							component_separator = { right = alt_section_separators.right },
+						},
+					},
+				},
 				winbar = {
 					lualine_a = {
 						{
@@ -119,7 +128,10 @@ return {
 						},
 					},
 					lualine_b = {
-						{ "diagnostics" },
+						{
+							"diagnostics",
+							separator = { right = alt_section_separators.right },
+						},
 					},
 					extensions = {},
 				},

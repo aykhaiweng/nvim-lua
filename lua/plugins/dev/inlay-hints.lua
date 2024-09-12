@@ -6,8 +6,11 @@ return {
 		keys = {
 			{ "<leader>vh", "<CMD>InlayHintsToggle<cr>", desc = "Toggle Inlay Hints" },
 		},
-		config = function()
-			require("inlay-hints").setup()
+        opts = {
+            autocmd = { enable = false }
+        },
+		config = function(_, opts)
+			require("inlay-hints").setup(opts)
 		end,
 	},
 }

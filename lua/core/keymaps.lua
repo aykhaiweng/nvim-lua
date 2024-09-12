@@ -8,11 +8,11 @@ vim.keymap.set("v", "<C-c>", "<Esc>")
 vim.keymap.set("n", "Q", "<nop>", { desc = "DISABLED" })
 
 -- tabs
+vim.keymap.set("n", "<leader>ta", vim.cmd.tabnew, { desc = "Open new tab" })
 vim.keymap.set("n", "<leader>tj", vim.cmd.tabfirst, { desc = "Go to first tab" })
 vim.keymap.set("n", "<leader>tl", vim.cmd.tabnext, { desc = "Go to tab on right" })
 vim.keymap.set("n", "<leader>th", vim.cmd.tabprev, { desc = "Go to tab on the left" })
 vim.keymap.set("n", "<leader>tk", vim.cmd.tablast, { desc = "Go to last tab" })
-vim.keymap.set("n", "<leader>tn", vim.cmd.tabnew, { desc = "Open new tab" })
 vim.keymap.set("n", "<leader>tt", [[<C-w>T]], { desc = "Break out current file to new tab" })
 vim.keymap.set("n", "<leader>tm", ":tabm ", { desc = "Move tab to index" })
 vim.keymap.set("n", "<leader>tx", vim.cmd.tabclose, { desc = "Close tab" })
@@ -48,15 +48,12 @@ vim.keymap.set("x", "P", '"_dP', { desc = "Paste without overriding default regi
 vim.keymap.set("v", "P", '"_dP', { desc = "Visual paste without overriding the register" })
 -- This will yank into the system clipboard, useful when
 -- separating the vim and system clipboards
-vim.keymap.set("v", "<leader>y", '"+y', { desc = "Yank to system clipboard" })
-vim.keymap.set("n", "<leader>y", '"+Y', { desc = "Yank to system clipboard" })
-
--- Same as above but for cutting
-vim.keymap.set("n", "<leader>d", '"_d', { desc = "Delete to empty register" })
-vim.keymap.set("v", "<leader>d", '"_d', { desc = "Delete to empty register" })
--- Same as above but for cutting
-vim.keymap.set("n", "<leader>x", '"_x', { desc = "Cut to empty register" })
-vim.keymap.set("v", "<leader>x", '"_x', { desc = "Cut to empty register" })
+vim.keymap.set("v", "Y", '"+y', { desc = "Yank to system clipboard" })
+vim.keymap.set("n", "Y", '"+Y', { desc = "Yank to system clipboard" })
+-- Deletes to empty register
+vim.keymap.set("v", "D", '"_d', { desc = "Delete to empty register" })
+-- Cuts to empty register
+vim.keymap.set("v", "X", '"_x', { desc = "Cut to empty register" })
 
 -- tmux-sessionizer
 -- vim.keymap.set("n", "<leader>po", "<cmd>silent !tmux neww tms<CR>")
@@ -68,12 +65,12 @@ vim.keymap.set(
 	[[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
 	{ desc = "Substitute word under cursor" }
 )
-vim.keymap.set(
-	"v",
-	"<leader>ew",
-	[[:s/<C-r><C-w>/<C-r><C-w>/gI<Left><Left><Left>]],
-	{ desc = "Substitute word under cursor, limited to selection" }
-)
+-- vim.keymap.set(
+-- 	"v",
+-- 	"<leader>ew",
+-- 	[[:s/<C-r><C-w>/<C-r><C-w>/gI<Left><Left><Left>]],
+-- 	{ desc = "Substitute word under cursor, limited to selection" }
+-- )
 vim.keymap.set(
 	"v",
 	"<leader>es",
@@ -82,7 +79,7 @@ vim.keymap.set(
 )
 
 -- set breakpoints
-vim.keymap.set("n", "<leader>bp", vim.cmd.Break, { desc = "Create breakpoint under cursor" })
+-- vim.keymap.set("n", "<leader>bp", vim.cmd.Break, { desc = "Create breakpoint under cursor" })
 
 -- Folding
 vim.keymap.set("n", "<leader><space>", "za", { desc = "Toggle fold under cursor" })
