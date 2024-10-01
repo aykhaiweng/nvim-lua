@@ -75,7 +75,7 @@ local lsp_config = function()
 		},
 	}
 
-    --- Mason Setup
+	--- Mason Setup
 	local mason_lspconfig = require("mason-lspconfig")
 	local setup_server_handler = function(server_name)
 		if servers[server_name] == nil then
@@ -151,15 +151,6 @@ return {
 		dependencies = {
 			{
 				"SmiteshP/nvim-navic",
-				keys = {
-					{
-						"<C-s>",
-						function()
-							print(require("nvim-navic").get_location())
-						end,
-						desc = "Show current location",
-					},
-				},
 			},
 			{
 				"williamboman/mason.nvim",
@@ -169,10 +160,10 @@ return {
 					ensure_installed = {
 						"prettierd",
 						"stylua",
-                        "eslint_d",
-                        "jsonlint",
-                        "djlint",
-                        "ruff"
+						"eslint_d",
+						"jsonlint",
+						"djlint",
+						"ruff",
 					},
 				},
 				config = function(_, opts)
@@ -204,6 +195,6 @@ return {
 				enabled = true,
 			},
 		},
-        config = lsp_config
+		config = lsp_config,
 	},
 }

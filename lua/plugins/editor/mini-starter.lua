@@ -8,21 +8,21 @@ return {
 
 			local my_items = {
 				-- Remote
-				{
-					section = "Remote",
-					name = "Start remote session",
-					action = [[:RemoteStart]],
-				},
-				{
-					section = "Remote",
-					name = "Show remote logs",
-					action = [[:RemoteLog]],
-				},
-				{
-					section = "Remote",
-					name = "Show remote info",
-					action = [[:RemoteInfo]],
-				},
+				-- {
+				-- 	section = "Remote",
+				-- 	name = "Start remote session",
+				-- 	action = [[:RemoteStart]],
+				-- },
+				-- {
+				-- 	section = "Remote",
+				-- 	name = "Show remote logs",
+				-- 	action = [[:RemoteLog]],
+				-- },
+				-- {
+				-- 	section = "Remote",
+				-- 	name = "Show remote info",
+				-- 	action = [[:RemoteInfo]],
+				-- },
 				-- Telescope
 				{
 					section = "Telescope",

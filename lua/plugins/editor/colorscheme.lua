@@ -60,9 +60,9 @@ return {
                             EdgyNormal = { bg = c.crust },
                             -- Outline
 							OutlineCurrent = { bg = c.surface0, fg = c.yellow, style = { "italic" } },
-                            TreesitterContext = { bg = c.crust, style = {} },
+                            TreesitterContext = { bg = c.mantle, style = { "bold" } },
                             TreesitterContextLineNumber = { bg = c.crust, style = {} },
-                            TreesitterContextBottom = { bg = c.crust, style = {} },
+                            TreesitterContextBottom = { bg = c.mantle, style = { "bold" } },
                             TreesitterContextLineNumberBottom = { bg = c.crust, style = {} },
                             -- GitSigns
 							GitSignsAdd = { bg = sign_column_background },

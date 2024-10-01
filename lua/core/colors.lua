@@ -5,10 +5,24 @@ vim.opt.background = "dark"
 
 -- Diagnostic Icons
 vim.diagnostic.config({
-    DiagnosticSignError = { text = "", texthl = "DiagnosticsError" },
-    DiagnosticSignWarn = { text = "", texthl = "DiagnosticsWarn" },
-    DiagnosticSignInfo = { text = "", texthl = "DiagnosticsInfo" },
-    DiagnosticSignHint = { text = "", texthl = "DiagnosticsHint" }
+    -- DiagnosticSignError = { text = "", texthl = "DiagnosticsError" },
+    -- DiagnosticSignWarn = { text = "", texthl = "DiagnosticsWarn" },
+    -- DiagnosticSignInfo = { text = "", texthl = "DiagnosticsInfo" },
+    -- DiagnosticSignHint = { text = "", texthl = "DiagnosticsHint" }
+    signs = {
+        text = {
+            [vim.diagnostic.severity.ERROR] = "",
+            [vim.diagnostic.severity.WARN] = "",
+            [vim.diagnostic.severity.INFO] = "",
+            [vim.diagnostic.severity.HINT] = ""
+        },
+        texthl = {
+            [vim.diagnostic.severity.ERROR] = "DiagnosticsError",
+            [vim.diagnostic.severity.WARN] = "DiagnosticsWarn",
+            [vim.diagnostic.severity.INFO] = "DiagnosticsInfo",
+            [vim.diagnostic.severity.HINT] = "DiagnosticsHint"
+        }
+    }
 })
 
 -- Cursor

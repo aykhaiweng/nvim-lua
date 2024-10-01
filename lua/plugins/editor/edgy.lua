@@ -105,7 +105,7 @@ return {
 			require("edgy").setup(opts)
 
 			vim.opt.laststatus = 3
-			-- vim.opt.splitkeep = "screen"
+			vim.opt.splitkeep = "screen"
 		end,
 	},
 }

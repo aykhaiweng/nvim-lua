@@ -7,6 +7,7 @@ return {
 			"nvim-telescope/telescope.nvim",
 			"mfussenegger/nvim-dap-python",
 		},
+        lazy = false,
 		ft = {
 			"python",
 		},
@@ -15,7 +16,6 @@ return {
 			-- name = "venv",
 			-- auto_refresh = false
 		},
-		event = { "BufReadPre", "BufNewFile" },
 		keys = {
 			-- Keymap to open VenvSelector to pick a venv.
 			{ "<leader>vs", "<cmd>VenvSelect<cr>", "Python virtualenv select" },
@@ -24,17 +24,6 @@ return {
 		},
 		config = function(_, opts)
             require("venv-selector").setup(opts)
-			vim.api.nvim_create_autocmd("VimEnter", {
-				desc = "Auto select virtualenv Nvim open",
-				pattern = "*",
-				callback = function()
-					local venv = vim.fn.findfile("pyproject.toml", vim.fn.getcwd() .. ";")
-					if venv ~= "" then
-						require("venv-selector").retrieve_from_cache()
-					end
-				end,
-				once = true,
-			})
 		end,
 	},
 }

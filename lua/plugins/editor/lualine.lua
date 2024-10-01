@@ -7,6 +7,8 @@ return {
 				"SmiteshP/nvim-navic",
 				opts = {
 					lazy_update_context = false,
+					highlight = true,
+					click = true,
 					lsp = {
 						auto_attach = true,
 					},
@@ -77,21 +79,26 @@ return {
 						},
 						"branch",
 						"diff",
-						"diagnostics",
+						-- "diagnostics",
 					},
 					lualine_c = {
-						"filename",
 						{
-							function()
-								return require("nvim-navic").get_location()
-							end,
-							cond = function()
-								return package.loaded["nvim-navic"] and require("nvim-navic").is_available()
-							end,
+							"filename",
+							file_status = true,
+							newfile_status = true,
+							path = 1,
+							shorting_target = 80,
+							separator = { right = alt_section_separators.right },
 						},
 					},
 					lualine_x = {},
-					lualine_y = { { "encoding", "fileformat" }, "filetype" },
+					lualine_y = {
+						{
+							"encoding",
+							"fileformat",
+						},
+						"filetype",
+					},
 					lualine_z = {
 						"location",
 						"progress",
@@ -109,8 +116,8 @@ return {
 					lualine_a = {
 						{
 							"tabs",
-                            mode = 0,
-                            path = 1,
+							mode = 0,
+							path = 1,
 							separator = { right = alt_section_separators.right },
 							component_separator = { right = alt_section_separators.right },
 						},
@@ -123,7 +130,7 @@ return {
 							file_status = true,
 							newfile_status = true,
 							path = 1,
-							shorting_target = 60,
+							shorting_target = 1000,
 							separator = { right = alt_section_separators.right },
 						},
 					},
@@ -131,6 +138,16 @@ return {
 						{
 							"diagnostics",
 							separator = { right = alt_section_separators.right },
+						},
+					},
+					lualine_c = {
+						{
+							function()
+								return require("nvim-navic").get_location()
+							end,
+							cond = function()
+								return package.loaded["nvim-navic"] and require("nvim-navic").is_available()
+							end,
 						},
 					},
 					extensions = {},
@@ -141,6 +158,7 @@ return {
 							"filename",
 							file_status = true,
 							newfile_status = true,
+							shorting_target = 60,
 							path = 1,
 						},
 					},
@@ -157,8 +175,8 @@ return {
 			-- vim options
 			vim.cmd("set noshowmode")
 			vim.cmd("set showcmd")
-			vim.opt.laststatus = 1 -- 3 to span across
-			vim.opt.showtabline = 2
+			-- vim.opt.laststatus = 1 -- 3 to span across
+			-- vim.opt.showtabline = 2
 		end,
 	},
 }

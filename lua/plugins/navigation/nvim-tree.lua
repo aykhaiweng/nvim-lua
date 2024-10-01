@@ -36,9 +36,6 @@ return {
 				bookmarks_placement = "signcolumn",
 			},
 		},
-        window_picker = {
-            enable = false,
-        },
 		filters = {
 			enable = false,
 		},
