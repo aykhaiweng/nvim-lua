@@ -22,7 +22,6 @@ return {
 		opts = function()
 			local disabled_filetypes = {
 				"help",
-				"term",
 				"diff",
 				"gitcommit",
 				"NvimTree",
@@ -32,7 +31,6 @@ return {
 				"fugitive",
 				"fugitiveblame",
 				"tsplayground",
-				"toggleterm",
 				"quickfixlist",
 				"loclist",
 			}
