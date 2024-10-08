@@ -35,11 +35,11 @@ local servers = {
 
 local lsp_config = function()
 	-- Set up completion using nvim_cmp with LSP source
-	local common_capabilities = require("cmp_nvim_lsp").default_capabilities()
-	common_capabilities.textDocument.foldingRange = {
-		dynamicRegistration = false,
-		lineFoldingOnly = true,
-	}
+	-- local common_capabilities = require("cmp_nvim_lsp").default_capabilities()
+	-- common_capabilities.textDocument.foldingRange = {
+	-- 	dynamicRegistration = false,
+	-- 	lineFoldingOnly = true,
+	-- }
 
 	local common_on_init = function(client, _)
 		-- Disabled due to https://github.com/neovim/neovim/issues/23164
@@ -69,7 +69,7 @@ local lsp_config = function()
 		enabled = true,
 		on_init = common_on_init,
 		on_attach = common_on_attach_handler,
-		capabilities = common_capabilities,
+		-- capabilities = common_capabilities,
 		flags = {
 			debounce_text_changes = 500, -- 150 seems to be the default by idk what this implies
 		},
@@ -122,7 +122,7 @@ local lsp_config = function()
 					end
 				end
 				-- THIS IS FOR BUILTIN LSP
-				vim.diagnostic.open_float({
+				vim.diagnostic.open_float(0, {
 					scope = "cursor",
 					focusable = false,
 					close_events = {
