@@ -41,7 +41,7 @@ return {
 						title = "Undotree",
 						ft = "undotree",
 						pinned = false,
-						size = { height = 0.5 },
+						size = { height = 0.4 },
 					},
 					{
 						title = "Files",
