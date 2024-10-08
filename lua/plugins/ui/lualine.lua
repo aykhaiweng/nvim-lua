@@ -34,7 +34,7 @@ return {
 				"tsplayground",
 				"quickfixlist",
 				"loclist",
-                "noice"
+				"noice",
 			}
 			--          local section_separators = { left = '', right = '' }
 			-- local alt_section_separators = { left = "", right = "" }
@@ -130,7 +130,7 @@ return {
 							file_status = true,
 							newfile_status = true,
 							path = 1,
-							shorting_target = 1000,
+							shorting_target = 1,
 							separator = { right = alt_section_separators.right },
 						},
 					},
@@ -158,8 +158,9 @@ return {
 							"filename",
 							file_status = true,
 							newfile_status = true,
-							shorting_target = 60,
 							path = 1,
+							shorting_target = 1000,
+							separator = { right = alt_section_separators.right },
 						},
 					},
 					lualine_b = {

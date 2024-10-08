@@ -1,6 +1,7 @@
 return {
 	{
 		"folke/trouble.nvim",
+		event = { "BufReadPre", "BufNewFile" },
 		keys = {
 			{
 				"<leader>lD",
@@ -27,9 +28,11 @@ return {
 			},
 		},
 		cmd = { "Trouble" },
-		opts = {
-			mode = "workspace_diagnostics",
-			auto_preview = false,
-		},
+		config = function()
+			require("trouble").setup({
+				mode = "workspace_diagnostics",
+				auto_preview = false,
+			})
+		end,
 	},
 }

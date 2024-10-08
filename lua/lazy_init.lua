@@ -1,36 +1,46 @@
--- Bootstrapping the installation of lazy.nvim
+-- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-    vim.fn.system({
-        "git",
-        "clone",
-        "--filter=blob:none",
-        "https://github.com/folke/lazy.nvim.git",
-        "--branch=stable", -- latest stable release
-        lazypath,
-    })
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+	local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+	if vim.v.shell_error ~= 0 then
+		vim.api.nvim_echo({
+			{ "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+			{ out, "WarningMsg" },
+			{ "\nPress any key to exit..." },
+		}, true, {})
+		vim.fn.getchar()
+		os.exit(1)
+	end
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Registering the plugins
+-- Make sure to setup `mapleader` and `maplocalleader` before
+-- loading lazy.nvim so that mappings are correct.
+-- This is also a good place to setup other settings (vim.opt)
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
+
+-- Setup lazy.nvim
 require("lazy").setup({
-    { import = "plugins" },
-    { import = "plugins.colorscheme" },
-    { import = "plugins.terminal" },
-    { import = "plugins.treesitter" },
-    { import = "plugins.ui" },
-    { import = "plugins.navigation" },
-    { import = "plugins.editor" },
-    { import = "plugins.linting" },
-    { import = "plugins.formatting" },
-    { import = "plugins.dev" },
-    { import = "plugins.dev.python" },
-}, {
-    checker = {
-        enabled = true,
-    },
-    change_detection = {
-        enabled = true,
-        notify = true,
-    },
+	spec = {
+		-- import your plugins
+		{ import = "plugins" },
+		{ import = "plugins.colorscheme" },
+		{ import = "plugins.terminal" },
+		{ import = "plugins.navigation" },
+		{ import = "plugins.treesitter" },
+		{ import = "plugins.ui" },
+		{ import = "plugins.editor" },
+		{ import = "plugins.git" },
+		{ import = "plugins.linting" },
+		{ import = "plugins.formatting" },
+		{ import = "plugins.dev" },
+		{ import = "plugins.dev.python" },
+	},
+	-- Configure any other settings here. See the documentation for more details.
+	-- colorscheme that will be used when installing plugins.
+	install = { colorscheme = { "catppuccin" } },
+	-- automatically check for plugin updates
+	checker = { enabled = true },
 })
