@@ -5,10 +5,6 @@ vim.opt.background = "dark"
 
 -- Diagnostic Icons
 vim.diagnostic.config({
-    -- DiagnosticSignError = { text = "", texthl = "DiagnosticsError" },
-    -- DiagnosticSignWarn = { text = "", texthl = "DiagnosticsWarn" },
-    -- DiagnosticSignInfo = { text = "", texthl = "DiagnosticsInfo" },
-    -- DiagnosticSignHint = { text = "", texthl = "DiagnosticsHint" }
     signs = {
         text = {
             [vim.diagnostic.severity.ERROR] = "",

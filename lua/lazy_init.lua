@@ -15,20 +15,13 @@ vim.opt.rtp:prepend(lazypath)
 -- Registering the plugins
 require("lazy").setup({
 	{ import = "plugins" },
-	{ import = "plugins.navigation" },
-	{ import = "plugins.git" },
 	{ import = "plugins.editor" },
-	{ import = "plugins.dev" },
-	{ import = "plugins.terminal" },
-	{ import = "plugins.profiling" },
-	{ import = "plugins.lsp" },
-	{ import = "plugins.dap" },
 }, {
 	checker = {
 		enabled = true,
 	},
 	change_detection = {
-		enabled = false,
-		notify = false,
+		enabled = true,
+		notify = true,
 	},
 })

@@ -8,7 +8,7 @@ vim.keymap.set("v", "<C-c>", "<Esc>")
 vim.keymap.set("n", "Q", "<nop>", { desc = "DISABLED" })
 
 -- tabs
-vim.keymap.set("n", "<leader>ta", vim.cmd.tabnew, { desc = "Open new tab" })
+vim.keymap.set("n", "<leader>tn", vim.cmd.tabnew, { desc = "Open new tab" })
 vim.keymap.set("n", "<leader>tj", vim.cmd.tabfirst, { desc = "Go to first tab" })
 vim.keymap.set("n", "<leader>tl", vim.cmd.tabnext, { desc = "Go to tab on right" })
 vim.keymap.set("n", "<leader>th", vim.cmd.tabprev, { desc = "Go to tab on the left" })
@@ -65,18 +65,7 @@ vim.keymap.set(
 	[[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
 	{ desc = "Substitute word under cursor" }
 )
--- vim.keymap.set(
--- 	"v",
--- 	"<leader>ew",
--- 	[[:s/<C-r><C-w>/<C-r><C-w>/gI<Left><Left><Left>]],
--- 	{ desc = "Substitute word under cursor, limited to selection" }
--- )
-vim.keymap.set(
-	"v",
-	"<leader>es",
-	[[:s/]],
-	{ desc = "Make substitution under selection" }
-)
+vim.keymap.set("v", "<leader>es", [[:s/]], { desc = "Make substitution under selection" })
 
 -- set breakpoints
 -- vim.keymap.set("n", "<leader>bp", vim.cmd.Break, { desc = "Create breakpoint under cursor" })
