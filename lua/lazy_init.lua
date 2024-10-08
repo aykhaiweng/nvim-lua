@@ -28,15 +28,22 @@ require("lazy").setup({
 		{ import = "plugins" },
 		{ import = "plugins.colorscheme" },
 		{ import = "plugins.terminal" },
-		{ import = "plugins.navigation" },
+        --- Do you remember ALE? But better
 		{ import = "plugins.treesitter" },
+        --- UI and Navigation
+		{ import = "plugins.navigation" },
 		{ import = "plugins.ui" },
 		{ import = "plugins.editor" },
+        --- Git stuff
 		{ import = "plugins.git" },
+        --- Linting and Formatting
 		{ import = "plugins.linting" },
 		{ import = "plugins.formatting" },
+        --- Dev stuff like LSP / Navic etc.
 		{ import = "plugins.dev" },
 		{ import = "plugins.dev.python" },
+        --- AI stuff
+		{ import = "plugins.ai" },
 	},
 	-- Configure any other settings here. See the documentation for more details.
 	-- colorscheme that will be used when installing plugins.
