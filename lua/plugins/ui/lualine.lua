@@ -3,20 +3,7 @@ return {
 		"nvim-lualine/lualine.nvim",
 		dependencies = {
 			"nvim-tree/nvim-web-devicons",
-			{
-				"SmiteshP/nvim-navic",
-				opts = {
-					lazy_update_context = false,
-					highlight = true,
-					click = true,
-					lsp = {
-						auto_attach = true,
-					},
-				},
-				config = function(_, opts)
-					require("nvim-navic").setup(opts)
-				end,
-			},
+			"SmiteshP/nvim-navic",
 		},
 		lazy = false,
 		opts = function()
@@ -34,7 +21,7 @@ return {
 				"tsplayground",
 				"quickfixlist",
 				"loclist",
-                "qf",
+				"qf",
 				"noice",
 			}
 			--          local section_separators = { left = '', right = '' }
