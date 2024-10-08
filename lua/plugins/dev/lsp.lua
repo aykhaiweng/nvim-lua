@@ -122,7 +122,7 @@ local lsp_config = function()
 					end
 				end
 				-- THIS IS FOR BUILTIN LSP
-				vim.diagnostic.open_float(0, {
+				vim.diagnostic.open_float({
 					scope = "cursor",
 					focusable = false,
 					close_events = {
