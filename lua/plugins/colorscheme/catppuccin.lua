@@ -48,20 +48,12 @@ return {
 					-- LSP Stuff
 					LspSignatureActiveParameter = { bg = c.surface0, fg = c.yellow },
 					LspInlayHint = { bg = c.crust, style = { "italic" } },
+					--- Column Stuff
 					-- LineNr
 					SignColumn = { bg = sign_column_background },
 					SignColumnSB = { bg = sign_column_background },
 					CursorLineNr = { bg = number_column_background, fg = c.yellow, style = { "bold" } },
 					LineNr = { bg = number_column_background },
-					--- PLUGINS
-					-- Edgy stuff
-					EdgyNormal = { bg = c.crust },
-					-- Outline
-					OutlineCurrent = { bg = c.surface0, fg = c.yellow, style = { "italic" } },
-					TreesitterContext = { bg = number_column_background, style = { "bold" } },
-					TreesitterContextLineNumber = { bg = number_column_background, style = {} },
-					TreesitterContextBottom = { bg = number_column_background, style = { "bold" } },
-					TreesitterContextLineNumberBottom = { bg = number_column_background, style = {} },
 					-- GitSigns
 					GitSignsAdd = { bg = sign_column_background },
 					GitSignsChange = { bg = sign_column_background },
@@ -72,10 +64,15 @@ return {
 					DiagnosticSignInfo = { bg = sign_column_background },
 					DiagnosticSignWarn = { bg = sign_column_background },
 					DiagnosticSignError = { bg = sign_column_background },
-					-- NvimTree
-					NvimTreeNormal = { bg = c.crust },
-					-- Barbecue
-					barbecue_normal = { bg = c.crust },
+					--- PLUGINS
+					-- Edgy stuff
+					-- EdgyNormal = { bg = c.crust },
+					-- Outline
+					-- OutlineCurrent = { bg = c.surface0, fg = c.yellow, style = { "italic" } },
+					TreesitterContext = { bg = number_column_background, style = { "bold" } },
+					TreesitterContextLineNumber = { bg = number_column_background, style = {} },
+					TreesitterContextBottom = { bg = number_column_background, style = { "bold" } },
+					TreesitterContextLineNumberBottom = { bg = number_column_background, style = {} },
 					-- Telescope
 					TelescopeNormal = { bg = c.mantle }, -- Generally the backgrounds
 					TelescopeBorder = { bg = c.mantle, fg = c.mantle }, -- All the borders
@@ -96,11 +93,39 @@ return {
 			cmp = true,
 			gitsigns = true,
 			nvimtree = true,
+			neotree = true,
 			treesitter = true,
 			notify = false,
 			mini = {
 				enabled = true,
 				indentscope_color = "",
+			},
+			navic = {
+				enabled = true,
+				custom_bg = "NONE", -- "lualine" will set background to mantle
+			},
+			harpoon = true,
+			neogit = true,
+			noice = true,
+			native_lsp = {
+				enabled = true,
+				virtual_text = {
+					errors = { "italic" },
+					hints = { "italic" },
+					warnings = { "italic" },
+					information = { "italic" },
+					ok = { "italic" },
+				},
+				underlines = {
+					errors = { "underline" },
+					hints = { "underline" },
+					warnings = { "underline" },
+					information = { "underline" },
+					ok = { "underline" },
+				},
+				inlay_hints = {
+					background = false,
+				},
 			},
 			-- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
 		},
