@@ -27,7 +27,7 @@ return {
             }
 		},
 		keys = {
-			{ "<leader>=", "<cmd>OutlineOpen<CR><cmd>OutlineFocus<CR>", "n", desc = "Open Outline" },
+			{ "<leader>=", "<cmd>OutlineOpen<CR>", "n", desc = "Open Outline" },
 			{ "<leader>+", "<cmd>OutlineClose<CR>", "n", desc = "Close Outline" },
 		},
 		config = function(_, opts)
