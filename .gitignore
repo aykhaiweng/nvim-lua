@@ -3,3 +3,4 @@ packer_compiled.lua
 tmp/
 Session.vim
 .sessions/
+lazy-lock.json
