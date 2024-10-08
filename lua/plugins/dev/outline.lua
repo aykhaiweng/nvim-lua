@@ -12,7 +12,7 @@ return {
             outline_window = {
                 width = 40,
                 relative_width = false,
-                winhl = "Normal:NvimTreeNormal"
+                winhl = "Normal:EdgyNormal"
             },
             symbol_folding = {
                 autofold_depth = 1,
