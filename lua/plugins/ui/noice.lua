@@ -18,6 +18,9 @@ return {
 				},
 			},
 		},
+        keys = {
+			{ "<F8>", "<cmd>Noice all<CR>", "n", desc = "Open Noice all" },
+        },
 		dependencies = {
 			"MunifTanjim/nui.nvim",
 		},
