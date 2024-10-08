@@ -67,6 +67,7 @@ return {
 					"qf",
 					"loclist",
 					"fugitive",
+                    "NeogitStatus",
 					"help",
 				},
 				keys = {
