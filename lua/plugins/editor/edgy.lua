@@ -63,7 +63,12 @@ return {
 					},
 				},
 				right = {},
-				bottom = {},
+				bottom = {
+					"qf",
+					"loclist",
+					"fugitive",
+					"help",
+				},
 				keys = {
 					-- increase width
 					["<c-Right>"] = function(win)

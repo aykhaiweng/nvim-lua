@@ -34,6 +34,7 @@ return {
 				"tsplayground",
 				"quickfixlist",
 				"loclist",
+                "qf",
 				"noice",
 			}
 			--          local section_separators = { left = '', right = '' }
