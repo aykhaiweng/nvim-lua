@@ -35,10 +35,10 @@ return {
                 local darken = require("catppuccin.utils.colors").darken
                 local lighten = require("catppuccin.utils.colors").lighten
 
-				local sign_column_background = c.crust
-				local number_column_background = c.crust
-				local primary_bg = c.mantle
-				local sidebar_bg = c.crust
+				local sign_column_background = c.mantle
+				local number_column_background = c.mantle
+				local primary_bg = c.base
+				local sidebar_bg = c.mantle
                 local cursor_line = lighten(primary_bg, 0.98)
 				return {
 					--- NATIVE
@@ -69,13 +69,14 @@ return {
 					DiagnosticSignWarn = { bg = sign_column_background },
 					DiagnosticSignError = { bg = sign_column_background },
 					--- PLUGINS
+                    lualine_c_normal = { bg = sidebar_bg },
 					--- Edgy stuff
-					-- EdgyNormal = { bg = sidebar_bg },
-					-- EdgyTitle = { bg = sidebar_bg, style = { "bold" } },
-					-- EdgyIcon = { bg = sidebar_bg },
-					-- EdgyIconActive = { bg = sidebar_bg },
-					-- EdgyWinBar = { bg = sidebar_bg },
-					-- EdgyWinBarNC = { bg = sidebar_bg },
+					EdgyNormal = { bg = sidebar_bg },
+					EdgyTitle = { bg = sidebar_bg, style = { "bold" } },
+					EdgyIcon = { bg = sidebar_bg },
+					EdgyIconActive = { bg = sidebar_bg },
+					EdgyWinBar = { bg = sidebar_bg },
+					EdgyWinBarNC = { bg = sidebar_bg },
 					--- Neotree
 					NeoTreeNormal = { bg = sidebar_bg, },
 					NeoTreeNormalNC = { bg = sidebar_bg, },
@@ -95,7 +96,7 @@ return {
 					TelescopePromptBorder = { bg = c.base, fg = c.base },
 					TelescopeResultsTitle = { bg = c.green, fg = sidebar_bg },
 					TelescopePreviewTitle = { bg = c.blue, fg = sidebar_bg },
-					TelescopePreviewNormal = { bg = c.background },
+					TelescopePreviewNormal = { bg = primary_bg },
 				}
 			end,
 		},
