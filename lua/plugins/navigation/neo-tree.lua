@@ -317,6 +317,7 @@ return {
 		-- If you want icons for diagnostic errors, you'll need to define them somewhere:
 		require("neo-tree").setup(opts)
 
-		vim.keymap.set("n", "<C-b>", ":Neotree reveal<cr>", { desc = "Open Neo-tree" })
+		vim.keymap.set("n", "<leader>=", ":Neotree reveal<cr>", { desc = "Open Neo-tree" })
+		vim.keymap.set("n", "<C-b>", ":Neotree toggle<cr>", { desc = "Toggle Neo-tree" })
 	end,
 }

@@ -34,7 +34,7 @@ return {
 			return {
 				options = {
 					icons_enabled = true,
-                    draw_empty = true,
+					draw_empty = true,
 					section_separators = { left = section_separators.right, right = section_separators.left },
 					component_separators = { left = sub_section_separators.right, right = sub_section_separators.left },
 					disabled_filetypes = {

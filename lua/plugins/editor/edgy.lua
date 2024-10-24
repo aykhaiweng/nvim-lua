@@ -1,21 +1,60 @@
 return {
+	-- {
+	-- 	"lucobellic/edgy-group.nvim",
+	-- 	event = "VeryLazy",
+	-- 	dependencies = { "folke/edgy.nvim" },
+	-- 	keys = {
+	-- 		{
+	-- 			"<leader>wh",
+	-- 			function()
+	-- 				require("edgy-group").open_group_offset("left", 1)
+	-- 			end,
+	-- 			desc = "Edgy Group Next Left",
+	-- 		},
+	-- 		{
+	-- 			"<leader>wl",
+	-- 			function()
+	-- 				require("edgy-group").open_group_offset("left", -1)
+	-- 			end,
+	-- 			desc = "Edgy Group Prev Left",
+	-- 		},
+	-- 		{
+	-- 			"<c-,>",
+	-- 			function()
+	-- 				require("edgy-group.stl").pick()
+	-- 			end,
+	-- 			desc = "Edgy Group Pick",
+	-- 		},
+	-- 	},
+	-- 	opts = {
+	-- 		groups = {
+	-- 			left = {
+	-- 				{ icon = "", titles = { "Neo-Tree" } },
+	-- 				{ icon = "", titles = { "Neo-Tree Git" } },
+	-- 				{ icon = "", titles = { "Outline" } },
+	-- 			},
+	-- 		},
+	-- 		statusline = {
+	-- 			separators = { " ", " " },
+	-- 			clickable = true,
+	-- 			colored = true,
+	-- 			colors = {
+	-- 				active = "PmenuSel",
+	-- 				inactive = "Pmenu",
+	-- 			},
+	-- 		},
+	-- 	},
+	-- },
 	{
 		"folke/edgy.nvim",
 		event = { "BufReadPre", "BufNewFile" },
 		keys = {
 			{
-				"<leader>we",
+				"<leader>ww",
 				function()
 					require("edgy").toggle()
 				end,
 				desc = "Edgy Toggle",
-			},
-			{
-				"<leader>wo",
-				function()
-					require("edgy").open()
-				end,
-				desc = "Edgy Open",
 			},
             -- stylua: ignore
             { "<leader>wE", function() require("edgy").select() end, desc = "Edgy Select Window" },
@@ -38,18 +77,19 @@ return {
 				},
 				left = {
 					{
-						title = "Undotree",
-						ft = "undotree",
-						pinned = false,
-						size = { height = 0.4 },
-					},
-					{
-						title = "Files",
+						title = "Neo-Tree Git",
 						ft = "neo-tree",
 						pinned = true,
-						open = function()
-							vim.cmd("Neotree reveal")
-						end,
+                        filter = function(buf) return vim.b[buf].neo_tree_source == "git_status" end,
+						open = "Neotree position=top git_status",
+						size = { height = 0.3 },
+					},
+					{
+						title = "Neo-Tree Files",
+						ft = "neo-tree",
+						pinned = true,
+                        filter = function(buf) return vim.b[buf].neo_tree_source == "filesystem" end,
+						open = "Neotree position=left filesystem",
 						size = { height = 0.5 },
 					},
 					{
@@ -67,7 +107,7 @@ return {
 					"qf",
 					"loclist",
 					"fugitive",
-                    "NeogitStatus",
+					"NeogitStatus",
 					"help",
 				},
 				keys = {

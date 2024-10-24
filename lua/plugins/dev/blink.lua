@@ -24,7 +24,7 @@ return {
 
 		-- keymaps
 		keymap = {
-			show = { "<C-space>", "<C-n>" },
+			show = { "<C-space>" },
 			hide = {},
 			accept = { "<C-e>" },
 			select_prev = { "<Up>", "<C-k>", "<C-p>" },
@@ -44,7 +44,7 @@ return {
 			autocomplete = {
 				min_width = 30,
 				max_width = 60,
-				max_height = 30,
+				max_height = 10,
 				border = "none",
 				winhighlight = "Normal:BlinkCmpMenu,FloatBorder:BlinkCmpMenuBorder,CursorLine:BlinkCmpMenuSelection,Search:None",
 				-- keep the cursor X lines away from the top/bottom of the window
@@ -59,9 +59,9 @@ return {
 				draw = "simple",
 			},
 			documentation = {
-				min_width = 30,
+				min_width = 10,
 				max_width = 60,
-				max_height = 40,
+				max_height = 20,
 				border = "padded",
 				winhighlight = "Normal:BlinkCmpDoc,FloatBorder:BlinkCmpDocBorder,CursorLine:BlinkCmpDocCursorLine,Search:None",
 				-- which directions to show the documentation window,
@@ -84,4 +84,23 @@ return {
 			},
 		},
 	},
+    config = function(_, opts)
+        local blink = require("blink.cmp")
+        blink.setup(opts)
+
+        -- Custom behaviours
+		local blink_augroup = vim.api.nvim_create_augroup("blink_custom", { clear = true })
+		vim.api.nvim_create_autocmd({
+			"InsertLeave",
+			"InsertEnter",
+		}, {
+			group = blink_augroup,
+			callback = function()
+                blink.hide()
+			end,
+		})
+
+        -- Custom trigger but only for Insert
+        vim.keymap.set("i", "<C-n>", blink.show, { desc = "Show completion" })
+    end,
 }

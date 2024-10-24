@@ -49,19 +49,19 @@
   "querysetmanager": {
     "prefix": "querysetmanager",
     "body": [
-      "class ${0:ModelName}QuerySet(models.QuerySet):",
+      "class ${1:ModelName}QuerySet(models.QuerySet):",
       "    \"\"\"",
-      "    Base QuerySet for the ${0:ModelName} objects.",
-      "    \"\"\"",
-      "",
-      "",
-      "class Base${0:ModelName}Manager(models.Manager):",
-      "    \"\"\"",
-      "    Base Manager for the ${0:ModelName} objects.",
+      "    Base QuerySet for the ${1:ModelName} objects.",
       "    \"\"\"",
       "",
       "",
-      "${0:ModelName}Manager = Base${0:ModelName}Manager.from_queryset(${0:ModelName}QuerySet)"
+      "class Base${1:ModelName}Manager(models.Manager):",
+      "    \"\"\"",
+      "    Base Manager for the ${1:ModelName} objects.",
+      "    \"\"\"",
+      "",
+      "",
+      "${1:ModelName}Manager = Base${1:ModelName}Manager.from_queryset(${1:ModelName}QuerySet)"
     ],
     "description": "Snippet to create QuerySet and ModelManagers"
   }
