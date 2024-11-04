@@ -45,7 +45,7 @@ return {
             ["<C-j>"] = {"select_next"},
             ["<C-n>"] = {"show", "select_next"},
             ["<C-b>"] = {"scroll_documentation_up"},
-            ["<C-f>"] = {"scroll_documentation_down"},
+            ["<C-f>"] = {"show_documentation", "scroll_documentation_down"},
             ["<Tab>"] = {"snippet_forward"},
             ["<S-Tab>"] = {"snippet_backward"},
 		},
