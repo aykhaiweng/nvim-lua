@@ -17,7 +17,7 @@ return {
 						-- filter using buffer options
 						bo = {
 							-- if the file type is one of following, the window will be ignored
-							filetype = { "neo-tree", "neo-tree-popup", "notify" },
+							filetype = { "neo-tree", "neo-tree-popup", "notify", "edgy", "terminal" },
 							-- if the buffer type is one of following, the window will be ignored
 							buftype = { "terminal", "quickfix" },
 						},
@@ -31,7 +31,14 @@ return {
 		popup_border_style = "rounded",
 		enable_git_status = true,
 		enable_diagnostics = true,
-		open_files_do_not_replace_types = { "terminal", "trouble", "qf", "edgy" }, -- when opening files, do not use windows containing these filetypes or buftypes
+		open_files_do_not_replace_types = {
+			"terminal",
+			"trouble",
+			"Trouble",
+            "Outline",
+			"qf",
+			"edgy",
+		}, -- when opening files, do not use windows containing these filetypes or buftypes
 		sort_case_insensitive = false, -- used when sorting files and directories in the tree
 		sort_function = nil, -- use a custom function for sorting files and directories in the tree
 		-- sort_function = function (a,b)
@@ -317,7 +324,7 @@ return {
 		-- If you want icons for diagnostic errors, you'll need to define them somewhere:
 		require("neo-tree").setup(opts)
 
-		vim.keymap.set("n", "<leader>=", ":Neotree reveal<cr>", { desc = "Open Neo-tree" })
-		vim.keymap.set("n", "<C-b>", ":Neotree toggle<cr>", { desc = "Toggle Neo-tree" })
+		vim.keymap.set("n", "<leader>-", [[:Neotree reveal<cr>]], { desc = "Open Neo-tree" })
+		vim.keymap.set("n", "<C-b>", [[:Neotree toggle position=left<cr>]], { desc = "Toggle Neo-tree" })
 	end,
 }
