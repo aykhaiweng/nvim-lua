@@ -24,19 +24,30 @@ return {
 
 		-- keymaps
 		keymap = {
-			show = { "<C-space>" },
-			hide = {},
-			accept = { "<C-e>" },
-			select_prev = { "<Up>", "<C-k>", "<C-p>" },
-			select_next = { "<Down>", "<C-j>", "<C-n>" },
-
-			show_documentation = {},
-			hide_documentation = {},
-			scroll_documentation_up = "<C-b>",
-			scroll_documentation_down = "<C-f>",
-
-			snippet_forward = "<Tab>",
-			snippet_backward = "<S-Tab>",
+            preset = "default",
+			-- show = { "<C-space>" },
+			-- hide = {},
+			-- accept = { "<C-e>" },
+			-- select_prev = { "<Up>", "<C-k>", "<C-p>" },
+			-- select_next = { "<Down>", "<C-j>", "<C-n>" },
+			-- show_documentation = {},
+			-- hide_documentation = {},
+			-- scroll_documentation_up = "<C-b>",
+			-- scroll_documentation_down = "<C-f>",
+			-- snippet_forward = "<Tab>",
+			-- snippet_backward = "<S-Tab>",
+            ["<C-space>"] = {"show", "hide"},
+			["<C-e>"] = {"accept"},
+            ["<Up>"] = {"select_prev"},
+            ["<C-k>"] = {"select_prev"},
+            ["<C-p>"] = {"select_prev"},
+            ["<Down>"] = {"select_next"},
+            ["<C-j>"] = {"select_next"},
+            ["<C-n>"] = {"show", "select_next"},
+            ["<C-b>"] = {"scroll_documentation_up"},
+            ["<C-f>"] = {"scroll_documentation_down"},
+            ["<Tab>"] = {"snippet_forward"},
+            ["<S-Tab>"] = {"snippet_backward"},
 		},
 
         -- windows
