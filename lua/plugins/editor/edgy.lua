@@ -56,8 +56,21 @@ return {
 				end,
 				desc = "Edgy Toggle",
 			},
+			{
+				"<C-b>",
+				function()
+					require("edgy").toggle()
+				end,
+				desc = "Edgy Toggle",
+			},
             -- stylua: ignore
-            { "<leader>wE", function() require("edgy").select() end, desc = "Edgy Select Window" },
+            {
+                "<leader>wE",
+                function()
+                    require("edgy").select()
+                end,
+                desc = "Edgy Select Window",
+            },
 		},
 		opts = function()
 			local opts = {
