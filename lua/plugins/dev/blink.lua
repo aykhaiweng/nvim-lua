@@ -36,18 +36,18 @@ return {
 			-- scroll_documentation_down = "<C-f>",
 			-- snippet_forward = "<Tab>",
 			-- snippet_backward = "<S-Tab>",
-            ["<C-space>"] = {"show", "hide"},
-			["<C-e>"] = {"accept"},
-            ["<Up>"] = {"select_prev"},
-            ["<C-k>"] = {"select_prev"},
-            ["<C-p>"] = {"select_prev"},
-            ["<Down>"] = {"select_next"},
-            ["<C-j>"] = {"select_next"},
-            ["<C-n>"] = {"show", "select_next"},
-            ["<C-b>"] = {"scroll_documentation_up"},
-            ["<C-f>"] = {"show_documentation", "scroll_documentation_down"},
-            ["<Tab>"] = {"snippet_forward"},
-            ["<S-Tab>"] = {"snippet_backward"},
+            ["<C-space>"] = {"show", "hide", "fallback"},
+			["<C-e>"] = {"accept", "fallback"},
+            ["<Up>"] = {"select_prev", "fallback"},
+            ["<C-k>"] = {"select_prev", "fallback"},
+            ["<C-p>"] = {"select_prev", "fallback"},
+            ["<Down>"] = {"select_next", "fallback"},
+            ["<C-j>"] = {"select_next", "fallback"},
+            ["<C-n>"] = {"show", "select_next", "fallback"},
+            ["<C-b>"] = {"scroll_documentation_up", "fallback"},
+            ["<C-f>"] = {"show_documentation", "scroll_documentation_down", "fallback"},
+            ["<Tab>"] = {"snippet_forward", "fallback"},
+            ["<S-Tab>"] = {"snippet_backward", "fallback"},
 		},
 
         -- windows
@@ -107,7 +107,9 @@ return {
 		}, {
 			group = blink_augroup,
 			callback = function()
-                blink.hide()
+                if vim.bo.filetype ~= "gitcommit" then
+                    blink.hide()
+                end
 			end,
 		})
 
