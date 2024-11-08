@@ -39,13 +39,13 @@ return {
 				local number_column_background = c.mantle
 				local primary_bg = c.base
 				local sidebar_bg = c.mantle
-                local cursor_line = lighten(primary_bg, 0.98)
+                local cursor_line = darken(primary_bg, 1.2)
 				return {
 					--- NATIVE
                     Normal = { bg = primary_bg },
                     NormalNC = { bg = primary_bg },
                     NormalFloat = { bg = sidebar_bg },
-                    Cursor = { bg = c.foreground, fg = c.mantle },
+                    Cursor = { bg = "blue", fg = primary_bg },
                     CursorLine = { bg = cursor_line },
 					-- Borders
 					WinSeparator = { bg = sidebar_bg, fg = lighten(sidebar_bg, 0.95) },
