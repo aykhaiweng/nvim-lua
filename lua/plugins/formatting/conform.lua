@@ -8,9 +8,10 @@ return {
 			{
 				"<leader>ff",
 				function()
-					conform.format({ timeout_ms = 3000 })
+					conform.format({ async = true, timeout_ms = 3000 })
 				end,
 				desc = "Conform in file or range (visual)",
+                mode = {"v", "n"}
 			},
 		}
 	end,
