@@ -4,24 +4,10 @@ return {
 	dependencies = {
 		"rafamadriz/friendly-snippets",
 	},
-	version = "v0.*",
 	opts = {
-		-- keymaps
 		keymap = {
-			preset = "default",
-			-- show = { "<C-space>" },
-			-- hide = {},
-			-- accept = { "<C-e>" },
-			-- select_prev = { "<Up>", "<C-k>", "<C-p>" },
-			-- select_next = { "<Down>", "<C-j>", "<C-n>" },
-			-- show_documentation = {},
-			-- hide_documentation = {},
-			-- scroll_documentation_up = "<C-b>",
-			-- scroll_documentation_down = "<C-f>",
-			-- snippet_forward = "<Tab>",
-			-- snippet_backward = "<S-Tab>",
 			["<C-space>"] = { "show", "hide", "fallback" },
-			["<C-e>"] = { "accept", "fallback" },
+			["<C-e>"] = { "select_and_accept", "fallback" },
 			["<Up>"] = { "select_prev", "fallback" },
 			["<C-k>"] = { "select_prev", "fallback" },
 			["<C-p>"] = { "select_prev", "fallback" },
@@ -32,6 +18,7 @@ return {
 			["<C-f>"] = { "show_documentation", "scroll_documentation_down", "fallback" },
 			["<Tab>"] = { "snippet_forward", "fallback" },
 			["<S-Tab>"] = { "snippet_backward", "fallback" },
+			["<esc>"] = { "cancel", "fallback" },
 		},
 		appearance = {
 			-- Sets the fallback highlight groups to nvim-cmp's highlight groups
@@ -54,9 +41,11 @@ return {
 
 			-- or set per mode
 			list = {
-				selection = function(ctx)
-					return ctx.mode == "cmdline" and "auto_insert" or "preselect"
-				end,
+				selection = {
+					preselect = function(ctx)
+						return ctx.mode ~= "cmdline" and not require("blink.cmp").snippet_active({ direction = 1 })
+					end,
+				},
 			},
 
 			menu = {
