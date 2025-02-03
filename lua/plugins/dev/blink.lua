@@ -4,6 +4,7 @@ return {
 	dependencies = {
 		"rafamadriz/friendly-snippets",
 	},
+    version = "*",
 	opts = {
 		keymap = {
 			["<C-space>"] = { "show", "hide", "fallback" },
@@ -18,7 +19,7 @@ return {
 			["<C-f>"] = { "show_documentation", "scroll_documentation_down", "fallback" },
 			["<Tab>"] = { "snippet_forward", "fallback" },
 			["<S-Tab>"] = { "snippet_backward", "fallback" },
-			["<esc>"] = { "cancel", "fallback" },
+            -- ["<esc>"] = { "cancel", "fallback" },
 		},
 		appearance = {
 			-- Sets the fallback highlight groups to nvim-cmp's highlight groups
