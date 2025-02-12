@@ -7,30 +7,18 @@ return {
 			vim.api.nvim_set_hl(0, "GitSignsCurrentLineBlame", { link = "Comment" })
 			require("gitsigns").setup({
 				signs = {
-					add = { hl = "GitSignsAdd", text = "▎", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
+					add = { text = "▎" },
 					change = {
-						hl = "GitSignsChange",
 						text = "▎",
-						numhl = "GitSignsChangeNr",
-						linehl = "GitSignsChangeLn",
 					},
 					delete = {
-						hl = "GitSignsDelete",
 						text = "_",
-						numhl = "GitSignsDeleteNr",
-						linehl = "GitSignsDeleteLn",
 					},
 					topdelete = {
-						hl = "GitSignsDelete",
 						text = "‾",
-						numhl = "GitSignsDeleteNr",
-						linehl = "GitSignsDeleteLn",
 					},
 					changedelete = {
-						hl = "GitSignsChange",
 						text = "▎",
-						numhl = "GitSignsChangeNr",
-						linehl = "GitSignsChangeLn",
 					},
 				},
 				signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
@@ -112,7 +100,7 @@ return {
 						gitsigns.diffthis("~")
 					end, { desc = "Diff this ~" })
 
-                    -- Toggle Virtual Text
+					-- Toggle Virtual Text
 					map("n", "<leader>vb", gitsigns.toggle_current_line_blame, { desc = "Toggle current line blame" })
 					map("n", "<leader>vd", gitsigns.toggle_deleted, { desc = "Toggle deleted" })
 
