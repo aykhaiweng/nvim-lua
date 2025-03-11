@@ -24,9 +24,9 @@ return {
 				"qf",
 				"noice",
 			}
-			local section_separators = { left = "", right = "" }
-			local alt_section_separators = { left = "", right = "" }
-			local sub_section_separators = { left = "", right = "" }
+			-- local section_separators = { left = "", right = "" }
+			-- local alt_section_separators = { left = "", right = "" }
+			-- local sub_section_separators = { left = "", right = "" }
 			-- local sub_section_separators = { left = "", right = "" }
 			-- local section_separators = { left = '', right = '' }
 			return {
