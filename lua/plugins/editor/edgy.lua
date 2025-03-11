@@ -12,7 +12,7 @@ return {
 			},
             -- stylua: ignore
             {
-                "<leader>wE",
+                "<leader>we",
                 function()
                     require("edgy").select()
                 end,
