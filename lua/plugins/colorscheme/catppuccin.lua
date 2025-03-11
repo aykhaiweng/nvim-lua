@@ -82,6 +82,7 @@ return {
 					NeoTreeNormalNC = { bg = sidebar_bg, },
 					--- Outline
 					OutlineCurrent = { bg = "#2a2b3c", fg = "#a6e3a1", style = { "italic", "bold" } },
+					OutlineGuides = { fg = c.base },
 					--- Treesitter
 					TreesitterContext = { bg = number_column_background, style = { "bold" } },
 					TreesitterContextLineNumber = { bg = number_column_background, style = {} },
@@ -117,7 +118,7 @@ return {
 			},
 			navic = {
 				enabled = true,
-				custom_bg = "NONE", -- "lualine" will set background to mantle
+                custom_bg = "#181825",
 			},
 			harpoon = true,
 			neogit = true,
