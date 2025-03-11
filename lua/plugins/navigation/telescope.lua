@@ -3,7 +3,7 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		branch = "0.1.x",
-        lazy = true,
+		lazy = true,
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons",
@@ -45,48 +45,43 @@ return {
 		config = function()
 			local actions = require("telescope.actions")
 
-			-- extensions
-			require("telescope").load_extension("ui-select")
-			require("telescope").load_extension("fzf")
-			require("telescope").load_extension("live_grep_args")
-
 			-- setup
 			require("telescope").setup({
 				defaults = {
-                    file_ignore_patterns = {
-                        "^.git/",
-                        "/node_modules",
-                        "__pycache__"
-                    },
-                    color_devicons = true,
+					file_ignore_patterns = {
+						"^.git/",
+						"/node_modules",
+						"__pycache__",
+					},
+					color_devicons = true,
 					prompt_prefix = "   ",
 					path_display = { "truncate" },
 					mappings = {
 						i = {
 							["<ESC>"] = actions.close,
-                            ["<C-c>"] = actions.close,
-                            ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
+							["<C-c>"] = actions.close,
+							["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
 						},
 					},
-                    sorting_strategy = "ascending",
-                    selection_strategy = "closest",
-                    -- layout_strategy = "vertical",
+					sorting_strategy = "ascending",
+					selection_strategy = "closest",
+					-- layout_strategy = "vertical",
 					layout_config = {
-                        vertical = {
-                            prompt_position = "top",
-                            width = {
-                                0.6,
-                                max = 120
-                            }
-                        },
-                        horizontal = {
-                            prompt_position = "top",
-                            width = {
-                                0.8,
-                                max = 160,
-                            },
-                        },
-                        preview_cutoff = 10
+						vertical = {
+							prompt_position = "top",
+							width = {
+								0.6,
+								max = 120,
+							},
+						},
+						horizontal = {
+							prompt_position = "top",
+							width = {
+								0.8,
+								max = 160,
+							},
+						},
+						preview_cutoff = 10,
 					},
 				},
 				pickers = {
@@ -104,6 +99,11 @@ return {
 					},
 				},
 			})
+
+			-- extensions
+			require("telescope").load_extension("ui-select")
+			require("telescope").load_extension("fzf")
+			require("telescope").load_extension("live_grep_args")
 		end,
 	},
 }

@@ -109,7 +109,8 @@ return {
 			nvimtree = true,
 			neotree = true,
 			treesitter = true,
-			notify = false,
+            blink_cmp = true,
+			notify = true,
 			mini = {
 				enabled = true,
 				indentscope_color = "",
@@ -138,7 +139,7 @@ return {
 					ok = { "underline" },
 				},
 				inlay_hints = {
-					background = false,
+					background = true,
 				},
 			},
 			-- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)

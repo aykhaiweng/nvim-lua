@@ -49,10 +49,10 @@ return {
 		end,
 	},
 	-- Treesitter Context
-	{
-		"nvim-treesitter/nvim-treesitter-context",
-		event = { "BufReadPre", "BufNewFile" },
-	},
+	-- {
+	-- 	"nvim-treesitter/nvim-treesitter-context",
+	-- 	event = { "BufReadPre", "BufNewFile" },
+	-- },
 	-- Playground
 	{
 		"nvim-treesitter/playground",

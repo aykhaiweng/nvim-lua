@@ -17,15 +17,12 @@ return {
 			["<C-n>"] = { "show", "select_next", "fallback" },
 			["<C-b>"] = { "scroll_documentation_up", "fallback" },
 			["<C-f>"] = { "show_documentation", "scroll_documentation_down", "fallback" },
+			["<C-l>"] = { "show_signature", "fallback" },
 			["<Tab>"] = { "snippet_forward", "fallback" },
 			["<S-Tab>"] = { "snippet_backward", "fallback" },
             -- ["<esc>"] = { "cancel", "fallback" },
 		},
 		appearance = {
-			-- Sets the fallback highlight groups to nvim-cmp's highlight groups
-			-- Useful for when your theme doesn't support blink.cmp
-			-- Will be removed in a future release
-			use_nvim_cmp_as_default = true,
 			-- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
 			-- Adjusts spacing to ensure icons are aligned
 			nerd_font_variant = "mono",
@@ -66,14 +63,17 @@ return {
 			documentation = { auto_show = true, auto_show_delay_ms = 500 },
 
 			-- Display a preview of the selected item on the current line
-			ghost_text = { enabled = false },
+			ghost_text = { enabled = true },
 		},
+
+        cmdline = {
+            enabled = true,
+            sources = { "lsp", "path", "buffer" }
+        },
 
 		sources = {
 			-- Remove 'buffer' if you don't want text completions, by default it's only enabled when LSP returns no items
 			default = { "lsp", "path", "snippets", "buffer" },
-			-- Disable cmdline completions
-			cmdline = { "lsp", "path", "snippets", "buffer" },
 		},
 
 		-- Experimental signature help support
