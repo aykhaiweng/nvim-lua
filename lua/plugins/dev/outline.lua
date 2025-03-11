@@ -38,7 +38,7 @@ return {
 				winhl = "Normal:EdgyNormal",
 			},
 			symbol_folding = {
-				autofold_depth = 99,
+				autofold_depth = 2,
 				auto_unfold = {
 					hovered = true,
 				},
