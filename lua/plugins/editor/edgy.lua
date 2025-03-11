@@ -4,13 +4,6 @@ return {
 		event = "VeryLazy",
 		keys = {
 			{
-				"<leader>ww",
-				function()
-					require("edgy").toggle()
-				end,
-				desc = "Edgy Toggle",
-			},
-			{
 				"<C-b>",
 				function()
 					require("edgy").toggle()
