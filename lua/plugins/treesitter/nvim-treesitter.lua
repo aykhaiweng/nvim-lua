@@ -7,7 +7,7 @@ return {
 			require("nvim-treesitter.configs").setup({
 				-- A list of parser names, or "all" (the four listed parsers should always be installed)
 				ensure_installed = {
-                    "gitignore",
+					"gitignore",
 					"dockerfile",
 					"lua",
 					"vim",
@@ -41,11 +41,12 @@ return {
 				},
 			})
 
-			-- Folding fun times
+			-- -- Folding fun times
 			vim.opt.foldmethod = "expr"
-			vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-			vim.opt.foldlevelstart = 99
-			vim.opt.foldlevel = 99
+			vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+			-- vim.opt.foldtext = "v:lua.vim.treesitter.foldtext()"
+			-- vim.opt.foldlevelstart = 99
+			-- vim.opt.foldlevel = 99
 		end,
 	},
 	-- Treesitter Context
@@ -66,7 +67,7 @@ return {
 	-- Fixing % motions
 	{
 		"yorickpeterse/nvim-tree-pairs",
-        enabled = false,
+		enabled = false,
 		event = { "BufReadPre", "BufNewFile" },
 		config = function(_, opts)
 			require("tree-pairs").setup(opts)

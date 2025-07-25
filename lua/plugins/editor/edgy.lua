@@ -26,10 +26,10 @@ return {
 				},
 				options = {
 					left = {
-						size = 50,
+						size = 45,
 					},
 					right = {
-						size = 50,
+						size = 45,
 					},
 					bottom = {
 						size = 20,
@@ -66,7 +66,7 @@ return {
 					{
 						title = "Outline",
 						ft = "Outline",
-						pinned = true,
+						pinned = false,
 						open = function()
 							vim.cmd("OutlineOpen")
 						end,

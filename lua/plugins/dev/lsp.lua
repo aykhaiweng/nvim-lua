@@ -130,6 +130,7 @@ local lsp_config = function()
 						"CursorMovedI",
 						"BufHidden",
 						"InsertCharPre",
+                        "InsertEnter",
 						"WinLeave",
 					},
 				})
