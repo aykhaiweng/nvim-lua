@@ -1,6 +1,3 @@
--- Changing the leader symbol
--- vim.g.mapleader = " "
-
 -- Bind C-c to <Esc>
 vim.keymap.set("i", "<C-c>", "<Esc>")
 vim.keymap.set("v", "<C-c>", "<Esc>")
@@ -76,4 +73,4 @@ vim.keymap.set("n", "<leader><space>", "za", { desc = "Toggle fold under cursor"
 -- vim.keymap.set("n", "<CR>", "za", {desc = "Toggle fold under cursor"})
 
 -- Terminal
-vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit out of Terminal Insert" })
+-- vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit out of Terminal Insert" })

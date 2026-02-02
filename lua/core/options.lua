@@ -80,3 +80,10 @@ vim.opt.updatetime = 100
 -- vim.cmd([[ set guicursor+=i-ci-ve:ver25 ]])
 -- vim.cmd([[ set guicursor+=r-cr:block-Cursor ]])
 -- vim.cmd([[ set guicursor+=a:blinkoff400-blinkon250 ]])
+
+
+-- Start autoinsert
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+  pattern = "term://*",
+  command = "startinsert",
+})
