@@ -25,7 +25,7 @@ return {
 				{ "<leader>po", builtin.oldfiles, "n", desc = "Open recent" },
 				{ "<C-p>", builtin.find_files, "n", desc = "Find files" },
 				{
-					"<C-f>",
+                                        "<C-F>",
 					"<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
 					"n",
 					desc = "Live grep",
