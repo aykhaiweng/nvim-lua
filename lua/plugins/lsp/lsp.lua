@@ -42,7 +42,6 @@ local lsp_config = function()
 		desc = "LSP actions",
 		callback = function(event)
 			local opts = { buffer = event.buf }
-			vim.o.winborder = "rounded"
 
 			-- these will be buffer-local keybindings
 			-- because they only work if you have an active language server
@@ -55,12 +54,6 @@ local lsp_config = function()
 			vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", opts)
 			vim.keymap.set("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
 			vim.keymap.set("i", "<C-s>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
-
-			-- automatically enable autocompletion
-			local client = vim.lsp.get_client_by_id(event.data.client_id)
-			if client:supports_method("textDocument/completion") then
-				vim.lsp.completion.enable(true, client.id, event.buf, { autotrigger = true })
-			end
 
 			-- diagnostics
 			vim.diagnostic.config({
