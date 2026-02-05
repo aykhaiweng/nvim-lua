@@ -25,7 +25,7 @@ return {
 				{ "<leader>po", builtin.oldfiles, "n", desc = "Open recent" },
 				{ "<C-p>", builtin.find_files, "n", desc = "Find files" },
 				{
-                                        "<C-F>",
+					"<C-F>",
 					"<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
 					"n",
 					desc = "Live grep",
@@ -49,6 +49,7 @@ return {
 				"node_modules/",
 				"__pycache__/",
 				"venv/",
+				".DS_Store",
 			}
 
 			-- setup
@@ -66,6 +67,10 @@ return {
 						},
 					},
 					sorting_strategy = "ascending",
+                    sorter = require('telescope.sorters').get_generic_fuzzy_sorter(),
+					tiebreak = function(current_entry, existing_entry, _)
+						return current_entry.ordinal < existing_entry.ordinal
+					end,
 					selection_strategy = "closest",
 					vimgrep_arguments = {
 						"rg",
@@ -101,6 +106,9 @@ return {
 					find_files = {
 						hidden = true,
 						no_ignore = true,
+						-- additional_args = function(_)
+						-- 	return { "--sort", "path" }
+						-- end,
 					},
 					live_grep = {
 						file_ignore_patterns = default_file_ignore_patterns,
@@ -114,9 +122,9 @@ return {
 				extensions = {
 					fzf = {
 						fuzzy = true, -- false will only do exact matching
-						override_generic_sorter = false, -- override the generic sorter
-						override_file_sorter = false, -- override the file sorter
 						case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+						override_generic_sorter = true, -- override the generic sorter
+						override_file_sorter = true, -- override the file sorter
 					},
 				},
 			})
