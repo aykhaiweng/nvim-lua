@@ -24,17 +24,10 @@ return {
 				"qf",
 				"noice",
 			}
-			-- local section_separators = { left = "", right = "" }
-			-- local alt_section_separators = { left = "", right = "" }
-			-- local sub_section_separators = { left = "", right = "" }
-			-- local sub_section_separators = { left = "", right = "" }
-			-- local section_separators = { left = '', right = '' }
 			return {
 				options = {
 					icons_enabled = true,
 					draw_empty = true,
-					-- section_separators = { left = section_separators.right, right = section_separators.left },
-					-- component_separators = { left = sub_section_separators.right, right = sub_section_separators.left },
 					disabled_filetypes = {
 						-- statusline = disabled_filetypes,
 						winbar = disabled_filetypes,
@@ -43,30 +36,36 @@ return {
 					always_divide_middle = true,
 					globalstatus = true,
 					refresh = {
-						statusline = 100,
-						tabline = 100,
-						winbar = 100,
+						statusline = 1000,
+						tabline = 1000,
+						winbar = 1000,
+						refresh_time = 16, -- ~60fps
+						events = {
+							"WinEnter",
+							"BufEnter",
+							"BufWritePost",
+							"SessionLoadPost",
+							"FileChangedShellPost",
+							"VimResized",
+							"Filetype",
+							"CursorMoved",
+							"CursorMovedI",
+							"ModeChanged",
+						},
 					},
+					section_separators = "",
+					component_separators = "",
 				},
 				sections = {
 					lualine_a = {
 						{
 							"mode",
-							-- separator = { right = section_separators.right },
 							right_padding = 2,
 						},
 					},
 					lualine_b = {
-						{
-							function()
-								return vim.g.remote_neovim_host and ("Remote: %s"):format(vim.uv.os_gethostname()) or ""
-							end,
-							padding = { right = 1, left = 1 },
-							-- separator = { left = section_separators.left, right = section_separators.right },
-						},
 						"branch",
 						"diff",
-						-- "diagnostics",
 					},
 					lualine_c = {
 						{
@@ -75,16 +74,14 @@ return {
 							newfile_status = true,
 							path = 1,
 							shorting_target = 80,
-							-- separator = { right = alt_section_separators.right },
 						},
 						{
-							-- function()
-							-- 	return require("nvim-navic").get_location()
-							-- end,
-							-- cond = function()
-							-- 	return package.loaded["nvim-navic"] and require("nvim-navic").is_available()
-							-- end,
-							--                      color_correction = nil,
+							function()
+								return require("nvim-navic").get_location()
+							end,
+							cond = function()
+								return package.loaded["nvim-navic"] and require("nvim-navic").is_available()
+							end,
 						},
 					},
 					lualine_x = {},
@@ -108,17 +105,7 @@ return {
 					lualine_y = {},
 					lualine_z = {},
 				},
-				tabline = {
-					lualine_a = {
-						{
-							"tabs",
-							mode = 0,
-							path = 1,
-							-- separator = { right = alt_section_separators.right },
-							-- component_separator = { right = alt_section_separators.right },
-						},
-					},
-				},
+                tabline = {},
 				winbar = {
 					lualine_a = {
 						{
@@ -127,26 +114,18 @@ return {
 							newfile_status = true,
 							path = 1,
 							shorting_target = 1,
-							-- separator = { right = alt_section_separators.right },
-						},
-					},
-					lualine_b = {
-						{
-							"diagnostics",
-							-- separator = { right = alt_section_separators.right },
 						},
 					},
 					lualine_c = {
-						-- {
-						-- 	function()
-						-- 		return require("nvim-navic").get_location()
-						-- 	end,
-						-- 	cond = function()
-						-- 		return package.loaded["nvim-navic"] and require("nvim-navic").is_available()
-						-- 	end,
-						-- },
+						{ "diagnostics" },
 					},
-					extensions = {},
+					lualine_z = {
+						{
+							"tabs",
+							mode = 0,
+							path = 1,
+						},
+					},
 				},
 				inactive_winbar = {
 					lualine_a = {
@@ -156,7 +135,6 @@ return {
 							newfile_status = true,
 							path = 1,
 							shorting_target = 1000,
-							-- separator = { right = alt_section_separators.right },
 						},
 					},
 					lualine_b = {
@@ -172,8 +150,7 @@ return {
 			-- vim options
 			vim.cmd("set noshowmode")
 			vim.cmd("set showcmd")
-			-- vim.opt.laststatus = 1 -- 3 to span across
-			-- vim.opt.showtabline = 2
+			vim.opt.showtabline = 0
 		end,
 	},
 }
