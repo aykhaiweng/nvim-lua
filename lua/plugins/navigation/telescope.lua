@@ -44,15 +44,17 @@ return {
 		end,
 		config = function()
 			local actions = require("telescope.actions")
+			local default_file_ignore_patterns = {
+				"^.git/",
+				"node_modules/",
+				"__pycache__/",
+				"venv/",
+			}
 
 			-- setup
 			require("telescope").setup({
 				defaults = {
-					file_ignore_patterns = {
-						"^.git/",
-						"/node_modules",
-						"__pycache__",
-					},
+					file_ignore_patterns = default_file_ignore_patterns,
 					color_devicons = true,
 					prompt_prefix = "   ",
 					path_display = { "truncate" },
@@ -65,7 +67,18 @@ return {
 					},
 					sorting_strategy = "ascending",
 					selection_strategy = "closest",
-					-- layout_strategy = "vertical",
+					vimgrep_arguments = {
+						"rg",
+						"--color=never",
+						"--no-heading",
+						"--with-filename",
+						"--line-number",
+						"--column",
+						"--smart-case",
+						"--hidden", -- This flag allows hidden files
+						"--glob", -- This allows us to exclude specific folders
+						"!{.git/*}", -- Exclude the .git directory (recommended)
+					},
 					layout_config = {
 						vertical = {
 							prompt_position = "top",
@@ -88,6 +101,14 @@ return {
 					find_files = {
 						hidden = true,
 						no_ignore = true,
+					},
+					live_grep = {
+						file_ignore_patterns = default_file_ignore_patterns,
+						hidden = true,
+						no_ignore = true,
+						additional_args = function(_)
+							return { "--hidden" }
+						end,
 					},
 				},
 				extensions = {
