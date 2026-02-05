@@ -142,7 +142,7 @@ return {
 				-- Whether to automatically show the window when new completion items are available
 				menu = {
 					auto_show = true,
-					border = "rounded",
+					-- border = "rounded",
 				},
 				-- Displays a preview of the selected item on the current line
 				ghost_text = {
@@ -160,12 +160,12 @@ return {
 				"buffer",
 			},
 		},
-		documentation = {
-			auto_show = true,
-			window = {
-				border = "rounded", -- Options: "single", "double", "rounded", "solid", "shadow"
-			},
-		},
+		-- documentation = {
+		-- 	auto_show = true,
+		-- 	window = {
+		-- 		border = "rounded", -- Options: "single", "double", "rounded", "solid", "shadow"
+		-- 	},
+		-- },
 
 		signature = {
 			enabled = true,
