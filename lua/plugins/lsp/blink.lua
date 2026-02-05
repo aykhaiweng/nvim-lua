@@ -140,19 +140,39 @@ return {
 					},
 				},
 				-- Whether to automatically show the window when new completion items are available
-				menu = { auto_show = false },
+				menu = {
+					auto_show = true,
+					border = "rounded",
+				},
 				-- Displays a preview of the selected item on the current line
-				ghost_text = { enabled = true },
+				ghost_text = {
+					enabled = true,
+				},
 			},
 		},
 
 		sources = {
 			-- Remove 'buffer' if you don't want text completions, by default it's only enabled when LSP returns no items
-			default = { "lsp", "path", "snippets", "buffer" },
+			default = {
+				"lsp",
+				"path",
+				"snippets",
+				"buffer",
+			},
+		},
+		documentation = {
+			auto_show = true,
+			window = {
+				border = "rounded", -- Options: "single", "double", "rounded", "solid", "shadow"
+			},
 		},
 
-		-- Experimental signature help support
-		signature = { enabled = true, window = { show_documentation = true } },
+		signature = {
+			enabled = true,
+			window = {
+				show_documentation = true,
+			},
+		},
 	},
 	config = function(_, opts)
 		local blink = require("blink.cmp")
@@ -172,7 +192,11 @@ return {
 			end,
 		})
 
+
 		-- Custom trigger but only for Insert
 		vim.keymap.set("i", "<C-n>", blink.show, { desc = "Show completion" })
+
+		-- vim.cmd("set completeopt=noselect")
+		vim.o.winborder = "rounded"
 	end,
 }
