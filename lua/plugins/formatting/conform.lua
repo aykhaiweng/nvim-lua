@@ -11,12 +11,13 @@ return {
 					conform.format({ async = true, timeout_ms = 3000 })
 				end,
 				desc = "Conform in file or range (visual)",
-                mode = {"v", "n"}
+				mode = { "v", "n" },
 			},
 		}
 	end,
 	opts = {
 		formatters_by_ft = {
+			bash = { "sh" },
 			javascript = { "prettierd" },
 			typescript = { "prettierd" },
 			javascriptreact = { "prettierd" },

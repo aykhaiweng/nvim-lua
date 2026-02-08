@@ -105,7 +105,15 @@ return {
 					lualine_y = {},
 					lualine_z = {},
 				},
-                tabline = {},
+				tabline = {
+					lualine_a = {
+						{
+							"tabs",
+							mode = 0,
+							path = 1,
+						},
+					},
+				},
 				winbar = {
 					lualine_a = {
 						{
@@ -119,13 +127,7 @@ return {
 					lualine_c = {
 						{ "diagnostics" },
 					},
-					lualine_z = {
-						{
-							"tabs",
-							mode = 0,
-							path = 1,
-						},
-					},
+					lualine_z = {},
 				},
 				inactive_winbar = {
 					lualine_a = {
