@@ -69,7 +69,7 @@ return {
 					DiagnosticSignWarn = { bg = sign_column_background },
 					DiagnosticSignError = { bg = sign_column_background },
 					--- PLUGINS
-                    lualine_c_normal = { bg = sidebar_bg },
+                    -- lualine_c_normal = { bg = sidebar_bg },
 					--- Edgy stuff
 					EdgyNormal = { bg = sidebar_bg },
 					EdgyTitle = { bg = sidebar_bg, style = { "bold" } },
