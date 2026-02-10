@@ -71,7 +71,7 @@ vim.opt.isfname:append("@-@")
 vim.opt.updatetime = 100
 
 -- clipboard
--- vim.opt.clipboard = "unnamed"
+vim.opt.clipboard = "unnamedplus"
 
 -- cursor
 -- vim.cmd([[ let &t_SI = "\e[6 q" ]])
