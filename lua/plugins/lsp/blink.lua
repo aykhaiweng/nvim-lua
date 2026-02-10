@@ -160,13 +160,6 @@ return {
 				"buffer",
 			},
 		},
-		-- documentation = {
-		-- 	auto_show = true,
-		-- 	window = {
-		-- 		border = "rounded", -- Options: "single", "double", "rounded", "solid", "shadow"
-		-- 	},
-		-- },
-
 		signature = {
 			enabled = true,
 			window = {
