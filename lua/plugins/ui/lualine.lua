@@ -115,7 +115,7 @@ return {
 					},
 				},
 				winbar = {
-					lualine_a = {
+					lualine_b = {
 						{
 							"filename",
 							file_status = true,
