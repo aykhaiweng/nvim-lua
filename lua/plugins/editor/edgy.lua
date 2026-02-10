@@ -10,14 +10,13 @@ return {
 				end,
 				desc = "Edgy Toggle",
 			},
-            -- stylua: ignore
-            {
-                "<leader>we",
-                function()
-                    require("edgy").select()
-                end,
-                desc = "Edgy Select Window",
-            },
+			{
+				"<leader>we",
+				function()
+					require("edgy").select()
+				end,
+				desc = "Edgy Select Window",
+			},
 		},
 		opts = function()
 			local opts = {
@@ -26,10 +25,10 @@ return {
 				},
 				options = {
 					left = {
-						size = 45,
+						size = 40,
 					},
 					right = {
-						size = 45,
+						size = 40,
 					},
 					bottom = {
 						size = 20,
@@ -37,20 +36,34 @@ return {
 				},
 				left = {
 					{
-						title = "Files",
-						ft = "neo-tree",
-						pinned = true,
-                        filter = function(buf) return vim.b[buf].neo_tree_source == "filesystem" end,
-						open = "Neotree position=left filesystem",
-						size = { height = 0.6 },
-					},
-					{
 						title = "Git",
 						ft = "neo-tree",
 						pinned = true,
-                        filter = function(buf) return vim.b[buf].neo_tree_source == "git_status" end,
-						open = "Neotree position=top git_status",
-						size = { height = 0.1 },
+						filter = function(buf)
+							return vim.b[buf].neo_tree_source == "git_status"
+						end,
+						open = "Neotree position=bottom git_status",
+						size = { height = 0.15 },
+					},
+					{
+						title = "Buffers",
+						ft = "neo-tree",
+						filter = function(buf)
+							return vim.b[buf].neo_tree_source == "buffers"
+						end,
+						pinned = true,
+						open = "Neotree position=top buffers",
+						size = { height = 0.15 },
+					},
+					{
+						title = "Files",
+						ft = "neo-tree",
+						filter = function(buf)
+							return vim.b[buf].neo_tree_source == "filesystem"
+						end,
+						pinned = true,
+						open = "Neotree position=left filesystem",
+						size = { height = 0.7 },
 					},
 				},
 				right = {
@@ -63,12 +76,13 @@ return {
 						end,
 						size = { height = 0.5 },
 					},
-                },
+				},
 				bottom = {
 					"qf",
 					"loclist",
 					"fugitive",
 					"NeogitStatus",
+					"trouble",
 					"help",
 				},
 				keys = {
@@ -95,7 +109,7 @@ return {
 		config = function(_, opts)
 			require("edgy").setup(opts)
 
-            -- vim options
+			-- vim options
 			vim.opt.laststatus = 3
 			vim.opt.splitkeep = "screen"
 		end,
