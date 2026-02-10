@@ -2,7 +2,7 @@ return {
 	-- Telescope
 	{
 		"nvim-telescope/telescope.nvim",
-		branch = "0.1.x",
+		branch = "master",
 		lazy = true,
 		dependencies = {
 			"nvim-lua/plenary.nvim",
@@ -99,7 +99,6 @@ return {
 								max = 160,
 							},
 						},
-						preview_cutoff = 10,
 					},
 				},
 				pickers = {
