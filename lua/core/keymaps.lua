@@ -53,9 +53,6 @@ vim.keymap.set("v", "D", '"_d', { desc = "Delete to empty register" })
 -- Cuts to empty register
 vim.keymap.set("v", "X", '"_x', { desc = "Cut to empty register" })
 
--- tmux-sessionizer
--- vim.keymap.set("n", "<leader>po", "<cmd>silent !tmux neww tms<CR>")
-
 -- Imba substitute command
 vim.keymap.set(
 	"n",
@@ -76,7 +73,6 @@ vim.keymap.set(
 
 -- Folding
 vim.keymap.set("n", "<leader><space>", "za", { desc = "Toggle fold under cursor" })
--- vim.keymap.set("n", "<CR>", "za", {desc = "Toggle fold under cursor"})
 
 -- Terminal
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit out of Terminal Insert" })
