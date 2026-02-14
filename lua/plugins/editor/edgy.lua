@@ -36,6 +36,16 @@ return {
 				},
 				left = {
 					{
+						title = "Files",
+						ft = "neo-tree",
+						filter = function(buf)
+							return vim.b[buf].neo_tree_source == "filesystem"
+						end,
+						pinned = true,
+						open = "Neotree position=left filesystem",
+						size = { height = 0.7 },
+					},
+					{
 						title = "Git",
 						ft = "neo-tree",
 						pinned = true,
@@ -54,16 +64,6 @@ return {
 						pinned = true,
 						open = "Neotree position=top buffers",
 						size = { height = 0.15 },
-					},
-					{
-						title = "Files",
-						ft = "neo-tree",
-						filter = function(buf)
-							return vim.b[buf].neo_tree_source == "filesystem"
-						end,
-						pinned = true,
-						open = "Neotree position=left filesystem",
-						size = { height = 0.7 },
 					},
 				},
 				right = {
