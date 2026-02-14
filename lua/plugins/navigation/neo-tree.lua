@@ -11,7 +11,7 @@ return {
 			version = "2.*",
 			config = function()
 				require("window-picker").setup({
-                    hint = 'floating-big-letter',
+					hint = "floating-big-letter",
 					filter_rules = {
 						include_current_win = false,
 						autoselect_one = true,
@@ -28,9 +28,9 @@ return {
 		},
 	},
 	opts = {
-        rocks = {
-            hererocks = false
-        },
+		rocks = {
+			hererocks = false,
+		},
 		close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
 		popup_border_style = "rounded",
 		enable_git_status = true,
@@ -39,7 +39,7 @@ return {
 			"terminal",
 			"trouble",
 			"Trouble",
-            "Outline",
+			"Outline",
 			"qf",
 			"edgy",
 		}, -- when opening files, do not use windows containing these filetypes or buftypes
