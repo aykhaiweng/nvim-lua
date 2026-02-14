@@ -185,7 +185,6 @@ return {
 			end,
 		})
 
-
 		-- Custom trigger but only for Insert
 		vim.keymap.set("i", "<C-n>", blink.show, { desc = "Show completion" })
 
