@@ -19,6 +19,7 @@ return {
 		formatters_by_ft = {
 			bash = { "shfmt" },
 			sh = { "shfmt" },
+			zsh = { "shfmt" },
 			javascript = { "prettierd" },
 			typescript = { "prettierd" },
 			javascriptreact = { "prettierd" },
