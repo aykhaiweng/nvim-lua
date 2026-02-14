@@ -30,76 +30,76 @@ return {
 			-- miscs = {}, -- Uncomment to turn off hard-coded styles
 		},
 		highlight_overrides = {
-			mocha = function(c)
-				-- https://github.com/catppuccin/catppuccin/blob/main/docs/style-guide.md
-                local darken = require("catppuccin.utils.colors").darken
-                local lighten = require("catppuccin.utils.colors").lighten
-
-				local sign_column_background = c.mantle
-				local number_column_background = c.mantle
-				local primary_bg = c.base
-				local sidebar_bg = c.mantle
-                local cursor_line = darken(primary_bg, 1.2)
-				return {
-					--- NATIVE
-                    Normal = { bg = primary_bg },
-                    NormalNC = { bg = primary_bg },
-                    NormalFloat = { bg = sidebar_bg },
-                    Cursor = { bg = "blue", fg = primary_bg },
-                    CursorLine = { bg = cursor_line },
-					-- Borders
-					WinSeparator = { bg = sidebar_bg, fg = lighten(sidebar_bg, 0.95) },
-					NeoTreeWinSeparator = { bg = sidebar_bg, fg = lighten(sidebar_bg, 0.95) },
-					-- LSP Stuff
-					LspSignatureActiveParameter = { bg = c.surface0, fg = c.yellow },
-					LspInlayHint = { bg = c.crust, style = { "italic" } },
-					-- Column Stuff
-					SignColumn = { bg = sign_column_background },
-					SignColumnSB = { bg = sign_column_background },
-					CursorLineNr = { bg = number_column_background, fg = c.yellow, style = { "bold" } },
-					LineNr = { bg = number_column_background },
-					-- GitSigns
-					GitSignsAdd = { bg = sign_column_background },
-					GitSignsChange = { bg = sign_column_background },
-					GitSignsDelete = { bg = sign_column_background },
-					-- DiagnosticSign
-					DiagnosticSignOK = { bg = sign_column_background },
-					DiagnosticSignHint = { bg = sign_column_background },
-					DiagnosticSignInfo = { bg = sign_column_background },
-					DiagnosticSignWarn = { bg = sign_column_background },
-					DiagnosticSignError = { bg = sign_column_background },
-					--- PLUGINS
-                    -- lualine_c_normal = { bg = sidebar_bg },
-					--- Edgy stuff
-					EdgyNormal = { bg = sidebar_bg },
-					EdgyTitle = { bg = sidebar_bg, style = { "bold" } },
-					EdgyIcon = { bg = sidebar_bg },
-					EdgyIconActive = { bg = sidebar_bg },
-					EdgyWinBar = { bg = sidebar_bg },
-					EdgyWinBarNC = { bg = sidebar_bg },
-					--- Neotree
-					NeoTreeNormal = { bg = sidebar_bg, },
-					NeoTreeNormalNC = { bg = sidebar_bg, },
-					--- Outline
-					OutlineCurrent = { bg = "#2a2b3c", fg = "#a6e3a1", style = { "italic", "bold" } },
-					OutlineGuides = { fg = c.base },
-					--- Treesitter
-					TreesitterContext = { bg = number_column_background, style = { "bold" } },
-					TreesitterContextLineNumber = { bg = number_column_background, style = {} },
-					TreesitterContextBottom = { bg = number_column_background, style = { "bold" } },
-					TreesitterContextLineNumberBottom = { bg = number_column_background, style = {} },
-					--- Telescope
-					TelescopeNormal = { bg = sidebar_bg }, -- Generally the backgrounds
-					TelescopeBorder = { bg = sidebar_bg, fg = sidebar_bg }, -- All the borders
-					TelescopePromptTitle = { bg = c.pink, fg = sidebar_bg },
-					TelescopePromptNormal = { bg = c.base },
-					TelescopePromptPrefix = { bg = c.base },
-					TelescopePromptBorder = { bg = c.base, fg = c.base },
-					TelescopeResultsTitle = { bg = c.green, fg = sidebar_bg },
-					TelescopePreviewTitle = { bg = c.blue, fg = sidebar_bg },
-					TelescopePreviewNormal = { bg = primary_bg },
-				}
-			end,
+			-- mocha = function(c)
+			-- 	-- https://github.com/catppuccin/catppuccin/blob/main/docs/style-guide.md
+			--              local darken = require("catppuccin.utils.colors").darken
+			--              local lighten = require("catppuccin.utils.colors").lighten
+			--
+			-- 	local sign_column_background = c.mantle
+			-- 	local number_column_background = c.mantle
+			-- 	local primary_bg = c.base
+			-- 	local sidebar_bg = c.mantle
+			--              local cursor_line = darken(primary_bg, 1.2)
+			-- 	return {
+			-- 		--- NATIVE
+			--                  Normal = { bg = primary_bg },
+			--                  NormalNC = { bg = primary_bg },
+			--                  NormalFloat = { bg = sidebar_bg },
+			--                  Cursor = { bg = "blue", fg = primary_bg },
+			--                  CursorLine = { bg = cursor_line },
+			-- 		-- Borders
+			-- 		WinSeparator = { bg = sidebar_bg, fg = lighten(sidebar_bg, 0.95) },
+			-- 		NeoTreeWinSeparator = { bg = sidebar_bg, fg = lighten(sidebar_bg, 0.95) },
+			-- 		-- LSP Stuff
+			-- 		LspSignatureActiveParameter = { bg = c.surface0, fg = c.yellow },
+			-- 		LspInlayHint = { bg = c.crust, style = { "italic" } },
+			-- 		-- Column Stuff
+			-- 		SignColumn = { bg = sign_column_background },
+			-- 		SignColumnSB = { bg = sign_column_background },
+			-- 		CursorLineNr = { bg = number_column_background, fg = c.yellow, style = { "bold" } },
+			-- 		LineNr = { bg = number_column_background },
+			-- 		-- GitSigns
+			-- 		GitSignsAdd = { bg = sign_column_background },
+			-- 		GitSignsChange = { bg = sign_column_background },
+			-- 		GitSignsDelete = { bg = sign_column_background },
+			-- 		-- DiagnosticSign
+			-- 		DiagnosticSignOK = { bg = sign_column_background },
+			-- 		DiagnosticSignHint = { bg = sign_column_background },
+			-- 		DiagnosticSignInfo = { bg = sign_column_background },
+			-- 		DiagnosticSignWarn = { bg = sign_column_background },
+			-- 		DiagnosticSignError = { bg = sign_column_background },
+			-- 		--- PLUGINS
+			--                  -- lualine_c_normal = { bg = sidebar_bg },
+			-- 		--- Edgy stuff
+			-- 		EdgyNormal = { bg = sidebar_bg },
+			-- 		EdgyTitle = { bg = sidebar_bg, style = { "bold" } },
+			-- 		EdgyIcon = { bg = sidebar_bg },
+			-- 		EdgyIconActive = { bg = sidebar_bg },
+			-- 		EdgyWinBar = { bg = sidebar_bg },
+			-- 		EdgyWinBarNC = { bg = sidebar_bg },
+			-- 		--- Neotree
+			-- 		NeoTreeNormal = { bg = sidebar_bg, },
+			-- 		NeoTreeNormalNC = { bg = sidebar_bg, },
+			-- 		--- Outline
+			-- 		OutlineCurrent = { bg = "#2a2b3c", fg = "#a6e3a1", style = { "italic", "bold" } },
+			-- 		OutlineGuides = { fg = c.base },
+			-- 		--- Treesitter
+			-- 		TreesitterContext = { bg = number_column_background, style = { "bold" } },
+			-- 		TreesitterContextLineNumber = { bg = number_column_background, style = {} },
+			-- 		TreesitterContextBottom = { bg = number_column_background, style = { "bold" } },
+			-- 		TreesitterContextLineNumberBottom = { bg = number_column_background, style = {} },
+			-- 		--- Telescope
+			-- 		TelescopeNormal = { bg = sidebar_bg }, -- Generally the backgrounds
+			-- 		TelescopeBorder = { bg = sidebar_bg, fg = sidebar_bg }, -- All the borders
+			-- 		TelescopePromptTitle = { bg = c.pink, fg = sidebar_bg },
+			-- 		TelescopePromptNormal = { bg = c.base },
+			-- 		TelescopePromptPrefix = { bg = c.base },
+			-- 		TelescopePromptBorder = { bg = c.base, fg = c.base },
+			-- 		TelescopeResultsTitle = { bg = c.green, fg = sidebar_bg },
+			-- 		TelescopePreviewTitle = { bg = c.blue, fg = sidebar_bg },
+			-- 		TelescopePreviewNormal = { bg = primary_bg },
+			-- 	}
+			-- end,
 		},
 		color_overrides = {},
 		custom_highlights = {},
