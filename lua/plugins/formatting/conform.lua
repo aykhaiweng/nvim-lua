@@ -17,7 +17,8 @@ return {
 	end,
 	opts = {
 		formatters_by_ft = {
-			bash = { "sh" },
+			bash = { "shfmt" },
+			sh = { "shfmt" },
 			javascript = { "prettierd" },
 			typescript = { "prettierd" },
 			javascriptreact = { "prettierd" },
