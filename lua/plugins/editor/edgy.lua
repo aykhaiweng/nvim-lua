@@ -6,7 +6,14 @@ return {
 			{
 				"<C-b>",
 				function()
-					require("edgy").toggle()
+					require("edgy").toggle("left", { focus = false })
+				end,
+				desc = "Edgy Toggle",
+			},
+			{
+				"<C-S-B>",
+				function()
+					require("edgy").open({ focus = false })
 				end,
 				desc = "Edgy Toggle",
 			},
@@ -25,10 +32,10 @@ return {
 				},
 				options = {
 					left = {
-						size = 40,
+						size = 45,
 					},
 					right = {
-						size = 40,
+						size = 45,
 					},
 					bottom = {
 						size = 20,
@@ -78,6 +85,14 @@ return {
 					},
 				},
 				bottom = {
+					{
+						title = "Terminal",
+						ft = "toggleterm",
+						pinned = true,
+						filter = function(buf, win)
+							return vim.api.nvim_win_get_config(win).relative == ""
+						end,
+					},
 					"qf",
 					"loclist",
 					"fugitive",
