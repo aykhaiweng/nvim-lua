@@ -5,21 +5,21 @@ vim.keymap.set("v", "<C-c>", "<Esc>")
 vim.keymap.set("n", "Q", "<nop>", { desc = "DISABLED" })
 
 -- tabs
-vim.keymap.set("n", "<leader>tn", vim.cmd.tabnew, { desc = "Open new tab" })
-vim.keymap.set("n", "<leader>tj", vim.cmd.tabfirst, { desc = "Go to first tab" })
-vim.keymap.set("n", "<leader>tl", vim.cmd.tabnext, { desc = "Go to tab on right" })
 vim.keymap.set("n", "<leader>th", vim.cmd.tabprev, { desc = "Go to tab on the left" })
+vim.keymap.set("n", "<leader>tj", vim.cmd.tabfirst, { desc = "Go to first tab" })
 vim.keymap.set("n", "<leader>tk", vim.cmd.tablast, { desc = "Go to last tab" })
-vim.keymap.set("n", "<leader>tt", [[<C-w>T]], { desc = "Break out current file to new tab" })
+vim.keymap.set("n", "<leader>tl", vim.cmd.tabnext, { desc = "Go to tab on right" })
 vim.keymap.set("n", "<leader>tm", ":tabm ", { desc = "Move tab to index" })
+vim.keymap.set("n", "<leader>tn", vim.cmd.tabnew, { desc = "Open new tab" })
+vim.keymap.set("n", "<leader>tt", [[<C-w>T]], { desc = "Break out current file to new tab" })
 vim.keymap.set("n", "<leader>tx", vim.cmd.tabclose, { desc = "Close tab" })
 
 -- resize windows
-vim.keymap.set("n", "<M-l>", "<C-w>>", { desc = "Increase width" })
+vim.keymap.set("n", "<M-=>", "<C-w>=", { desc = "Standardize widths" })
 vim.keymap.set("n", "<M-h>", "<C-w><", { desc = "Decrease width" })
 vim.keymap.set("n", "<M-j>", "<C-w>-", { desc = "Increase height" })
 vim.keymap.set("n", "<M-k>", "<C-w>+", { desc = "Decrease height" })
-vim.keymap.set("n", "<M-=>", "<C-w>=", { desc = "Standardize widths" })
+vim.keymap.set("n", "<M-l>", "<C-w>>", { desc = "Increase width" })
 
 -- move cursor in edit mode
 vim.keymap.set("i", "<M-h>", "<left>", { desc = "Cursor left" })
@@ -31,9 +31,11 @@ vim.keymap.set("i", "<M-l>", "<right>", { desc = "Cursor right" })
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 -- visual line move -- It will automatically indent with =
+vim.keymap.set("n", "<leader>ff", "gg=G''", { desc = "Format using gg=G" })
+vim.keymap.set("v", "<leader>fs", ":'<,'>sort<CR>", { desc = "Sort lines under visual selection" })
+vim.keymap.set("v", "<leader>fS", ":'<,'>sort", { desc = "Sort lines under visual selection" })
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move selection up" })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move selection down" })
-vim.keymap.set("n", "<leader>ff", "gg=G''", { desc = "Format using gg=G" })
 
 -- Change behaviour of J to move bottom line to current line without
 -- moving the cursor
