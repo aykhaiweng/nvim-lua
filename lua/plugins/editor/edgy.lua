@@ -52,26 +52,26 @@ return {
 						open = "Neotree position=left filesystem",
 						size = { height = 0.7 },
 					},
-					{
-						title = "Git",
-						ft = "neo-tree",
-						pinned = true,
-						filter = function(buf)
-							return vim.b[buf].neo_tree_source == "git_status"
-						end,
-						open = "Neotree position=bottom git_status",
-						size = { height = 0.15 },
-					},
-					{
-						title = "Buffers",
-						ft = "neo-tree",
-						filter = function(buf)
-							return vim.b[buf].neo_tree_source == "buffers"
-						end,
-						pinned = true,
-						open = "Neotree position=top buffers",
-						size = { height = 0.15 },
-					},
+					-- {
+					-- 	title = "Git",
+					-- 	ft = "neo-tree",
+					-- 	pinned = true,
+					-- 	filter = function(buf)
+					-- 		return vim.b[buf].neo_tree_source == "git_status"
+					-- 	end,
+					-- 	open = "Neotree position=bottom git_status",
+					-- 	size = { height = 0.15 },
+					-- },
+					-- {
+					-- 	title = "Buffers",
+					-- 	ft = "neo-tree",
+					-- 	filter = function(buf)
+					-- 		return vim.b[buf].neo_tree_source == "buffers"
+					-- 	end,
+					-- 	pinned = true,
+					-- 	open = "Neotree position=top buffers",
+					-- 	size = { height = 0.15 },
+					-- },
 				},
 				right = {
 					{
@@ -88,8 +88,7 @@ return {
 					{
 						title = "Terminal",
 						ft = "toggleterm",
-						pinned = true,
-						filter = function(buf, win)
+						filter = function(buf, win)  -- noqa
 							return vim.api.nvim_win_get_config(win).relative == ""
 						end,
 					},

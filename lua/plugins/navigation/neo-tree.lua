@@ -28,9 +28,6 @@ return {
 		},
 	},
 	opts = {
-		rocks = {
-			hererocks = false,
-		},
 		close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
 		popup_border_style = "rounded",
 		enable_git_status = true,
@@ -45,13 +42,6 @@ return {
 		}, -- when opening files, do not use windows containing these filetypes or buftypes
 		sort_case_insensitive = false, -- used when sorting files and directories in the tree
 		sort_function = nil, -- use a custom function for sorting files and directories in the tree
-		-- sort_function = function (a,b)
-		--       if a.type == b.type then
-		--           return a.path > b.path
-		--       else
-		--           return a.type > b.type
-		--       end
-		--   end , -- this sorts files and directories descendantly
 		default_component_configs = {
 			container = {
 				enable_character_fade = true,
@@ -135,10 +125,6 @@ return {
 				enabled = false,
 			},
 		},
-		-- A list of functions, each representing a global custom command
-		-- that will be available in all sources (if not overridden in `opts[source_name].commands`)
-		-- see `:h neo-tree-custom-commands-global`
-		commands = {},
 		window = {
 			position = "left",
 			width = 40,
@@ -185,12 +171,6 @@ return {
 				["x"] = "cut_to_clipboard",
 				["p"] = "paste_from_clipboard",
 				["c"] = "copy", -- takes text input for destination, also accepts the optional config.show_path option like "add":
-				-- ["c"] = {
-				--  "copy",
-				--  config = {
-				--    show_path = "none" -- "none", "relative", "absolute"
-				--  }
-				--}
 				["m"] = "move", -- takes text input for destination, also accepts the optional config.show_path option like "add".
 				["q"] = "close_window",
 				["R"] = "refresh",
@@ -200,7 +180,6 @@ return {
 				["i"] = "show_file_details",
 			},
 		},
-		nesting_rules = {},
 		filesystem = {
 			filtered_items = {
 				visible = false, -- when true, they will just be displayed differently than normal items
@@ -233,18 +212,13 @@ return {
 				},
 			},
 			follow_current_file = {
-				enabled = false, -- This will find and focus the file in the active buffer every time
+				enabled = true, -- This will find and focus the file in the active buffer every time
 				--               -- the current file is changed while the tree is open.
 				leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
 			},
 			group_empty_dirs = false, -- when true, empty folders will be grouped together
 			hijack_netrw_behavior = "open_default", -- netrw disabled, opening a directory opens neo-tree
-			-- in whatever position is specified in window.position
-			-- "open_current",  -- netrw disabled, opening a directory opens within the
-			-- window like netrw would, regardless of window.position
-			-- "disabled",    -- netrw left alone, neo-tree does not handle opening dirs
 			use_libuv_file_watcher = true, -- This will use the OS level file watchers to detect changes
-			-- instead of relying on nvim autocmd events.
 			window = {
 				mappings = {
 					["<bs>"] = "navigate_up",
@@ -266,14 +240,12 @@ return {
 					["on"] = { "order_by_name", nowait = false },
 					["os"] = { "order_by_size", nowait = false },
 					["ot"] = { "order_by_type", nowait = false },
-					-- ['<key>'] = function(state) ... end,
 				},
 				fuzzy_finder_mappings = { -- define keymaps for filter popup window in fuzzy_finder_mode
 					["<down>"] = "move_cursor_down",
 					["<C-n>"] = "move_cursor_down",
 					["<up>"] = "move_cursor_up",
 					["<C-p>"] = "move_cursor_up",
-					-- ['<key>'] = function(state, scroll_padding) ... end,
 				},
 			},
 
