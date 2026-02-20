@@ -37,6 +37,24 @@ local lsp_config = function()
 		ensure_installed = vim.tbl_keys(servers),
 	})
 
+	--- Automatically restart LSP when a file has been saved
+	vim.api.nvim_create_autocmd("BufWritePost", {
+		-- "*" pattern makes this agnostic to any file extension
+		pattern = "*",
+		callback = function()
+			local clients = vim.lsp.get_clients({ bufnr = 0 })
+			for _, client in ipairs(clients) do
+				-- Trigger a workspace scan to find new files/imports
+				if client.server_capabilities.workspaceSymbolProvider then
+					vim.lsp.buf.workspace_symbol()
+				end
+				-- Specifically for Pyright/Basedpyright to refresh diagnostics
+				vim.diagnostic.show(nil, 0)
+			end
+		end,
+		desc = "Agnostic LSP Refresh on File Save",
+	})
+
 	--- Keybindings for LSP
 	vim.api.nvim_create_autocmd("LspAttach", {
 		desc = "LSP actions",
