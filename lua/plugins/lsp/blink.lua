@@ -171,7 +171,7 @@ return {
 		local blink = require("blink.cmp")
 		blink.setup(opts)
 
-		-- Custom behaviours
+		--- Disable blink when in gitcommit
 		local blink_augroup = vim.api.nvim_create_augroup("blink_custom", { clear = true })
 		vim.api.nvim_create_autocmd({
 			"InsertLeave",
@@ -184,6 +184,7 @@ return {
 				end
 			end,
 		})
+
 
 		-- Custom trigger but only for Insert
 		vim.keymap.set("i", "<C-n>", blink.show, { desc = "Show completion" })
