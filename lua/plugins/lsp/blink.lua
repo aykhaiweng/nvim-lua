@@ -185,6 +185,15 @@ return {
 			end,
 		})
 
+        --- Every time we go to normal mode attempt to hide the blink window
+		vim.api.nvim_create_autocmd("ModeChanged", {
+			-- Listens for transitions from any mode (*) to Normal mode (n)
+			pattern = "*:n",
+			callback = function()
+				-- Attempting to close existing menus
+				require("blink.cmp").hide()
+			end,
+		})
 
 		-- Custom trigger but only for Insert
 		vim.keymap.set("i", "<C-n>", blink.show, { desc = "Show completion" })
