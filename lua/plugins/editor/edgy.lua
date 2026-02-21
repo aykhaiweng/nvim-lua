@@ -2,6 +2,10 @@ return {
 	{
 		"folke/edgy.nvim",
 		event = "VeryLazy",
+		init = function()
+			vim.opt.laststatus = 3
+			vim.opt.splitkeep = "screen"
+		end,
 		keys = {
 			{
 				"<C-b>",
@@ -50,10 +54,10 @@ return {
 				--- Panel sizes
 				options = {
 					left = {
-						size = 45,
+						size = 50,
 					},
 					right = {
-						size = 45,
+						size = 50,
 					},
 					bottom = {
 						size = 20,
@@ -90,6 +94,15 @@ return {
 					-- 	open = "Neotree position=top buffers",
 					-- 	size = { height = 0.15 },
 					-- },
+					{
+						title = "Outline",
+						ft = "Outline",
+						pinned = true,
+						open = function()
+							vim.cmd("OutlineOpen")
+						end,
+						size = { height = 0.5 },
+					},
 				},
 				right = {
 					{
@@ -97,7 +110,7 @@ return {
 						ft = "Outline",
 						pinned = true,
 						open = function()
-							vim.cmd("OutlineOpen")
+							vim.cmd("Outline")
 						end,
 						size = { height = 0.5 },
 					},
@@ -141,24 +154,31 @@ return {
 		config = function(_, opts)
 			require("edgy").setup(opts)
 
-			--- vim options as recommended by the edgy documentation
-			vim.opt.laststatus = 3
-			vim.opt.splitkeep = "screen"
-			vim.opt.equalalways = true
+			local function custom_edgy_open()
+				-- -- Save the current window ID
+				local current_win = vim.api.nvim_get_current_win()
+
+				-- Open Edgy panels
+				require("edgy").open()
+
+				-- Defer the focus restoration
+				vim.schedule(function()
+					-- Ensure the window still exists before focusing
+					if vim.api.nvim_win_is_valid(current_win) then
+						vim.api.nvim_set_current_win(current_win)
+					end
+				end)
+			end
+
+			custom_edgy_open()
 
 			--- Auto open edgy windows
-			vim.api.nvim_create_autocmd({ "VimEnter", "WinEnter", "BufWinEnter" }, {
+			vim.api.nvim_create_autocmd({ "TabNew" }, {
 				desc = "Auto-open pinned edgy views on startup",
 				callback = function()
-					-- Opens all pinned views in all edgebars
-					require("edgy").open()
+					custom_edgy_open()
 				end,
 			})
-
-			--- Auto open when detecting new diagnostics
-			-- vim.api.nvim_create_autocmd("DiagnosticChanged", {
-			-- 	command = "Trouble diagnostics open",
-			-- })
 		end,
 	},
 }
