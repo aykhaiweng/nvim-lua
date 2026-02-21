@@ -105,15 +105,6 @@ return {
 					lualine_y = {},
 					lualine_z = {},
 				},
-				tabline = {
-					lualine_a = {
-						{
-							"tabs",
-							mode = 0,
-							path = 1,
-						},
-					},
-				},
 				winbar = {
 					lualine_b = {
 						{
@@ -152,7 +143,6 @@ return {
 			-- vim options
 			vim.cmd("set noshowmode")
 			vim.cmd("set showcmd")
-			vim.opt.showtabline = 0
 		end,
 	},
 }
