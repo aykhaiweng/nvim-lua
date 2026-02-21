@@ -1,79 +1,59 @@
-local servers = {
-	lua_ls = {
-		settings = {
-			Lua = {
-
-				diagnostics = {
-					globals = { "vim" },
+return {
+	{
+		"neovim/nvim-lspconfig",
+		dependencies = {
+			{
+				"williamboman/mason.nvim",
+				cmd = "Mason",
+				build = ":MasonUpdate",
+				opts = {},
+				config = function(_, opts)
+					require("mason").setup(opts)
+				end,
+			},
+			{
+				"williamboman/mason-lspconfig.nvim",
+				opts = {
+					ensure_installed = {
+						-- bash
+						"shfmt",
+						-- python
+						"basedpyright",
+						"ruff",
+						-- lua
+						"lua_ls",
+						"stylua",
+						-- html/css/js
+						"eslint_d",
+						"prettierd",
+						-- data formats
+						"nginx-config-formatter",
+						"jsonlint",
+					},
 				},
-				completion = {
-					autoRequire = true,
-				},
-				hint = {
-					enable = true,
-				},
-				workspace = {
-					library = vim.api.nvim_get_runtime_file("", true),
-				},
+				config = function(_, opts)
+					require("mason-lspconfig").setup(opts)
+				end,
 			},
 		},
-	},
-	basedpyright = {
-		settings = {
-			basedpyright = {
-				typeCheckingMode = "off",
-				reportMissingImports = "error",
-				disableOrganizeImports = true,
+		cmd = {
+			"LspInfo",
+			"LspInstall",
+			"LspStart",
+		},
+		event = {
+			"BufReadPre",
+			"BufNewFile",
+		},
+		opts = {
+			inlay_hints = {
+				enabled = true,
 			},
 		},
-	},
-}
+		config = function(_, opts)
+			vim.lsp.config("*", opts)
 
-local lsp_config = function()
-	-- Set up completion using nvim_cmp with LSP source
-	--- Mason Setup
-	local mason_lspconfig = require("mason-lspconfig")
-	mason_lspconfig.setup({
-		ensure_installed = vim.tbl_keys(servers),
-	})
-
-	--- Automatically restart LSP when a file has been saved
-	vim.api.nvim_create_autocmd("BufWritePost", {
-		-- "*" pattern makes this agnostic to any file extension
-		pattern = "*",
-		callback = function()
-			local clients = vim.lsp.get_clients({ bufnr = 0 })
-			for _, client in ipairs(clients) do
-				-- Trigger a workspace scan to find new files/imports
-				if client.server_capabilities.workspaceSymbolProvider then
-					vim.lsp.buf.workspace_symbol()
-				end
-				-- Specifically for Pyright/Basedpyright to refresh diagnostics
-				vim.diagnostic.show(nil, 0)
-			end
-		end,
-		desc = "Agnostic LSP Refresh on File Save",
-	})
-
-	--- Keybindings for LSP
-	vim.api.nvim_create_autocmd("LspAttach", {
-		desc = "LSP actions",
-		callback = function(event)
-			local opts = { buffer = event.buf }
-
-			-- these will be buffer-local keybindings
-			-- because they only work if you have an active language server
-			vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
-			vim.keymap.set("n", "gl", '<cmd>lua vim.diagnostic.open_float(0, { scope = "line" })<cr>', opts)
-			vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
-			vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
-			vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", opts)
-			vim.keymap.set("n", "go", "<cmd>lua vim.lsp.buf.type_definition()<cr>", opts)
-			vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", opts)
-			vim.keymap.set("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
-			vim.keymap.set("i", "<C-s>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
-
-			-- diagnostics
+			--- diagnostics
 			vim.diagnostic.config({
 				virtual_text = true,
 				virtual_lines = {
@@ -83,65 +63,55 @@ local lsp_config = function()
 				update_in_insert = false,
 				float = {
 					show_header = true,
-					source = "always",
 					border = "rounded",
 					focusable = false,
 				},
 			})
-		end,
-	})
-end
 
-return {
-	{
-		"neovim/nvim-lspconfig",
-		dependencies = {
-			{
-				"SmiteshP/nvim-navic",
-			},
-			{
-				"williamboman/mason.nvim",
-				cmd = "Mason",
-				build = ":MasonUpdate",
-				opts = {
-					ensure_installed = {
-						"prettierd",
-						"stylua",
-						"eslint_d",
-						"jsonlint",
-						"djlint",
-						"ruff",
-					},
-				},
-				config = function(_, opts)
-					require("mason").setup(opts)
-					local mr = require("mason-registry")
+			--- Keybindings for LSP
+			vim.api.nvim_create_autocmd("LspAttach", {
+				desc = "LSP actions",
+				callback = function(event)
+					local _opts = { buffer = event.buf }
 
-					local function ensure_installed()
-						for _, tool in ipairs(opts.ensure_installed) do
-							local p = mr.get_package(tool)
-							if not p:is_installed() then
-								p:install()
-							end
+					-- these will be buffer-local keybindings
+					-- because they only work if you have an active language server
+					vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", _opts)
+					vim.keymap.set("n", "gl", '<cmd>lua vim.diagnostic.open_float(0, { scope = "line" })<cr>', _opts)
+					vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", _opts)
+					vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", _opts)
+					vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", _opts)
+					vim.keymap.set("n", "go", "<cmd>lua vim.lsp.buf.type_definition()<cr>", _opts)
+					vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", _opts)
+					vim.keymap.set("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", _opts)
+					vim.keymap.set("i", "<C-s>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", _opts)
+				end,
+			})
+
+			--- Automatically restart LSP when a file has been saved
+			vim.api.nvim_create_autocmd("BufWritePost", {
+				pattern = "*",
+				callback = function()
+					local clients = vim.lsp.get_clients({ bufnr = 0 })
+					for _, client in ipairs(clients) do
+						-- Notify the server that the file system has changed
+						-- This avoids the "input prompt" while forcing an import re-scan
+						if
+							client.server_capabilities.workspace
+							and client.server_capabilities.workspace.didChangeWatchedFiles
+						then
+							client.notify("workspace/didChangeWatchedFiles", {
+								changes = {
+									{ uri = vim.uri_from_bufnr(0), type = 1 }, -- Type 1 = Created/Changed
+								},
+							})
 						end
 					end
-
-					if mr.refresh() then
-						mr.refresh(ensure_installed)
-					else
-						ensure_installed()
-					end
+					-- Refresh the UI diagnostics silently
+					vim.diagnostic.show(nil, 0)
 				end,
-			},
-			"williamboman/mason-lspconfig.nvim",
-		},
-		cmd = { "LspInfo", "LspInstall", "LspStart" },
-		event = { "BufReadPre", "BufNewFile" },
-		opts = {
-			inlay_hints = {
-				enabled = true,
-			},
-		},
-		config = lsp_config,
+				desc = "Silent LSP refresh on save",
+			})
+		end,
 	},
 }

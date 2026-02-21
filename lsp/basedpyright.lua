@@ -3,9 +3,13 @@ return {
 	filetypes = { "python" },
 	settings = {
 		basedpyright = {
-			typeCheckingMode = "off",
-			reportMissingImports = "error",
+			analysis = {
+				autoSearchPaths = true,
+				diagnosticMode = "workspace", -- Options: "openFilesOnly", "workspace"
+			},
 			disableOrganizeImports = true,
+			reportMissingImports = "error",
+			typeCheckingMode = "off",
 		},
 	},
 }

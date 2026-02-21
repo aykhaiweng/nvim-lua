@@ -30,6 +30,24 @@ return {
 				animate = {
 					enabled = false,
 				},
+				exit_when_last = false,
+				close_when_all_hidden = true,
+				wo = {
+					winbar = true,
+					winfixwidth = true,
+					winfixheight = true,
+					winhighlight = "",
+					spell = false,
+					signcolumn = "no",
+				},
+				--- Force layout correction on every edgy-related event
+				on_layout = function()
+					vim.schedule(function()
+						vim.cmd("redraw!")
+						require("edgy").goto_main()
+					end)
+				end,
+				--- Panel sizes
 				options = {
 					left = {
 						size = 45,
@@ -77,7 +95,7 @@ return {
 					{
 						title = "Outline",
 						ft = "Outline",
-						pinned = false,
+						pinned = true,
 						open = function()
 							vim.cmd("OutlineOpen")
 						end,
@@ -88,7 +106,7 @@ return {
 					{
 						title = "Terminal",
 						ft = "toggleterm",
-						filter = function(buf, win)  -- noqa
+						filter = function(buf, win) -- noqa
 							return vim.api.nvim_win_get_config(win).relative == ""
 						end,
 					},
@@ -101,19 +119,19 @@ return {
 				},
 				keys = {
 					-- increase width
-					["<M-L>"] = function(win)
+					["<M-l>"] = function(win)
 						win:resize("width", 2)
 					end,
 					-- decrease width
-					["<M-H>"] = function(win)
+					["<M-h>"] = function(win)
 						win:resize("width", -2)
 					end,
 					-- increase height
-					["<M-K>"] = function(win)
+					["<M-k>"] = function(win)
 						win:resize("height", 2)
 					end,
 					-- decrease height
-					["<M-J>"] = function(win)
+					["<M-j>"] = function(win)
 						win:resize("height", -2)
 					end,
 				},
@@ -123,9 +141,24 @@ return {
 		config = function(_, opts)
 			require("edgy").setup(opts)
 
-			-- vim options
+			--- vim options as recommended by the edgy documentation
 			vim.opt.laststatus = 3
 			vim.opt.splitkeep = "screen"
+			vim.opt.equalalways = true
+
+			--- Auto open edgy windows
+			vim.api.nvim_create_autocmd({ "VimEnter", "WinEnter", "BufWinEnter" }, {
+				desc = "Auto-open pinned edgy views on startup",
+				callback = function()
+					-- Opens all pinned views in all edgebars
+					require("edgy").open()
+				end,
+			})
+
+			--- Auto open when detecting new diagnostics
+			-- vim.api.nvim_create_autocmd("DiagnosticChanged", {
+			-- 	command = "Trouble diagnostics open",
+			-- })
 		end,
 	},
 }
