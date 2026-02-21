@@ -6,6 +6,11 @@ return {
 			"SmiteshP/nvim-navic",
 		},
 		lazy = false,
+		init = function()
+			-- vim options
+			vim.cmd("set noshowmode")
+			vim.cmd("set showcmd")
+		end,
 		opts = function()
 			local disabled_filetypes = {
 				"help",
@@ -139,10 +144,6 @@ return {
 		end,
 		config = function(_, opts)
 			require("lualine").setup(opts)
-
-			-- vim options
-			vim.cmd("set noshowmode")
-			vim.cmd("set showcmd")
 		end,
 	},
 }
