@@ -5,6 +5,7 @@ return {
 		init = function()
 			vim.opt.laststatus = 3
 			vim.opt.splitkeep = "screen"
+			vim.opt.equalalways = true
 		end,
 		keys = {
 			{
