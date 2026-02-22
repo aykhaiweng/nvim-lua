@@ -17,16 +17,16 @@ return {
 		styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
 			comments = { "italic" }, -- Change the style of comments
 			conditionals = { "italic" },
-			-- loops = {},
-			-- functions = {},
-			-- keywords = {},
-			-- strings = {},
-			-- variables = {},
-			-- numbers = {},
-			-- booleans = {},
-			-- properties = {},
-			-- types = {},
-			-- operators = {},
+			loops = {},
+			functions = {},
+			keywords = {},
+			strings = {},
+			variables = {},
+			numbers = {},
+			booleans = {},
+			properties = {},
+			types = {},
+			operators = {},
 			-- miscs = {}, -- Uncomment to turn off hard-coded styles
 		},
 		highlight_overrides = {
@@ -101,16 +101,33 @@ return {
 			-- 	}
 			-- end,
 		},
-		color_overrides = {},
-		custom_highlights = {},
 		default_integrations = true,
+		lsp_styles = { -- Handles the style of specific lsp hl groups (see `:h lsp-highlight`).
+			virtual_text = {
+				errors = { "italic" },
+				hints = { "italic" },
+				warnings = { "italic" },
+				information = { "italic" },
+				ok = { "italic" },
+			},
+			underlines = {
+				errors = { "underline" },
+				hints = { "underline" },
+				warnings = { "underline" },
+				information = { "underline" },
+				ok = { "underline" },
+			},
+			inlay_hints = {
+				background = true,
+			},
+		},
 		integrations = {
 			cmp = true,
 			gitsigns = true,
 			nvimtree = true,
 			neotree = true,
 			treesitter = true,
-            blink_cmp = true,
+			blink_cmp = true,
 			notify = true,
 			mini = {
 				enabled = true,
@@ -118,7 +135,7 @@ return {
 			},
 			navic = {
 				enabled = true,
-                custom_bg = "#181825",
+				custom_bg = "#181825",
 			},
 			harpoon = true,
 			neogit = true,
