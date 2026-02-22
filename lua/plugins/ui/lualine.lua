@@ -132,7 +132,7 @@ return {
 							file_status = true,
 							newfile_status = true,
 							path = 1,
-							shorting_target = 1000,
+							shorting_target = 1,
 						},
 					},
 					lualine_b = {
