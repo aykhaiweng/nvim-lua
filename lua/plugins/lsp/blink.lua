@@ -171,8 +171,9 @@ return {
 		local blink = require("blink.cmp")
 		blink.setup(opts)
 
-		--- Disable blink when in gitcommit
 		local blink_augroup = vim.api.nvim_create_augroup("blink_custom", { clear = true })
+
+		--- Disable blink when in gitcommit
 		vim.api.nvim_create_autocmd({
 			"InsertLeave",
 			"InsertEnter",
@@ -185,10 +186,10 @@ return {
 			end,
 		})
 
-        --- Every time we go to normal mode attempt to hide the blink window
-		vim.api.nvim_create_autocmd("ModeChanged", {
+		--- Every time we go to normal mode attempt to hide the blink window
+		vim.api.nvim_create_autocmd("InsertLeave", {
+			group = blink_augroup,
 			-- Listens for transitions from any mode (*) to Normal mode (n)
-			pattern = "*:n",
 			callback = function()
 				-- Attempting to close existing menus
 				require("blink.cmp").hide()
