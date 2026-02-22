@@ -129,6 +129,7 @@ return {
 			treesitter = true,
 			blink_cmp = true,
 			notify = true,
+			lualine = true,
 			mini = {
 				enabled = true,
 				indentscope_color = "",

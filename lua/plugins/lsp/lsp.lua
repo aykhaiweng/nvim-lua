@@ -14,22 +14,22 @@ return {
 			{
 				"williamboman/mason-lspconfig.nvim",
 				opts = {
-					ensure_installed = {
-						-- bash
-						"shfmt",
-						-- python
-						"basedpyright",
-						"ruff",
-						-- lua
-						"lua_ls",
-						"stylua",
-						-- html/css/js
-						"eslint_d",
-						"prettierd",
-						-- data formats
-						"nginx-config-formatter",
-						"jsonlint",
-					},
+					-- ensure_installed = {
+					-- 	-- bash
+					-- 	"shfmt",
+					-- 	-- python
+					-- 	"basedpyright",
+					-- 	"ruff",
+					-- 	-- lua
+					-- 	"lua_ls",
+					-- 	"stylua",
+					-- 	-- html/css/js
+					-- 	"eslint_d",
+					-- 	"prettierd",
+					-- 	-- data formats
+					-- 	"nginx-config-formatter",
+					-- 	"jsonlint",
+					-- },
 				},
 				config = function(_, opts)
 					require("mason-lspconfig").setup(opts)
