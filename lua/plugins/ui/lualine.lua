@@ -31,6 +31,7 @@ return {
 			}
 			return {
 				options = {
+					theme = "catppuccin",
 					icons_enabled = true,
 					draw_empty = true,
 					disabled_filetypes = {
@@ -102,14 +103,14 @@ return {
 						"progress",
 					},
 				},
-				inactive_sections = {
-					lualine_a = {},
-					lualine_b = {},
-					lualine_c = { "filename" },
-					lualine_x = {},
-					lualine_y = {},
-					lualine_z = {},
-				},
+				-- inactive_sections = {
+				-- 	lualine_a = {},
+				-- 	lualine_b = {},
+				-- 	lualine_c = { "filename" },
+				-- 	lualine_x = {},
+				-- 	lualine_y = {},
+				-- 	lualine_z = {},
+				-- },
 				winbar = {
 					lualine_b = {
 						{
@@ -120,10 +121,9 @@ return {
 							shorting_target = 1,
 						},
 					},
-					lualine_c = {
+					lualine_y = {
 						{ "diagnostics" },
 					},
-					lualine_z = {},
 				},
 				inactive_winbar = {
 					lualine_a = {
@@ -135,10 +135,9 @@ return {
 							shorting_target = 1,
 						},
 					},
-					lualine_b = {
+					lualine_y = {
 						{ "diagnostics" },
 					},
-					extensions = {},
 				},
 			}
 		end,
