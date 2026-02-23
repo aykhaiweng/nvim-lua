@@ -102,6 +102,7 @@ return {
 						"CursorMovedI",
 						"BufHidden",
 						"InsertCharPre",
+						"ModeChanged",
 						"WinLeave",
 					},
 				})
@@ -110,7 +111,11 @@ return {
 			vim.api.nvim_create_augroup("lsp_diagnostics_hold", { clear = true })
 			vim.api.nvim_create_autocmd({ "CursorHold" }, {
 				pattern = "*",
-				command = "lua OpenDiagnosticIfNoFloat()",
+				callback = function()
+					if vim.fn.mode() == "n" then
+						OpenDiagnosticIfNoFloat()
+					end
+				end,
 				group = "lsp_diagnostics_hold",
 			})
 
