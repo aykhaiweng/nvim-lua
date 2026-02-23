@@ -12,7 +12,6 @@ local custom_keymaps = {
 	["<C-l>"] = { "show_signature", "fallback" },
 	["<Tab>"] = { "snippet_forward", "fallback" },
 	["<S-Tab>"] = { "snippet_backward", "fallback" },
-	-- ["<esc>"] = { "fallback" },
 }
 
 return {
@@ -22,40 +21,27 @@ return {
 		"rafamadriz/friendly-snippets",
 	},
 	version = "*",
-	enabled = true,
 	opts = {
 		keymap = custom_keymaps,
 		appearance = {
-			-- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
-			-- Adjusts spacing to ensure icons are aligned
 			nerd_font_variant = "mono",
 		},
 		completion = {
-			-- 'prefix' will fuzzy match on the text before the cursor
-			-- 'full' will fuzzy match on the text before *and* after the cursor
-			-- example: 'foo_|_bar' will match 'foo_' for 'prefix' and 'foo__bar' for 'full'
 			keyword = { range = "full" },
-
-			-- Disable auto brackets
-			-- NOTE: some LSPs may add auto brackets themselves anyway
 			accept = { auto_brackets = { enabled = false } },
 
-			-- or set per mode
-			--
 			list = {
 				selection = {
 					auto_insert = false,
 					preselect = function(ctx)
+						-- This is a fix for snippets
 						return ctx.mode ~= "cmdline" and not require("blink.cmp").snippet_active({ direction = 1 })
 					end,
 				},
 			},
 
 			menu = {
-				-- Don't automatically show the completion menu
 				auto_show = true,
-
-				-- nvim-cmp style menu
 				draw = {
 					columns = {
 						{ "label", "label_description", gap = 1 },
@@ -64,18 +50,10 @@ return {
 				},
 			},
 
-			-- Show documentation when selecting a completion item
 			documentation = {
-				-- Controls whether the documentation window will automatically show when selecting a completion item
 				auto_show = true,
-				-- Delay before showing the documentation window
 				auto_show_delay_ms = 500,
-				-- Delay before updating the documentation window when selecting a new item,
-				-- while an existing item is still visible
 				update_delay_ms = 50,
-				-- Whether to use treesitter highlighting, disable if you run into performance issues
-				-- treesitter_highlighting = true,
-				-- -- Draws the item in the documentation window, by default using an internal treessitter based implementation
 				draw = function(opts)
 					opts.default_implementation()
 				end,
@@ -83,14 +61,10 @@ return {
 					min_width = 10,
 					max_width = 80,
 					max_height = 20,
-					border = "padded",
+					border = "rounded",
 					winblend = 0,
 					winhighlight = "Normal:BlinkCmpDoc,FloatBorder:BlinkCmpDocBorder,EndOfBuffer:BlinkCmpDoc",
-					-- Note that the gutter will be disabled when border ~= 'none'
 					scrollbar = true,
-					-- Which directions to show the documentation window,
-					-- for each of the possible menu window directions,
-					-- falling back to the next direction when there's not enough space
 					direction_priority = {
 						menu_north = { "e", "w", "n", "s" },
 						menu_south = { "e", "w", "s", "n" },
@@ -98,18 +72,14 @@ return {
 				},
 			},
 
-			-- Display a preview of the selected item on the current line
-			-- ghost_text = {
-			-- 	enabled = false,
-			-- 	-- Show the ghost text when an item has been selected
-			-- 	show_with_selection = true,
-			-- 	-- Show the ghost text when no item has been selected, defaulting to the first item
-			-- 	show_without_selection = false,
-			-- 	-- Show the ghost text when the menu is open
-			-- 	show_with_menu = true,
-			-- 	-- Show the ghost text when the menu is closed
-			-- 	show_without_menu = true,
-			-- },
+			--- Display a preview of the selected item on the current line
+			ghost_text = {
+				enabled = true,
+				show_with_selection = true,
+				show_without_selection = false,
+				show_with_menu = true,
+				show_without_menu = true,
+			},
 		},
 		cmdline = {
 			enabled = true,
