@@ -74,7 +74,7 @@ return {
 
 			--- Display a preview of the selected item on the current line
 			ghost_text = {
-				enabled = true,
+				enabled = false,
 				show_with_selection = true,
 				show_without_selection = false,
 				show_with_menu = true,
