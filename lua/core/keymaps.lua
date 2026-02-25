@@ -3,6 +3,7 @@ vim.keymap.set("i", "<C-c>", "<Esc>")
 vim.keymap.set("v", "<C-c>", "<Esc>")
 -- Unbinding capital Q
 vim.keymap.set("n", "Q", "<nop>", { desc = "DISABLED" })
+vim.keymap.set("n", "<C-q>", "<nop>", { desc = "DISABLED" })
 
 -- tabs
 vim.keymap.set("n", "<leader>th", vim.cmd.tabprev, { desc = "Go to tab on the left" })
