@@ -130,12 +130,6 @@ return {
 				"buffer",
 			},
 		},
-		signature = {
-			enabled = true,
-			window = {
-				show_documentation = true,
-			},
-		},
 	},
 	config = function(_, opts)
 		local blink = require("blink.cmp")
@@ -157,12 +151,12 @@ return {
 		})
 
 		--- Every time we go to normal mode attempt to hide the blink window
-		vim.api.nvim_create_autocmd("InsertLeave", {
+		vim.api.nvim_create_autocmd({ "InsertLeave", "ModeChanged" }, {
 			group = blink_augroup,
 			-- Listens for transitions from any mode (*) to Normal mode (n)
 			callback = function()
 				-- Attempting to close existing menus
-				require("blink.cmp").hide()
+				blink.hide()
 			end,
 		})
 

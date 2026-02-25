@@ -86,7 +86,7 @@ return {
 				end,
 			})
 
-            --- Automatically open diagnostics on cursor hold
+			--- Automatically open diagnostics on cursor hold
 			function OpenDiagnosticIfNoFloat()
 				for _, winid in pairs(vim.api.nvim_tabpage_list_wins(0)) do
 					if vim.api.nvim_win_get_config(winid).zindex then
@@ -117,31 +117,6 @@ return {
 					end
 				end,
 				group = "lsp_diagnostics_hold",
-			})
-
-			--- Automatically restart LSP when a file has been saved
-			vim.api.nvim_create_autocmd("BufWritePost", {
-				pattern = "*",
-				callback = function()
-					local clients = vim.lsp.get_clients({ bufnr = 0 })
-					for _, client in ipairs(clients) do
-						-- Notify the server that the file system has changed
-						-- This avoids the "input prompt" while forcing an import re-scan
-						if
-							client.server_capabilities.workspace
-							and client.server_capabilities.workspace.didChangeWatchedFiles
-						then
-							client.notify("workspace/didChangeWatchedFiles", {
-								changes = {
-									{ uri = vim.uri_from_bufnr(0), type = 1 }, -- Type 1 = Created/Changed
-								},
-							})
-						end
-					end
-					-- Refresh the UI diagnostics silently
-					vim.diagnostic.show(nil, 0)
-				end,
-				desc = "Silent LSP refresh on save",
 			})
 		end,
 	},

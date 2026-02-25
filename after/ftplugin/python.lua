@@ -1,3 +1,4 @@
+--- Cheap way to copy the relative path of a python module being hovered
 local function get_python_module_path()
 	local path = vim.fn.expand("%:p") -- Get the full path of the current buffer
 	local root_markers = { "pyproject.toml", "setup.py", ".git" } -- Common project root markers
@@ -25,10 +26,8 @@ local function get_python_module_path()
 	print("Module path:", module_path)
 	return module_path
 end
-
 -- Register the function as a Neovim command
 vim.api.nvim_create_user_command("PythonModulePath", get_python_module_path, {})
-
 vim.keymap.set(
 	"n",
 	"<leader>ym",
@@ -36,4 +35,13 @@ vim.keymap.set(
 	{ desc = "Yank the current python module path to system clipboard" }
 )
 
+
+--- Default ruler
 vim.opt.colorcolumn = "99"
+
+
+--- Tree-sitter usually captures self as @variable.builtin.python
+-- Force 'self' to use the builtin constant/variable color
+vim.api.nvim_set_hl(0, "@variable.builtin.python", { link = "Special" })
+-- If using LSP, link the semantic token as well
+vim.api.nvim_set_hl(0, "@lsp.type.selfParameter.python", { link = "Special" })
