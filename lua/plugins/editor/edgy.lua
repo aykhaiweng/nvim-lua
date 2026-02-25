@@ -105,25 +105,15 @@ return {
 						size = { height = 0.5 },
 					},
 				},
-				right = {
-					{
-						title = "Outline",
-						ft = "Outline",
-						pinned = true,
-						open = function()
-							vim.cmd("Outline")
-						end,
-						size = { height = 0.5 },
-					},
-				},
+				right = {},
 				bottom = {
-					{
-						title = "Terminal",
-						ft = "toggleterm",
-						filter = function(buf, win) -- noqa
-							return vim.api.nvim_win_get_config(win).relative == ""
-						end,
-					},
+					-- {
+					-- 	title = "Terminal",
+					-- 	ft = "toggleterm",
+					-- 	filter = function(buf, win) -- noqa
+					-- 		return vim.api.nvim_win_get_config(win).relative == ""
+					-- 	end,
+					-- },
 					"qf",
 					"loclist",
 					"fugitive",
