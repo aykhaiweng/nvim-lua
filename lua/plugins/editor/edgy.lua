@@ -5,7 +5,7 @@ return {
 		init = function()
 			vim.opt.laststatus = 3
 			vim.opt.splitkeep = "screen"
-			vim.opt.equalalways = true
+			vim.opt.equalalways = false
 		end,
 		keys = {
 			{
@@ -35,16 +35,16 @@ return {
 				animate = {
 					enabled = false,
 				},
-				exit_when_last = false,
-				close_when_all_hidden = true,
-				wo = {
-					winbar = true,
-					winfixwidth = true,
-					winfixheight = true,
-					winhighlight = "",
-					spell = false,
-					signcolumn = "no",
-				},
+				exit_when_last = true,
+				-- close_when_all_hidden = true,
+				-- wo = {
+				-- 	winbar = true,
+				-- 	winfixwidth = true,
+				-- 	winfixheight = true,
+				-- 	winhighlight = "",
+				-- 	spell = false,
+				-- 	signcolumn = "no",
+				-- },
 				--- Force layout correction on every edgy-related event
 				on_layout = function()
 					vim.schedule(function()
@@ -111,16 +111,32 @@ return {
 					{
 						title = "Terminal",
 						ft = "toggleterm",
+						height = 0.4,
 						filter = function(buf, win) -- noqa
 							return vim.api.nvim_win_get_config(win).relative == ""
 						end,
 					},
-					"qf",
+					{
+						title = "Noice",
+						ft = "noice",
+						height = 0.4,
+						filter = function(buf, win) -- noqa
+							return vim.api.nvim_win_get_config(win).relative == ""
+						end,
+					},
+					{ title = "Quickfix", ft = "qf" },
 					"loclist",
 					"fugitive",
 					"NeogitStatus",
-					"trouble",
-					"help",
+					"Trouble",
+					{
+						ft = "help",
+						size = { height = 20 },
+						-- don't open help files in edgy that we're editing
+						filter = function(buf)
+							return vim.bo[buf].buftype == "help"
+						end,
+					},
 				},
 				keys = {
 					-- increase width
@@ -147,19 +163,7 @@ return {
 			require("edgy").setup(opts)
 
 			local function custom_edgy_open()
-				-- -- Save the current window ID
-				local current_win = vim.api.nvim_get_current_win()
-
-				-- Open Edgy panels
 				require("edgy").open()
-
-				-- Defer the focus restoration
-				vim.schedule(function()
-					-- Ensure the window still exists before focusing
-					if vim.api.nvim_win_is_valid(current_win) then
-						vim.api.nvim_set_current_win(current_win)
-					end
-				end)
 			end
 
 			custom_edgy_open()
@@ -168,6 +172,7 @@ return {
 			vim.api.nvim_create_autocmd({ "TabNew" }, {
 				desc = "Auto-open pinned edgy views on startup",
 				callback = function()
+					print("TEST")
 					custom_edgy_open()
 				end,
 			})
