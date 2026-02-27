@@ -86,11 +86,9 @@ return {
 			keymap = custom_keymaps,
 			sources = function()
 				local type = vim.fn.getcmdtype()
-				-- Search forward and backward
 				if type == "/" or type == "?" then
 					return { "buffer" }
 				end
-				-- Commands
 				if type == ":" or type == "@" then
 					return { "cmdline" }
 				end
@@ -100,6 +98,7 @@ return {
 				trigger = {
 					show_on_blocked_trigger_characters = {},
 					show_on_x_blocked_trigger_characters = {},
+					prefetch_on_insert = false,
 				},
 				list = {
 					selection = {
@@ -109,12 +108,9 @@ return {
 						auto_insert = false,
 					},
 				},
-				-- Whether to automatically show the window when new completion items are available
 				menu = {
 					auto_show = true,
-					-- border = "rounded",
 				},
-				-- Displays a preview of the selected item on the current line
 				ghost_text = {
 					enabled = true,
 				},
@@ -152,8 +148,6 @@ return {
 
 		--- Every time we go to normal mode attempt to hide the blink window
 		vim.api.nvim_create_autocmd({ "InsertLeave", "ModeChanged" }, {
-			group = blink_augroup,
-			-- Listens for transitions from any mode (*) to Normal mode (n)
 			callback = function()
 				-- Attempting to close existing menus
 				blink.hide()

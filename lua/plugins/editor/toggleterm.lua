@@ -3,16 +3,16 @@ return {
 	version = "*",
 	event = "VeryLazy",
 	opts = {},
+	keys = {
+		{
+
+			"<F5>",
+			"<cmd>ToggleTerm<cr>",
+			desc = "Toggle Term",
+			mode = {"n", "t", "i", "v"}
+		},
+	},
 	config = function(_, opts)
 		require("toggleterm").setup(opts)
-
-		local Terminal = require("toggleterm.terminal").Terminal
-		local lazygit = Terminal:new({ cmd = "lazygit", hidden = true })
-
-		function _lazygit_toggle()
-			lazygit:toggle()
-		end
-
-		vim.keymap.set("n", "F5", ":lua _lazygit_toggle()<CR>", { noremap = true, silent = false })
 	end,
 }

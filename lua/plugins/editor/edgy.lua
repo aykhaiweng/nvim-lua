@@ -95,25 +95,26 @@ return {
 					-- 	open = "Neotree position=top buffers",
 					-- 	size = { height = 0.15 },
 					-- },
+				},
+				right = {
 					{
 						title = "Outline",
 						ft = "Outline",
-						pinned = true,
+						pinned = false,
 						open = function()
 							vim.cmd("OutlineOpen")
 						end,
 						size = { height = 0.5 },
 					},
 				},
-				right = {},
 				bottom = {
-					-- {
-					-- 	title = "Terminal",
-					-- 	ft = "toggleterm",
-					-- 	filter = function(buf, win) -- noqa
-					-- 		return vim.api.nvim_win_get_config(win).relative == ""
-					-- 	end,
-					-- },
+					{
+						title = "Terminal",
+						ft = "toggleterm",
+						filter = function(buf, win) -- noqa
+							return vim.api.nvim_win_get_config(win).relative == ""
+						end,
+					},
 					"qf",
 					"loclist",
 					"fugitive",

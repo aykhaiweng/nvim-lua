@@ -1,9 +1,11 @@
 -- Bind C-c to <Esc>
 vim.keymap.set("i", "<C-c>", "<Esc>")
 vim.keymap.set("v", "<C-c>", "<Esc>")
+vim.keymap.set("i", "<C-q>", "<Esc>")
+vim.keymap.set("v", "<C-q>", "<Esc>")
 -- Unbinding capital Q
 vim.keymap.set("n", "Q", "<nop>", { desc = "DISABLED" })
-vim.keymap.set("n", "<C-q>", "<nop>", { desc = "DISABLED" })
+vim.keymap.set("n", "<C-q>", "<Esc>", { desc = "DISABLED" })
 
 -- tabs
 vim.keymap.set("n", "<leader>th", vim.cmd.tabprev, { desc = "Go to tab on the left" })
@@ -78,4 +80,4 @@ vim.keymap.set(
 vim.keymap.set("n", "<leader><space>", "za", { desc = "Toggle fold under cursor" })
 
 -- Terminal
-vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit out of Terminal Insert" })
+vim.keymap.set("t", "<C-q>", "<C-\\><C-n>", { desc = "Exit out of Terminal Insert" })
