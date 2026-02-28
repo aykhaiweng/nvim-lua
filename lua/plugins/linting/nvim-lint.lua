@@ -2,6 +2,7 @@
 return {
 	"mfussenegger/nvim-lint",
 	lazy = true,
+	enabled = false,
 	event = { "BufReadPre", "BufNewFile", "InsertLeave" },
 	init = function()
 		local lint = require("lint")
@@ -51,6 +52,7 @@ return {
 			javascriptreact = { "eslint_d" },
 			typescriptreact = { "eslint_d" },
 			svelte = { "eslint_d" },
+			yaml = { "eslint_d" },
 			-- python = { "ruff" },
 			json = { "jsonlint" },
 		}

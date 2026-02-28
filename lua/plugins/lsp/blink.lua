@@ -27,6 +27,9 @@ return {
 			nerd_font_variant = "mono",
 		},
 		completion = {
+			trigger = {
+				prefetch_on_insert = false,
+			},
 			keyword = { range = "full" },
 			accept = { auto_brackets = { enabled = false } },
 
@@ -98,7 +101,6 @@ return {
 				trigger = {
 					show_on_blocked_trigger_characters = {},
 					show_on_x_blocked_trigger_characters = {},
-					prefetch_on_insert = false,
 				},
 				list = {
 					selection = {
