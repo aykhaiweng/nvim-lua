@@ -61,7 +61,7 @@ return {
 						size = 50,
 					},
 					bottom = {
-						size = 20,
+						size = 25,
 					},
 				},
 				left = {
@@ -161,7 +161,6 @@ return {
 			vim.api.nvim_create_autocmd({ "TabNew" }, {
 				desc = "Auto-open pinned edgy views on startup",
 				callback = function()
-					print("TEST")
 					custom_edgy_open()
 				end,
 			})
