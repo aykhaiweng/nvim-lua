@@ -50,6 +50,7 @@ return {
 				"__pycache__/",
 				"venv/",
 				".DS_Store",
+				".ruff_cache/*"
 			}
 
 			-- setup
@@ -105,9 +106,6 @@ return {
 					find_files = {
 						hidden = true,
 						no_ignore = true,
-						-- additional_args = function(_)
-						-- 	return { "--sort", "path" }
-						-- end,
 					},
 					live_grep = {
 						file_ignore_patterns = default_file_ignore_patterns,
