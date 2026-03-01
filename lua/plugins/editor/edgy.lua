@@ -5,31 +5,33 @@ return {
 		init = function()
 			vim.opt.laststatus = 3
 			vim.opt.splitkeep = "screen"
-			vim.opt.equalalways = false
+			vim.opt.equalalways = true
 		end,
-		keys = {
-			{
-				"<C-b>",
-				function()
-					require("edgy").toggle("left", { focus = false })
-				end,
-				desc = "Edgy Toggle",
-			},
-			{
-				"<C-S-B>",
-				function()
-					require("edgy").open({ focus = false })
-				end,
-				desc = "Edgy Toggle",
-			},
-			{
-				"<leader>we",
-				function()
-					require("edgy").select()
-				end,
-				desc = "Edgy Select Window",
-			},
-		},
+		keys = function()
+			return {
+				{
+					"<C-b>",
+					function()
+						require("edgy").toggle("left", { focus = false })
+					end,
+					desc = "Edgy Toggle",
+				},
+				{
+					"<C-S-B>",
+					function()
+						require("edgy").open({ focus = false })
+					end,
+					desc = "Edgy Toggle",
+				},
+				{
+					"<leader>we",
+					function()
+						require("edgy").select()
+					end,
+					desc = "Edgy Select Window",
+				},
+			}
+		end,
 		opts = function()
 			local opts = {
 				animate = {
@@ -37,32 +39,19 @@ return {
 				},
 				exit_when_last = true,
 				-- close_when_all_hidden = true,
-				-- wo = {
-				-- 	winbar = true,
-				-- 	winfixwidth = true,
-				-- 	winfixheight = true,
-				-- 	winhighlight = "",
-				-- 	spell = false,
-				-- 	signcolumn = "no",
-				-- },
-				--- Force layout correction on every edgy-related event
-				on_layout = function()
-					vim.schedule(function()
-						vim.cmd("redraw!")
-						require("edgy").goto_main()
-					end)
-				end,
-				--- Panel sizes
+				keep_win_size = true,
+				wo = {
+					winbar = true,
+					winfixwidth = true,
+					winfixheight = true,
+					winhighlight = "",
+					spell = false,
+					signcolumn = "no",
+				},
 				options = {
-					left = {
-						size = 50,
-					},
-					right = {
-						size = 50,
-					},
-					bottom = {
-						size = 25,
-					},
+					left = { size = 50 },
+					right = { size = 50 },
+					bottom = { size = 25 },
 				},
 				left = {
 					{
@@ -74,6 +63,9 @@ return {
 						end,
 						open = "Neotree position=top git_status",
 						size = { height = 0.15 },
+						wo = {
+							winfixwidth = true,
+						},
 					},
 					{
 						title = "Files",
@@ -84,6 +76,9 @@ return {
 						pinned = true,
 						open = "Neotree position=left filesystem",
 						size = { height = 0.5 },
+						wo = {
+							winfixwidth = true,
+						},
 					},
 					{
 						title = "Outline",
@@ -93,9 +88,11 @@ return {
 							vim.cmd("OutlineOpen")
 						end,
 						size = { height = 0.25 },
+						wo = {
+							winfixwidth = true,
+						},
 					},
 				},
-				right = {},
 				bottom = {
 					{
 						title = "Terminal",
@@ -104,6 +101,9 @@ return {
 						filter = function(buf, win) -- noqa
 							return vim.api.nvim_win_get_config(win).relative == ""
 						end,
+						wo = {
+							winfixheight = true,
+						},
 					},
 					{
 						title = "Noice",
@@ -112,8 +112,17 @@ return {
 						filter = function(buf, win) -- noqa
 							return vim.api.nvim_win_get_config(win).relative == ""
 						end,
+						wo = {
+							winfixheight = true,
+						},
 					},
-					{ title = "Quickfix", ft = "qf" },
+					{
+						title = "Quickfix",
+						ft = "qf",
+						wo = {
+							winfixheight = true,
+						},
+					},
 					"loclist",
 					"fugitive",
 					"NeogitStatus",
@@ -125,6 +134,9 @@ return {
 						filter = function(buf)
 							return vim.bo[buf].buftype == "help"
 						end,
+						wo = {
+							winfixheight = true,
+						},
 					},
 				},
 				keys = {
@@ -164,6 +176,19 @@ return {
 					custom_edgy_open()
 				end,
 			})
+
+			-- Smart window balancing that respects edgy.nvim
+			vim.keymap.set("n", "<leader>w=", function()
+				-- 1. Equalize all windows using standard Neovim logic
+				vim.cmd("wincmd =")
+
+				-- 2. Force edgy to fix the layouts it manages
+				local ok, edgy = pcall(require, "edgy")
+				if ok then
+					-- This resets edgy windows to their configured fixed sizes
+					edgy.fix()
+				end
+			end, { desc = "Balance windows (respecting edgy)" })
 		end,
 	},
 }
