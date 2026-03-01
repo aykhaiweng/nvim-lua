@@ -66,6 +66,16 @@ return {
 				},
 				left = {
 					{
+						title = "Git",
+						ft = "neo-tree",
+						pinned = true,
+						filter = function(buf)
+							return vim.b[buf].neo_tree_source == "git_status"
+						end,
+						open = "Neotree position=top git_status",
+						size = { height = 0.15 },
+					},
+					{
 						title = "Files",
 						ft = "neo-tree",
 						filter = function(buf)
@@ -73,40 +83,19 @@ return {
 						end,
 						pinned = true,
 						open = "Neotree position=left filesystem",
-						size = { height = 0.7 },
+						size = { height = 0.5 },
 					},
-					-- {
-					-- 	title = "Git",
-					-- 	ft = "neo-tree",
-					-- 	pinned = true,
-					-- 	filter = function(buf)
-					-- 		return vim.b[buf].neo_tree_source == "git_status"
-					-- 	end,
-					-- 	open = "Neotree position=bottom git_status",
-					-- 	size = { height = 0.15 },
-					-- },
-					-- {
-					-- 	title = "Buffers",
-					-- 	ft = "neo-tree",
-					-- 	filter = function(buf)
-					-- 		return vim.b[buf].neo_tree_source == "buffers"
-					-- 	end,
-					-- 	pinned = true,
-					-- 	open = "Neotree position=top buffers",
-					-- 	size = { height = 0.15 },
-					-- },
-				},
-				right = {
 					{
 						title = "Outline",
 						ft = "Outline",
-						pinned = false,
+						pinned = true,
 						open = function()
 							vim.cmd("OutlineOpen")
 						end,
-						size = { height = 0.5 },
+						size = { height = 0.25 },
 					},
 				},
+				right = {},
 				bottom = {
 					{
 						title = "Terminal",

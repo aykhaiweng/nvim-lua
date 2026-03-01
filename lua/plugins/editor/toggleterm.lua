@@ -74,8 +74,37 @@ return {
 
 					smart_toggleterm()
 				end,
-				mode = { "n", "t" }, -- Normal, Terminal, and Insert modes
-				desc = "Toggle/Focus Bottom Terminal",
+				mode = { "n", "t", "v", "i" }, -- Normal, Terminal, Insert and Visual modes
+				desc = "Toggle/Focus bottom Terminal",
+			},
+			{
+				"<F6>",
+				function()
+					local Terminal = require("toggleterm.terminal").Terminal
+
+					local float_term = Terminal:new({
+						id = 1,
+						direction = "float",
+						float_opts = {
+							border = "curved", -- You can change this to 'single', 'double', 'solid', or 'shadow'
+							width = math.floor(vim.o.columns * 0.8), -- Takes up 80% of screen width
+							height = math.floor(vim.o.lines * 0.8), -- Takes up 80% of screen height
+						},
+						-- Automatically enter insert mode when opened
+						on_open = function(term)
+							vim.cmd("startinsert")
+						end,
+					})
+
+					-- Define a simple wrapper function to toggle it
+					local function toggle_floating_term()
+						float_term:toggle()
+					end
+
+					toggle_floating_term()
+				end,
+				mode = { "n", "t", "v", "i" }, -- Normal, Terminal, Insert and Visual modes
+				desc = "Open floating Terminal",
 			},
 		},
 		config = function(_, opts)
