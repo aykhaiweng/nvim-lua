@@ -15,13 +15,10 @@ return {
 			-- 1. Ensure it always opens at the bottom
 			direction = "horizontal",
 			size = 20,
-			start_in_insert = true,
 		},
 		keys = function()
-			-- Require the Terminal object from toggleterm
 			local Terminal = require("toggleterm.terminal").Terminal
 
-			-- Create a single reference to the default terminal (ID 1)
 			local main_term = Terminal:new({
 				id = 1,
 				float_opts = {
@@ -31,60 +28,83 @@ return {
 				},
 			})
 
-			-- Centralized smart toggle function
 			local function smart_toggle(target_direction)
-				-- 1. If terminal is open but in the wrong layout
-				if main_term:is_open() and main_term.direction ~= target_direction then
-					main_term:close()
-					main_term.direction = target_direction
-					main_term:open()
-					return
-				end
+				local current_tab = vim.api.nvim_get_current_tabpage()
+				local current_win = vim.api.nvim_get_current_win()
 
-				-- 2. If it's completely closed, set the desired layout and open
-				if not main_term:is_open() then
-					main_term.direction = target_direction
-					main_term:open()
-					return
-				end
+				-- 1. Identify the terminal's buffer and find if it's visible anywhere
+				local term_buf = main_term.bufnr
+				local term_win_id = nil
+				local term_tab_id = nil
 
-				-- 3. If it's open AND in the correct layout, handle tab jumping and focus
-				local win = main_term.window
-				if win and vim.api.nvim_win_is_valid(win) then
-					local term_tab = vim.api.nvim_win_get_tabpage(win)
-					local current_tab = vim.api.nvim_get_current_tabpage()
-
-					if term_tab == current_tab then
-						-- Focus if we aren't in it, close if we are
-						if vim.api.nvim_get_current_win() ~= win then
-							main_term:close()
-							main_term:open()
-						else
-							main_term:close()
+				if term_buf and vim.api.nvim_buf_is_valid(term_buf) then
+					-- Scan all tabs to find the terminal window
+					for _, tab in ipairs(vim.api.nvim_list_tabpages()) do
+						for _, win in ipairs(vim.api.nvim_tabpage_list_wins(tab)) do
+							if vim.api.nvim_win_get_buf(win) == term_buf then
+								term_win_id = win
+								term_tab_id = tab
+								break
+							end
 						end
-					else
-						-- Move from another tab
-						local saved_tab = vim.api.nvim_get_current_tabpage()
+						if term_win_id then
+							break
+						end
+					end
+				end
+
+				-- 2. Scenario: Terminal is NOT visible anywhere
+				if not term_win_id then
+					main_term.direction = target_direction
+					main_term:open()
+					return
+				end
+
+				-- 3. Scenario: Terminal is visible in CURRENT tab
+				if term_tab_id == current_tab then
+					-- Check actual layout (Float vs Split)
+					local win_config = vim.api.nvim_win_get_config(term_win_id)
+					local is_floating = win_config.relative ~= ""
+					local want_floating = (target_direction == "float")
+
+					if is_floating ~= want_floating then
+						-- Wrong shape: Close and Reopen correct shape
 						main_term:close()
-						if vim.api.nvim_get_current_tabpage() ~= saved_tab then
-							vim.api.nvim_set_current_tabpage(saved_tab)
-						end
 						main_term.direction = target_direction
 						main_term:open()
+					else
+						-- Correct shape: Toggle Focus
+						if current_win == term_win_id then
+							main_term:close() -- We are in it, close
+						else
+							vim.api.nvim_set_current_win(term_win_id) -- Just focus, don't reopen
+							vim.cmd("startinsert")
+						end
 					end
-				else
-					-- Fallback if the window state detached
+					return
+				end
+
+				-- 4. Scenario: Terminal is visible in ANOTHER tab (The Fix)
+				if term_tab_id ~= current_tab then
+					-- Crucial: Manually close the remote window without switching tabs
+					vim.api.nvim_win_close(term_win_id, true)
+
+					-- Reset internal state so toggleterm knows it's closed
+					main_term.window = nil
+
+					-- Open in current tab
 					main_term.direction = target_direction
 					main_term:open()
 				end
 			end
+
 			return {
 				{
 					"<F5>",
 					function()
 						smart_toggle("horizontal")
 					end,
-					mode = { "n", "t", "v", "i" }, -- Normal, Terminal, Insert and Visual modes
+					mode = { "n", "t", "v", "i" },
 					desc = "Toggle/Focus bottom Terminal",
 				},
 				{
@@ -92,7 +112,7 @@ return {
 					function()
 						smart_toggle("float")
 					end,
-					mode = { "n", "t", "v", "i" }, -- Normal, Terminal, Insert and Visual modes
+					mode = { "n", "t", "v", "i" },
 					desc = "Open floating Terminal",
 				},
 			}
