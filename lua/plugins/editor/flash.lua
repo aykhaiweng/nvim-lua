@@ -44,4 +44,13 @@ return {
 			desc = "Toggle Flash Search",
 		},
 	},
+	config = function()
+		vim.api.nvim_create_autocmd("FileType", {
+			pattern = "terminal",
+			callback = function()
+				-- Disable flash for terminal buffers
+				vim.b.flash_enabled = false
+			end,
+		})
+	end,
 }

@@ -13,24 +13,7 @@ return {
 			},
 			{
 				"williamboman/mason-lspconfig.nvim",
-				opts = {
-					-- ensure_installed = {
-					-- 	-- bash
-					-- 	"shfmt",
-					-- 	-- python
-					-- 	"basedpyright",
-					-- 	"ruff",
-					-- 	-- lua
-					-- 	"lua_ls",
-					-- 	"stylua",
-					-- 	-- html/css/js
-					-- 	"eslint_d",
-					-- 	"prettierd",
-					-- 	-- data formats
-					-- 	"nginx-config-formatter",
-					-- 	"jsonlint",
-					-- },
-				},
+				opts = {},
 				config = function(_, opts)
 					require("mason-lspconfig").setup(opts)
 				end,
@@ -52,6 +35,20 @@ return {
 		},
 		config = function(_, opts)
 			vim.lsp.config("*", opts)
+
+			--- common options
+			local capabilities = vim.lsp.protocol.make_client_capabilities()
+			capabilities.textDocument.foldingRange = {
+				dynamicRegistration = false,
+				lineFoldingOnly = true,
+			}
+			local language_servers = vim.lsp.get_clients() -- or list servers manually like {'gopls', 'clangd'}
+			for _, ls in ipairs(language_servers) do
+				require("lspconfig")[ls].setup({
+					capabilities = capabilities,
+					-- you can add other fields for setting up lsp server in this table
+				})
+			end
 
 			--- diagnostics
 			vim.diagnostic.config({

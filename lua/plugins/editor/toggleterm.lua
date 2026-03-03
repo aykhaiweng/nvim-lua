@@ -15,6 +15,7 @@ return {
 			-- 1. Ensure it always opens at the bottom
 			direction = "horizontal",
 			size = 20,
+			start_in_insert = true,
 		},
 		keys = function()
 			-- Require the Terminal object from toggleterm
@@ -32,7 +33,7 @@ return {
 
 			-- Centralized smart toggle function
 			local function smart_toggle(target_direction)
-				-- 1. If terminal is open but in the wrong layout (e.g., it is floating but we pressed C-t)
+				-- 1. If terminal is open but in the wrong layout
 				if main_term:is_open() and main_term.direction ~= target_direction then
 					main_term:close()
 					main_term.direction = target_direction
@@ -56,8 +57,8 @@ return {
 					if term_tab == current_tab then
 						-- Focus if we aren't in it, close if we are
 						if vim.api.nvim_get_current_win() ~= win then
-							vim.api.nvim_set_current_win(win)
-							vim.cmd("startinsert")
+							main_term:close()
+							main_term:open()
 						else
 							main_term:close()
 						end

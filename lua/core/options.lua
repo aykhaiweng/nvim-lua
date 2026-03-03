@@ -27,6 +27,7 @@ vim.opt.splitbelow = true
 vim.opt.listchars = "tab:--,trail:·,nbsp:~,extends:>,precedes:<"
 vim.opt.list = false
 -- vim.opt.fillchars = { eob = "" }  -- Removing the tilde from the
+-- vim.opt.fillchars = "eob: ,fold: ,foldopen:,foldsep: ,foldinner: ,foldclose:"
 
 -- indents - use 4 spaces as default
 vim.opt.tabstop = 4
