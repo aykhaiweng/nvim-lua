@@ -54,6 +54,7 @@ return {
 				if not term_win_id then
 					main_term.direction = target_direction
 					main_term:open()
+					vim.cmd("startinsert")
 					return
 				end
 
@@ -75,6 +76,9 @@ return {
 					main_term.window = nil
 					main_term.direction = target_direction
 					main_term:open()
+					vim.schedule(function()
+						vim.cmd("startinsert")
+					end)
 				end
 			end
 
