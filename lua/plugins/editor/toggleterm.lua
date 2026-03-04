@@ -30,15 +30,12 @@ return {
 
 			local function smart_toggle(target_direction)
 				local current_tab = vim.api.nvim_get_current_tabpage()
-				local current_win = vim.api.nvim_get_current_win()
-
-				-- 1. Identify the terminal's buffer and find if it's visible anywhere
 				local term_buf = main_term.bufnr
 				local term_win_id = nil
 				local term_tab_id = nil
 
+				-- 1. Locate the terminal window anywhere in Neovim
 				if term_buf and vim.api.nvim_buf_is_valid(term_buf) then
-					-- Scan all tabs to find the terminal window
 					for _, tab in ipairs(vim.api.nvim_list_tabpages()) do
 						for _, win in ipairs(vim.api.nvim_tabpage_list_wins(tab)) do
 							if vim.api.nvim_win_get_buf(win) == term_buf then
@@ -53,46 +50,29 @@ return {
 					end
 				end
 
-				-- 2. Scenario: Terminal is NOT visible anywhere
+				-- 2. If it's NOT open anywhere: Open fresh in target direction
 				if not term_win_id then
 					main_term.direction = target_direction
 					main_term:open()
 					return
 				end
 
-				-- 3. Scenario: Terminal is visible in CURRENT tab
-				if term_tab_id == current_tab then
-					-- Check actual layout (Float vs Split)
-					local win_config = vim.api.nvim_win_get_config(term_win_id)
-					local is_floating = win_config.relative ~= ""
-					local want_floating = (target_direction == "float")
+				-- 3. If it IS open: Evaluate if we close it or move/transform it
+				local win_config = vim.api.nvim_win_get_config(term_win_id)
+				local is_currently_float = (win_config.relative ~= "")
+				local want_float = (target_direction == "float")
 
-					if is_floating ~= want_floating then
-						-- Wrong shape: Close and Reopen correct shape
-						main_term:close()
-						main_term.direction = target_direction
-						main_term:open()
-					else
-						-- Correct shape: Toggle Focus
-						if current_win == term_win_id then
-							main_term:close() -- We are in it, close
-						else
-							vim.api.nvim_set_current_win(term_win_id) -- Just focus, don't reopen
-							vim.cmd("startinsert")
-						end
+				if term_tab_id == current_tab and is_currently_float == want_float then
+					-- Case: Same tab AND same shape -> Close it
+					main_term:close()
+				else
+					-- Case: Different tab OR Different shape -> Move/Transform it here
+					-- Use the "remote kill" method to avoid tab jumping
+					if vim.api.nvim_win_is_valid(term_win_id) then
+						vim.api.nvim_win_close(term_win_id, true)
 					end
-					return
-				end
 
-				-- 4. Scenario: Terminal is visible in ANOTHER tab (The Fix)
-				if term_tab_id ~= current_tab then
-					-- Crucial: Manually close the remote window without switching tabs
-					vim.api.nvim_win_close(term_win_id, true)
-
-					-- Reset internal state so toggleterm knows it's closed
 					main_term.window = nil
-
-					-- Open in current tab
 					main_term.direction = target_direction
 					main_term:open()
 				end
@@ -105,7 +85,7 @@ return {
 						smart_toggle("horizontal")
 					end,
 					mode = { "n", "t", "v", "i" },
-					desc = "Toggle/Focus bottom Terminal",
+					desc = "Terminal: Bottom (Open/Move/Close)",
 				},
 				{
 					"<F6>",
@@ -113,7 +93,7 @@ return {
 						smart_toggle("float")
 					end,
 					mode = { "n", "t", "v", "i" },
-					desc = "Open floating Terminal",
+					desc = "Terminal: Float (Open/Move/Close)",
 				},
 			}
 		end,
