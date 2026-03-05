@@ -18,19 +18,25 @@ return {
 		},
 		keys = function()
 			local Terminal = require("toggleterm.terminal").Terminal
+			local terminals = {}
 
-			local main_term = Terminal:new({
-				id = 1,
-				float_opts = {
-					border = "curved",
-					width = math.floor(vim.o.columns * 0.6),
-					height = math.floor(vim.o.lines * 0.8),
-				},
-			})
+			local function smart_toggle(target_direction, id, cmd)
+				id = id or 1
+				if not terminals[id] then
+					terminals[id] = Terminal:new({
+						id = id,
+						cmd = cmd,
+						float_opts = {
+							border = "curved",
+							width = math.floor(vim.o.columns * 0.6),
+							height = math.floor(vim.o.lines * 0.8),
+						},
+					})
+				end
 
-			local function smart_toggle(target_direction)
+				local term = terminals[id]
 				local current_tab = vim.api.nvim_get_current_tabpage()
-				local term_buf = main_term.bufnr
+				local term_buf = term.bufnr
 				local term_win_id = nil
 				local term_tab_id = nil
 
@@ -52,8 +58,8 @@ return {
 
 				-- 2. If it's NOT open anywhere: Open fresh in target direction
 				if not term_win_id then
-					main_term.direction = target_direction
-					main_term:open()
+					term.direction = target_direction
+					term:open()
 					vim.cmd("startinsert")
 					return
 				end
@@ -65,7 +71,7 @@ return {
 
 				if term_tab_id == current_tab and is_currently_float == want_float then
 					-- Case: Same tab AND same shape -> Close it
-					main_term:close()
+					term:close()
 				else
 					-- Case: Different tab OR Different shape -> Move/Transform it here
 					-- Use the "remote kill" method to avoid tab jumping
@@ -73,9 +79,9 @@ return {
 						vim.api.nvim_win_close(term_win_id, true)
 					end
 
-					main_term.window = nil
-					main_term.direction = target_direction
-					main_term:open()
+					term.window = nil
+					term.direction = target_direction
+					term:open()
 					vim.schedule(function()
 						vim.cmd("startinsert")
 					end)
@@ -86,7 +92,7 @@ return {
 				{
 					"<F5>",
 					function()
-						smart_toggle("horizontal")
+						smart_toggle("horizontal", 1)
 					end,
 					mode = { "n", "t", "v", "i" },
 					desc = "Terminal: Bottom (Open/Move/Close)",
@@ -94,7 +100,7 @@ return {
 				{
 					"<F6>",
 					function()
-						smart_toggle("float")
+						smart_toggle("float", 1)
 					end,
 					mode = { "n", "t", "v", "i" },
 					desc = "Terminal: Float (Open/Move/Close)",
