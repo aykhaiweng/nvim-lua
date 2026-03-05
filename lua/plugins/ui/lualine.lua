@@ -26,6 +26,8 @@ return {
 				"tsplayground",
 				"quickfixlist",
 				"loclist",
+				"terminal",
+				"edgy",
 				"qf",
 				"noice",
 			}

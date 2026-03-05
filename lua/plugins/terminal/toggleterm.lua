@@ -3,6 +3,7 @@ return {
 		"akinsho/toggleterm.nvim",
 		version = "*",
 		event = "VeryLazy",
+		enabled = false,
 		init = function()
 			vim.api.nvim_create_autocmd({ "TermOpen", "BufEnter" }, {
 				pattern = "term://*toggleterm#*",
@@ -104,6 +105,14 @@ return {
 					end,
 					mode = { "n", "t", "v", "i" },
 					desc = "Terminal: Float (Open/Move/Close)",
+				},
+				{
+					"<F7>",
+					function()
+						smart_toggle("horizontal", 2)
+					end,
+					mode = { "n", "t", "v", "i" },
+					desc = "Terminal2: Bottom (Open/Move/Close)",
 				},
 			}
 		end,

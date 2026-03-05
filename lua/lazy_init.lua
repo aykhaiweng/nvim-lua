@@ -21,6 +21,8 @@ local plugins = {
 	{ import = "plugins" },
 	{ import = "plugins.colorscheme" },
 	{ import = "plugins.terminal" },
+	-- --- AI shit
+	{ import = "plugins.ai" },
 	-- --- Do you remember ALE? But better
 	{ import = "plugins.treesitter" },
 	-- --- UI and Navigation

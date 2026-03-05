@@ -38,7 +38,6 @@ return {
 					enabled = false,
 				},
 				exit_when_last = true,
-				-- close_when_all_hidden = true,
 				keep_win_size = true,
 				wo = {
 					winbar = true,
@@ -50,7 +49,7 @@ return {
 				},
 				options = {
 					left = { size = 50 },
-					right = { size = 50 },
+					right = { size = 80 },
 					bottom = { size = 25 },
 				},
 				left = {
@@ -96,13 +95,15 @@ return {
 				bottom = {
 					{
 						title = "Terminal",
-						ft = "toggleterm",
+						ft = "terminal",
 						height = 0.4,
 						filter = function(buf, win) -- noqa
 							return vim.api.nvim_win_get_config(win).relative == ""
+								and vim.b[buf].terminal_position == "bottom"
 						end,
 						wo = {
 							winfixheight = true,
+							winhighlight = "Normal:NeoTreeNormal,NormalNC:NeoTreeNormalNC,EndOfBuffer:NeoTreeEndOfBuffer",
 						},
 					},
 					{
@@ -164,16 +165,16 @@ return {
 			require("edgy").setup(opts)
 
 			local function custom_edgy_open()
-				require("edgy").open()
+				require("edgy").open({ focus = false })
 			end
 
 			custom_edgy_open()
 
-			--- Auto open edgy windows
-			vim.api.nvim_create_autocmd({ "TabNew" }, {
-				desc = "Auto-open pinned edgy views on startup",
+			-- --- Auto open edgy windows
+			vim.api.nvim_create_autocmd({ "TabNew", "TabEnter" }, {
+				desc = "Auto-open pinned edgy views on tab enter",
 				callback = function()
-					custom_edgy_open()
+					vim.schedule(custom_edgy_open)
 				end,
 			})
 
