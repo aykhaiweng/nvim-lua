@@ -149,7 +149,7 @@ return {
 		})
 
 		--- Every time we go to normal mode attempt to hide the blink window
-		vim.api.nvim_create_autocmd({ "InsertLeave", "ModeChanged" }, {
+		vim.api.nvim_create_autocmd({ "InsertLeave", "ModeChanged", "CmdlineLeave" }, {
 			callback = function()
 				-- Attempting to close existing menus
 				blink.hide()
