@@ -18,9 +18,24 @@ return {
 				end
 
 				if os.getenv("TMUX") then
-					local panes = vim.fn.system("tmux list-panes -t : -F '#{pane_start_command}'")
-					if panes:find("gemini") then
-						os.execute("tmux resize-pane -Z")
+					local panes = vim.fn.system("tmux list-panes -t : -F '#{pane_id} #{pane_start_command}'")
+					local target_pane = nil
+					for line in panes:gmatch("[^\r\n]+") do
+						local id, start_cmd = line:match("^(%%?%d+)%s+(.*)$")
+						if start_cmd and start_cmd:find("gemini") then
+							target_pane = id
+							break
+						end
+					end
+
+					if target_pane then
+						-- If the pane exists, sync the port and show the pane
+						local sync_cmd = string.format(
+							"export GEMINI_CLI_IDE_SERVER_PORT=%d\n",
+							status.port
+						)
+						vim.fn.system(string.format("tmux send-keys -t %s %s", target_pane, vim.fn.shellescape(sync_cmd)))
+						os.execute("tmux select-pane -t " .. target_pane)
 					else
 						local env_cmd = string.format(
 							'TERM_PROGRAM="vscode" GEMINI_CLI_IDE_WORKSPACE_PATH=%s GEMINI_CLI_IDE_SERVER_PORT=%d ',
