@@ -1,12 +1,15 @@
--- Python implementation
-vim.g.python3_host_prog = os.getenv("HOME") .. "/.pyenv/versions/neovim3/bin/python3"
+-- Improvement 5: Safer Python host prog
+local python_path = os.getenv("HOME") .. "/.pyenv/versions/neovim3/bin/python3"
+if vim.fn.executable(python_path) == 1 then
+	vim.g.python3_host_prog = python_path
+end
 
 -- Stop my GUI terminal from rendering it's cursor over mine
 vim.opt.guicursor = ""
 
--- Stop buffers from hiding
-vim.cmd([[ set hidden ]])
-vim.cmd([[ set autoread ]])
+-- Improvement 3: Modernize Core Options
+vim.opt.hidden = true
+vim.opt.autoread = true
 
 -- mouse
 vim.opt.mouse = "a"
@@ -75,13 +78,13 @@ vim.opt.updatetime = 200
 -- clipboard
 vim.opt.clipboard = ""
 
--- cursor
-vim.cmd([[ let &t_SI = "\e[6 q" ]])
-vim.cmd([[ let &t_EI = "\e[2 q" ]])
-vim.cmd([[ set guicursor=n-v-c:block-Cursor ]])
-vim.cmd([[ set guicursor+=i-ci-ve:ver25 ]])
-vim.cmd([[ set guicursor+=r-cr:block-Cursor ]])
-vim.cmd([[ set guicursor+=a:blinkoff400-blinkon200 ]])
+-- Improvement 3: Modernize Cursor
+vim.opt.guicursor = {
+	"n-v-c:block-Cursor",
+	"i-ci-ve:ver25",
+	"r-cr:block-Cursor",
+	"a:blinkoff400-blinkon200",
+}
 
 
 -- Start autoinsert
