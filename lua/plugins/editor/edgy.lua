@@ -33,6 +33,7 @@ return {
 			}
 		end,
 		opts = function()
+			local winhighlight = "Normal:Normal,NormalNC:NeoTreeNormalNC,EndOfBuffer:NeoTreeEndOfBuffer"
 			local opts = {
 				animate = {
 					enabled = false,
@@ -43,9 +44,9 @@ return {
 					winbar = true,
 					winfixwidth = true,
 					winfixheight = true,
-					winhighlight = "",
 					spell = false,
 					signcolumn = "no",
+					winhighlight = winhighlight
 				},
 				options = {
 					left = { size = 50 },
@@ -103,7 +104,6 @@ return {
 						end,
 						wo = {
 							winfixheight = true,
-							winhighlight = "Normal:NeoTreeNormal,NormalNC:NeoTreeNormalNC,EndOfBuffer:NeoTreeEndOfBuffer",
 						},
 					},
 					{
