@@ -81,3 +81,13 @@ vim.keymap.set("n", "<leader><space>", "za", { desc = "Toggle fold under cursor"
 
 -- Terminal
 vim.keymap.set("t", "<C-q>", "<C-\\><C-n>", { desc = "Exit out of Terminal Insert" })
+
+-- Jump into floating window
+vim.keymap.set("n", "<leader>wf", function()
+	for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+		if vim.api.nvim_win_get_config(win).relative ~= "" then
+			vim.api.nvim_set_current_win(win)
+			return
+		end
+	end
+end, { desc = "Jump into floating window" })

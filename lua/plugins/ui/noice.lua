@@ -15,6 +15,15 @@ return {
 			lsp = {
 				signature = {
 					enabled = true,
+					auto_open = {
+						enabled = true,
+						trigger = true,
+					},
+					opts = { focusable = true },
+				},
+				hover = {
+					enabled = true,
+					opts = { focusable = true },
 				},
 			},
 		},

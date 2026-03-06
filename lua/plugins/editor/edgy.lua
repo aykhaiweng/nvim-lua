@@ -5,15 +5,17 @@ return {
 		init = function()
 			vim.opt.laststatus = 3
 			vim.opt.splitkeep = "screen"
-			vim.opt.equalalways = true
+			vim.opt.equalalways = false
 		end,
 		keys = function()
+			local function toggle_edgy()
+				require("edgy").toggle("left", { focus = false })
+			end
+
 			return {
 				{
 					"<C-b>",
-					function()
-						require("edgy").toggle("left", { focus = false })
-					end,
+					toggle_edgy,
 					desc = "Edgy Toggle",
 				},
 				{
@@ -21,7 +23,7 @@ return {
 					function()
 						require("edgy").open({ focus = false })
 					end,
-					desc = "Edgy Toggle",
+					desc = "Edgy Open",
 				},
 				{
 					"<leader>we",
@@ -39,18 +41,17 @@ return {
 					enabled = false,
 				},
 				exit_when_last = true,
-				keep_win_size = true,
+				keep_win_size = false,
 				wo = {
 					winbar = true,
 					winfixwidth = true,
 					winfixheight = true,
 					spell = false,
 					signcolumn = "no",
-					winhighlight = winhighlight
+					winhighlight = winhighlight,
 				},
 				options = {
-					left = { size = 50 },
-					right = { size = 80 },
+					left = { size = 60 },
 					bottom = { size = 25 },
 				},
 				left = {
@@ -170,7 +171,7 @@ return {
 
 			custom_edgy_open()
 
-			-- --- Auto open edgy windows
+			--- Auto open edgy windows
 			vim.api.nvim_create_autocmd({ "TabNew", "TabEnter" }, {
 				desc = "Auto-open pinned edgy views on tab enter",
 				callback = function()
@@ -178,18 +179,72 @@ return {
 				end,
 			})
 
-			-- Smart window balancing that respects edgy.nvim
-			vim.keymap.set("n", "<leader>w=", function()
-				-- 1. Equalize all windows using standard Neovim logic
+			--- Robust window balancing for edgy
+			local function balance_editors()
+				local ok, edgy = pcall(require, "edgy")
+				local wins = vim.api.nvim_tabpage_list_wins(0)
+
+				-- 1. Ensure all edgy windows have winfix set so wincmd = ignores them
+				for _, win in ipairs(wins) do
+					if ok and edgy.get_win(win) then
+						vim.wo[win].winfixwidth = true
+						vim.wo[win].winfixheight = true
+					else
+						vim.wo[win].winfixwidth = false
+						vim.wo[win].winfixheight = false
+					end
+				end
+
+				-- 2. Initial pass with Neovim balancer
+				if ok then edgy.fix() end
 				vim.cmd("wincmd =")
 
-				-- 2. Force edgy to fix the layouts it manages
-				local ok, edgy = pcall(require, "edgy")
-				if ok then
-					-- This resets edgy windows to their configured fixed sizes
-					edgy.fix()
-				end
-			end, { desc = "Balance windows (respecting edgy)" })
+				-- 3. Manually fix vertical heights for editors in each column
+				vim.schedule(function()
+					if not vim.api.nvim_tabpage_is_valid(0) then return end
+					
+					if ok then edgy.fix() end
+					vim.cmd("redraw")
+
+					local current_wins = vim.api.nvim_tabpage_list_wins(0)
+					local columns = {}
+					for _, win in ipairs(current_wins) do
+						if not (ok and edgy.get_win(win)) and vim.api.nvim_win_get_config(win).relative == "" then
+							local pos = vim.api.nvim_win_get_position(win)
+							local x = pos[2]
+							columns[x] = columns[x] or {}
+							table.insert(columns[x], win)
+						end
+					end
+
+					for _, col_wins in pairs(columns) do
+						if #col_wins > 1 then
+							-- Sort top to bottom
+							table.sort(col_wins, function(a, b)
+								return vim.api.nvim_win_get_position(a)[1] < vim.api.nvim_win_get_position(b)[1]
+							end)
+
+							local total_h = 0
+							for _, win in ipairs(col_wins) do
+								total_h = total_h + vim.api.nvim_win_get_height(win)
+							end
+
+							local avg_h = math.floor(total_h / #col_wins)
+							local remainder = total_h % #col_wins
+
+							-- Set heights for EVERY window in the column
+							for i, win in ipairs(col_wins) do
+								local h = avg_h + (i <= remainder and 1 or 0)
+								pcall(vim.api.nvim_win_set_height, win, h)
+							end
+						end
+					end
+					
+					if ok then edgy.fix() end
+				end)
+			end
+
+			vim.keymap.set("n", "<leader>w=", balance_editors, { desc = "Balance windows (respecting edgy)" })
 		end,
 	},
 }

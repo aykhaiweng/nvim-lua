@@ -59,7 +59,7 @@ return {
 				float = {
 					show_header = true,
 					border = "rounded",
-					focusable = false,
+					focusable = true,
 				},
 			})
 

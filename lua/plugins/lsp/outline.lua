@@ -22,7 +22,7 @@ return {
 				},
 			},
 			outline_window = {
-				width = 50,
+				width = 60,
 				relative_width = false,
 				winhl = "Normal:EdgyNormal",
 			},

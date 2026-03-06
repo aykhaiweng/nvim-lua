@@ -134,12 +134,12 @@ return {
 				required_width = 110, -- min width of window required to show this column
 			},
 			symlink_target = {
-				enabled = false,
+				enabled = true,
 			},
 		},
 		window = {
 			position = "left",
-			width = 50,
+			width = 60,
 			mapping_options = {
 				noremap = true,
 				nowait = true,
@@ -313,6 +313,5 @@ return {
 		require("neo-tree").setup(opts)
 
 		vim.keymap.set("n", "<leader>-", [[:Neotree reveal<cr>]], { desc = "Open Neo-tree" })
-		vim.keymap.set("n", "<C-b>", [[:Neotree toggle position=left<cr>]], { desc = "Toggle Neo-tree" })
 	end,
 }

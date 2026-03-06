@@ -20,16 +20,3 @@ vim.diagnostic.config({
         }
     }
 })
-
--- Cursor
-local CursorLineGroup = vim.api.nvim_create_augroup("CursorLine", { clear = true })
-vim.api.nvim_create_autocmd({ "VimEnter", "WinEnter", "BufWinEnter" }, {
-	pattern = "*",
-	command = "set cursorline",
-	group = CursorLineGroup,
-})
-vim.api.nvim_create_autocmd({ "WinLeave" }, {
-	pattern = "*",
-	command = "set nocursorline",
-	group = CursorLineGroup,
-})
