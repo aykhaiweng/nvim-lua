@@ -18,14 +18,14 @@ autocmd("VimResized", {
 			end
 		end
 
-		if ok then edgy.fix() end
+		if ok and edgy.fix then pcall(edgy.fix) end
 		vim.cmd("tabdo wincmd =")
 
 		if ok then
 			vim.schedule(function()
 				if not vim.api.nvim_tabpage_is_valid(0) then return end
 				
-				edgy.fix()
+				if ok and edgy.fix then pcall(edgy.fix) end
 				vim.cmd("redraw")
 
 				local wins = vim.api.nvim_tabpage_list_wins(0)
@@ -55,7 +55,7 @@ autocmd("VimResized", {
 						end
 					end
 				end
-				edgy.fix()
+				if ok and edgy.fix then pcall(edgy.fix) end
 			end)
 		end
 	end,

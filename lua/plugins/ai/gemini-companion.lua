@@ -37,10 +37,13 @@ return {
 
 		-- Helper: Spawn or switch to CLI session in tmux
 		local function switch_to_cli(cli_name, resume_cmd)
-			local gemini = require("gemini")
+			local ok, gemini = pcall(require, "gemini")
+			if not ok then return end
+
 			local status = gemini.getServerStatus()
-			if not status.port then
-				vim.cmd("GeminiSwitchToCli sidebar '" .. resume_cmd .. " --resume'")
+			if not (status and status.port) then
+				-- If no server is running, don't use --resume as there is nothing to resume
+				vim.cmd("GeminiSwitchToCli sidebar " .. resume_cmd)
 				return
 			end
 
@@ -49,10 +52,11 @@ return {
 				if target_pane then
 					os.execute("tmux resize-pane -Z")
 				else
+					local workspace = status.workspace or vim.fn.getcwd()
 					local env_cmd = string.format(
 						'TERM_PROGRAM="vscode" %s_CLI_IDE_WORKSPACE_PATH=%s %s_CLI_IDE_SERVER_PORT=%d ',
 						cli_name:upper(),
-						vim.fn.shellescape(status.workspace),
+						vim.fn.shellescape(workspace),
 						cli_name:upper(),
 						status.port
 					)
@@ -86,36 +90,36 @@ return {
 		end
 
 		return {
-			-- {
-			-- 	"<F7>",
-			-- 	function()
-			-- 		switch_to_cli("gemini", "gemini")
-			-- 	end,
-			-- 	desc = "Spawn or switch to Gemini session (tmux split)",
-			-- },
 			{
 				"<F7>",
 				function()
-					switch_to_cli("qwen", "qwen")
+					switch_to_cli("gemini", "gemini")
 				end,
-				desc = "Spawn or switch to Qwen session (tmux split)",
+				desc = "Spawn or switch to Gemini session (tmux split)",
 			},
 			-- {
-			-- 	"<leader>aS",
+			-- 	"<F7>",
 			-- 	function()
-			-- 		send_to_cli("gemini")
+			-- 		switch_to_cli("qwen", "qwen")
 			-- 	end,
-			-- 	mode = { "x" },
-			-- 	desc = "Send selection to Gemini CLI (tmux)",
+			-- 	desc = "Spawn or switch to Qwen session (tmux split)",
 			-- },
 			{
 				"<leader>aS",
 				function()
-					send_to_cli("qwen")
+					send_to_cli("gemini")
 				end,
 				mode = { "x" },
-				desc = "Send selection to Qwen CLI (tmux)",
+				desc = "Send selection to Gemini CLI (tmux)",
 			},
+			-- {
+			-- 	"<leader>aS",
+			-- 	function()
+			-- 		send_to_cli("qwen")
+			-- 	end,
+			-- 	mode = { "x" },
+			-- 	desc = "Send selection to Qwen CLI (tmux)",
+			-- },
 		}
 	end,
 }
