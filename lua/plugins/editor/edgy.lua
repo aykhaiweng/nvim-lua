@@ -51,7 +51,7 @@ return {
 					winhighlight = winhighlight,
 				},
 				options = {
-					left = { size = 60 },
+					left = { size = 50 },
 					bottom = { size = 25 },
 				},
 				left = {
