@@ -25,10 +25,20 @@ return {
 				{ "<leader>po", builtin.oldfiles, "n", desc = "Open recent" },
 				{ "<C-p>", builtin.find_files, "n", desc = "Find files" },
 				{
-					"<C-F>",
+					"<C-f>",
 					"<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
-					"n",
+					mode = {"n"},
 					desc = "Live grep",
+				},
+				{
+					"<C-f>",
+					function()
+						vim.cmd('noau normal! gv"vy')
+						local selection = vim.fn.getreg("v")
+						require("telescope").extensions.live_grep_args.live_grep_args({ default_text = selection })
+					end,
+					mode = {"v"},
+					desc = "Live grep visual selection",
 				},
 
 				-- remaps for lsp
@@ -44,6 +54,32 @@ return {
 		end,
 		config = function()
 			local actions = require("telescope.actions")
+
+			local function compare_paths(a, b)
+				if a == b then return false end
+				local a_parts = vim.split(a, "/")
+				local b_parts = vim.split(b, "/")
+				local min_len = math.min(#a_parts, #b_parts)
+
+				for i = 1, min_len do
+					local a_part = a_parts[i]
+					local b_part = b_parts[i]
+					if a_part ~= b_part then
+						local a_is_file = (i == #a_parts)
+						local b_is_file = (i == #b_parts)
+
+						if a_is_file and not b_is_file then
+							return true
+						elseif not a_is_file and b_is_file then
+							return false
+						else
+							return a_part < b_part
+						end
+					end
+				end
+				return #a_parts < #b_parts
+			end
+
 			local default_file_ignore_patterns = {
 				"^.git/",
 				"node_modules/",
@@ -70,7 +106,7 @@ return {
 					sorting_strategy = "ascending",
                     sorter = require('telescope.sorters').get_generic_fuzzy_sorter(),
 					tiebreak = function(current_entry, existing_entry, _)
-						return current_entry.ordinal < existing_entry.ordinal
+						return compare_paths(current_entry.value, existing_entry.value)
 					end,
 					selection_strategy = "closest",
 					vimgrep_arguments = {
