@@ -16,12 +16,13 @@ local handler = function(virtText, lnum, endLnum, width, truncate)
 			chunkWidth = vim.fn.strdisplaywidth(chunkText)
 			-- str width returned from truncate() may less than 2nd argument, need padding
 			if curWidth + chunkWidth < targetWidth then
-				suffix = suffix .. (" "):rep(targetWidth - curWidth - chunkWidth)
+				curWidth = curWidth + chunkWidth
 			end
 			break
 		end
 		curWidth = curWidth + chunkWidth
 	end
+	table.insert(newVirtText, { ("─"):rep(targetWidth - curWidth), "Whitespace" })
 	table.insert(newVirtText, { suffix, "MoreMsg" })
 	return newVirtText
 end
