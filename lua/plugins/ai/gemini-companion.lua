@@ -3,6 +3,19 @@ return {
 	dependencies = { "nvim-lua/plenary.nvim" },
 	event = "VeryLazy",
 	config = function()
+		-- Monkey patch persistence for macOS to fix the /proc dependency
+		if vim.loop.os_uname().sysname == "Darwin" then
+			local ok_p, persistence = pcall(require, "gemini.persistence")
+			if ok_p then
+				persistence.isActiveNvimProcess = function(pid)
+					local handle = io.popen("ps -p " .. pid .. " -o comm=")
+					if not handle then return false end
+					local comm = handle:read("*a")
+					handle:close()
+					return string.find(comm, "nvim") ~= nil
+				end
+			end
+		end
 		require("gemini").setup()
 	end,
 	keys = function()
@@ -40,7 +53,21 @@ return {
 			local ok, gemini = pcall(require, "gemini")
 			if not ok then return end
 
-			local status = gemini.getServerStatus()
+			local function get_status()
+				local status = gemini.getServerStatus()
+				if status and status.port then
+					return status
+				end
+				return nil
+			end
+
+			local status = get_status()
+			if not status then
+				-- Try once more after a short delay if it's just starting up
+				vim.wait(200)
+				status = get_status()
+			end
+
 			if not (status and status.port) then
 				-- If no server is running, don't use --resume as there is nothing to resume
 				vim.cmd("GeminiSwitchToCli sidebar " .. resume_cmd)
@@ -61,11 +88,11 @@ return {
 						status.port
 					)
 					local cmd = "tmux split-window -h -l 80 "
-						.. vim.fn.shellescape(env_cmd .. resume_cmd .. " --resume")
+						.. vim.fn.shellescape(env_cmd .. resume_cmd)
 					os.execute(cmd)
 				end
 			else
-				vim.cmd("GeminiSwitchToCli sidebar '" .. resume_cmd .. " --resume'")
+				vim.cmd("GeminiSwitchToCli sidebar " .. resume_cmd)
 			end
 		end
 
@@ -96,6 +123,7 @@ return {
 					switch_to_cli("gemini", "gemini")
 				end,
 				desc = "Spawn or switch to Gemini session (tmux split)",
+				mode = {"n", "v", "i", "t", "x"}
 			},
 			-- {
 			-- 	"<F7>",
