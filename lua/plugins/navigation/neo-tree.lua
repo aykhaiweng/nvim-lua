@@ -39,6 +39,11 @@ return {
 			end,
 		},
 	},
+	keys = {
+		-- { "<C-b>", "<cmd>Neotree<cr>", desc = "Neo-tree" },
+		{ "<leader>-", "<cmd>Neotree reveal<cr>", desc = "Neo-tree reveal current file" },
+	},
+	cmd = { "Neotree" },
 	opts = {
 		close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
 		popup_border_style = "rounded",
@@ -309,9 +314,6 @@ return {
 		},
 	},
 	config = function(_, opts)
-		-- If you want icons for diagnostic errors, you'll need to define them somewhere:
 		require("neo-tree").setup(opts)
-
-		vim.keymap.set("n", "<leader>-", [[:Neotree reveal<cr>]], { desc = "Open Neo-tree" })
-	end,
+	end
 }
