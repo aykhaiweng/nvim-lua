@@ -4,6 +4,9 @@ if vim.fn.executable(python_path) == 1 then
 	vim.g.python3_host_prog = python_path
 end
 
+-- Enable project level .nvim.lua 
+vim.o.exrc = true
+
 -- Stop my GUI terminal from rendering it's cursor over mine
 vim.opt.guicursor = ""
 
@@ -85,7 +88,6 @@ vim.opt.guicursor = {
 	"r-cr:block-Cursor",
 	"a:blinkoff400-blinkon200",
 }
-
 
 -- Start autoinsert
 vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {

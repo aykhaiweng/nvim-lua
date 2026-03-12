@@ -80,6 +80,7 @@ return {
 					enabled = true,
 					custom_bg = "#181825",
 				},
+				snacks = true,
 				harpoon = true,
 				neogit = true,
 				noice = true,

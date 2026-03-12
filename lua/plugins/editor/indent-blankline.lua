@@ -2,6 +2,7 @@ return {
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		event = { "BufReadPre", "BufNewFile" },
+		enabled = false,
 		opts = {
 			scope = {
 				enabled = false,

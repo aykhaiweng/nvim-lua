@@ -19,7 +19,9 @@ autocmd("VimResized", {
 		end
 
 		if ok and edgy.fix then pcall(edgy.fix) end
+		local curr_tab = vim.api.nvim_get_current_tabpage()
 		vim.cmd("tabdo wincmd =")
+		vim.api.nvim_set_current_tabpage(curr_tab)
 
 		if ok then
 			vim.schedule(function()
