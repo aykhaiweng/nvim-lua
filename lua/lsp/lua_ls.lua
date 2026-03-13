@@ -6,13 +6,11 @@ return {
 		Lua = {
 			runtime = { version = "LuaJIT" },
 			workspace = {
-				library = {
-					vim.fn.stdpath("data") .. "/lazydev/library",
-					vim.env.VIMRUNTIME .. "/lua",
-				},
 				checkThirdParty = false,
 			},
+			-- Still keep globals "vim" just in case lazydev isn't active
 			diagnostics = { globals = { "vim" } },
+			telemetry = { enabled = false },
 		},
 	},
 }

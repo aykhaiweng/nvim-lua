@@ -1,15 +1,3 @@
-return {
-	cmd = { "basedpyright" },
-	filetypes = { "python" },
-	settings = {
-		basedpyright = {
-			analysis = {
-				autoSearchPaths = true,
-				diagnosticMode = "workspace", -- Options: "openFilesOnly", "workspace"
-			},
-			disableOrganizeImports = true,
-			reportMissingImports = "error",
-			typeCheckingMode = "off",
-		},
-	},
-}
+-- You can add extra overrides here if needed,
+-- but the default basedpyright settings are now handled in plugins/lsp/lsp.lua
+return {}

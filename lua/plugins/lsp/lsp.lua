@@ -11,45 +11,7 @@ return {
 					require("mason").setup(opts)
 				end,
 			},
-			{
-				"williamboman/mason-lspconfig.nvim",
-				opts = {
-					ensure_installed = { "basedpyright", "lua_ls" },
-				},
-				config = function(_, opts)
-					local lspconfig = require("lspconfig")
-					local blink = require("blink.cmp")
-
-					require("mason-lspconfig").setup({
-						ensure_installed = opts.ensure_installed,
-						handlers = {
-							function(server_name)
-								local server_config = {}
-
-								-- Try to load server-specific config from lua/lsp/
-								local has_custom_config, custom_config = pcall(require, "lsp." .. server_name)
-								if has_custom_config then
-									server_config = custom_config
-								end
-
-								-- Add default capabilities
-								local capabilities = vim.lsp.protocol.make_client_capabilities()
-								capabilities.textDocument.foldingRange = {
-									dynamicRegistration = false,
-									lineFoldingOnly = true,
-								}
-								server_config.capabilities = vim.tbl_deep_extend("force", capabilities, server_config.capabilities or {})
-
-								-- Add blink.cmp capabilities
-								server_config.capabilities = blink.get_lsp_capabilities(server_config.capabilities)
-
-								-- Setup the server
-								lspconfig[server_name].setup(server_config)
-							end,
-						},
-					})
-				end,
-			},
+			{ "williamboman/mason-lspconfig.nvim" },
 		},
 		cmd = {
 			"LspInfo",
@@ -64,14 +26,44 @@ return {
 			inlay_hints = {
 				enabled = true,
 			},
+			servers = {
+				basedpyright = {
+					settings = {
+						basedpyright = {
+							analysis = {
+								autoSearchPaths = true,
+								diagnosticMode = "workspace",
+								typeCheckingMode = "off",
+								useLibraryCodeForTypes = true,
+							},
+						},
+					},
+				},
+				lua_ls = {
+					settings = {
+						Lua = {
+							runtime = { version = "LuaJIT" },
+							workspace = { checkThirdParty = false },
+							diagnostics = { globals = { "vim" } },
+							telemetry = { enabled = false },
+						},
+					},
+				},
+			},
 		},
 		config = function(_, opts)
-			-- Neovim 0.11+ default config for all servers
+			local lspconfig = require("lspconfig")
+			local mason_lspconfig = require("mason-lspconfig")
+			local blink = require("blink.cmp")
+
+			-- 1. Neovim 0.11+ default config for all servers
 			if vim.lsp.config then
-				vim.lsp.config("*", opts)
+				vim.lsp.config("*", {
+					inlay_hints = opts.inlay_hints,
+				})
 			end
 
-			--- diagnostics
+			-- 2. Setup diagnostics UI
 			vim.diagnostic.config({
 				virtual_text = true,
 				virtual_lines = false,
@@ -84,7 +76,35 @@ return {
 				},
 			})
 
-			--- Keybindings for LSP
+			-- 3. Define common capabilities
+			local capabilities = vim.lsp.protocol.make_client_capabilities()
+			capabilities.textDocument.foldingRange = {
+				dynamicRegistration = false,
+				lineFoldingOnly = true,
+			}
+			capabilities = blink.get_lsp_capabilities(capabilities)
+
+			-- 4. Setup mason-lspconfig and handlers
+			mason_lspconfig.setup({
+				ensure_installed = vim.tbl_keys(opts.servers or {}),
+				handlers = {
+					function(server_name)
+						local server_opts = vim.tbl_deep_extend("force", {
+							capabilities = vim.deepcopy(capabilities),
+						}, opts.servers[server_name] or {})
+
+						-- Load server-specific config from lua/lsp/ if it exists
+						local has_custom_config, custom_config = pcall(require, "lsp." .. server_name)
+						if has_custom_config then
+							server_opts = vim.tbl_deep_extend("force", server_opts, custom_config)
+						end
+
+						lspconfig[server_name].setup(server_opts)
+					end,
+				},
+			})
+
+			-- 5. LSP Keybindings (on attach)
 			vim.api.nvim_create_autocmd("LspAttach", {
 				desc = "LSP actions",
 				callback = function(event)
