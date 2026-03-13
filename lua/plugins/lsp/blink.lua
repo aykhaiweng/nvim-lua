@@ -19,6 +19,7 @@ return {
 	lazy = false, -- lazy loading handled internally
 	dependencies = {
 		"rafamadriz/friendly-snippets",
+		"neovim/nvim-lspconfig",
 	},
 	version = "*",
 	opts = {
@@ -132,6 +133,12 @@ return {
 	config = function(_, opts)
 		local blink = require("blink.cmp")
 		blink.setup(opts)
+
+		-- Augment lspconfig capabilities
+		local has_lspconfig, lspconfig = pcall(require, "lspconfig")
+		if has_lspconfig then
+			lspconfig.util.default_config.capabilities = blink.get_lsp_capabilities(lspconfig.util.default_config.capabilities)
+		end
 
 		local blink_augroup = vim.api.nvim_create_augroup("blink_custom", { clear = true })
 

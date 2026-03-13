@@ -54,7 +54,6 @@ return {
 		config = function(_, opts)
 			local lspconfig = require("lspconfig")
 			local mason_lspconfig = require("mason-lspconfig")
-			local blink = require("blink.cmp")
 
 			-- 1. Neovim 0.11+ default config for all servers
 			if vim.lsp.config then
@@ -77,12 +76,14 @@ return {
 			})
 
 			-- 3. Define common capabilities
-			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities.textDocument.foldingRange = {
-				dynamicRegistration = false,
-				lineFoldingOnly = true,
-			}
-			capabilities = blink.get_lsp_capabilities(capabilities)
+			local capabilities = vim.tbl_deep_extend("force", lspconfig.util.default_config.capabilities, {
+				textDocument = {
+					foldingRange = {
+						dynamicRegistration = false,
+						lineFoldingOnly = true,
+					},
+				},
+			})
 
 			-- 4. Setup mason-lspconfig and handlers
 			mason_lspconfig.setup({
