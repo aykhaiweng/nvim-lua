@@ -13,9 +13,41 @@ return {
 			},
 			{
 				"williamboman/mason-lspconfig.nvim",
-				opts = {},
+				opts = {
+					ensure_installed = { "basedpyright", "lua_ls" },
+				},
 				config = function(_, opts)
-					require("mason-lspconfig").setup(opts)
+					local lspconfig = require("lspconfig")
+					local blink = require("blink.cmp")
+
+					require("mason-lspconfig").setup({
+						ensure_installed = opts.ensure_installed,
+						handlers = {
+							function(server_name)
+								local server_config = {}
+
+								-- Try to load server-specific config from lua/lsp/
+								local has_custom_config, custom_config = pcall(require, "lsp." .. server_name)
+								if has_custom_config then
+									server_config = custom_config
+								end
+
+								-- Add default capabilities
+								local capabilities = vim.lsp.protocol.make_client_capabilities()
+								capabilities.textDocument.foldingRange = {
+									dynamicRegistration = false,
+									lineFoldingOnly = true,
+								}
+								server_config.capabilities = vim.tbl_deep_extend("force", capabilities, server_config.capabilities or {})
+
+								-- Add blink.cmp capabilities
+								server_config.capabilities = blink.get_lsp_capabilities(server_config.capabilities)
+
+								-- Setup the server
+								lspconfig[server_name].setup(server_config)
+							end,
+						},
+					})
 				end,
 			},
 		},
@@ -34,20 +66,9 @@ return {
 			},
 		},
 		config = function(_, opts)
-			vim.lsp.config("*", opts)
-
-			--- common options
-			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities.textDocument.foldingRange = {
-				dynamicRegistration = false,
-				lineFoldingOnly = true,
-			}
-			local language_servers = vim.lsp.get_clients() -- or list servers manually like {'gopls', 'clangd'}
-			for _, ls in ipairs(language_servers) do
-				require("lspconfig")[ls].setup({
-					capabilities = capabilities,
-					-- you can add other fields for setting up lsp server in this table
-				})
+			-- Neovim 0.11+ default config for all servers
+			if vim.lsp.config then
+				vim.lsp.config("*", opts)
 			end
 
 			--- diagnostics
