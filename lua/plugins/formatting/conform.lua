@@ -33,6 +33,8 @@ return {
 			markdown = { "prettierd" },
 			graphql = { "prettierd" },
 			lua = { "stylua" },
+			terraform = { "terraform_fmt" },
+			hcl = { "terraform_fmt" },
 			python = {
 				"ruff_fix",
 				"ruff_format",

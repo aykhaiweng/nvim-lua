@@ -27,6 +27,8 @@ return {
 				enabled = true,
 			},
 			servers = {
+				terraformls = {},
+				tflint = {},
 				basedpyright = {
 					settings = {
 						basedpyright = {
