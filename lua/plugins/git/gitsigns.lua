@@ -101,7 +101,7 @@ return {
 					map("n", "<leader>gb", gitsigns.toggle_current_line_blame, { desc = "Toggle current line blame" })
 					map("n", "<leader>gd", gitsigns.toggle_deleted, { desc = "Toggle deleted" })
 
-					-- Text objecht
+					-- Text object
 					map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
 				end,
 			})

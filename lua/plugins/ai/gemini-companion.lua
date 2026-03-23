@@ -2,6 +2,7 @@ return {
 	"gutsavgupta/nvim-gemini-companion",
 	dependencies = { "nvim-lua/plenary.nvim" },
 	event = "VeryLazy",
+	enabled = false,
 	config = function()
 		-- Monkey patch persistence for macOS to fix the /proc dependency
 		if vim.loop.os_uname().sysname == "Darwin" then
