@@ -1,8 +1,8 @@
 local terminals = {}
 
-local function smart_toggle(target_direction, id, position)
-	-- Use position as part of the key if no specific ID is provided
-	local term_id = id or position or 1
+local function smart_toggle(target_direction, id, position, cmd)
+	-- Use command, position or ID as the key
+	local term_id = id or cmd or position or 1
 	local term = terminals[term_id]
 
 	if not term or not vim.api.nvim_buf_is_valid(term.buf) then
@@ -45,6 +45,10 @@ local function smart_toggle(target_direction, id, position)
 				border = "single",
 			})
 			return win
+		elseif target_direction == "vertical" then
+			vim.cmd("botright vsplit")
+			vim.api.nvim_win_set_buf(0, term_buf)
+			return vim.api.nvim_get_current_win()
 		else
 			-- horizontal
 			vim.cmd("botright " .. 20 .. "split")
@@ -57,7 +61,11 @@ local function smart_toggle(target_direction, id, position)
 	if not term_win_id then
 		open_term()
 		if vim.bo[term_buf].buftype ~= "terminal" then
-			vim.cmd("terminal")
+			if cmd then
+				vim.cmd("terminal " .. cmd)
+			else
+				vim.cmd("terminal")
+			end
 			vim.bo[term_buf].filetype = "terminal"
 
 			-- Clean up buffer when terminal exits
@@ -79,12 +87,10 @@ local function smart_toggle(target_direction, id, position)
 	end
 
 	-- 3. If it IS open: Evaluate if we close it or move/transform it
-	local win_config = vim.api.nvim_win_get_config(term_win_id)
-	local is_currently_float = (win_config.relative ~= "")
-	local want_float = (target_direction == "float")
+	local current_direction = vim.b[term_buf].terminal_direction
 
-	if term_tab_id == current_tab and is_currently_float == want_float then
-		-- Case: Same tab AND same shape -> Close it
+	if term_tab_id == current_tab and current_direction == target_direction then
+		-- Case: Same tab AND same direction -> Close it
 		vim.api.nvim_win_close(term_win_id, true)
 	else
 		-- Case: Different tab OR Different shape -> Move/Transform it here
@@ -106,12 +112,8 @@ vim.keymap.set({ "n", "t", "v", "i" }, "<F5>", function()
 end, { desc = "Terminal: Bottom (Open/Move/Close)" })
 
 vim.keymap.set({ "n", "t", "v", "i" }, "<F6>", function()
-	smart_toggle("float", 1)
-end, { desc = "Terminal: Float (Open/Move/Close)" })
-
--- vim.keymap.set({ "n", "t", "v", "i" }, "<F7>", function()
--- 	smart_toggle("horizontal", 2, "bottom")
--- end, { desc = "Terminal2: Bottom (Open/Move/Close)" })
+	smart_toggle("vertical", 1, "right")
+end, { desc = "Terminal: Right (Open/Move/Close)" })
 
 local group = vim.api.nvim_create_augroup("NativeTerminal", { clear = true })
 vim.api.nvim_create_autocmd({ "TermOpen", "BufEnter" }, {
@@ -124,4 +126,6 @@ vim.api.nvim_create_autocmd({ "TermOpen", "BufEnter" }, {
 	end,
 })
 
-return {}
+return {
+	smart_toggle = smart_toggle,
+}

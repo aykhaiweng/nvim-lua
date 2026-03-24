@@ -4,3 +4,4 @@ tmp/
 Session.vim
 .sessions/
 lazy-lock.json
+conductor/

@@ -27,6 +27,7 @@ return {
 				"quickfixlist",
 				"loclist",
 				"terminal",
+				"terminalGemini",
 				"edgy",
 				"qf",
 				"noice",

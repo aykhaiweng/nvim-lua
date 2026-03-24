@@ -52,7 +52,8 @@ return {
 					winhighlight = winhighlight,
 				},
 				options = {
-					left = { size = 40 },
+					left = { size = 50 },
+					right = { size = 70 },
 					bottom = { size = 25 },
 				},
 				left = {
@@ -90,6 +91,26 @@ return {
 							vim.cmd("OutlineOpen")
 						end,
 						size = { height = 0.25 },
+						wo = {
+							winfixwidth = true,
+						},
+					},
+				},
+				right = {
+					{
+						title = "Terminal",
+						ft = "terminal",
+						filter = function(buf, win) -- noqa
+							return vim.api.nvim_win_get_config(win).relative == ""
+								and vim.b[buf].terminal_position == "right"
+						end,
+						wo = {
+							winfixwidth = true,
+						},
+					},
+					{
+						title = "Gemini",
+						ft = "terminalGemini",
 						wo = {
 							winfixwidth = true,
 						},
