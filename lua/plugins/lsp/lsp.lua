@@ -29,13 +29,14 @@ return {
 			servers = {
 				terraformls = {},
 				tflint = {},
+				pylsp = {},
 				basedpyright = {
 					settings = {
 						basedpyright = {
 							analysis = {
 								autoSearchPaths = true,
 								diagnosticMode = "workspace",
-								typeCheckingMode = "off",
+								typeCheckingMode = "standard",
 								useLibraryCodeForTypes = true,
 							},
 						},
