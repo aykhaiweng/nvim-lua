@@ -117,20 +117,20 @@ return {
 		end
 
 		return {
-			-- {
-			-- 	"<F7>",
-			-- 	function()
-			-- 		switch_to_cli("gemini", "gemini")
-			-- 	end,
-			-- 	desc = "Spawn or switch to Gemini session (tmux split)",
-			-- 	mode = {"n", "v", "i", "t", "x"}
-			-- },
 			{
 				"<F7>",
-				"<cmd>GeminiToggle<cr>",
-				desc = "Toggle Gemini Sidebar",
+				function()
+					switch_to_cli("gemini", "gemini")
+				end,
+				desc = "Spawn or switch to Gemini session (tmux split)",
 				mode = {"n", "v", "i", "t", "x"}
 			},
+			-- {
+			-- 	"<F7>",
+			-- 	"<cmd>GeminiToggle<cr>",
+			-- 	desc = "Toggle Gemini Sidebar",
+			-- 	mode = {"n", "v", "i", "t", "x"}
+			-- },
 			-- {
 			-- 	"<F7>",
 			-- 	function()

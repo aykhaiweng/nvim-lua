@@ -34,7 +34,7 @@ return {
 			}
 			return {
 				options = {
-					theme = "catppuccin",
+					-- theme = "catppuccin",
 					icons_enabled = true,
 					draw_empty = true,
 					disabled_filetypes = {
