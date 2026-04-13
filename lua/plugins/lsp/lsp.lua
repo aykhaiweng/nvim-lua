@@ -29,7 +29,15 @@ return {
 			servers = {
 				terraformls = {},
 				tflint = {},
-				pylsp = {},
+				-- pylsp = {
+				-- 	settings = {
+				-- 		pylsp = {
+				-- 			plugins = {
+				-- 				pycodestyle = { enabled = false },
+				-- 			},
+				-- 		},
+				-- 	},
+				-- },
 				basedpyright = {
 					settings = {
 						basedpyright = {
@@ -67,11 +75,14 @@ return {
 
 			-- 2. Setup diagnostics UI
 			vim.diagnostic.config({
-				virtual_text = true,
+				virtual_text = {
+					source = "always",
+				},
 				virtual_lines = false,
 				underline = true,
 				update_in_insert = false,
 				float = {
+					source = "always",
 					show_header = true,
 					border = "rounded",
 					focusable = true,

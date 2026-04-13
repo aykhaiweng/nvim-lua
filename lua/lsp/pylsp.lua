@@ -13,7 +13,10 @@ return {
 				yapf = { enabled = false },
 				black = { enabled = false },
 				-- Linting (we use ruff via nvim-lint or conform)
-				pycodestyle = { enabled = false },
+				pycodestyle = {
+					enabled = false,
+					ignore = { "E", "W" }, -- Ignore all errors and warnings if it somehow runs
+				},
 				pyflakes = { enabled = false },
 				mccabe = { enabled = false },
 				pylint = { enabled = false },
