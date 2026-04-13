@@ -53,10 +53,25 @@ return {
 			lazygit = { configure = true },
 			indent = indent_opts,
 			input = { enabled = true },
-			notifier = { enabled = false },
+			notifier = { enabled = false }, -- Enabled notifier
 			scope = { enabled = true },
 			words = { enabled = true },
+			scroll = { enabled = false }, -- Added smooth scrolling
+			win = { enabled = true }, -- Enabled win module for breadcrumbs
 		}
+	end,
+	config = function(_, opts)
+		require("snacks").setup(opts)
+
+		-- Show breadcrumbs in the winbar
+		-- vim.api.nvim_create_autocmd("LspAttach", {
+		-- 	callback = function(args)
+		-- 		local client = vim.lsp.get_client_by_id(args.data.client_id)
+		-- 		if client and client.server_capabilities.documentSymbolProvider then
+		-- 			vim.opt_local.winbar = "%{%v:lua.Snacks.win.breadcrumbs()%}"
+		-- 		end
+		-- 	end,
+		-- })
 	end,
 	keys = {
 		-- Find files (C-p and leader pf)
