@@ -1,0 +1,6 @@
+---@type vim.lsp.Config
+return {
+	cmd = { "tflint", "--langserver" },
+	filetypes = { "terraform" },
+	root_markers = { ".tflint.hcl", ".terraform", ".git" },
+}
