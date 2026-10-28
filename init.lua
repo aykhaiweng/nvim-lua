@@ -1,9 +1,7 @@
+-- Entry point. Leader keys first, so anything mapped later picks them up.
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
-require("core/options")
-require("core/keymaps")
-require("core/autocmds")
-require("core/colors")
-require("core/terminals")
-require("lazy_init")
+require("config.options")
+require("config.keymaps")
+require("config.autocmds")
