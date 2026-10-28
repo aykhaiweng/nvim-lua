@@ -1,9 +1,7 @@
--- Entry point. Order matters: leader keys must exist before any plugin maps them.
+-- Entry point. Leader keys first, so anything mapped later picks them up.
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
 require("config.options")
 require("config.keymaps")
 require("config.autocmds")
-require("config.pack") -- installs plugins; lz.n owns when they load
-require("config.lsp")
